@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/onBoarding/on_boarding_controller.dart';
 import 'package:sboba_app_client/module/onBoarding/onboarding_item.dart';
+import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sboba_app_client/splash_screen/splash_screen_animation.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -84,6 +85,7 @@ class OnBoardibgScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold,
                                       )),
                               onPressed: () {
+                                CashHelper.putData("onBoard", true);
                                 Get.to(() => SplashScreen());
                                 //  submitData(context);
                               })

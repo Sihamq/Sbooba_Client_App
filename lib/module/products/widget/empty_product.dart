@@ -12,7 +12,7 @@ class EmptyProduct extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(1.h),
+            padding: EdgeInsets.all(6.h),
             child: const Image(
               image: AssetImage("assets/e.png"),
               fit: BoxFit.cover,

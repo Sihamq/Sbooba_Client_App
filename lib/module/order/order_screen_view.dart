@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:sboba_app_client/module/order/details_order/details_order.dart';
 import 'package:sboba_app_client/module/order/order_controller.dart';
 import 'package:sboba_app_client/module/order/widgets/grid_view.dart';
+import 'package:sboba_app_client/module/order/widgets/order_cateogry.dart';
 import 'package:sboba_app_client/module/order/widgets/pending_card.dart';
 import 'package:sizer/sizer.dart';
 
@@ -44,7 +45,10 @@ class OrderView extends StatelessWidget {
           child: Container(
             width: 48.h,
             height: 6.h,
-            child: ListView.builder(
+            child: ListView.separated(
+                separatorBuilder: (context, index) => SizedBox(
+                      width: 1.5.h,
+                    ),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -55,8 +59,8 @@ class OrderView extends StatelessWidget {
                 //     mainAxisSpacing: 100,
                 //     crossAxisSpacing: 10),
                 itemBuilder: (context, index) {
-                  return GridProduct(
-                    index: index,
+                  return OrderCatogrey(
+                    x: index,
                   );
                 }),
           ),

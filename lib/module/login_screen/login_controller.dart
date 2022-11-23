@@ -15,15 +15,14 @@ class LoginController extends GetxController {
   var nameController = TextEditingController();
   var passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool isshowpassword = false;
+  bool isshowpassword = true;
   var isLoading = false;
-  IconData? iconVisiblity = Icons.visibility;
+  IconData? iconVisiblity = Icons.visibility_off;
   showPassword() {
     isshowpassword = !isshowpassword;
     // isshowpassword = isshowpassword == true ? false : true;
 
-    iconVisiblity =
-        isshowpassword ? Icons.visibility : Icons.visibility_off_outlined;
+    iconVisiblity = isshowpassword ? Icons.visibility_off : Icons.visibility;
     update();
   }
 

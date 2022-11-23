@@ -131,15 +131,15 @@ class CreateAccount extends StatelessWidget {
                           padding: EdgeInsets.only(
                               bottom: 1.h, left: 2.h, right: 2.h),
                           child: MyTextField(
-                            onTapIcon: () => controller.showPassword(),
+                            onTapIcon: () => controller.showCheckedPassword(),
                             validate: ((p0) {
                               return validInput(p0!, 6, 12, "confirm password");
                             }),
                             controller: controller.confirmController,
-                            obcure: controller.isshowpassword,
+                            obcure: controller.ischecked,
                             label: "Confirm your password".tr,
                             prefix: Icons.lock,
-                            suffix: controller.iconVisiblity,
+                            suffix: controller.iconCVisiblity,
                           ),
                         ),
                         Padding(

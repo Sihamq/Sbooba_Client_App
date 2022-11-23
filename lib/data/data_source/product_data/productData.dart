@@ -19,4 +19,22 @@ class Productdata {
       print(e.toString());
     }
   }
+
+  Future showSingleProduct(id) async {
+    try {
+      var response = await DioHelper.getData(
+          url: ApiLink.showProduct + "${id}",
+          option: {
+            "Authorization": "Bearer " + await CashHelper.getData("token")
+          });
+      if (response.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

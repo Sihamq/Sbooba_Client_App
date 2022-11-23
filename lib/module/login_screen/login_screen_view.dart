@@ -61,26 +61,26 @@ class LoginScreen extends StatelessWidget {
                     padding:
                         EdgeInsets.only(bottom: 3.h, left: 3.h, right: 3.h),
                     child: MyTextField(
+                      validate: ((p0) {
+                        return validInput(p0!, 6, 12, "password");
+                      }),
                       controller: controller.passwordController,
                       obcure: controller.isshowpassword,
                       label: "Enter your password".tr,
                       prefix: Icons.lock,
                       suffix: controller.iconVisiblity,
                       onTapIcon: () => controller.showPassword(),
-                      validate: ((p0) {
-                        return validInput(p0!, 3, 40, "password");
-                      }),
                     ),
                   ),
                   BlueButton(
                       onpress: () async {
                         FocusScope.of(context).unfocus();
                         await controller.login(context);
-                        //print("sucess");
-                        //  Get.to(HomeScreen(), binding: ProductBinding());
                       },
                       title: controller.isLoading == true
-                          ? CircularProgressIndicator()
+                          ? SpinKitCircle(
+                              color: myOrange,
+                            )
                           : Text(
                               "LOGIN".tr,
                               style: TextStyle(

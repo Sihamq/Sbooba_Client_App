@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,15 +10,18 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sboba_app_client/module/Profile/widgets/row_profile.dart';
 import 'package:sboba_app_client/module/edit_profile/edit_profile.dart';
+import 'package:sboba_app_client/module/login_screen/login_screen_view.dart';
 import 'package:sboba_app_client/module/money_with_draw/money_with_draw.dart';
 import 'package:sboba_app_client/module/payment/payment_history/payment_history.dart';
 import 'package:sboba_app_client/module/payment/payment_info/payment_info.dart';
+import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sboba_app_client/module/ticket/ticket_view.dart';
 import 'package:sboba_app_client/module/verification/change_password/change_password.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../../lang/lang_controller.dart';
 import '../../my_colors.dart';
+import '../../shared/component/awesome_dialog.dart';
 import '../../shop_setting/shop_settig.dart';
 
 class ProfileColoumn extends StatelessWidget {
@@ -94,8 +98,7 @@ class ProfileColoumn extends StatelessWidget {
               buttonColor: myGreen,
               title: "Language".tr,
               titleStyle: TextStyle(fontWeight: FontWeight.bold),
-              content: 
-              Column(children: [
+              content: Column(children: [
                 GetBuilder<LanguageController>(
                     init: LanguageController(),
                     builder: (controller) => Column(
@@ -130,9 +133,21 @@ class ProfileColoumn extends StatelessWidget {
             child: ProfileRow(iconData: Icons.language, text: "lan".tr),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.all(1.h),
-          child: ProfileRow(iconData: Icons.logout, text: "Logout".tr),
+        InkWell(
+          onTap: () {
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.question,
+                context: context,
+                describe: "",
+                subTitle: "Do you want to leave the apps?",
+                mainTitle: "",
+                btOnpressed: () =>
+                    {CashHelper.removeData("token"), Get.off(LoginScreen())});
+          },
+          child: Padding(
+            padding: EdgeInsets.all(1.h),
+            child: ProfileRow(iconData: Icons.logout, text: "Logout".tr),
+          ),
         ),
       ],
     );

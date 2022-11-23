@@ -5,8 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sboba_app_client/module/Profile/profile_controller.dart';
 import 'package:sboba_app_client/module/Profile/widgets/coloumn_profile.dart';
 import 'package:sboba_app_client/module/Profile/widgets/row_account.dart';
 import 'package:sboba_app_client/module/Profile/widgets/total_container.dart';
@@ -31,43 +33,30 @@ class ProfileView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          height: 105.h,
+          height: 114.h,
           color: Colors.white,
-          child: Column(
-            children: [
-              Stack(
-                alignment: AlignmentDirectional.bottomCenter,
-                children: [
-                  Container(
-                    child: ClipPath(
-                      clipper: WaveClipper(),
-                      child: Container(
-                        child: Column(children: [RowAcount(), RowAcount()]),
-                        color: myGreen.withOpacity(.4),
-                        height: 33.h,
+          child: GetBuilder<ProfileController>(
+            init: ProfileController(),
+            builder: (controller) => Column(
+              children: [
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
+                  children: [
+                    Container(
+                      child: ClipPath(
+                        clipper: WaveClipper(),
+                        child: Container(
+                          child: Column(children: [RowAcount(), RowAcount()]),
+                          color: myGreen.withOpacity(.4),
+                          height: 36.h,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    top: 19.h,
-                    child: Row(
-                      children: [
-                        DottedBorder(
-                          color: Colors.grey[400]!,
-                          radius: Radius.circular(20),
-                          strokeWidth: 4,
-                          child: Container(
-                              decoration: BoxDecoration(
-                                  color: myWhite,
-                                  borderRadius: BorderRadius.circular(20)),
-                              height: 13.h,
-                              width: 30.w,
-                              child: CircleAvatar(
-                                radius: 20.h,
-                                backgroundImage: AssetImage("assets/img.jpg"),
-                              )),
-                        ),
-                        DottedBorder(
+                    Positioned(
+                      top: 21.h,
+                      child: Row(
+                        children: [
+                          DottedBorder(
                             color: Colors.grey[400]!,
                             radius: Radius.circular(20),
                             strokeWidth: 4,
@@ -75,118 +64,152 @@ class ProfileView extends StatelessWidget {
                                 decoration: BoxDecoration(
                                     color: myWhite,
                                     borderRadius: BorderRadius.circular(20)),
-                                height: 13.h,
-                                width: 30.h,
-                                child: Padding(
-                                  padding: EdgeInsets.all(1.h),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Wrap(
-                                        spacing: 2.w,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(
-                                                top: .5.h, left: .5, right: .5),
-                                            child: Text("Openat".tr,
-                                                style: TextStyle(
-                                                    fontSize: 8.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ),
-                                          Icon(
-                                            Icons.calendar_month,
-                                            color: myOrange,
-                                            size: 20,
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: .5.h),
-                                            child: Text("24-3-2022",
-                                                style: TextStyle(
-                                                    fontSize: 8.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ),
-                                          Icon(
-                                            Icons.av_timer,
-                                            color: myOrange,
-                                            size: 20,
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: .5.h),
-                                            child: Text("10:00 PM",
-                                                style: TextStyle(
-                                                    fontSize: 8.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          )
-                                        ],
-                                      ),
-                                      Wrap(
-                                        spacing: 2.w,
-                                        crossAxisAlignment:
-                                            WrapCrossAlignment.start,
-                                        children: [
-                                          Icon(
-                                            MdiIcons.store,
-                                            size: 20,
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: .5.h),
-                                            child: Text("CoffeeShop".tr,
-                                                style: TextStyle(
-                                                    fontSize: 9.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ),
-                                          Icon(
-                                            Icons.person,
-                                            size: 20,
-                                          ),
-                                          Padding(
-                                            padding: EdgeInsets.only(top: .5.h),
-                                            child: Text("Coffee Shop".tr,
-                                                style: TextStyle(
-                                                    fontSize: 9.sp,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                          ),
-                                        ],
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.all(.5.h),
-                                        child: Wrap(
-                                          spacing: 2,
+                                height: 15.h,
+                                width: 30.w,
+                                child: CircleAvatar(
+                                  radius: 20.h,
+                                  backgroundImage: AssetImage("assets/img.jpg"),
+                                )),
+                          ),
+                          controller.isLoading
+                              ? SpinKitCircle(
+                                  color: myOrange,
+                                )
+                              : DottedBorder(
+                                  color: Colors.grey[400]!,
+                                  radius: Radius.circular(20),
+                                  strokeWidth: 4,
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                          color: myWhite,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      height: 15.h,
+                                      width: 30.h,
+                                      child: Padding(
+                                        padding: EdgeInsets.all(1.h),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Icon(Icons.phone),
-                                            Text(
-                                              "777777777777",
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
+                                            Wrap(
+                                              spacing: 2.w,
+                                              crossAxisAlignment:
+                                                  WrapCrossAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: .5.h,
+                                                      left: .5,
+                                                      right: .5),
+                                                  child: Text("Openat".tr,
+                                                      style: TextStyle(
+                                                          fontSize: 8.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                                Icon(
+                                                  Icons.calendar_month,
+                                                  color: myOrange,
+                                                  size: 20,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: .5.h),
+                                                  child: Text("24-3-2022",
+                                                      style: TextStyle(
+                                                          fontSize: 8.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                                Icon(
+                                                  Icons.av_timer,
+                                                  color: myOrange,
+                                                  size: 20,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: .5.h),
+                                                  child: Text("10:00 PM",
+                                                      style: TextStyle(
+                                                          fontSize: 8.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                )
+                                              ],
+                                            ),
+                                            Wrap(
+                                              spacing: 2.w,
+                                              crossAxisAlignment:
+                                                  WrapCrossAlignment.start,
+                                              children: [
+                                                Icon(
+                                                  MdiIcons.store,
+                                                  size: 20,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: .5.h),
+                                                  child: Text(
+                                                      controller.profile!.data!
+                                                          .shopName!,
+                                                      style: TextStyle(
+                                                          fontSize: 9.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                                Icon(
+                                                  Icons.person,
+                                                  size: 20,
+                                                ),
+                                                Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: .5.h),
+                                                  child: Text(
+                                                      controller
+                                                          .profile!.data!.name!,
+                                                      style: TextStyle(
+                                                          fontSize: 9.sp,
+                                                          fontWeight:
+                                                              FontWeight.bold)),
+                                                ),
+                                              ],
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.all(.5.h),
+                                              child: Wrap(
+                                                spacing: 2,
+                                                children: [
+                                                  Icon(Icons.phone),
+                                                  Text(
+                                                    controller
+                                                        .profile!.data!.phone!,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ],
+                                              ),
                                             )
                                           ],
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                ))),
-                      ],
+                                      ))),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: 1.h,
-                  left: 1.h,
+                  ],
                 ),
-                child: ProfileColoumn(),
-              ),
-            ],
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: 1.h,
+                    left: 1.h,
+                  ),
+                  child: ProfileColoumn(),
+                ),
+              ],
+            ),
           ),
         ),
       ),

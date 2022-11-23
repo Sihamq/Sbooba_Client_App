@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../my_colors.dart';
+import '../order_controller.dart';
 
-class ProductCateogry extends StatelessWidget {
+class OrderCatogrey extends StatelessWidget {
   int? x;
-  ProductCateogry({super.key, this.x});
+  OrderCatogrey({super.key, this.x});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProductController>(
+    return GetBuilder<OrderController>(
       builder: (controller) => InkWell(
         onTap: (() => controller.getSelected(x)),
         child: AnimatedContainer(
@@ -29,7 +29,7 @@ class ProductCateogry extends StatelessWidget {
           //     : Alignment(1.0, 1.0),
           child: Center(
             child: Text(
-              "Sweet",
+              "All",
               style: TextStyle(
                   color: controller.selected == x ? myWhite : myBlack,
                   fontWeight: FontWeight.bold,
@@ -39,5 +39,6 @@ class ProductCateogry extends StatelessWidget {
         ),
       ),
     );
+    ;
   }
 }

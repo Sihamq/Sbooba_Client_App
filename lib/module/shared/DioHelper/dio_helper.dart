@@ -4,7 +4,7 @@ class DioHelper {
   static late Dio dio;
   static init() {
     dio = Dio(BaseOptions(
-        baseUrl: 'http://192.168.0.102/sboba_v2/api',
+        baseUrl: 'http://192.168.0.102/sboba_v2/api', //http://192.168.0.102
         receiveDataWhenStatusError: true,
         headers: {
           'Content-Type': 'application/json',
@@ -41,5 +41,10 @@ class DioHelper {
         headers: option,
       ),
     );
+  }
+
+  static Future<Response> deleteData(
+      {required String url, id, Map<String, dynamic>? option}) async {
+    return await dio.delete(url, options: Options(headers: option));
   }
 }

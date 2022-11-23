@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/data/models/product_model.dart';
 import 'package:sboba_app_client/module/products/product_binding.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/products/widget/discount_container.dart';
 import 'package:sizer/sizer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../my_colors.dart';
 
@@ -29,20 +32,35 @@ class MealCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: 120.w,
-                    height: 10.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                  CachedNetworkImage(
+                    imageUrl: controller.product!.data![index!].category!.icon!,
+                    imageBuilder: (context, imageProvider) => Container(
+                      //
+                      //
+                      //
+                      width: 120.w,
+                      height: 4.h,
+                      decoration: BoxDecoration(
+                        //shape: BoxShape.circle,
                         image: DecorationImage(
-                            image: AssetImage(controller
-                                .productItem[index!].category!.icon!))),
+                            image: imageProvider, fit: BoxFit.cover),
+                      ),
+                    ),
+                    placeholder: (context, url) =>
+                        SpinKitCircle(color: myGreen),
+                    errorWidget: (context, url, error) => Padding(
+                      padding: EdgeInsets.all(3.h),
+                      child: Center(
+                          child: Icon(
+                        Icons.error,
+                        color: myGreen,
+                      )),
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.all(.5.h),
                     child: Text(
-                      controller.productItem[index!].name!,
+                      controller.product!.data![index!].name!,
                       style: TextStyle(
                           color: myGreen,
                           fontWeight: FontWeight.bold,
@@ -53,7 +71,7 @@ class MealCard extends StatelessWidget {
                     padding: EdgeInsets.only(left: 1.w, right: 1.w),
                     child: Wrap(spacing: 2.w, children: [
                       Text(
-                        controller.productItem[index!].unitPrice.toString(),
+                        controller.product!.data![index!].unitPrice.toString(),
                         style: TextStyle(
                             fontSize: 8.sp, fontWeight: FontWeight.bold),
                       ),
@@ -92,7 +110,7 @@ class MealCard extends StatelessWidget {
                       ))
                 ],
               )),
-          if (controller.productItem[index!].tax != 0) DiscountContainer(),
+          if (controller.product!.data![index!].tax != 0) DiscountContainer(),
         ],
       ),
     );

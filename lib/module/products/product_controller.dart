@@ -4,12 +4,16 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/product_data/productData.dart';
 import 'package:sboba_app_client/data/models/product_model.dart';
+import 'package:sboba_app_client/data/models/show_product.dart';
 
 class ProductController extends GetxController {
   List<XFile> imageFileList = [];
   final ImagePicker imagePicker = ImagePicker();
   var selectedDate = DateTime.now().obs;
   var selectedTime = TimeOfDay.now().obs;
+  Product? product;
+  List productItem = <ProductItem>[];
+  bool isLoading = false;
   void onInit() {
     getProducts();
     super.onInit();
@@ -21,18 +25,25 @@ class ProductController extends GetxController {
     update();
   }
 
-  Product? product;
-  List<ProductItem> productItem = [];
+  ////////////////Get Products////////////////////////////////////////////
   getProducts() async {
     try {
+      isLoading = true;
       var res = await Productdata().getProduct();
       var pro = res["data"] as List;
-      productItem = pro.map((e) => ProductItem.fromJson(e)).toList();
-      print(productItem);
+      if (res["status"] == 200) {
+        isLoading = false;
+        productItem = pro.map((e) => ProductItem.fromJson(e)).toList();
+        print(productItem.length);
 
-      product = Product.fromJson(res);
-      print(product!.data![0].id);
-      update();
+        product = Product.fromJson(res);
+        print(product!.data![0].id);
+        // print(productItem[0]["name"]);
+        update();
+      } else {
+        isLoading = true;
+        update();
+      }
     } catch (e) {
       print("something error ${e.toString()}");
     }
@@ -61,7 +72,46 @@ class ProductController extends GetxController {
     }
   }
 
-  getProduct() {}
+  List<ShowItem> showProduct = [];
+  ///////////////////////show single product//////////////////////
+  Future showProducst(id) async {
+    try {
+      isLoading = true;
+      var res = await Productdata().showSingleProduct(id);
+      var pro = res["data"] as List;
+      if (res["status"] == 200) {
+        isLoading = false;
+        showProduct = pro.map((e) => ShowItem.fromJson(e)).toList();
+        print(showProduct.length);
+        // print(showProduct[].id);
+
+        update();
+      } else {
+        isLoading = true;
+        update();
+      }
+    } catch (e) {
+      print("something error ${e.toString()}");
+    }
+  }
+
+  var swittch = false.obs;
+  var featured = false.obs;
+  changSwitch(value) {
+    if (value == 1) {
+      swittch.value = true;
+    } else {
+      swittch.value = false;
+    }
+  }
+
+  changeFeaturedswitch(value) {
+    if (value == 1) {
+      featured.value = true;
+    } else {
+      featured.value = false;
+    }
+  }
 
   @override
   void onReady() {

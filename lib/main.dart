@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
         initialBinding: HomeBinding(),
         debugShowCheckedModeBanner: false,
         title: 'Sboba App',
-        home: OnBoardibgScreen(),
+        home: SplashScreen(),
       ),
     );
   }

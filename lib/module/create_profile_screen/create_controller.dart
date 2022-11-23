@@ -105,120 +105,119 @@ class CreateController extends GetxController {
             btOnpressed: () =>
                 Get.offAll(LoginScreen(), binding: LoginBinding()),
           );
-        }
-        // else {
-        //   errorSignUp = ErrorSignUp.fromJson(data);
+        } else {
+          errorSignUp = ErrorSignUp.fromJson(data);
 
-        //   if (errorSignUp!.sellerEmail!.isNotEmpty) {
-        //     Get.snackbar(
-        //       titleText: Text(
-        //         "Email has already been taken",
-        //         style: TextStyle(
-        //             color: myWhite,
-        //             fontWeight: FontWeight.bold,
-        //             fontSize: 13.sp),
-        //       ),
-        //       backgroundColor: myOrange,
-        //       "",
-        //       colorText: myWhite,
-        //       snackStyle: SnackStyle.FLOATING,
-        //       "",
-        //       icon: Padding(
-        //         padding: EdgeInsets.only(bottom: 1.h),
-        //         child: Icon(
-        //           Icons.password_outlined,
-        //           color: Colors.white,
-        //           size: 5.h,
-        //         ),
-        //       ),
-        //       snackPosition: SnackPosition.BOTTOM,
-        //       duration: Duration(seconds: 4),
-        //       isDismissible: true,
-        //       margin: EdgeInsets.all(15),
-        //     );
-        //   } else if (errorSignUp!.sellerPhone!.isNotEmpty) {
-        //     Get.snackbar(
-        //       titleText: Text(
-        //         "Phone has already been taken ",
-        //         style: TextStyle(
-        //             color: myWhite,
-        //             fontWeight: FontWeight.bold,
-        //             fontSize: 13.sp),
-        //       ),
-        //       backgroundColor: myOrange,
-        //       "",
-        //       colorText: myWhite,
-        //       snackStyle: SnackStyle.FLOATING,
-        //       "",
-        //       icon: Padding(
-        //         padding: EdgeInsets.only(bottom: 1.h),
-        //         child: Icon(
-        //           Icons.phone_android,
-        //           color: Colors.white,
-        //           size: 5.h,
-        //         ),
-        //       ),
-        //       snackPosition: SnackPosition.BOTTOM,
-        //       duration: Duration(seconds: 4),
-        //       isDismissible: true,
-        //       margin: EdgeInsets.all(15),
-        //     );
-        //   } else if (errorSignUp!.sellerCommercialNo!.isNotEmpty) {
-        //     Get.snackbar(
-        //       titleText: Text(
-        //         "commericalNo. has already been taken ",
-        //         style: TextStyle(
-        //             color: myWhite,
-        //             fontWeight: FontWeight.bold,
-        //             fontSize: 13.sp),
-        //       ),
-        //       backgroundColor: myOrange,
-        //       "",
-        //       colorText: myWhite,
-        //       snackStyle: SnackStyle.FLOATING,
-        //       "",
-        //       icon: Padding(
-        //         padding: EdgeInsets.only(bottom: 1.h),
-        //         child: Icon(
-        //           Icons.file_copy,
-        //           color: Colors.white,
-        //           size: 5.h,
-        //         ),
-        //       ),
-        //       snackPosition: SnackPosition.BOTTOM,
-        //       duration: Duration(seconds: 4),
-        //       isDismissible: true,
-        //       margin: EdgeInsets.all(15),
-        //     );
-        //   } else {
-        //     Get.snackbar(
-        //       titleText: Text(
-        //         "Shop's Name has already been taken ",
-        //         style: TextStyle(
-        //             color: myWhite,
-        //             fontWeight: FontWeight.bold,
-        //             fontSize: 13.sp),
-        //       ),
-        //       backgroundColor: Colors.red[900],
-        //       "",
-        //       colorText: myWhite,
-        //       snackStyle: SnackStyle.FLOATING,
-        //       "",
-        //       icon: Padding(
-        //         padding: EdgeInsets.only(bottom: 1.h),
-        //         child: Icon(
-        //           Icons.store,
-        //           color: Colors.white,
-        //           size: 5.h,
-        //         ),
-        //       ),
-        //       snackPosition: SnackPosition.BOTTOM,
-        //       duration: Duration(seconds: 4),
-        //       isDismissible: true,
-        //       margin: EdgeInsets.all(15),
-        //     );
-        //   }
-        // }
+          if (errorSignUp!.sellerEmail!.isNotEmpty) {
+            Get.snackbar(
+              titleText: Text(
+                "Email has already been taken",
+                style: TextStyle(
+                    color: myWhite,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13.sp),
+              ),
+              backgroundColor: myOrange,
+              "",
+              colorText: myWhite,
+              snackStyle: SnackStyle.FLOATING,
+              "",
+              icon: Padding(
+                padding: EdgeInsets.only(bottom: 1.h),
+                child: Icon(
+                  Icons.password_outlined,
+                  color: Colors.white,
+                  size: 5.h,
+                ),
+              ),
+              snackPosition: SnackPosition.BOTTOM,
+              duration: Duration(seconds: 4),
+              isDismissible: true,
+              margin: EdgeInsets.all(15),
+            );
+          } else if (errorSignUp!.sellerPhone!.isNotEmpty) {
+            Get.snackbar(
+              titleText: Text(
+                "Phone has already been taken ",
+                style: TextStyle(
+                    color: myWhite,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13.sp),
+              ),
+              backgroundColor: myOrange,
+              "",
+              colorText: myWhite,
+              snackStyle: SnackStyle.FLOATING,
+              "",
+              icon: Padding(
+                padding: EdgeInsets.only(bottom: 1.h),
+                child: Icon(
+                  Icons.phone_android,
+                  color: Colors.white,
+                  size: 5.h,
+                ),
+              ),
+              snackPosition: SnackPosition.BOTTOM,
+              duration: Duration(seconds: 4),
+              isDismissible: true,
+              margin: EdgeInsets.all(15),
+            );
+          } else if (errorSignUp!.sellerCommercialNo!.isNotEmpty) {
+            Get.snackbar(
+              titleText: Text(
+                "commericalNo. has already been taken ",
+                style: TextStyle(
+                    color: myWhite,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13.sp),
+              ),
+              backgroundColor: myOrange,
+              "",
+              colorText: myWhite,
+              snackStyle: SnackStyle.FLOATING,
+              "",
+              icon: Padding(
+                padding: EdgeInsets.only(bottom: 1.h),
+                child: Icon(
+                  Icons.file_copy,
+                  color: Colors.white,
+                  size: 5.h,
+                ),
+              ),
+              snackPosition: SnackPosition.BOTTOM,
+              duration: Duration(seconds: 4),
+              isDismissible: true,
+              margin: EdgeInsets.all(15),
+            );
+          } else {
+            Get.snackbar(
+              titleText: Text(
+                "Shop's Name has already been taken ",
+                style: TextStyle(
+                    color: myWhite,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13.sp),
+              ),
+              backgroundColor: Colors.red[900],
+              "",
+              colorText: myWhite,
+              snackStyle: SnackStyle.FLOATING,
+              "",
+              icon: Padding(
+                padding: EdgeInsets.only(bottom: 1.h),
+                child: Icon(
+                  Icons.store,
+                  color: Colors.white,
+                  size: 5.h,
+                ),
+              ),
+              snackPosition: SnackPosition.BOTTOM,
+              duration: Duration(seconds: 4),
+              isDismissible: true,
+              margin: EdgeInsets.all(15),
+            );
+          }
+        }
 
         // print("failed");
 
@@ -254,13 +253,23 @@ class CreateController extends GetxController {
   }
 
   bool isshowpassword = true;
-  IconData? iconVisiblity = Icons.visibility;
+  bool ischecked = true;
+  IconData? iconVisiblity = Icons.visibility_off;
+  IconData? iconCVisiblity = Icons.visibility_off;
+  /////////////// pass
   showPassword() {
     isshowpassword = !isshowpassword;
     // isshowpassword = isshowpassword == true ? false : true;
 
-    iconVisiblity =
-        isshowpassword ? Icons.visibility : Icons.visibility_off_outlined;
+    iconVisiblity = isshowpassword ? Icons.visibility_off : Icons.visibility;
+    update();
+  }
+  //////////////////confirm pass
+
+  showCheckedPassword() {
+    ischecked = !ischecked;
+
+    iconCVisiblity = ischecked ? Icons.visibility_off : Icons.visibility;
     update();
   }
 }

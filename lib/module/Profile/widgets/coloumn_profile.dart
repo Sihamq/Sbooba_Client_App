@@ -44,7 +44,7 @@ class ProfileColoumn extends StatelessWidget {
           child: InkWell(
               child:
                   ProfileRow(iconData: Icons.person, text: "Edit Profile".tr),
-              onTap: (() => Get.to(() => EditProfile()))),
+              onTap: (() => Get.to(() => EditAccount()))),
         ),
         Padding(
           padding: EdgeInsets.all(1.h),

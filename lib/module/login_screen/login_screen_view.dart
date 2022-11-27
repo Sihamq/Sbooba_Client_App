@@ -26,7 +26,7 @@ class LoginScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Padding(
             padding: EdgeInsets.only(
-              top: 10.h,
+              top: 7.h,
             ),
             child: GetBuilder<LoginController>(
               init: LoginController(),

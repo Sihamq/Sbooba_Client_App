@@ -8,6 +8,7 @@ import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_binding.dart';
 import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
+import 'package:sboba_app_client/module/shared/component/snack_message.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -91,30 +92,8 @@ class LoginController extends GetxController {
           // ));
         } else if (res["status"] == 500) {
           isLoading = false;
-          Get.snackbar(
-            titleText: Text(
-              "Password is not correct",
-              style: TextStyle(
-                  color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
-            ),
-            backgroundColor: Colors.red[900],
-            "",
-            colorText: myWhite,
-            snackStyle: SnackStyle.FLOATING,
-            "",
-            icon: Padding(
-              padding: EdgeInsets.only(bottom: 1.h),
-              child: Icon(
-                Icons.password_outlined,
-                color: Colors.white,
-                size: 5.h,
-              ),
-            ),
-            snackPosition: SnackPosition.BOTTOM,
-            duration: Duration(seconds: 4),
-            isDismissible: true,
-            margin: EdgeInsets.all(15),
-          );
+          showSnakBarMessage(
+              msg: "Password is not correct", color: Colors.green[900]);
         }
 
         update();

@@ -37,7 +37,7 @@ class MySmallTextField extends StatelessWidget {
     return SizedBox(
       //height: MediaQuery.of(context).size.height * .08,
       child: SizedBox(
-        height: 4.h,
+        height: 6.h,
         width: 41.w,
         child: TextFormField(
           maxLines: maxline == null ? 1 : maxline,

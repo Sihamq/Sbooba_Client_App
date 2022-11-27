@@ -21,21 +21,21 @@ class OrderView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          MaterialButton(
-            color: myGreen,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(25.0))),
-            child: Icon(
-              Icons.search,
-              color: myWhite,
+          InkWell(
+            onTap: () {},
+            child: Padding(
+              padding: EdgeInsets.all(1.5.h),
+              child: Icon(
+                Icons.search,
+                color: myWhite,
+              ),
             ),
-            onPressed: () {},
           )
         ],
         backgroundColor: myGreen,
         leading: Padding(
           padding: EdgeInsets.all(1.h),
-          child: Image(image: AssetImage("assets/1.png")),
+          child: const Image(image: AssetImage("assets/1.png")),
         ),
         elevation: 0,
       ),
@@ -51,13 +51,8 @@ class OrderView extends StatelessWidget {
                     ),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: 3,
-                // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                //     childAspectRatio: 5 / 2,
-                //     maxCrossAxisExtent: 100,
-                //     mainAxisSpacing: 100,
-                //     crossAxisSpacing: 10),
                 itemBuilder: (context, index) {
                   return OrderCatogrey(
                     x: index,

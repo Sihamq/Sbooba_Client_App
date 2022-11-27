@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
@@ -13,6 +14,7 @@ import 'package:sboba_app_client/module/login_screen/login_binding.dart';
 import 'package:sboba_app_client/module/login_screen/login_screen_view.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/shared/component/green_button.dart';
+import 'package:sboba_app_client/module/shared/component/snack_message.dart';
 import 'package:sizer/sizer.dart';
 
 import '../shared/component/awesome_dialog.dart';
@@ -26,6 +28,7 @@ class CreateController extends GetxController {
   var confirmController;
   var phoneController;
   var commericalController;
+
   int? gender = 0;
 
   var shopController = TextEditingController();
@@ -105,125 +108,149 @@ class CreateController extends GetxController {
             btOnpressed: () =>
                 Get.offAll(LoginScreen(), binding: LoginBinding()),
           );
-        } else {
-          errorSignUp = ErrorSignUp.fromJson(data);
-
-          if (errorSignUp!.sellerEmail!.isNotEmpty) {
-            Get.snackbar(
-              titleText: Text(
-                "Email has already been taken",
-                style: TextStyle(
-                    color: myWhite,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13.sp),
-              ),
-              backgroundColor: myOrange,
-              "",
-              colorText: myWhite,
-              snackStyle: SnackStyle.FLOATING,
-              "",
-              icon: Padding(
-                padding: EdgeInsets.only(bottom: 1.h),
-                child: Icon(
-                  Icons.password_outlined,
-                  color: Colors.white,
-                  size: 5.h,
-                ),
-              ),
-              snackPosition: SnackPosition.BOTTOM,
-              duration: Duration(seconds: 4),
-              isDismissible: true,
-              margin: EdgeInsets.all(15),
-            );
-          } else if (errorSignUp!.sellerPhone!.isNotEmpty) {
-            Get.snackbar(
-              titleText: Text(
-                "Phone has already been taken ",
-                style: TextStyle(
-                    color: myWhite,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13.sp),
-              ),
-              backgroundColor: myOrange,
-              "",
-              colorText: myWhite,
-              snackStyle: SnackStyle.FLOATING,
-              "",
-              icon: Padding(
-                padding: EdgeInsets.only(bottom: 1.h),
-                child: Icon(
-                  Icons.phone_android,
-                  color: Colors.white,
-                  size: 5.h,
-                ),
-              ),
-              snackPosition: SnackPosition.BOTTOM,
-              duration: Duration(seconds: 4),
-              isDismissible: true,
-              margin: EdgeInsets.all(15),
-            );
-          } else if (errorSignUp!.sellerCommercialNo!.isNotEmpty) {
-            Get.snackbar(
-              titleText: Text(
-                "commericalNo. has already been taken ",
-                style: TextStyle(
-                    color: myWhite,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13.sp),
-              ),
-              backgroundColor: myOrange,
-              "",
-              colorText: myWhite,
-              snackStyle: SnackStyle.FLOATING,
-              "",
-              icon: Padding(
-                padding: EdgeInsets.only(bottom: 1.h),
-                child: Icon(
-                  Icons.file_copy,
-                  color: Colors.white,
-                  size: 5.h,
-                ),
-              ),
-              snackPosition: SnackPosition.BOTTOM,
-              duration: Duration(seconds: 4),
-              isDismissible: true,
-              margin: EdgeInsets.all(15),
-            );
-          } else {
-            Get.snackbar(
-              titleText: Text(
-                "Shop's Name has already been taken ",
-                style: TextStyle(
-                    color: myWhite,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13.sp),
-              ),
-              backgroundColor: Colors.red[900],
-              "",
-              colorText: myWhite,
-              snackStyle: SnackStyle.FLOATING,
-              "",
-              icon: Padding(
-                padding: EdgeInsets.only(bottom: 1.h),
-                child: Icon(
-                  Icons.store,
-                  color: Colors.white,
-                  size: 5.h,
-                ),
-              ),
-              snackPosition: SnackPosition.BOTTOM,
-              duration: Duration(seconds: 4),
-              isDismissible: true,
-              margin: EdgeInsets.all(15),
-            );
-          }
         }
+        var res = data["seller.email"];
+        var res1 = data["seller.phone"];
+        var res2 = data["seller.shop_name"];
+        var res3 = data["seller.commercial_no"];
+
+        print(res);
+        // var tagsJson = jsonDecode(data)['seller.email'];
+        List<String> tags = [];
+        tags = res != null ? List.from(res) : [];
+        List<String> tags1 = [];
+        tags1 = res1 != null ? List.from(res1) : [];
+        List<String> tags2 = [];
+        tags2 = res2 != null ? List.from(res2) : [];
+        List<String> tags3 = [];
+        tags3 = res3 != null ? List.from(res3) : [];
+
+        print("tags$tags");
+        if (tags.isNotEmpty) {
+          showSnakBarMessage(msg: "email is taken", color: Colors.red[900]);
+        } else if (tags1.isNotEmpty) {
+          showSnakBarMessage(msg: "phoneis taken", color: Colors.red[900]);
+        } else if (tags2.isNotEmpty) {
+          showSnakBarMessage(msg: "Shop name is taken", color: Colors.red[900]);
+        } else if (tags3.isNotEmpty) {
+          showSnakBarMessage(
+              msg: "commerical is taken", color: Colors.red[900]);
+        }
+        //res.
+        //stringList.addAll(res);
+        // print(stringList);
+        // errorSignUp = ErrorSignUp.fromJson(data);
+        //  print(errorSignUp!.sellerEmail![0]);
+
+        // if (data["seller.email"]["The seller.email has already been taken"]) {
+        //   Get.snackbar(
+        //     titleText: Text(
+        //       "Email has already been taken",
+        //       style: TextStyle(
+        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
+        //     ),
+        //     backgroundColor: myOrange,
+        //     "",
+        //     colorText: myWhite,
+        //     snackStyle: SnackStyle.FLOATING,
+        //     "",
+        //     icon: Padding(
+        //       padding: EdgeInsets.only(bottom: 1.h),
+        //       child: Icon(
+        //         Icons.password_outlined,
+        //         color: Colors.white,
+        //         size: 5.h,
+        //       ),
+        //     ),
+        //     snackPosition: SnackPosition.BOTTOM,
+        //     duration: Duration(seconds: 4),
+        //     isDismissible: true,
+        //     margin: EdgeInsets.all(15),
+        //   );
+        // }
+        // if (errorSignUp!.sellerPhone!.isNotEmpty) {
+        //   Get.snackbar(
+        //     titleText: Text(
+        //       "Phone has already been taken ",
+        //       style: TextStyle(
+        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
+        //     ),
+        //     backgroundColor: myOrange,
+        //     "",
+        //     colorText: myWhite,
+        //     snackStyle: SnackStyle.FLOATING,
+        //     "",
+        //     icon: Padding(
+        //       padding: EdgeInsets.only(bottom: 1.h),
+        //       child: Icon(
+        //         Icons.phone_android,
+        //         color: Colors.white,
+        //         size: 5.h,
+        //       ),
+        //     ),
+        //     snackPosition: SnackPosition.BOTTOM,
+        //     duration: Duration(seconds: 4),
+        //     isDismissible: true,
+        //     margin: EdgeInsets.all(15),
+        //   );
+        // }
+        // if (errorSignUp!.sellerCommercialNo!.isNotEmpty) {
+        //   Get.snackbar(
+        //     titleText: Text(
+        //       "commericalNo. has already been taken ",
+        //       style: TextStyle(
+        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
+        //     ),
+        //     backgroundColor: myOrange,
+        //     "",
+        //     colorText: myWhite,
+        //     snackStyle: SnackStyle.FLOATING,
+        //     "",
+        //     icon: Padding(
+        //       padding: EdgeInsets.only(bottom: 1.h),
+        //       child: Icon(
+        //         Icons.file_copy,
+        //         color: Colors.white,
+        //         size: 5.h,
+        //       ),
+        //     ),
+        //     snackPosition: SnackPosition.BOTTOM,
+        //     duration: Duration(seconds: 4),
+        //     isDismissible: true,
+        //     margin: EdgeInsets.all(15),
+        //   );
+        // } else {
+        //   Get.snackbar(
+        //     titleText: Text(
+        //       "Shop's Name has already been taken ",
+        //       style: TextStyle(
+        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
+        //     ),
+        //     backgroundColor: Colors.red[900],
+        //     "",
+        //     colorText: myWhite,
+        //     snackStyle: SnackStyle.FLOATING,
+        //     "",
+        //     icon: Padding(
+        //       padding: EdgeInsets.only(bottom: 1.h),
+        //       child: Icon(
+        //         Icons.store,
+        //         color: Colors.white,
+        //         size: 5.h,
+        //       ),
+        //     ),
+        //     snackPosition: SnackPosition.BOTTOM,
+        //     duration: Duration(seconds: 4),
+        //     isDismissible: true,
+        //     margin: EdgeInsets.all(15),
+        //   );
+        // }
 
         // print("failed");
 
         update();
       } catch (e) {
-        print("${e.toString()}unknown");
+        print(" error sign up is${e.toString()}unknown");
       }
     }
   }

@@ -13,6 +13,7 @@ class DetailsContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("index:$index");
     return GetBuilder<ProductController>(
       builder: (controller) => Padding(
         padding: EdgeInsets.only(top: 20.h),
@@ -219,16 +220,34 @@ class DetailsContainer extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      Obx((() => Switch(
-                            focusColor: myOrange,
-                            value: controller.swittch.value,
-                            onChanged: (value) {
-                              controller.changSwitch(
-                                  controller.showProduct[index!].published);
-                            },
-                            activeColor: myOrange,
-                            inactiveThumbColor: Colors.grey,
-                          )))
+                      CircleAvatar(
+                        radius: 15,
+                        backgroundColor: myGreen,
+                        child: CircleAvatar(
+                            radius: 10,
+                            child: Center(
+                                child:
+                                    controller.showProduct[index!].published ==
+                                            1
+                                        ? Icon(
+                                            Icons.done,
+                                            size: 5.w,
+                                          )
+                                        : Icon(
+                                            Icons.cancel,
+                                            size: 5.w,
+                                          ))),
+                      )
+                      // Switch(
+                      //       focusColor: myOrange,
+                      //       value: controller.swittch.value,
+                      //       onChanged: (value) {
+                      //         controller.changSwitch(
+                      //             controller.showProduct[index!].published);
+                      //       },
+                      //       activeColor: myOrange,
+                      //       inactiveThumbColor: Colors.grey,
+                      //     )
                     ]),
                   ),
                   SizedBox(
@@ -239,26 +258,67 @@ class DetailsContainer extends StatelessWidget {
                     child: Row(children: [
                       Padding(
                         padding: EdgeInsets.all(1.h),
-                        child: Text("Featured".tr,
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text(
+                          "Featured".tr,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                       Spacer(),
-                      Obx(
-                        () => Switch(
-                          onChanged: (value) {
-                            controller.changeFeaturedswitch(
-                                controller.showProduct[index!].featured);
-                          },
-                          value: controller.featured.value,
-                          // onChanged: ((value) {
-
-                          // }),
-                          activeColor: myOrange,
-                          inactiveThumbColor: Colors.grey,
-                        ),
+                      CircleAvatar(
+                        radius: 15,
+                        backgroundColor: myGreen,
+                        child: CircleAvatar(
+                            radius: 10,
+                            child: Center(
+                                child:
+                                    controller.showProduct[index!].featured == 1
+                                        ? Icon(
+                                            Icons.done,
+                                            size: 5.w,
+                                          )
+                                        : Icon(
+                                            Icons.cancel,
+                                            size: 5.w,
+                                          ))),
                       )
+                      // Switch(
+                      //       focusColor: myOrange,
+                      //       value: controller.swittch.value,
+                      //       onChanged: (value) {
+                      //         controller.changSwitch(
+                      //             controller.showProduct[index!].published);
+                      //       },
+                      //       activeColor: myOrange,
+                      //       inactiveThumbColor: Colors.grey,
+                      //     )
                     ]),
                   ),
+
+                  // Container(
+                  //   color: Colors.grey[200],
+                  //   child: Row(children: [
+                  //     Padding(
+                  //       padding: EdgeInsets.all(1.h),
+                  //       child: Text("Featured".tr,
+                  //           style: TextStyle(fontWeight: FontWeight.bold)),
+                  //     ),
+                  //     Spacer(),
+                  //     // Obx(
+                  //     //   () => Switch(
+                  //     //     onChanged: (value) {
+                  //     //       controller.changeFeaturedswitch(
+                  //     //           controller.showProduct[index!].featured);
+                  //     //     },
+                  //     //     value: controller.featured.value,
+                  //     //     // onChanged: ((value) {
+
+                  //     //     // }),
+                  //     //     activeColor: myOrange,
+                  //     //     inactiveThumbColor: Colors.grey,
+                  //     //   ),
+                  //     // )
+                  //   ]),
+                  // ),
                   Padding(
                     padding: EdgeInsets.all(1.h),
                     child: Row(

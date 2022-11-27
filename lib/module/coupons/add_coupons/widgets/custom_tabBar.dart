@@ -26,8 +26,9 @@ class CustomTabBar extends StatelessWidget {
                 Tab(
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: Colors.grey[300]!, width: 1)),
+                      borderRadius: BorderRadius.circular(50),
+                      //border: Border.all(color: Colors.grey[300]!, width: 1)
+                    ),
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
@@ -42,13 +43,14 @@ class CustomTabBar extends StatelessWidget {
                 Tab(
                   child: Container(
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        border: Border.all(color: Colors.grey[300]!, width: 1)),
+                      borderRadius: BorderRadius.circular(50),
+                      // border: Border.all(color: Colors.grey[300]!, width: 1)
+                    ),
                     child: Align(
                       alignment: Alignment.center,
                       child: Text(
                         "Total".tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -56,7 +58,7 @@ class CustomTabBar extends StatelessWidget {
                   ),
                 ),
               ]),
-          Expanded(
+          const Expanded(
               child: Padding(
             padding: const EdgeInsets.all(8.0),
             child:

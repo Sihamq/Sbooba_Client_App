@@ -17,7 +17,7 @@ class AddingContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         color: myGreen.withOpacity(.1),
-        height: 5.h,
+        height: 7.h,
         width: 100.w,
         child: Padding(
             padding: EdgeInsets.all(1.h),

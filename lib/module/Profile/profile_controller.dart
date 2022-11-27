@@ -1,9 +1,17 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/data/data_source/profile_data/profile_data.dart';
 import 'package:sboba_app_client/data/models/product_model.dart';
 import 'package:sboba_app_client/data/models/profile_model.dart';
 
 class ProfileController extends GetxController {
+  var editName = TextEditingController();
+  var editEmail = TextEditingController();
+  var editPhone = TextEditingController();
+  var editShopAdress = TextEditingController();
+  var editCommerical = TextEditingController();
+  var editShopName = TextEditingController();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   void onInit() {
     getProfileInformation();
     super.onInit();
@@ -22,6 +30,12 @@ class ProfileController extends GetxController {
   int slected = 0;
   selectIndex(index) {
     slected = index;
+    update();
+  }
+
+  int? gender = 0;
+  changeGender(value) {
+    gender = value;
     update();
   }
 

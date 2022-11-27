@@ -62,7 +62,7 @@ class CreateAccount extends StatelessWidget {
                                 height: 15.h,
                                 child: Center(
                                     child: controller.imagee == null
-                                        ? Icon(Icons.add_a_photo)
+                                        ? const Icon(Icons.add_a_photo)
                                         : Image.file(controller.imagee!))),
                           ),
                         ),
@@ -71,7 +71,7 @@ class CreateAccount extends StatelessWidget {
                           padding: EdgeInsets.all(1.h),
                           child: Text(
                             "Personal".tr,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(
@@ -172,7 +172,7 @@ class CreateAccount extends StatelessWidget {
                               bottom: 2.h, left: 2.h, right: 2.h),
                           child: MyTextField(
                             validate: ((p0) {
-                              return validInput(p0!, 6, 15, "address");
+                              return validInput(p0!, 3, 15, "address");
                             }),
                             controller: controller.addressController,
                             obcure: false,

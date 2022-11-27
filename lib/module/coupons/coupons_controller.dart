@@ -5,7 +5,8 @@ import 'package:sboba_app_client/data/models/coupons.dart';
 
 import '../../data/data_source/coupon_data/coupon_data.dart';
 
-class CouponsController extends GetxController {
+class CouponsController extends GetxController
+    with StateMixin<List<CouponsItems>> {
   var couponCode = TextEditingController();
   var disountType = TextEditingController();
   var discount = TextEditingController();
@@ -30,6 +31,7 @@ class CouponsController extends GetxController {
   /////////////fetching coupon//////////////////////
   getCoupons() async {
     try {
+      change(couponItem.value, status: RxStatus.loading());
       isLoading = true;
       var res = await CouponData().getCoupons();
       if (res["status"] == 200) {
@@ -38,14 +40,19 @@ class CouponsController extends GetxController {
 
         couponItem.value =
             coupons.map((e) => CouponsItems.fromJson(e)).toList();
+        change(couponItem.value, status: RxStatus.success());
         print(couponItem);
-
+        if (couponItem.value.isEmpty) {
+          change(couponItem.value, status: RxStatus.empty());
+        }
         update();
       } else {
         isLoading = true;
+        change(couponItem.value, status: RxStatus.empty());
       }
     } catch (e) {
       print("something error ${e.toString()}");
+      change(couponItem.value, status: RxStatus.empty());
     }
   }
 
@@ -60,7 +67,7 @@ class CouponsController extends GetxController {
         // print(res[""]);
         //print(couponItem);
         print(res);
-        update();
+        // update();
       } else {
         // isLoading = true;
       }

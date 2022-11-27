@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -10,36 +11,55 @@ import 'package:sizer/sizer.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../my_colors.dart';
+import '../../shared/component/awesome_dialog.dart';
 
-class MealCard extends StatelessWidget {
+class MealCard extends GetView<ProductController> {
   int? index;
   MealCard({super.key, this.index});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProductController>(
-      init: ProductController(),
-      builder: (controller) => Stack(
+    return Obx(
+      () => Stack(
         alignment: Alignment.topRight,
         children: [
           Card(
               elevation: 5,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(1.h)),
+                  borderRadius: BorderRadius.circular(2.h)),
               // decoration: BoxDecoration(
               //   borderRadius: BorderRadius.circular(15),
 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: InkWell(
+                      onTap: () {
+                        CustomeAwesomeDialog().AwesomeDialogHeader(
+                            DialogType: DialogType.question,
+                            context: context,
+                            describe: "",
+                            subTitle: "Do you want to delete  this Product?",
+                            mainTitle: "",
+                            btOnpressed: () => controller.deleteProducts(
+                                controller.productItem[index!].id));
+                      },
+                      child: Icon(
+                        Icons.cancel_outlined,
+                        color: myOrange,
+                      ),
+                    ),
+                  ),
                   CachedNetworkImage(
-                    imageUrl: controller.product!.data![index!].category!.icon!,
+                    imageUrl: controller.productItem[index!].category!.icon!,
                     imageBuilder: (context, imageProvider) => Container(
                       //
                       //
                       //
                       width: 120.w,
-                      height: 4.h,
+                      height: 6.h,
                       decoration: BoxDecoration(
                         //shape: BoxShape.circle,
                         image: DecorationImage(
@@ -48,19 +68,19 @@ class MealCard extends StatelessWidget {
                     ),
                     placeholder: (context, url) =>
                         SpinKitCircle(color: myGreen),
-                    errorWidget: (context, url, error) => Padding(
-                      padding: EdgeInsets.all(3.h),
-                      child: Center(
-                          child: Icon(
-                        Icons.error,
-                        color: myGreen,
-                      )),
-                    ),
+                    errorWidget: (context, url, error) => Center(
+                        child: Container(
+                            height: 5.h,
+                            child: const Image(
+                                fit: BoxFit.cover,
+                                image: AssetImage(
+                                  "assets/121.png",
+                                )))),
                   ),
                   Padding(
                     padding: EdgeInsets.all(.5.h),
                     child: Text(
-                      controller.product!.data![index!].name!,
+                      controller.productItem[index!].name!,
                       style: TextStyle(
                           color: myGreen,
                           fontWeight: FontWeight.bold,
@@ -71,7 +91,7 @@ class MealCard extends StatelessWidget {
                     padding: EdgeInsets.only(left: 1.w, right: 1.w),
                     child: Wrap(spacing: 2.w, children: [
                       Text(
-                        controller.product!.data![index!].unitPrice.toString(),
+                        controller.productItem[index!].unitPrice.toString(),
                         style: TextStyle(
                             fontSize: 8.sp, fontWeight: FontWeight.bold),
                       ),
@@ -90,27 +110,24 @@ class MealCard extends StatelessWidget {
                               fontSize: 8.sp, fontWeight: FontWeight.bold))
                     ]),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Container(
                       color: myGreen.withOpacity(.1),
-                      height: 4.h,
+                      height: 5.h,
                       width: 100.w,
-                      child: Padding(
-                        padding: EdgeInsets.all(1.h),
-                        child: RatingBarIndicator(
-                          rating: 3.75,
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star_border_outlined,
-                            color: myOrange,
-                          ),
-                          itemCount: 1,
-                          itemSize: 13.5.w,
-                          direction: Axis.horizontal,
+                      child: RatingBarIndicator(
+                        rating: 3.75,
+                        itemBuilder: (context, index) => Icon(
+                          Icons.star_border_outlined,
+                          color: myOrange,
                         ),
+                        itemCount: 1,
+                        itemSize: 12.5.w,
+                        direction: Axis.horizontal,
                       ))
                 ],
               )),
-          if (controller.product!.data![index!].tax != 0) DiscountContainer(),
+          if (controller.productItem[index!].tax == 0) DiscountContainer(),
         ],
       ),
     );

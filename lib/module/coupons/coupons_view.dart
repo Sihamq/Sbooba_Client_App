@@ -4,6 +4,7 @@ import 'package:sboba_app_client/module/coupons/add_coupons/add_coupons_view.dar
 import 'package:sboba_app_client/module/coupons/coupons_controller.dart';
 import 'package:sboba_app_client/module/coupons/widget/coupon_container.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
+import 'package:sboba_app_client/module/shared/component/empty_screen.dart';
 import 'package:sizer/sizer.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -15,25 +16,24 @@ class CouponsView extends GetView<CouponsController> {
   @override
   Widget build(BuildContext context) {
     Get.put(CouponsController());
+
+    controller.getCoupons();
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         actions: [
-          MaterialButton(
-            color: myGreen,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(25.0))),
+          Padding(
+            padding: EdgeInsets.all(1.h),
             child: Icon(
               Icons.search,
               color: myWhite,
             ),
-            onPressed: () {},
           )
         ],
         backgroundColor: myGreen,
         leading: Padding(
           padding: EdgeInsets.all(1.h),
-          child: Image(image: AssetImage("assets/1.png")),
+          child: const Image(image: AssetImage("assets/1.png")),
         ),
         elevation: 0,
       ),
@@ -49,20 +49,21 @@ class CouponsView extends GetView<CouponsController> {
             }),
           ),
           //HorizontalCouponExample2()
+
           Expanded(
-            child: controller.couponItem.isNotEmpty
-                ? Obx(
-                    () => ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        itemCount: controller.couponItem.length,
-                        itemBuilder: (context, index) {
-                          return HorizontalCouponExample2(index: index);
-                        }),
-                  )
-                : SkeletonListView(),
-          ),
+              child: controller.obx(
+                  (state) => ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+                      itemCount: controller.couponItem.length,
+                      itemBuilder: (context, index) {
+                        return HorizontalCouponExample2(index: index);
+                      }),
+                  onEmpty: EmptyProduct(
+                      img: "assets/np.png", text: "No Coupons Now"),
+                  onLoading: SkeletonListView())),
+
           SizedBox(
             height: 1.h,
           )

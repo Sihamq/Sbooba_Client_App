@@ -86,7 +86,7 @@ class OnBoardibgScreen extends StatelessWidget {
                                       )),
                               onPressed: () {
                                 CashHelper.putData("onBoard", true);
-                                Get.to(() => SplashScreen());
+                                Get.off(() => SplashScreen());
                                 //  submitData(context);
                               })
                         ],

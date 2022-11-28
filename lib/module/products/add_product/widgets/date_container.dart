@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../../my_colors.dart';
 
@@ -14,16 +16,18 @@ class DateContainer extends StatelessWidget {
       padding: EdgeInsets.all(1.h),
       child: Container(
           width: 12.w,
-          height: 7.w,
+          height: 9.w,
           decoration: BoxDecoration(
             color: myGreen,
             borderRadius: BorderRadius.circular(5),
           ),
-          child: Center(
-              child: Icon(
-            Icons.calendar_month,
-            color: Colors.white,
-          ))),
+          child: IconButton(
+            icon: Icon(
+              Icons.calendar_month,
+              color: myWhite,
+            ),
+            onPressed: () {},
+          )),
     );
   }
 }

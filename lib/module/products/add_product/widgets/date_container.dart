@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
+    as slideDialog;
 
 import '../../../my_colors.dart';
 
@@ -26,7 +28,12 @@ class DateContainer extends StatelessWidget {
               Icons.calendar_month,
               color: myWhite,
             ),
-            onPressed: () {},
+            onPressed: () {
+              slideDialog.showSlideDialog(
+                context: context,
+                child: Text("Hello World"),
+              );
+            },
           )),
     );
   }

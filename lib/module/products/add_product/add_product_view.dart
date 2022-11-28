@@ -29,6 +29,7 @@ class AddProduct extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
           iconTheme: IconThemeData(color: myBlack),
           elevation: 0,
@@ -44,7 +45,7 @@ class AddProduct extends GetView<ProductController> {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.all(0.5.h),
+                padding: EdgeInsets.all(1.h),
                 child: MyAddTextField(
                   controller: ProductNameController,
                   obcure: false,
@@ -52,7 +53,7 @@ class AddProduct extends GetView<ProductController> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(0.5.h),
+                padding: EdgeInsets.all(1.h),
                 child: MyAddTextField(
                     maxline: 4,
                     controller: ProductNameController,
@@ -60,7 +61,7 @@ class AddProduct extends GetView<ProductController> {
                     label: "Description/Ingredient".tr),
               ),
               Padding(
-                padding: EdgeInsets.all(.4.h),
+                padding: EdgeInsets.all(1.h),
                 child: Row(
                   children: [
                     MySmallTextField(
@@ -87,14 +88,14 @@ class AddProduct extends GetView<ProductController> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(0.5.h),
+                padding: EdgeInsets.all(1.h),
                 child: MyAddTextField(
                     controller: ProductNameController,
                     obcure: false,
                     label: "Calories".tr),
               ),
               Padding(
-                padding: EdgeInsets.all(0.5.h),
+                padding: EdgeInsets.all(1.h),
                 child: MyAddTextField(
                   controller: ProductNameController,
                   obcure: false,
@@ -107,7 +108,7 @@ class AddProduct extends GetView<ProductController> {
                 child: AddImages(),
               ),
               Padding(
-                padding: EdgeInsets.all(0.4.h),
+                padding: EdgeInsets.all(1.h),
                 child: Row(
                   children: [
                     SizedBox(
@@ -116,7 +117,7 @@ class AddProduct extends GetView<ProductController> {
                     Text(
                       "Range".tr,
                       style: TextStyle(
-                          color: Colors.grey[500],
+                          color: myOrange,
                           fontSize: 10.sp,
                           fontWeight: FontWeight.bold),
                     ),
@@ -125,7 +126,26 @@ class AddProduct extends GetView<ProductController> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(0.4.h),
+                padding: EdgeInsets.all(1.h),
+                child: Row(
+                  children: [
+                    MySmallTextField(
+                        controller: ProductTagController,
+                        obcure: false,
+                        label: "Start Date"),
+                    SizedBox(
+                      width: 3.h,
+                    ),
+                    MySmallTextField(
+                      controller: ProductTagController,
+                      obcure: false,
+                      label: "End Date".tr,
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(1.h),
                 child: Row(
                   children: [
                     MySmallTextField(
@@ -149,7 +169,7 @@ class AddProduct extends GetView<ProductController> {
                   title: Text("Save".tr,
                       style: TextStyle(
                           color: myWhite, fontWeight: FontWeight.bold)),
-                  hight: 5.h,
+                  hight: 6.h,
                   width: 100.w)
             ],
           ),

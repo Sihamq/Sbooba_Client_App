@@ -85,7 +85,7 @@ class MySmallTextField extends StatelessWidget {
               hintText: label,
               hintStyle: TextStyle(
                   color: Colors.grey.withOpacity(.9),
-                  fontSize: 9.sp,
+                  fontSize: 7.sp,
                   fontWeight: FontWeight.bold)),
         ),
       ),

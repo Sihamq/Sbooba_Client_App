@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/product_data/productData.dart';
 import 'package:sboba_app_client/data/models/product_model.dart';
 import 'package:sboba_app_client/data/models/show_product.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+import 'package:intl/intl.dart';
 
 class ProductController extends GetxController
     with StateMixin<List<ProductItem>> {
@@ -14,9 +16,17 @@ class ProductController extends GetxController
   var selectedTime = TimeOfDay.now().obs;
   Product? product;
   var productItem = <ProductItem>[].obs;
+  var dateController = DateRangePickerController();
+  String? startDate, endDate;
+
   bool isLoading = false;
   void onInit() {
     getProducts();
+    final DateTime today = DateTime.now();
+    startDate = DateFormat('dd, MMMM yyyy').format(today).toString();
+    endDate = DateFormat('dd, MMMM yyyy')
+        .format(today.add(Duration(days: 3)))
+        .toString();
     super.onInit();
   }
 

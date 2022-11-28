@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
@@ -14,30 +15,33 @@ class DateContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(1.h),
-      child: Container(
-          width: 12.w,
-          height: 9.w,
-          decoration: BoxDecoration(
-            color: myGreen,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: IconButton(
-            icon: Icon(
-              Icons.calendar_month,
-              color: myWhite,
+    return GetBuilder<ProductController>(
+      builder: (controller) => Padding(
+        padding: EdgeInsets.all(1.h),
+        child: Container(
+            width: 12.w,
+            height: 9.w,
+            decoration: BoxDecoration(
+              color: myGreen,
+              borderRadius: BorderRadius.circular(5),
             ),
-            onPressed: () {
-              slideDialog.showSlideDialog(
-                context: context,
-                child: SfDateRangePicker(controller: ,
-                  selectionMode: DateRangePickerSelectionMode.range,
-                  view: DateRangePickerView.month,
-                ),
-              );
-            },
-          )),
+            child: IconButton(
+              icon: Icon(
+                Icons.calendar_month,
+                color: myWhite,
+              ),
+              onPressed: () {
+                slideDialog.showSlideDialog(
+                  context: context,
+                  child: SfDateRangePicker(
+                    controller: controller.dateController,
+                    selectionMode: DateRangePickerSelectionMode.range,
+                    view: DateRangePickerView.month,
+                  ),
+                );
+              },
+            )),
+      ),
     );
   }
 }

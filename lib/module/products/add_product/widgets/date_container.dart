@@ -31,7 +31,10 @@ class DateContainer extends StatelessWidget {
             onPressed: () {
               slideDialog.showSlideDialog(
                 context: context,
-                child: Text("Hello World"),
+                child: SfDateRangePicker(controller: ,
+                  selectionMode: DateRangePickerSelectionMode.range,
+                  view: DateRangePickerView.month,
+                ),
               );
             },
           )),

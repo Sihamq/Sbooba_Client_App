@@ -52,6 +52,7 @@ class MySmallTextField extends StatelessWidget {
           validator: validate,
           controller: controller,
           decoration: InputDecoration(
+              labelText: label,
               suffixIconColor: myGreen,
               suffixIcon: InkWell(child: Icon(suffix), onTap: suffixPressed),
               suffixIconConstraints: BoxConstraints(
@@ -83,7 +84,7 @@ class MySmallTextField extends StatelessWidget {
               // focusColor: HexColor('#0063FF'),
               hintText: label,
               hintStyle: TextStyle(
-                  color: Colors.grey.withOpacity(.6),
+                  color: Colors.grey.withOpacity(.9),
                   fontSize: 9.sp,
                   fontWeight: FontWeight.bold)),
         ),

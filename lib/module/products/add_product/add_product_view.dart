@@ -110,13 +110,6 @@ class AddProduct extends GetView<ProductController> {
                 padding: EdgeInsets.all(0.4.h),
                 child: Row(
                   children: [
-                    Container(
-                      width: 18.h,
-                      child: MySmallTextField(
-                          controller: miniProController,
-                          obcure: false,
-                          label: "MiniumP".tr),
-                    ),
                     SizedBox(
                       width: 4.w,
                     ),

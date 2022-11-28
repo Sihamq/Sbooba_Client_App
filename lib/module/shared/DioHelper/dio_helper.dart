@@ -47,4 +47,13 @@ class DioHelper {
       {required String url, id, Map<String, dynamic>? option}) async {
     return await dio.delete(url, options: Options(headers: option));
   }
+
+  static Future<Response?> putData(
+      {required String url,
+      Map<String, dynamic>? query,
+      required Map<String, dynamic> data,
+      Map<String, dynamic>? option}) async {
+    return await dio.put(url,
+        queryParameters: query, data: data, options: Options(headers: option));
+  }
 }

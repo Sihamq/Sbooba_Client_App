@@ -49,6 +49,7 @@ class MyAddTextField extends StatelessWidget {
         validator: validate,
         controller: controller,
         decoration: InputDecoration(
+            labelText: label,
             contentPadding: EdgeInsets.symmetric(horizontal: .5.w),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green, width: 1.5),

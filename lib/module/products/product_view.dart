@@ -80,40 +80,46 @@ class ProductView extends GetView<ProductController> {
         ),
         Expanded(
           child: controller.obx(
-              (state) => Padding(
-                    padding: EdgeInsets.all(1.h),
-                    child: GridView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                              childAspectRatio: 2 / 2,
-                              maxCrossAxisExtent: 210,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 5),
-                      itemBuilder: ((context, index) => InkWell(
-                          onTap: (() => {
-                                controller
-                                    .showProducst(
-                                        controller.product!.data![index].id)
-                                    .then(
-                                      (value) => Get.to(() => DetailsProduct(
-                                            index: index,
-                                          )),
-                                    )
-                              }),
-                          child: MealCard(
-                            index: index,
-                          ))),
-                      itemCount: controller.product!.data!.length,
-                    ),
-                  ),
-              onEmpty: EmptyProduct(
-                img: "assets/no.gif",
-                text: "No Product Yet",
+            (state) => Padding(
+              padding: EdgeInsets.all(1.h),
+              child: GridView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    childAspectRatio: 2 / 2,
+                    maxCrossAxisExtent: 210,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 5),
+                itemBuilder: ((context, index) => InkWell(
+                    onTap: (() => {
+                          controller
+                              .showProducst(controller.product!.data![index].id)
+                              .then(
+                                (value) => Get.to(() => DetailsProduct(
+                                      index: index,
+                                    )),
+                              )
+                        }),
+                    child: MealCard(
+                      index: index,
+                    ))),
+                itemCount: controller.product!.data!.length,
               ),
-              onLoading: SkeletonListView(),
-              onError: (error) => SkeletonListView()),
+            ),
+            onEmpty: EmptyProduct(
+              img: "assets/npp.png",
+              text: "No Product Yet",
+            ),
+            onLoading: SpinKitPouringHourGlassRefined(
+                strokeWidth: 5.0,
+                color: myOrange,
+                size: 80.sp,
+                duration: Duration(milliseconds: 500)),
+            onError: (error) => SpinKitPouringHourGlassRefined(
+                color: myOrange,
+                size: 80.sp,
+                duration: Duration(milliseconds: 500)),
+          ),
         ),
       ]),
     );

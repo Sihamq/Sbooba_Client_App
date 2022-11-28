@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sboba_app_client/module/Profile/profile_binding.dart';
 import 'package:sboba_app_client/module/Profile/widgets/row_profile.dart';
 import 'package:sboba_app_client/module/edit_profile/edit_profile.dart';
 import 'package:sboba_app_client/module/login_screen/login_screen_view.dart';
@@ -44,7 +45,8 @@ class ProfileColoumn extends StatelessWidget {
           child: InkWell(
               child:
                   ProfileRow(iconData: Icons.person, text: "Edit Profile".tr),
-              onTap: (() => Get.to(() => EditAccount()))),
+              onTap: (() =>
+                  Get.to(() => EditAccount(), binding: ProfileBinding()))),
         ),
         Padding(
           padding: EdgeInsets.all(1.h),

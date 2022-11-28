@@ -10,6 +10,7 @@ import 'package:sizer/sizer.dart';
 class MyTextField extends StatelessWidget {
   late TextEditingController controller;
   TextInputType? type;
+  void Function(String)? onChanged;
   void Function(String)? onSubmit;
   void Function()? onTap;
   String? Function(String?)? validate;
@@ -17,23 +18,28 @@ class MyTextField extends StatelessWidget {
   IconData? prefix;
   IconData? suffix;
   bool obcure;
+  bool? isfouce = false;
   int? maxline;
   void Function()? suffixPressed;
   void Function()? onTapIcon;
+  String? labelText;
   MyTextField(
       {Key? key,
       required this.controller,
       this.type,
+      this.isfouce,
       required this.obcure,
       this.onSubmit,
       this.onTap,
       this.validate,
       required this.label,
+      this.labelText,
       this.prefix,
       this.suffix,
       this.suffixPressed,
       this.maxline,
-      this.onTapIcon})
+      this.onTapIcon,
+      this.onChanged})
       : super(key: key);
 
   @override
@@ -48,14 +54,17 @@ class MyTextField extends StatelessWidget {
         //  cursorHeight: MediaQuery.of(context).size.height * .08,
         obscureText: obcure,
         keyboardType: type,
-        onChanged: (value) {},
+        onChanged: (value) {
+          isfouce = true;
+        },
         onTap: () {},
         validator: validate,
         controller: controller,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
         ),
         decoration: InputDecoration(
+            labelText: isfouce == true ? labelText : label,
 
             // contentPadding: EdgeInsets.symmetric(horizontal: 11.0),
             focusedBorder: OutlineInputBorder(

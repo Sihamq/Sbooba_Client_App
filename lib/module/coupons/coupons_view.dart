@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/coupons/add_coupons/add_coupons_view.dart';
 import 'package:sboba_app_client/module/coupons/coupons_controller.dart';
@@ -62,7 +63,10 @@ class CouponsView extends GetView<CouponsController> {
                       }),
                   onEmpty: EmptyProduct(
                       img: "assets/np.png", text: "No Coupons Now"),
-                  onLoading: SkeletonListView())),
+                  onLoading: SpinKitPouringHourGlassRefined(
+                      color: myOrange,
+                      size: 80.sp,
+                      duration: Duration(milliseconds: 500)))),
 
           SizedBox(
             height: 1.h,

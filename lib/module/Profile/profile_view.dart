@@ -68,13 +68,15 @@ class ProfileView extends StatelessWidget {
                                 width: 30.w,
                                 child: CircleAvatar(
                                   radius: 20.h,
-                                  backgroundImage: AssetImage("assets/img.jpg"),
+                                  backgroundImage:
+                                      const AssetImage("assets/img.jpg"),
                                 )),
                           ),
                           controller.isLoading
-                              ? SpinKitCircle(
+                              ? SpinKitPouringHourGlassRefined(
                                   color: myOrange,
-                                )
+                                  size: 40.sp,
+                                  duration: Duration(milliseconds: 500))
                               : DottedBorder(
                                   color: Colors.grey[400]!,
                                   radius: Radius.circular(20),
@@ -145,7 +147,7 @@ class ProfileView extends StatelessWidget {
                                               crossAxisAlignment:
                                                   WrapCrossAlignment.start,
                                               children: [
-                                                Icon(
+                                                const Icon(
                                                   MdiIcons.store,
                                                   size: 20,
                                                 ),
@@ -160,7 +162,7 @@ class ProfileView extends StatelessWidget {
                                                           fontWeight:
                                                               FontWeight.bold)),
                                                 ),
-                                                Icon(
+                                                const Icon(
                                                   Icons.person,
                                                   size: 20,
                                                 ),
@@ -182,11 +184,11 @@ class ProfileView extends StatelessWidget {
                                               child: Wrap(
                                                 spacing: 2,
                                                 children: [
-                                                  Icon(Icons.phone),
+                                                  const Icon(Icons.phone),
                                                   Text(
                                                     controller
                                                         .profile!.data!.phone!,
-                                                    style: TextStyle(
+                                                    style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   )
@@ -206,7 +208,7 @@ class ProfileView extends StatelessWidget {
                     right: 1.h,
                     left: 1.h,
                   ),
-                  child: ProfileColoumn(),
+                  child: const ProfileColoumn(),
                 ),
               ],
             ),

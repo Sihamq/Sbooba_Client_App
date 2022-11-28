@@ -16,7 +16,7 @@ class RowGender extends StatelessWidget {
       builder: (controller) => Wrap(
         children: [
           Text(
-            "What is your gender?",
+            "If you want to change gender , choose",
             style: TextStyle(color: myBlack, fontWeight: FontWeight.bold),
           ),
           RadioListTile(

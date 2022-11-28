@@ -78,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                         await controller.login(context);
                       },
                       title: controller.isLoading == true
-                          ? SpinKitCircle(
+                          ? SpinKitPouringHourGlassRefined(
                               color: myOrange,
                             )
                           : Text(

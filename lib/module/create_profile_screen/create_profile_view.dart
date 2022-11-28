@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
@@ -288,13 +289,17 @@ class CreateAccount extends StatelessWidget {
                             onpress: () async {
                               await controller.CreateAccount(context);
                             },
-                            title: Text(
-                              "Create".tr,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15.sp),
-                            ),
+                            title: controller.isLaoding
+                                ? Text(
+                                    "Create".tr,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15.sp),
+                                  )
+                                : SpinKitPouringHourGlassRefined(
+                                    color: myOrange,
+                                  ),
                             hight: 7.h,
                             width: 48.h),
 

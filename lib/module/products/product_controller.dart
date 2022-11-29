@@ -18,16 +18,35 @@ class ProductController extends GetxController
   var productItem = <ProductItem>[].obs;
   var dateController = DateRangePickerController();
   String? startDate, endDate;
+  var ProductNameController = TextEditingController();
+  var ProductDescriptionController = TextEditingController();
+  var SelectCateogController = TextEditingController();
+  var UnitPriceController = TextEditingController();
+  var UnitController = TextEditingController();
+  var miniProController = TextEditingController();
+  var ProductTagController = TextEditingController();
 
   bool isLoading = false;
   void onInit() {
     getProducts();
     final DateTime today = DateTime.now();
-    startDate = DateFormat('dd, MMMM yyyy').format(today).toString();
-    endDate = DateFormat('dd, MMMM yyyy')
+    startDate = DateFormat('dd, MMM yyyy').format(today).toString();
+    endDate = DateFormat('dd, MMM yyyy')
         .format(today.add(Duration(days: 3)))
         .toString();
+    dateController.selectedRange =
+        PickerDateRange(today, today.add(Duration(days: 3)));
     super.onInit();
+  }
+
+  void selectionChanged(DateRangePickerSelectionChangedArgs args) {
+    print(ProductTagController.text);
+    startDate =
+        DateFormat('dd, MMMM yyyy').format(args.value.startDate).toString();
+    endDate = DateFormat('dd, MMMM yyyy')
+        .format(args.value.endDate ?? args.value.startDate)
+        .toString();
+    update();
   }
 
   int? selected = 0;
@@ -77,7 +96,7 @@ class ProductController extends GetxController
         print("takeImage");
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text("Exceed allowed number"),
           ),
           // padding: const EdgeInsets.all(8),

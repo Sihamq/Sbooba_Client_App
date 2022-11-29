@@ -48,7 +48,7 @@ class ProfileView extends StatelessWidget {
                         child: Container(
                           child: Column(children: [RowAcount(), RowAcount()]),
                           color: myGreen.withOpacity(.4),
-                          height: 36.h,
+                          height: 38.h,
                         ),
                       ),
                     ),
@@ -86,116 +86,123 @@ class ProfileView extends StatelessWidget {
                                           color: myWhite,
                                           borderRadius:
                                               BorderRadius.circular(20)),
-                                      height: 15.h,
+                                      height: 18.h,
                                       width: 30.h,
                                       child: Padding(
                                         padding: EdgeInsets.all(1.h),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Wrap(
-                                              spacing: 2.w,
-                                              crossAxisAlignment:
-                                                  WrapCrossAlignment.start,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: .5.h,
-                                                      left: .5,
-                                                      right: .5),
-                                                  child: Text("Openat".tr,
-                                                      style: TextStyle(
-                                                          fontSize: 8.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ),
-                                                Icon(
-                                                  Icons.calendar_month,
-                                                  color: myOrange,
-                                                  size: 20,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: .5.h),
-                                                  child: Text("24-3-2022",
-                                                      style: TextStyle(
-                                                          fontSize: 8.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ),
-                                                Icon(
-                                                  Icons.av_timer,
-                                                  color: myOrange,
-                                                  size: 20,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: .5.h),
-                                                  child: Text("10:00 PM",
-                                                      style: TextStyle(
-                                                          fontSize: 8.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                )
-                                              ],
-                                            ),
-                                            Wrap(
-                                              spacing: 2.w,
-                                              crossAxisAlignment:
-                                                  WrapCrossAlignment.start,
-                                              children: [
-                                                const Icon(
-                                                  MdiIcons.store,
-                                                  size: 20,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: .5.h),
-                                                  child: Text(
-                                                      controller.profile!.data!
-                                                          .shopName!,
-                                                      style: TextStyle(
-                                                          fontSize: 9.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ),
-                                                const Icon(
-                                                  Icons.person,
-                                                  size: 20,
-                                                ),
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: .5.h),
-                                                  child: Text(
-                                                      controller
-                                                          .profile!.data!.name!,
-                                                      style: TextStyle(
-                                                          fontSize: 9.sp,
-                                                          fontWeight:
-                                                              FontWeight.bold)),
-                                                ),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.all(.5.h),
-                                              child: Wrap(
-                                                spacing: 2,
+                                        child: Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              Wrap(
+                                                spacing: 2.w,
+                                                crossAxisAlignment:
+                                                    WrapCrossAlignment.start,
                                                 children: [
-                                                  const Icon(Icons.phone),
-                                                  Text(
-                                                    controller
-                                                        .profile!.data!.phone!,
-                                                    style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: .5.h,
+                                                        left: .5,
+                                                        right: .5),
+                                                    child: Text("Openat".tr,
+                                                        style: TextStyle(
+                                                            fontSize: 8.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ),
+                                                  Icon(
+                                                    Icons.calendar_month,
+                                                    color: myOrange,
+                                                    size: 20,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: .5.h),
+                                                    child: Text("24-3-2022",
+                                                        style: TextStyle(
+                                                            fontSize: 8.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ),
+                                                  Icon(
+                                                    Icons.av_timer,
+                                                    color: myOrange,
+                                                    size: 20,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: .5.h),
+                                                    child: Text("10:00 PM",
+                                                        style: TextStyle(
+                                                            fontSize: 8.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
                                                   )
                                                 ],
                                               ),
-                                            )
-                                          ],
+                                              Wrap(
+                                                spacing: 2.w,
+                                                crossAxisAlignment:
+                                                    WrapCrossAlignment.start,
+                                                children: [
+                                                  const Icon(
+                                                    MdiIcons.store,
+                                                    size: 20,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: .5.h),
+                                                    child: Text(
+                                                        controller.profile!
+                                                            .data!.shopName!,
+                                                        style: TextStyle(
+                                                            fontSize: 9.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ),
+                                                  const Icon(
+                                                    Icons.person,
+                                                    size: 20,
+                                                  ),
+                                                  Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: .5.h),
+                                                    child: Text(
+                                                        controller.profile!
+                                                            .data!.name!,
+                                                        style: TextStyle(
+                                                            fontSize: 9.sp,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold)),
+                                                  ),
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsets.all(.5.h),
+                                                child: Wrap(
+                                                  spacing: 2,
+                                                  children: [
+                                                    const Icon(Icons.phone),
+                                                    Text(
+                                                      controller.profile!.data!
+                                                          .phone!,
+                                                      style: const TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ))),
                         ],

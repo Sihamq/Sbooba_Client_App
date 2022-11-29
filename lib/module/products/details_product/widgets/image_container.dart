@@ -18,8 +18,8 @@ class ImageContainer extends GetView<ProductController> {
               children: [
                 Center(
                   child: Container(
-                      height: 33.h,
-                      width: 100.w,
+                      height: MediaQuery.of(context).size.height * .32,
+                      width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                           //shape: BoxShape.circle
                           ),

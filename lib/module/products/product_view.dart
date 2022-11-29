@@ -107,18 +107,18 @@ class ProductView extends GetView<ProductController> {
               ),
             ),
             onEmpty: EmptyProduct(
-              img: "assets/npp.png",
+              img: "assets/nopro.png",
               text: "No Product Yet",
             ),
             onLoading: SpinKitPouringHourGlassRefined(
                 strokeWidth: 5.0,
                 color: myOrange,
                 size: 80.sp,
-                duration: Duration(milliseconds: 500)),
+                duration: const Duration(milliseconds: 800)),
             onError: (error) => SpinKitPouringHourGlassRefined(
                 color: myOrange,
                 size: 80.sp,
-                duration: Duration(milliseconds: 500)),
+                duration: const Duration(milliseconds: 800)),
           ),
         ),
       ]),

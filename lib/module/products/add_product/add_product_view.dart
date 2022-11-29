@@ -16,13 +16,6 @@ import 'package:sizer/sizer.dart';
 import '../../shared/component/add_text_formfield.dart';
 
 class AddProduct extends GetView<ProductController> {
-  var ProductNameController = TextEditingController();
-  var ProductDescriptionController = TextEditingController();
-  var SelectCateogController = TextEditingController();
-  var UnitPriceController = TextEditingController();
-  var UnitController = TextEditingController();
-  var miniProController = TextEditingController();
-  var ProductTagController = TextEditingController();
   AddProduct({super.key});
   //Get.put(ProductController);
 
@@ -39,139 +32,168 @@ class AddProduct extends GetView<ProductController> {
                 fontSize: 12.sp, fontWeight: FontWeight.bold, color: myBlack),
           ),
           backgroundColor: myWhite),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(2.h),
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: MyAddTextField(
-                  controller: ProductNameController,
-                  obcure: false,
-                  label: "Name".tr,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: MyAddTextField(
-                    maxline: 4,
-                    controller: ProductNameController,
+      body: GetBuilder<ProductController>(
+        builder: (controller) => SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(2.h),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
+                    controller: controller.ProductNameController,
                     obcure: false,
-                    label: "Description/Ingredient".tr),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: Row(
-                  children: [
-                    MySmallTextField(
-                      controller: UnitController,
-                      obcure: false,
-                      label: "Minium".tr,
-                    ),
-                    SizedBox(
-                      width: 3.h,
-                    ),
-                    MySmallTextField(
-                      controller: miniProController,
-                      obcure: false,
-                      label: "Candy".tr,
-                      suffix: Icons.arrow_right_alt,
-                      suffixPressed: () {
-                        Get.defaultDialog(
-                            title: "'",
-                            content: CustomRdaioButton(),
-                            middleText: "😊");
-                      },
-                    )
-                  ],
+                    label: "Name".tr,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: MyAddTextField(
-                    controller: ProductNameController,
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
+                      maxline: 4,
+                      controller: controller.ProductNameController,
+                      obcure: false,
+                      label: "Description/Ingredient".tr),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Row(
+                    children: [
+                      MySmallTextField(
+                        controller: controller.UnitController,
+                        obcure: false,
+                        label: "Minium".tr,
+                      ),
+                      SizedBox(
+                        width: 3.h,
+                      ),
+                      MySmallTextField(
+                        controller: controller.miniProController,
+                        obcure: false,
+                        label: "Candy".tr,
+                        suffix: Icons.arrow_right_alt,
+                        suffixPressed: () {
+                          Get.defaultDialog(
+                              title: "'",
+                              content: CustomRdaioButton(),
+                              middleText: "😊");
+                        },
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
+                      controller: controller.ProductNameController,
+                      obcure: false,
+                      label: "Calories".tr),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
+                    controller: controller.ProductNameController,
                     obcure: false,
-                    label: "Calories".tr),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: MyAddTextField(
-                  controller: ProductNameController,
-                  obcure: false,
-                  label: "Tag".tr,
-                  suffix: Icons.keyboard_arrow_right_outlined,
+                    label: "Tag".tr,
+                    suffix: Icons.keyboard_arrow_right_outlined,
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: AddImages(),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 4.w,
-                    ),
-                    Text(
-                      "Range".tr,
-                      style: TextStyle(
-                          color: myOrange,
-                          fontSize: 10.sp,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    DateContainer()
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: Row(
-                  children: [
-                    MySmallTextField(
-                        controller: ProductTagController,
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Row(
+                    children: [
+                      MySmallTextField(
+                          controller: controller.ProductTagController,
+                          obcure: false,
+                          label: "Quantity".tr),
+                      SizedBox(
+                        width: 3.h,
+                      ),
+                      MySmallTextField(
+                        controller: controller.ProductTagController,
                         obcure: false,
-                        label: "Start Date"),
-                    SizedBox(
-                      width: 3.h,
-                    ),
-                    MySmallTextField(
-                      controller: ProductTagController,
-                      obcure: false,
-                      label: "End Date".tr,
-                    ),
-                  ],
+                        label: "Flat".tr,
+                        suffix: Icons.arrow_drop_down,
+                        suffixPressed: () {},
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(1.h),
-                child: Row(
-                  children: [
-                    MySmallTextField(
-                        controller: ProductTagController,
-                        obcure: false,
-                        label: "Quantity".tr),
-                    SizedBox(
-                      width: 3.h,
-                    ),
-                    MySmallTextField(
-                      controller: ProductTagController,
-                      obcure: false,
-                      label: "Flat".tr,
-                      suffix: Icons.arrow_drop_down,
-                      suffixPressed: () {},
-                    ),
-                  ],
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: AddImages(),
                 ),
-              ),
-              BlueButton(
-                  title: Text("Save".tr,
-                      style: TextStyle(
-                          color: myWhite, fontWeight: FontWeight.bold)),
-                  hight: 6.h,
-                  width: 100.w)
-            ],
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Text(
+                        "Range".tr,
+                        style: TextStyle(
+                            color: myOrange,
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      DateContainer()
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 100.w,
+                        height: 5.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[300]),
+                        child: Padding(
+                          padding: EdgeInsets.all(1.h),
+                          child: Text(
+                            "Start Date is : ${controller.startDate}",
+                            style: TextStyle(
+                                color: myBlack,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.sp),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                      ),
+                      Container(
+                        width: 100.w,
+                        height: 5.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[300]),
+                        child: Padding(
+                          padding: EdgeInsets.all(1.h),
+                          child: Text(
+                            "End Date is :    ${controller.endDate}",
+                            style: TextStyle(
+                                color: myBlack,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.sp),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                BlueButton(
+                    title: Text("Save".tr,
+                        style: TextStyle(
+                            color: myWhite, fontWeight: FontWeight.bold)),
+                    hight: 7.h,
+                    width: 100.w)
+              ],
+            ),
           ),
         ),
       ),

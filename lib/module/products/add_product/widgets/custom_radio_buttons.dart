@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sizer/sizer.dart';
 
+enum Meal { mainMeals, sweet, drinks, spells }
+
 class CustomRdaioButton extends StatelessWidget {
   const CustomRdaioButton({super.key});
 
@@ -21,9 +23,9 @@ class CustomRdaioButton extends StatelessWidget {
               "Select Catogrey".tr,
               style: TextStyle(fontSize: 12.sp),
             ),
-            Spacer(),
+            const Spacer(),
             InkWell(
-              child: Icon(
+              child: const Icon(
                 Icons.search,
               ),
               onTap: () {},
@@ -33,28 +35,37 @@ class CustomRdaioButton extends StatelessWidget {
         RadioListTile(
             activeColor: myOrange,
             title: Text(
-              "Candy".tr,
+              "Sweets".tr,
               style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold),
             ),
-            value: 1,
+            value: Meal.sweet,
             groupValue: () {},
             onChanged: ((value) {})),
         RadioListTile(
             activeColor: myOrange,
             title: Text(
-              "Candy".tr,
+              "Drinks".tr,
               style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold),
             ),
-            value: 1,
+            value: Meal.drinks,
             groupValue: () {},
             onChanged: ((value) {})),
         RadioListTile(
             activeColor: myOrange,
             title: Text(
-              "Candy".tr,
+              "Private Orders/Spells".tr,
               style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold),
             ),
-            value: 1,
+            value: Meal.spells,
+            groupValue: () {},
+            onChanged: ((value) {})),
+        RadioListTile(
+            activeColor: myOrange,
+            title: Text(
+              "Main Meals".tr,
+              style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold),
+            ),
+            value: Meal.mainMeals,
             groupValue: () {},
             onChanged: ((value) {}))
       ],

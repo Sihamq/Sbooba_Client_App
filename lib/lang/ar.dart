@@ -86,7 +86,7 @@ Map<String, String> ar = {
   "Profile": "بروفايل",
   "Coupons": "كوبونات",
   "Add Product": "اضافة منتج",
-  "EndDate": "تاريخ الانتهاء",
+  "EndDate": "ينتهي بـ",
   "Start Date": "تاريخ البدء",
   "Add coupons": "اضافة كوبون",
   "Coupons Count": "عدد الكوبونات",

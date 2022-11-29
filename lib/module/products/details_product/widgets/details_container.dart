@@ -16,10 +16,10 @@ class DetailsContainer extends StatelessWidget {
     print("index:$index");
     return GetBuilder<ProductController>(
       builder: (controller) => Padding(
-        padding: EdgeInsets.only(top: 20.h),
+        padding: EdgeInsets.only(top: 1.h),
         child: Container(
-          width: 100.w,
-          height: 66.h,
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height * .60,
           decoration: BoxDecoration(
             border: Border(
                 top: BorderSide(
@@ -27,9 +27,7 @@ class DetailsContainer extends StatelessWidget {
               width: 7.0,
             )),
             color: Colors.white,
-            // borderRadius: BorderRadius.only(
-            //   topRight: Radius.circular(55.0),
-            //   topLeft: Radius.circular(55.0),
+
             // ),
           ),
           child: Padding(
@@ -41,7 +39,7 @@ class DetailsContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: EdgeInsets.all(1.h),
                     child: Row(
                       children: [
                         Text(

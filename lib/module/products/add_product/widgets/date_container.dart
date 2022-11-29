@@ -33,10 +33,57 @@ class DateContainer extends StatelessWidget {
               onPressed: () {
                 slideDialog.showSlideDialog(
                   context: context,
-                  child: SfDateRangePicker(
-                    controller: controller.dateController,
-                    selectionMode: DateRangePickerSelectionMode.range,
-                    view: DateRangePickerView.month,
+                  child: Column(
+                    children: [
+                      SfDateRangePicker(
+                        controller: controller.dateController,
+                        selectionMode: DateRangePickerSelectionMode.range,
+                        onSelectionChanged: controller.selectionChanged,
+                        view: DateRangePickerView.month,
+                        allowViewNavigation: true,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: myGreen,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyle(
+                                      color: myWhite,
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
+                          SizedBox(
+                            width: 3.h,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: myGreen,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text(
+                                  "Ok",
+                                  style: TextStyle(
+                                      color: myWhite,
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 );
               },

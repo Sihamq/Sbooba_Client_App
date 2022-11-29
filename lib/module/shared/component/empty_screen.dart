@@ -13,16 +13,12 @@ class EmptyProduct extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Padding(
-            padding: EdgeInsets.all(3.h),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: 50.h,
-              child: Image(
-                image: AssetImage(img!),
-                //fit: BoxFit.fill,
-                // filterQuality: FilterQuality.high,
-              ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 50.h,
+            child: Image(
+              image: AssetImage(img!),
+              fit: BoxFit.cover,
             ),
           ),
           Padding(
@@ -32,7 +28,7 @@ class EmptyProduct extends StatelessWidget {
               style: TextStyle(
                   color: myOrange,
                   fontWeight: FontWeight.bold,
-                  fontSize: 21.sp),
+                  fontSize: 18.sp),
             ),
           ),
         ],

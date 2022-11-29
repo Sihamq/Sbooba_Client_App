@@ -38,7 +38,7 @@ class MySmallTextField extends StatelessWidget {
       //height: MediaQuery.of(context).size.height * .08,
       child: SizedBox(
         height: 6.h,
-        width: 41.w,
+        width: 41.5.w,
         child: TextFormField(
           maxLines: maxline == null ? 1 : maxline,
           //  scrollPadding: EdgeInsets.all(8),
@@ -55,25 +55,20 @@ class MySmallTextField extends StatelessWidget {
               labelText: label,
               suffixIconColor: myGreen,
               suffixIcon: InkWell(child: Icon(suffix), onTap: suffixPressed),
-              suffixIconConstraints: BoxConstraints(
+              suffixIconConstraints: const BoxConstraints(
                 minWidth: 2,
                 minHeight: 2,
               ),
               // contentPadding: EdgeInsets.symmetric(horizontal: 6.h),
               focusedBorder: OutlineInputBorder(
                 borderSide: const BorderSide(color: Colors.green, width: 1),
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(10.0),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide(color: HexColor('#707070'), width: 1),
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide(color: myOrange, width: 1),
               ),
-              // suffix: InkWell(
-              //     onTap: suffixPressed,
-              //     child: Icon(
-              //       suffix,
-              //       size: 20,
-              //       color: Colors.black,
+
               //     )),
               fillColor: HexColor('#FFFFFF'),
               filled: true,

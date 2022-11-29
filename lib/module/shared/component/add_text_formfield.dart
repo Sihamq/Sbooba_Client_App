@@ -53,11 +53,11 @@ class MyAddTextField extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(horizontal: .5.w),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green, width: 1.5),
-              borderRadius: BorderRadius.circular(5.0),
+              borderRadius: BorderRadius.circular(10),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: Colors.grey[200]!, width: 1),
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: myOrange, width: 1),
             ),
             suffix: InkWell(
                 onTap: suffixPressed,

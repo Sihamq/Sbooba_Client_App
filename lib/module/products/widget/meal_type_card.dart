@@ -20,115 +20,115 @@ class MealCard extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Stack(
-        alignment: Alignment.topRight,
-        children: [
-          Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(2.h)),
-              // decoration: BoxDecoration(
-              //   borderRadius: BorderRadius.circular(15),
-
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      () => Card(
+        elevation: 5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.h)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(alignment: Alignment.topRight, children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: InkWell(
+                  onTap: () {
+                    CustomeAwesomeDialog().AwesomeDialogHeader(
+                        DialogType: DialogType.question,
+                        context: context,
+                        describe: "",
+                        subTitle: "Do you want to delete  this Product?",
+                        mainTitle: "",
+                        btOnpressed: () => controller
+                            .deleteProducts(controller.productItem[index!].id));
+                  },
+                  child: Icon(
+                    Icons.cancel_outlined,
+                    color: myOrange,
+                  ),
+                ),
+              ),
+              CachedNetworkImage(
+                imageUrl: controller.productItem[index!].category!.icon!,
+                imageBuilder: (context, imageProvider) => Container(
+                  //
+                  //
+                  //
+                  width: 120.w,
+                  height: 6.h,
+                  decoration: BoxDecoration(
+                    //shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
+                  ),
+                ),
+                placeholder: (context, url) => SpinKitCircle(color: myGreen),
+                errorWidget: (context, url, error) => Center(
+                    child: Container(
+                        height: 5.h,
+                        child: const Image(
+                            fit: BoxFit.cover,
+                            image: AssetImage(
+                              "assets/121.png",
+                            )))),
+              ),
+              if (controller.productItem[index!].tax == 0) DiscountContainer(),
+            ]),
+            Padding(
+              padding: EdgeInsets.all(.5.h),
+              child: Text(
+                controller.productItem[index!].name!,
+                style: TextStyle(
+                    color: myGreen,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13.sp),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 1.w, right: 1.w),
+              child: Wrap(spacing: 1.w, children: [
+                Text(
+                  controller.productItem[index!].unitPrice.toString(),
+                  style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.discount_rounded,
+                  color: myGreen,
+                  size: 4.w,
+                ),
+              ]),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 1.w, right: 1.w),
+              child: Wrap(
+                spacing: 2.w,
                 children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: InkWell(
-                      onTap: () {
-                        CustomeAwesomeDialog().AwesomeDialogHeader(
-                            DialogType: DialogType.question,
-                            context: context,
-                            describe: "",
-                            subTitle: "Do you want to delete  this Product?",
-                            mainTitle: "",
-                            btOnpressed: () => controller.deleteProducts(
-                                controller.productItem[index!].id));
-                      },
-                      child: Icon(
-                        Icons.cancel_outlined,
-                        color: myOrange,
-                      ),
-                    ),
+                  Text(
+                    "EndDate".tr,
+                    style:
+                        TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold),
                   ),
-                  CachedNetworkImage(
-                    imageUrl: controller.productItem[index!].category!.icon!,
-                    imageBuilder: (context, imageProvider) => Container(
-                      //
-                      //
-                      //
-                      width: 120.w,
-                      height: 6.h,
-                      decoration: BoxDecoration(
-                        //shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: imageProvider, fit: BoxFit.cover),
-                      ),
-                    ),
-                    placeholder: (context, url) =>
-                        SpinKitCircle(color: myGreen),
-                    errorWidget: (context, url, error) => Center(
-                        child: Container(
-                            height: 5.h,
-                            child: const Image(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                  "assets/121.png",
-                                )))),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(.5.h),
-                    child: Text(
-                      controller.productItem[index!].name!,
+                  Text("22-Novmber-2022",
                       style: TextStyle(
-                          color: myGreen,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13.sp),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 1.w, right: 1.w),
-                    child: Wrap(spacing: 2.w, children: [
-                      Text(
-                        controller.productItem[index!].unitPrice.toString(),
-                        style: TextStyle(
-                            fontSize: 8.sp, fontWeight: FontWeight.bold),
-                      ),
-                      Icon(
-                        Icons.discount_rounded,
-                        color: myGreen,
-                        size: 4.w,
-                      ),
-                      Text(
-                        "EndDate".tr,
-                        style: TextStyle(
-                            fontSize: 8.sp, fontWeight: FontWeight.bold),
-                      ),
-                      Text("22-10-2022",
-                          style: TextStyle(
-                              fontSize: 8.sp, fontWeight: FontWeight.bold))
-                    ]),
-                  ),
-                  const Spacer(),
-                  Container(
-                      color: myGreen.withOpacity(.1),
-                      height: 5.h,
-                      width: 100.w,
-                      child: RatingBarIndicator(
-                        rating: 3.75,
-                        itemBuilder: (context, index) => Icon(
-                          Icons.star_border_outlined,
-                          color: myOrange,
-                        ),
-                        itemCount: 1,
-                        itemSize: 12.5.w,
-                        direction: Axis.horizontal,
-                      ))
+                          fontSize: 8.sp, fontWeight: FontWeight.bold))
                 ],
-              )),
-          if (controller.productItem[index!].tax == 0) DiscountContainer(),
-        ],
+              ),
+            ),
+            const Spacer(),
+            Container(
+                color: myGreen.withOpacity(.1),
+                height: 3.h,
+                width: 100.w,
+                child: RatingBarIndicator(
+                  rating: 3.75,
+                  itemBuilder: (context, index) => Icon(
+                    Icons.star_border_outlined,
+                    color: myOrange,
+                  ),
+                  itemCount: 1,
+                  itemSize: 12.5.w,
+                  direction: Axis.horizontal,
+                ))
+          ],
+        ),
       ),
     );
   }

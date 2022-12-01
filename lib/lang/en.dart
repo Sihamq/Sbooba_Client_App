@@ -175,5 +175,9 @@ Map<String, String> en = {
   "Client": "Client",
   "Discount": "Discount",
   "Language": "Choose Favorite Language",
-  "lan": "Languge"
+  "lan": "Languge",
+  "totalOrder": "Total Orders",
+  "sales": "Sales",
+  "sucess": "Sucessful Orders",
+  "canceled": "Cancelled Orders"
 };

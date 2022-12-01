@@ -53,7 +53,7 @@ class ProductView extends GetView<ProductController> {
           child: GetBuilder<ProductController>(
             init: ProductController(),
             builder: (controller) => SizedBox(
-                width: 48.h,
+                // width: ,
                 height: 6.h,
                 child: ListView.separated(
                     separatorBuilder: (context, index) => SizedBox(
@@ -61,8 +61,8 @@ class ProductView extends GetView<ProductController> {
                         ),
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 3,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: 10,
                     itemBuilder: (context, index) {
                       return ProductCateogry(
                         x: index,
@@ -87,9 +87,9 @@ class ProductView extends GetView<ProductController> {
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     childAspectRatio: 2 / 2,
-                    maxCrossAxisExtent: 210,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 5),
+                    maxCrossAxisExtent: 320,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 3),
                 itemBuilder: ((context, index) => InkWell(
                     onTap: (() => {
                           controller
@@ -111,14 +111,16 @@ class ProductView extends GetView<ProductController> {
               text: "No Product Yet",
             ),
             onLoading: SpinKitPouringHourGlassRefined(
-                strokeWidth: 5.0,
-                color: myOrange,
-                size: 80.sp,
-                duration: const Duration(milliseconds: 800)),
+              strokeWidth: 5.0,
+              color: myOrange,
+              size: 80.sp,
+              //duration: const Duration(milliseconds: 800)
+            ),
             onError: (error) => SpinKitPouringHourGlassRefined(
-                color: myOrange,
-                size: 80.sp,
-                duration: const Duration(milliseconds: 800)),
+              color: myOrange,
+              size: 80.sp,
+              // duration: const Duration(milliseconds: 800)
+            ),
           ),
         ),
       ]),

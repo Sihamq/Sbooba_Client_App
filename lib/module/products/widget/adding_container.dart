@@ -18,17 +18,20 @@ class AddingContainer extends StatelessWidget {
     return Container(
         color: myGreen.withOpacity(.1),
         height: 7.h,
-        width: 100.w,
+        // width: MediaQuery.of(context).size.width,
         child: Padding(
             padding: EdgeInsets.all(1.h),
             child: Row(
               children: [
                 Text(
                   label!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  width: 1.w,
                 ),
                 Text("${noOfPro}",
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 Spacer(),
                 InkWell(
                   onTap: onTap,
@@ -42,7 +45,7 @@ class AddingContainer extends StatelessWidget {
                     child: Center(
                       child: Text(
                         btnTitle!,
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),

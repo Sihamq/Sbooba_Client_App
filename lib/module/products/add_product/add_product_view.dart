@@ -64,7 +64,7 @@ class AddProduct extends GetView<ProductController> {
                         label: "Minium".tr,
                       ),
                       SizedBox(
-                        width: 3.h,
+                        width: 1.h,
                       ),
                       MySmallTextField(
                         controller: controller.miniProController,
@@ -106,7 +106,7 @@ class AddProduct extends GetView<ProductController> {
                           obcure: false,
                           label: "Quantity".tr),
                       SizedBox(
-                        width: 3.h,
+                        width: .5.h,
                       ),
                       MySmallTextField(
                         controller: controller.ProductTagController,
@@ -136,7 +136,15 @@ class AddProduct extends GetView<ProductController> {
                             fontSize: 10.sp,
                             fontWeight: FontWeight.bold),
                       ),
-                      DateContainer()
+                      Wrap(spacing: 2.w, children: [
+                        DateContainer(),
+                        MySmallTextField(
+                          label: "Discount",
+                          type: TextInputType.number,
+                          controller: controller.ProductTagController,
+                          obcure: false,
+                        )
+                      ])
                     ],
                   ),
                 ),

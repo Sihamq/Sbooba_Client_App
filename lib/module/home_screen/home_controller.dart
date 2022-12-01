@@ -25,11 +25,11 @@ class HomeController extends GetxController {
     "Profile".tr
   ];
   List<String> icon = [
-    "assets/order.png",
-    "assets/11.png",
-    "assets/33.png",
-    "assets/22.png",
-    "assets/44.png",
+    "assets/tracking.png",
+    "assets/product.png",
+    "assets/not.png",
+    "assets/vou.png",
+    "assets/use.png",
   ];
   int currentIndex = 0;
   TabController? tabController;

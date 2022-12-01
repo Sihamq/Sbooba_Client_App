@@ -7,7 +7,14 @@ import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sizer/sizer.dart';
 
 class RowAcount extends StatelessWidget {
-  const RowAcount({super.key});
+  String? firstText, secondText, thirdText, fourText;
+
+  RowAcount(
+      {super.key,
+      this.firstText,
+      this.secondText,
+      this.thirdText,
+      this.fourText});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +28,7 @@ class RowAcount extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(.5),
                 child: Text(
-                  "Your Account Balance".tr,
+                  firstText!,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 9.sp),
                 ),
               ),
@@ -38,11 +45,15 @@ class RowAcount extends StatelessWidget {
         Spacer(),
         Padding(
           padding: EdgeInsets.all(.5.h),
-          child: TotalContainer(),
+          child: TotalContainer(
+            secondText: secondText,
+          ),
         ),
         Padding(
           padding: EdgeInsets.all(.5.h),
-          child: TotalContainer(),
+          child: TotalContainer(
+            secondText: thirdText,
+          ),
         )
       ],
     );

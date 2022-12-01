@@ -15,15 +15,17 @@ class DetailsProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<ProductController>(
       builder: (controller) => Scaffold(
+        backgroundColor: myGreen,
         body: SafeArea(
-          child: Stack(alignment: AlignmentDirectional.bottomEnd, children: [
-            Positioned(top: 0.h, child: ImageContainer()),
-            Positioned(
-                bottom: 0.h,
-                child: DetailsContainer(
-                  index: index,
-                )),
-          ]),
+          child: SingleChildScrollView(
+            child: Column(//alignment: AlignmentDirectional.bottomEnd,
+                children: [
+              ImageContainer(),
+              DetailsContainer(
+                index: index,
+              ),
+            ]),
+          ),
         ),
       ),
     );

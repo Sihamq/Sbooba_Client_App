@@ -155,7 +155,7 @@ Map<String, String> ar = {
   "Create a Ticket": "انشاء بطاقة",
   "Create": "انشاء",
   "Description": "وصف",
-  "Minium": "اقل منتج",
+  "Minium": "اقل كمية شراء",
   "Candy": "حلوى",
   "Range": "تاريخ الخصم",
   "Quantity": "الكمية",
@@ -170,5 +170,9 @@ Map<String, String> ar = {
   "Client": "العميل",
   "Discount": "خصم",
   "Language": "اختر لغتك",
-  "lan": "اللغه"
+  "lan": "اللغه",
+  "totalOrder": "اجمالي الطلبات",
+  "sales": "مبيعات",
+  "sucess": "طلبات ناجحة",
+  "canceled": "طلبات ملغية"
 };

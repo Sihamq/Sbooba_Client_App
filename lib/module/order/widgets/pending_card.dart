@@ -104,7 +104,7 @@ class PendingCard extends StatelessWidget {
             Spacer(),
             Container(
               color: myGreen.withOpacity(.1),
-              height: 4.5.h,
+              height: 5.h,
               width: 100.w,
               child: Padding(
                 padding: EdgeInsets.all(1.h),
@@ -114,7 +114,7 @@ class PendingCard extends StatelessWidget {
                     style:
                         TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     "${100.0}SAR",
                     style: TextStyle(

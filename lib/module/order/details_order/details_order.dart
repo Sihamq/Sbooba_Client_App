@@ -17,9 +17,12 @@ class DetailsOrder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: myWhite),
+        elevation: 0,
+        //  actionsIconTheme: IconThemeData(color: myWhite),
         backgroundColor: myGreen,
         title: Text("Order Details".tr,
-            style: TextStyle(fontWeight: FontWeight.bold)),
+            style: TextStyle(fontWeight: FontWeight.bold, color: myWhite)),
       ),
       body: SingleChildScrollView(
         child: Stack(alignment: AlignmentDirectional.center, children: [

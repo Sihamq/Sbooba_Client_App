@@ -19,6 +19,7 @@ class OrderView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(OrderController());
     return Scaffold(
+      backgroundColor: myWhite,
       appBar: AppBar(
         actions: [
           InkWell(
@@ -43,7 +44,7 @@ class OrderView extends StatelessWidget {
         Padding(
           padding: EdgeInsets.all(2.h),
           child: Container(
-            width: 48.h,
+            //width: 48.h,
             height: 6.h,
             child: ListView.separated(
                 separatorBuilder: (context, index) => SizedBox(
@@ -51,7 +52,7 @@ class OrderView extends StatelessWidget {
                     ),
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return OrderCatogrey(
@@ -61,18 +62,22 @@ class OrderView extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: GridView.builder(
-              physics: BouncingScrollPhysics(),
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  childAspectRatio: 2 / 2,
-                  maxCrossAxisExtent: 350,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10),
-              itemBuilder: ((context, index) => InkWell(
-                  onTap: (() => Get.to(() => DetailsOrder())),
-                  child: PendingCard())),
-              itemCount: 5),
+          child: Padding(
+            padding: EdgeInsets.only(left: .3.h, right: .3.h),
+            child: GridView.builder(
+                // padding: EdgeInsets.only(left: .5.h, right: .5.h),
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    childAspectRatio: 3 / 3,
+                    maxCrossAxisExtent: 343,
+                    mainAxisSpacing: 5,
+                    crossAxisSpacing: 10),
+                itemBuilder: ((context, index) => InkWell(
+                    onTap: (() => Get.to(() => DetailsOrder())),
+                    child: PendingCard())),
+                itemCount: 10),
+          ),
         ),
       ]),
     );

@@ -6,7 +6,8 @@ import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sizer/sizer.dart';
 
 class TotalContainer extends StatelessWidget {
-  const TotalContainer({super.key});
+  String? secondText;
+  TotalContainer({super.key, this.secondText});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class TotalContainer extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: .5.h, right: .5.h),
               child: Text(
-                "Total Products".tr,
+                secondText!,
                 style: TextStyle(
                     color: myWhite,
                     fontWeight: FontWeight.bold,

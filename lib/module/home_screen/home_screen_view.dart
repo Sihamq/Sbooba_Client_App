@@ -35,7 +35,7 @@ class HomeScreen extends GetWidget<HomeController> {
             children: [
               ImageIcon(
                 AssetImage(path),
-                color: isSelected ? myGreen : myBlack,
+                color: isSelected ? myGreen : Colors.grey[700],
               ),
               Expanded(
                 child: Text(label.tr,
@@ -55,7 +55,7 @@ class HomeScreen extends GetWidget<HomeController> {
     return GetBuilder<HomeController>(
       builder: (controller) => Scaffold(
         extendBody: true,
-        backgroundColor: Colors.grey[200],
+        backgroundColor: myWhite,
         bottomNavigationBar:
             // Container(
             //   height: 8.h,
@@ -70,7 +70,7 @@ class HomeScreen extends GetWidget<HomeController> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(30.0),
                     child: Container(
-                      color: myWhite,
+                      color: Colors.grey[50],
                       child: DefaultTabController(
                         length: 5,
                         // onTap: ((value) => controller.changCurrentIndex(value)),

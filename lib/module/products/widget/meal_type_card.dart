@@ -43,6 +43,7 @@ class MealCard extends GetView<ProductController> {
                   child: Icon(
                     Icons.cancel_outlined,
                     color: myOrange,
+                    size: 20.sp,
                   ),
                 ),
               ),
@@ -53,7 +54,7 @@ class MealCard extends GetView<ProductController> {
                   //
                   //
                   width: 120.w,
-                  height: 6.h,
+                  height: 7.h,
                   decoration: BoxDecoration(
                     //shape: BoxShape.circle,
                     image: DecorationImage(
@@ -63,14 +64,14 @@ class MealCard extends GetView<ProductController> {
                 placeholder: (context, url) => SpinKitCircle(color: myGreen),
                 errorWidget: (context, url, error) => Center(
                     child: Container(
-                        height: 5.h,
+                        height: 7.h,
                         child: const Image(
                             fit: BoxFit.cover,
                             image: AssetImage(
                               "assets/121.png",
                             )))),
               ),
-              if (controller.productItem[index!].tax == 0) DiscountContainer(),
+              if (controller.productItem[index!].tax != 0) DiscountContainer(),
             ]),
             Padding(
               padding: EdgeInsets.all(.5.h),
@@ -86,8 +87,12 @@ class MealCard extends GetView<ProductController> {
               padding: EdgeInsets.only(left: 1.w, right: 1.w),
               child: Wrap(spacing: 1.w, children: [
                 Text(
-                  controller.productItem[index!].unitPrice.toString(),
-                  style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold),
+                  controller.productItem[index!].unitPrice.toString() +
+                      "SAR".tr,
+                  style: TextStyle(
+                      fontSize: 8.sp,
+                      fontWeight: FontWeight.bold,
+                      color: myOrange),
                 ),
                 Icon(
                   Icons.discount_rounded,

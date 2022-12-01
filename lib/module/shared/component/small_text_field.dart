@@ -38,7 +38,7 @@ class MySmallTextField extends StatelessWidget {
       //height: MediaQuery.of(context).size.height * .08,
       child: SizedBox(
         height: 6.h,
-        width: 41.5.w,
+        width: 41.w,
         child: TextFormField(
           maxLines: maxline == null ? 1 : maxline,
           //  scrollPadding: EdgeInsets.all(8),
@@ -46,6 +46,7 @@ class MySmallTextField extends StatelessWidget {
 
           //  cursorHeight: MediaQuery.of(context).size.height * .08,
           obscureText: obcure,
+
           keyboardType: type,
           onChanged: (value) {},
           onTap: () {},

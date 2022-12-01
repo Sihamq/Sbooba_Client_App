@@ -29,13 +29,12 @@ class ProductController extends GetxController
   bool isLoading = false;
   void onInit() {
     getProducts();
-    final DateTime today = DateTime.now();
-    startDate = DateFormat('dd, MMM yyyy').format(today).toString();
-    endDate = DateFormat('dd, MMM yyyy')
-        .format(today.add(Duration(days: 3)))
-        .toString();
-    dateController.selectedRange =
-        PickerDateRange(today, today.add(Duration(days: 3)));
+    final DateTime today = DateTime.utc(0, 0, 0);
+    startDate = "00-00-00";
+    endDate = "00-00-00";
+    dateController.selectedRange;
+    // =
+    // PickerDateRange(today, today.add(Duration(days: 3)));
     super.onInit();
   }
 

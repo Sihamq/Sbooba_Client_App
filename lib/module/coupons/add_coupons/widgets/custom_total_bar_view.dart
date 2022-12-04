@@ -49,7 +49,7 @@ class CustomTabOrderView extends StatelessWidget {
             child: MyAddTextField(
                 controller: controller.couponCode,
                 obcure: false,
-                label: "Coupon Code"),
+                label: "Coupon Code".tr),
           ),
           Padding(
             padding: EdgeInsets.all(1.h),
@@ -81,19 +81,17 @@ class CustomTabOrderView extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.all(1.h),
-            child: Row(
-              children: [
-                MySmallTextField(
-                    controller: controller.discount,
-                    obcure: false,
-                    label: "Minimum Shopping".tr),
-                Spacer(),
-                MySmallTextField(
-                    controller: controller.discount,
-                    obcure: false,
-                    label: "Minimum Discount Amount".tr),
-              ],
-            ),
+            child: MyAddTextField(
+                controller: controller.discount,
+                obcure: false,
+                label: "Minimum Shopping".tr),
+          ),
+          Padding(
+            padding: EdgeInsets.all(1.h),
+            child: MyAddTextField(
+                controller: controller.discount,
+                obcure: false,
+                label: "Maximum Discount Amount".tr),
           ),
           BlueButton(
               title: Text("Save".tr,

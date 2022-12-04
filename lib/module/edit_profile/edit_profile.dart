@@ -30,6 +30,10 @@ class EditAccount extends StatelessWidget {
         init: ProfileController(),
         builder: (controller) => Scaffold(
           appBar: AppBar(
+            title: Text(
+              "Edit Profile".tr,
+              style: TextStyle(color: myGreen),
+            ),
             backgroundColor: Colors.grey[50],
             elevation: 0,
             iconTheme: IconThemeData(color: myBlack),
@@ -128,7 +132,7 @@ class EditAccount extends StatelessWidget {
                                     bottom: 1.h, left: 2.h, right: 2.h),
                                 child: Wrap(spacing: 3.w, children: [
                                   Text(
-                                    "Gender is:",
+                                    "gender".tr,
                                     style: TextStyle(
                                         color: myOrange,
                                         fontWeight: FontWeight.bold,
@@ -136,13 +140,13 @@ class EditAccount extends StatelessWidget {
                                   ),
                                   controller.profile!.data!.gender == 1
                                       ? Text(
-                                          "Male",
+                                          "male".tr,
                                           style: TextStyle(
                                               color: myGreen,
                                               fontWeight: FontWeight.bold,
                                               fontSize: 12.sp),
                                         )
-                                      : Text("Female",
+                                      : Text("fmaile".tr,
                                           style: TextStyle(
                                               color: myGreen,
                                               fontWeight: FontWeight.bold,
@@ -238,7 +242,7 @@ class EditAccount extends StatelessWidget {
                                           spacing: 20.h,
                                           children: [
                                             Text(
-                                              "Show your location".tr,
+                                              "location".tr,
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 12.sp,
@@ -266,7 +270,7 @@ class EditAccount extends StatelessWidget {
                                           color: myOrange,
                                         )
                                       : Text(
-                                          "Update".tr,
+                                          "update".tr,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

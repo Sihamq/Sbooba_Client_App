@@ -17,7 +17,7 @@ Map<String, String> en = {
   "To": "To",
   "Distance Between": "Distance Between",
   "Delivery Price": "Delivery Price",
-  "quantity": "quantity",
+  "quantity": " Avialable Quantity",
   "Pending": "Pending",
   "Set a new Password": "Set a new Password",
   "Save": "Save",
@@ -179,5 +179,17 @@ Map<String, String> en = {
   "totalOrder": "Total Orders",
   "sales": "Sales",
   "sucess": "Sucessful Orders",
-  "canceled": "Cancelled Orders"
+  "canceled": "Cancelled Orders",
+  "end": "End Date is :",
+  "start": "Start Date is ",
+  "gender": "Gender is:",
+  "male": "Male",
+  "fmaile": "Famile",
+  "if": "If you want to change gender , choose",
+  "location": "Show your location",
+  "Edit Account": "تعديل الحساب",
+  "update": "Update",
+  "Ingredient": "Description/Ingredient in english",
+  "unitprice": "Unit Price",
+  "unitpurchesprice": "Unit purches Price"
 };

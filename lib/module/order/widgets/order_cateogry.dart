@@ -20,7 +20,8 @@ class OrderCatogrey extends StatelessWidget {
           duration: const Duration(seconds: 2),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            color: controller.selected == x ? myOrange : myWhite,
+            color:
+                controller.selected == x ? myOrange : myGreen.withOpacity(.1),
           ),
           height: controller.selected == x ? 5.h : 3.h,
           width: controller.selected == x ? 10.h : 15.h,

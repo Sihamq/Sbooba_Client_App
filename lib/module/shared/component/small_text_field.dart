@@ -35,55 +35,56 @@ class MySmallTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      //height: MediaQuery.of(context).size.height * .08,
-      child: SizedBox(
-        height: 6.h,
-        width: 41.w,
-        child: TextFormField(
-          maxLines: maxline == null ? 1 : maxline,
-          //  scrollPadding: EdgeInsets.all(8),
-          // Added this
+      height: 6.h,
+      width: 41.w,
+      child: TextFormField(
+        maxLines: maxline == null ? 1 : maxline,
+        //  scrollPadding: EdgeInsets.all(8),
+        // Added this
 
-          //  cursorHeight: MediaQuery.of(context).size.height * .08,
-          obscureText: obcure,
+        //  cursorHeight: MediaQuery.of(context).size.height * .08,
+        obscureText: obcure,
 
-          keyboardType: type,
-          onChanged: (value) {},
-          onTap: () {},
-          validator: validate,
-          controller: controller,
-          decoration: InputDecoration(
-              labelText: label,
-              suffixIconColor: myGreen,
-              suffixIcon: InkWell(child: Icon(suffix), onTap: suffixPressed),
-              suffixIconConstraints: const BoxConstraints(
-                minWidth: 2,
-                minHeight: 2,
-              ),
-              // contentPadding: EdgeInsets.symmetric(horizontal: 6.h),
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.green, width: 1),
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide(color: myOrange, width: 1),
-              ),
+        keyboardType: type,
+        onChanged: (value) {},
+        onTap: () {},
+        validator: validate,
+        controller: controller,
+        decoration: InputDecoration(
+            labelText: label,
+            suffixIconColor: myGreen,
+            suffixIcon: suffix == null
+                ? null
+                : InkWell(child: Icon(suffix), onTap: suffixPressed),
+            suffixIconConstraints: const BoxConstraints(
+              minWidth: 2,
+              minHeight: 2,
+            ),
+            // contentPadding: EdgeInsets.symmetric(horizontal: 6.h),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.green, width: 1),
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: myOrange, width: 1),
+            ),
 
-              //     )),
-              fillColor: HexColor('#FFFFFF'),
-              filled: true,
-              prefixIcon: Icon(
-                prefix,
-                color: HexColor('#5D5E60'),
-              ),
-              // focusColor: HexColor('#0063FF'),
-              hintText: label,
-              hintStyle: TextStyle(
-                  color: Colors.grey.withOpacity(.9),
-                  fontSize: 7.sp,
-                  fontWeight: FontWeight.bold)),
-        ),
+            //     )),
+            fillColor: HexColor('#FFFFFF'),
+            filled: true,
+            prefixIcon: prefix == null
+                ? null
+                : Icon(
+                    prefix,
+                    color: HexColor('#5D5E60'),
+                  ),
+            // focusColor: HexColor('#0063FF'),
+            hintText: label,
+            hintStyle: TextStyle(
+                color: Colors.grey.withOpacity(.9),
+                fontSize: 7.sp,
+                fontWeight: FontWeight.bold)),
       ),
     );
   }

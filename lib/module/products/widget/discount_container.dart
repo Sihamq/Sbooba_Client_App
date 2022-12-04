@@ -15,13 +15,13 @@ class DiscountContainer extends StatelessWidget {
         height: 6.w,
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
-          color: Colors.red[400],
+          color: Colors.redAccent[200],
           borderRadius: BorderRadius.circular(15),
         ),
         child: Center(
             child: Text(
           "${10}%",
-          style: TextStyle(color: myWhite),
+          style: TextStyle(color: myWhite, fontWeight: FontWeight.w600),
         )));
   }
 }

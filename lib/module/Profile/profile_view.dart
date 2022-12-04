@@ -86,7 +86,7 @@ class ProfileView extends StatelessWidget {
                               ? SpinKitPouringHourGlassRefined(
                                   color: myOrange,
                                   size: 40.sp,
-                                  duration: Duration(milliseconds: 500))
+                                )
                               : DottedBorder(
                                   color: Colors.grey[400]!,
                                   radius: const Radius.circular(20),

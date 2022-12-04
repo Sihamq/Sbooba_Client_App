@@ -14,7 +14,7 @@ class AddCoupons extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: myBlack),
         title: Text(
-          'Add Coupons'.tr,
+          "Add coupons".tr,
           style: TextStyle(color: myBlack, fontWeight: FontWeight.bold),
         ),
         backgroundColor: myWhite,

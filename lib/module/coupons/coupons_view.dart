@@ -64,9 +64,10 @@ class CouponsView extends GetView<CouponsController> {
                   onEmpty: EmptyProduct(
                       img: "assets/box.png", text: "No Coupons Now"),
                   onLoading: SpinKitPouringHourGlassRefined(
-                      color: myOrange,
-                      size: 80.sp,
-                      duration: const Duration(milliseconds: 800)))),
+                    color: myOrange,
+                    size: 80.sp,
+                    // duration: const Duration(milliseconds: 800)
+                  ))),
 
           SizedBox(
             height: 1.h,

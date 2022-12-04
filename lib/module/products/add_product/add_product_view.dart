@@ -29,7 +29,7 @@ class AddProduct extends GetView<ProductController> {
           title: Text(
             "Add Product".tr,
             style: TextStyle(
-                fontSize: 12.sp, fontWeight: FontWeight.bold, color: myBlack),
+                fontSize: 12.sp, fontWeight: FontWeight.bold, color: myGreen),
           ),
           backgroundColor: myWhite),
       body: GetBuilder<ProductController>(
@@ -41,7 +41,7 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.ProductNameController,
+                    controller: controller.ProductNameArabicController,
                     obcure: false,
                     label: "Name".tr,
                   ),
@@ -49,17 +49,34 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
+                    controller: controller.ProductNameEnglishController,
+                    obcure: false,
+                    label: "name".tr,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
                       maxline: 4,
-                      controller: controller.ProductNameController,
+                      controller: controller.ProductDescriptionArabicController,
                       obcure: false,
                       label: "Description/Ingredient".tr),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
+                      maxline: 4,
+                      controller:
+                          controller.ProductDescriptionEnglishController,
+                      obcure: false,
+                      label: "Ingredient".tr),
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: Row(
                     children: [
                       MySmallTextField(
-                        controller: controller.UnitController,
+                        controller: controller.productAvialbleController,
                         obcure: false,
                         label: "Minium".tr,
                       ),
@@ -67,6 +84,7 @@ class AddProduct extends GetView<ProductController> {
                         width: 1.h,
                       ),
                       MySmallTextField(
+                        type: TextInputType.number,
                         controller: controller.miniProController,
                         obcure: false,
                         label: "Candy".tr,
@@ -84,14 +102,15 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                      controller: controller.ProductNameController,
+                      type: TextInputType.number,
+                      controller: controller.productCaloriesController,
                       obcure: false,
                       label: "Calories".tr),
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.ProductNameController,
+                    controller: controller.ProductTagController,
                     obcure: false,
                     label: "Tag".tr,
                     suffix: Icons.keyboard_arrow_right_outlined,
@@ -120,6 +139,89 @@ class AddProduct extends GetView<ProductController> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
+                  child: Row(
+                    children: [
+                      MySmallTextField(
+                          controller: controller.ProductTagController,
+                          obcure: false,
+                          label: "unitprice".tr),
+                      SizedBox(
+                        width: .5.h,
+                      ),
+                      MySmallTextField(
+                        controller: controller.ProductTagController,
+                        obcure: false,
+                        label: "unitpurchesprice".tr,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Container(
+                    width: 100.w,
+                    height: 5.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey[300]),
+                    child: Padding(
+                      padding: EdgeInsets.all(1.h),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Featured".tr,
+                            style: TextStyle(
+                                color: myGreen,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.sp),
+                          ),
+                          const Spacer(),
+                          Switch(
+                            focusColor: myOrange,
+                            value: controller.swittch.value,
+                            onChanged: (value) {},
+                            activeColor: myOrange,
+                            inactiveThumbColor: Colors.grey,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Container(
+                    width: 100.w,
+                    height: 5.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.grey[300]),
+                    child: Padding(
+                      padding: EdgeInsets.all(1.h),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Published".tr,
+                            style: TextStyle(
+                                color: myGreen,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12.sp),
+                          ),
+                          const Spacer(),
+                          Switch(
+                            focusColor: myOrange,
+                            value: controller.swittch.value,
+                            onChanged: (value) {},
+                            activeColor: myOrange,
+                            inactiveThumbColor: Colors.grey,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
                   child: AddImages(),
                 ),
                 Padding(
@@ -137,9 +239,9 @@ class AddProduct extends GetView<ProductController> {
                             fontWeight: FontWeight.bold),
                       ),
                       Wrap(spacing: 2.w, children: [
-                        DateContainer(),
+                        const DateContainer(),
                         MySmallTextField(
-                          label: "Discount",
+                          label: "Discount".tr,
                           type: TextInputType.number,
                           controller: controller.ProductTagController,
                           obcure: false,
@@ -163,7 +265,7 @@ class AddProduct extends GetView<ProductController> {
                         child: Padding(
                           padding: EdgeInsets.all(1.h),
                           child: Text(
-                            "Start Date is : ${controller.startDate}",
+                            "${"start".tr}       ${controller.startDate}",
                             style: TextStyle(
                                 color: myBlack,
                                 fontWeight: FontWeight.bold,
@@ -183,7 +285,7 @@ class AddProduct extends GetView<ProductController> {
                         child: Padding(
                           padding: EdgeInsets.all(1.h),
                           child: Text(
-                            "End Date is :    ${controller.endDate}",
+                            "end".tr + "    ${controller.endDate}",
                             style: TextStyle(
                                 color: myBlack,
                                 fontWeight: FontWeight.bold,

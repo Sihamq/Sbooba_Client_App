@@ -18,13 +18,18 @@ class ProductController extends GetxController
   var productItem = <ProductItem>[].obs;
   var dateController = DateRangePickerController();
   String? startDate, endDate;
-  var ProductNameController = TextEditingController();
-  var ProductDescriptionController = TextEditingController();
+  var ProductNameArabicController = TextEditingController();
+  var ProductNameEnglishController = TextEditingController();
+  var ProductDescriptionArabicController = TextEditingController();
+  var ProductDescriptionEnglishController = TextEditingController();
+
   var SelectCateogController = TextEditingController();
   var UnitPriceController = TextEditingController();
-  var UnitController = TextEditingController();
+  var UnitPurchesController = TextEditingController();
   var miniProController = TextEditingController();
   var ProductTagController = TextEditingController();
+  var productCaloriesController = TextEditingController();
+  var productAvialbleController = TextEditingController();
 
   bool isLoading = false;
   void onInit() {

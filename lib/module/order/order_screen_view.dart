@@ -69,7 +69,7 @@ class OrderView extends StatelessWidget {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    childAspectRatio: 3 / 3,
+                    childAspectRatio: 5 / 6,
                     maxCrossAxisExtent: 343,
                     mainAxisSpacing: 5,
                     crossAxisSpacing: 10),

@@ -55,6 +55,7 @@ dependencies:
   cached_network_image: ^3.2.2
   syncfusion_flutter_datepicker: ^20.3.58
   slide_popup_dialog_null_safety: ^1.0.0
+  pretty_dio_logger: ^1.1.1
   
 
   file_picker: 

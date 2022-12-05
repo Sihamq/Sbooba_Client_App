@@ -38,7 +38,7 @@ class MyAddTextField extends StatelessWidget {
       // height: MediaQuery.of(context).size.height * .05,
       child: TextFormField(
         maxLines: maxline == null ? 1 : maxline,
-        //  scrollPadding: EdgeInsets.all(8),
+        //scrollPadding: EdgeInsets.all(8),
         // Added this
 
         //  cursorHeight: MediaQuery.of(context).size.height * .08,
@@ -68,11 +68,14 @@ class MyAddTextField extends StatelessWidget {
                 )),
             fillColor: HexColor('#FFFFFF'),
             filled: true,
-            prefixIcon: Icon(
-              prefix,
-              color: HexColor('#5D5E60'),
-            ),
+            prefixIcon: prefix == null
+                ? null
+                : Icon(
+                    prefix,
+                    color: myGreen,
+                  ),
             // focusColor: HexColor('#0063FF'),
+
             hintText: label,
             hintStyle: TextStyle(
                 color: Colors.grey.withOpacity(.6),

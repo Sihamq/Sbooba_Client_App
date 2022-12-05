@@ -39,6 +39,13 @@ class DetailsContainer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Text(
+                "details".tr,
+                style: TextStyle(
+                    color: myGreen,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.sp),
+              ),
               Padding(
                 padding: EdgeInsets.all(1.h),
                 child: Row(

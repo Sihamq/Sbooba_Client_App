@@ -108,7 +108,7 @@ class ProductView extends GetView<ProductController> {
             ),
             onEmpty: EmptyProduct(
               img: "assets/nopro.png",
-              text: "No Product Yet",
+              text: "noproduct".tr,
             ),
             onLoading: SpinKitPouringHourGlassRefined(
               strokeWidth: 5.0,

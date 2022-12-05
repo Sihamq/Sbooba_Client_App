@@ -1,6 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/module/shared/cash_helper.dart';
 
 import 'package:sizer/sizer.dart';
 
@@ -15,7 +16,8 @@ class CustomeAwesomeDialog {
       void Function()? btOnpressed,
       DialogType}) {
     return AwesomeDialog(
-        btnOkText: "OK".tr,
+        btnOkText: "Ok".tr,
+        reverseBtnOrder: CashHelper.getData("lang") == "ar" ? true : false,
         btnCancelText: "Cancel".tr,
         title: mainTitle,
         context: context,

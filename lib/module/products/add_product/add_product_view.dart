@@ -178,8 +178,10 @@ class AddProduct extends GetView<ProductController> {
                           const Spacer(),
                           Switch(
                             focusColor: myOrange,
-                            value: controller.swittch.value,
-                            onChanged: (value) {},
+                            value: controller.swittch,
+                            onChanged: (value) {
+                              controller.changSwitch(value);
+                            },
                             activeColor: myOrange,
                             inactiveThumbColor: Colors.grey,
                           )
@@ -210,8 +212,10 @@ class AddProduct extends GetView<ProductController> {
                           const Spacer(),
                           Switch(
                             focusColor: myOrange,
-                            value: controller.swittch.value,
-                            onChanged: (value) {},
+                            value: controller.featured,
+                            onChanged: (value) {
+                              controller.changeFeaturedswitch(value);
+                            },
                             activeColor: myOrange,
                             inactiveThumbColor: Colors.grey,
                           )
@@ -228,9 +232,6 @@ class AddProduct extends GetView<ProductController> {
                   padding: EdgeInsets.all(1.h),
                   child: Row(
                     children: [
-                      SizedBox(
-                        width: 4.w,
-                      ),
                       Text(
                         "Range".tr,
                         style: TextStyle(
@@ -238,15 +239,18 @@ class AddProduct extends GetView<ProductController> {
                             fontSize: 10.sp,
                             fontWeight: FontWeight.bold),
                       ),
-                      Wrap(spacing: 2.w, children: [
-                        const DateContainer(),
-                        MySmallTextField(
-                          label: "Discount".tr,
-                          type: TextInputType.number,
-                          controller: controller.ProductTagController,
-                          obcure: false,
-                        )
-                      ])
+                      Padding(
+                        padding: EdgeInsets.all(.5.h),
+                        child: Wrap(children: [
+                          const DateContainer(),
+                          MySmallTextField(
+                            label: "Discount".tr,
+                            type: TextInputType.number,
+                            controller: controller.ProductTagController,
+                            obcure: false,
+                          )
+                        ]),
+                      )
                     ],
                   ),
                 ),

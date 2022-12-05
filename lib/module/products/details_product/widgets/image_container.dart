@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
+import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -47,24 +48,17 @@ class ImageContainer extends GetView<ProductController> {
                           ),
                     },
                     child: Container(
-                        height: 12.h,
-                        // width: 100,
-                        color: Colors.transparent,
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.arrow_back,
-                              color: myWhite,
-                            ),
-                            Text(
-                              "Product Details",
-                              style: TextStyle(
-                                  color: myWhite,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14.sp),
-                            )
-                          ],
-                        )),
+                      height: 12.h,
+                      // width: 100,
+                      color: Colors.transparent,
+                      child: Icon(
+                        CashHelper.getData("lang") == "ar"
+                            ? Icons.arrow_forward_ios
+                            : Icons.arrow_back_ios,
+                        color: myOrange,
+                        size: 20.sp,
+                      ),
+                    ),
                   ),
                 ),
                 Padding(

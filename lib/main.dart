@@ -36,6 +36,13 @@ class MyApp extends StatelessWidget {
         translations: Translation(),
         locale: languageController.language,
         theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle(
+                systemNavigationBarColor: myGreen,
+                statusBarColor: Colors.transparent,
+                statusBarIconBrightness: Brightness.dark,
+                statusBarBrightness: Brightness.dark),
+          ),
           fontFamily: 'Cairo',
           primarySwatch: Colors.orange,
           primaryColor: myGreen,

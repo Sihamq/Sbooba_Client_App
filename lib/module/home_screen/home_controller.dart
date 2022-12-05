@@ -18,7 +18,7 @@ class HomeController extends GetxController {
     ProfileView(),
   ];
   var label = [
-    "Order".tr,
+    "order".tr,
     "Products".tr,
     "Notification".tr,
     "Coupons".tr,

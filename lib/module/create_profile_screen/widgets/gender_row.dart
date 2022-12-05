@@ -15,12 +15,12 @@ class RowGender extends StatelessWidget {
       builder: (controller) => Wrap(
         children: [
           Text(
-            "What is your gender?",
+            "genderq".tr,
             style: TextStyle(color: myBlack, fontWeight: FontWeight.bold),
           ),
           RadioListTile(
               title: Text(
-                "Male",
+                "male".tr,
                 style: TextStyle(color: myBlack, fontWeight: FontWeight.bold),
               ),
               value: 1,
@@ -30,7 +30,7 @@ class RowGender extends StatelessWidget {
               }),
           RadioListTile(
             title: Text(
-              "Femaile",
+              "fmaile".tr,
               style: TextStyle(color: myBlack, fontWeight: FontWeight.bold),
             ),
             value: 0,

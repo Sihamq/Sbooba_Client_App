@@ -83,7 +83,7 @@ class CreateAccount extends StatelessWidget {
                             }),
                             controller: controller.nameController,
                             obcure: false,
-                            label: "Enter your Name".tr,
+                            label: "EnterName".tr,
                             prefix: Icons.email,
                           ),
                         ),
@@ -109,7 +109,7 @@ class CreateAccount extends StatelessWidget {
                             }),
                             controller: controller.phoneController,
                             obcure: false,
-                            label: "Enter your Phone".tr,
+                            label: "Enteryourphone".tr,
                             prefix: Icons.email,
                           ),
                         ),
@@ -138,7 +138,7 @@ class CreateAccount extends StatelessWidget {
                             }),
                             controller: controller.confirmController,
                             obcure: controller.ischecked,
-                            label: "Confirm your password".tr,
+                            label: "Confirmyourpassword".tr,
                             prefix: Icons.lock,
                             suffix: controller.iconCVisiblity,
                           ),
@@ -177,55 +177,11 @@ class CreateAccount extends StatelessWidget {
                             }),
                             controller: controller.addressController,
                             obcure: false,
-                            label: "Enter Shop's address".tr,
+                            label: "shopaddress".tr,
                             prefix: Icons.home,
                           ),
                         ),
-                        // Padding(
-                        //   padding: EdgeInsets.only(left: 2.h, right: 2.h),
-                        //   child: DottedBorder(
-                        //     borderType: BorderType.RRect,
-                        //     radius: Radius.circular(12),
-                        //     color: Colors.black,
-                        //     strokeWidth: 2,
-                        //     child: Container(
-                        //       decoration: BoxDecoration(
-                        //         borderRadius: BorderRadius.circular(10),
-                        //         color: Colors.grey[300],
-                        //       ),
-                        //       width: 48.h,
-                        //       height: 6.h,
-                        //       child: Padding(
-                        //         padding: EdgeInsets.all(1.h),
-                        //         child: Row(
-                        //           children: [
-                        //             controller.result == null
-                        //                 ? Text(
-                        //                     "Commerical registy no".tr,
-                        //                     style: TextStyle(
-                        //                         fontSize: 10.sp, color: myOrange),
-                        //                   )
-                        //                 : Text(
-                        //                     controller.result!.files.single.name,
-                        //                     style: TextStyle(
-                        //                         fontSize: 10.sp, color: myOrange),
-                        //                   ),
-                        //             Spacer(),
-                        //             InkWell(
-                        //               onTap: (() {
-                        //                 controller.pickFiles(['pdf'], false);
-                        //               }),
-                        //               child: Icon(
-                        //                 Icons.file_copy,
-                        //                 color: HexColor('#EF9B27'),
-                        //               ),
-                        //             ),
-                        //           ],
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ),
-                        // ),
+
                         Padding(
                           padding: EdgeInsets.only(left: 2.h, right: 2.h),
                           child: MyTextField(
@@ -234,7 +190,7 @@ class CreateAccount extends StatelessWidget {
                             }),
                             controller: controller.commericalController,
                             obcure: false,
-                            label: "Commerical registy no".tr,
+                            label: "comme".tr,
                             prefix: Icons.file_copy,
                           ),
                         ),
@@ -242,8 +198,7 @@ class CreateAccount extends StatelessWidget {
                           padding:
                               EdgeInsets.only(left: 3.h, right: 3.h, top: 1.w),
                           child: Text(
-                            "By Registering you agree to our terms and condition"
-                                .tr,
+                            "condition".tr,
                             style: TextStyle(
                                 fontSize: 10.sp,
                                 color: myOrange,
@@ -269,7 +224,7 @@ class CreateAccount extends StatelessWidget {
                                     spacing: 20.h,
                                     children: [
                                       Text(
-                                        "Show your location".tr,
+                                        "location".tr,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 12.sp,
@@ -289,7 +244,7 @@ class CreateAccount extends StatelessWidget {
                             onpress: () async {
                               await controller.CreateAccount(context);
                             },
-                            title: controller.isLaoding
+                            title: controller.isLaoding == false
                                 ? Text(
                                     "Create".tr,
                                     style: TextStyle(

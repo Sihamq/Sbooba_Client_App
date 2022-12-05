@@ -78,7 +78,7 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                             DialogType: DialogType.question,
                             context: context,
                             describe: "",
-                            subTitle: "Do you want to delete  this coupon?",
+                            subTitle: "deletec".tr,
                             mainTitle: "",
                             btOnpressed: () => controller.deleteCoupons(
                                 controller.couponItem[index!].id));

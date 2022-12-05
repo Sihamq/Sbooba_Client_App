@@ -61,43 +61,21 @@ class LoginController extends GetxController {
             DialogType: DialogType.success,
             context: context,
             describe: "",
-            mainTitle: "Congratulations🎉",
-            subTitle: "Sucessfully login",
+            mainTitle: "congra".tr,
+            subTitle: "Sucessfullylogin".tr,
             btOnpressed: () =>
                 Get.offAll(HomeScreen(), binding: ProductBinding()),
           );
-          // Get.snackbar(
-          //   titleText: Text(
-          //     "Congratulations...Login Suessfully..",
-          //     style: TextStyle(
-          //         color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
-          //   ),
-          //   backgroundColor: myGreen,
-          //   "",
-          //   colorText: myWhite,
-          //   snackStyle: SnackStyle.FLOATING,
-          //   "",
-          //   icon: Icon(
-          //     Icons.person,
-          //     color: Colors.white,
-          //     size: 5.h,
-          //   ),
-          //   snackPosition: SnackPosition.BOTTOM,
-          //   duration: Duration(seconds: 4),
-          //   isDismissible: true,
-          //   margin: EdgeInsets.all(15),
-          // );
-          // Get.showSnackbar(GetSnackBar(
-          //   titleText: Text("You Logined Sucuffuly"),
-          // ));
         } else if (res["status"] == 500) {
           isLoading = false;
-          showSnakBarMessage(
-              msg: "Password is not correct", color: Colors.green[900]);
+          if (res["message"] == "msg_password_mismatch") {
+            showSnakBarMessage(msg: "notcorrect".tr, color: Colors.red[900]);
+          }
         }
 
         update();
       } catch (e) {
+        isLoading = false;
         print(e.toString());
         //print("email or password not correct");
       }

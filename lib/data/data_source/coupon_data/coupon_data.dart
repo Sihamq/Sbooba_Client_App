@@ -7,7 +7,8 @@ class CouponData {
   Future getCoupons() async {
     try {
       var response = await DioHelper.getData(url: ApiLink.allcoupons, option: {
-        "Authorization": "Bearer " + await CashHelper.getData("token")
+        "Authorization": "Bearer " + await CashHelper.getData("token"),
+        "X-localization": await CashHelper.getData("lang")
       });
       if (response.statusCode == 200) {
         print(response.data);

@@ -12,7 +12,7 @@ showSnakBarMessage({required String msg, required color}) {
       color: Colors.white,
     ),
     shouldIconPulse: true,
-    title: "Warning",
+    title: "Warning".tr,
     snackPosition: SnackPosition.BOTTOM,
     barBlur: .5,
     borderRadius: 5.0,

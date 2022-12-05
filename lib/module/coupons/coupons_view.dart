@@ -61,8 +61,8 @@ class CouponsView extends GetView<CouponsController> {
                       itemBuilder: (context, index) {
                         return HorizontalCouponExample2(index: index);
                       }),
-                  onEmpty: EmptyProduct(
-                      img: "assets/box.png", text: "No Coupons Now"),
+                  onEmpty:
+                      EmptyProduct(img: "assets/box.png", text: "nocoupons".tr),
                   onLoading: SpinKitPouringHourGlassRefined(
                     color: myOrange,
                     size: 80.sp,

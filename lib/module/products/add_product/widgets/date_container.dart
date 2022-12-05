@@ -53,9 +53,11 @@ class DateContainer extends StatelessWidget {
                             child: TextButton(
                                 onPressed: () {
                                   Navigator.pop(context);
+                                  controller.startDate = "00-00-00";
+                                  controller.endDate = "00-00-00";
                                 },
                                 child: Text(
-                                  "Cancel",
+                                  "Cancel".tr,
                                   style: TextStyle(
                                       color: myWhite,
                                       fontSize: 11.sp,
@@ -63,7 +65,7 @@ class DateContainer extends StatelessWidget {
                                 )),
                           ),
                           SizedBox(
-                            width: 3.h,
+                            width: 1.h,
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -74,7 +76,7 @@ class DateContainer extends StatelessWidget {
                                   Navigator.pop(context);
                                 },
                                 child: Text(
-                                  "Ok",
+                                  "ok".tr,
                                   style: TextStyle(
                                       color: myWhite,
                                       fontSize: 11.sp,

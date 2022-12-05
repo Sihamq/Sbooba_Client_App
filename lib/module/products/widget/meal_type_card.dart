@@ -35,7 +35,7 @@ class MealCard extends GetView<ProductController> {
                         DialogType: DialogType.question,
                         context: context,
                         describe: "",
-                        subTitle: "Do you want to delete  this Product?",
+                        subTitle: "deletep".tr,
                         mainTitle: "",
                         btOnpressed: () => controller
                             .deleteProducts(controller.productItem[index!].id));

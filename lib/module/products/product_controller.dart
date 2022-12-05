@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 
 class ProductController extends GetxController
     with StateMixin<List<ProductItem>> {
+  ////////////////////////////////variables/////////////////////////
   List<XFile> imageFileList = [];
   final ImagePicker imagePicker = ImagePicker();
   var selectedDate = DateTime.now().obs;
@@ -30,8 +31,11 @@ class ProductController extends GetxController
   var ProductTagController = TextEditingController();
   var productCaloriesController = TextEditingController();
   var productAvialbleController = TextEditingController();
-
+  bool swittch = false;
+  bool featured = false;
   bool isLoading = false;
+  List<ShowItem> showProduct = [];
+  ///////////////////////////////////////methods//////////////////////////////////////
   void onInit() {
     getProducts();
     final DateTime today = DateTime.utc(0, 0, 0);
@@ -112,7 +116,6 @@ class ProductController extends GetxController
     }
   }
 
-  List<ShowItem> showProduct = [];
   ///////////////////////show single product//////////////////////
   Future showProducst(id) async {
     try {
@@ -151,22 +154,14 @@ class ProductController extends GetxController
     }
   }
 
-  var swittch = false.obs;
-  var featured = false.obs;
   changSwitch(value) {
-    if (value == 1) {
-      swittch.value = true;
-    } else {
-      swittch.value = false;
-    }
+    swittch = value;
+    update();
   }
 
   changeFeaturedswitch(value) {
-    if (value == 1) {
-      featured.value = true;
-    } else {
-      featured.value = false;
-    }
+    featured = value;
+    update();
   }
 
   @override

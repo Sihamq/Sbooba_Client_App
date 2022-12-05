@@ -79,8 +79,8 @@ class CreateController extends GetxController {
   /////////////////sign up code///////////////////////
   CreateAccount(context) async {
     if (formKey.currentState!.validate()) {
-      isLaoding = true;
       try {
+        isLaoding = true;
         print(nameController.value.text);
         var data = await SignupData().postData(
             name: nameController.text,
@@ -99,12 +99,13 @@ class CreateController extends GetxController {
 
         print("sucess");
         if (data["status"] == 200) {
+          isLaoding = true;
           CustomeAwesomeDialog().AwesomeDialogHeader(
             DialogType: DialogType.success,
             context: context,
             describe: "",
-            mainTitle: "Congratulations🎉",
-            subTitle: "Sucessfully Sign up",
+            mainTitle: "congra".tr,
+            subTitle: "Signup".tr,
             btOnpressed: () =>
                 Get.offAll(LoginScreen(), binding: LoginBinding()),
           );
@@ -127,131 +128,24 @@ class CreateController extends GetxController {
 
         print("tags$tags");
         if (tags.isNotEmpty) {
-          showSnakBarMessage(msg: "email is taken", color: Colors.red[900]);
+          isLaoding = false;
+          showSnakBarMessage(msg: "emailistaken", color: Colors.red[900]);
         } else if (tags1.isNotEmpty) {
-          showSnakBarMessage(msg: "phoneis taken", color: Colors.red[900]);
+          isLaoding = false;
+          showSnakBarMessage(msg: "phoneistaken", color: Colors.red[900]);
         } else if (tags2.isNotEmpty) {
-          showSnakBarMessage(msg: "Shop name is taken", color: Colors.red[900]);
+          isLaoding = false;
+          showSnakBarMessage(msg: "Shopnameistaken", color: Colors.red[900]);
         } else if (tags3.isNotEmpty) {
-          showSnakBarMessage(
-              msg: "commerical is taken", color: Colors.red[900]);
+          isLaoding = false;
+          showSnakBarMessage(msg: "commericalistaken", color: Colors.red[900]);
         }
-        //res.
-        //stringList.addAll(res);
-        // print(stringList);
-        // errorSignUp = ErrorSignUp.fromJson(data);
-        //  print(errorSignUp!.sellerEmail![0]);
-
-        // if (data["seller.email"]["The seller.email has already been taken"]) {
-        //   Get.snackbar(
-        //     titleText: Text(
-        //       "Email has already been taken",
-        //       style: TextStyle(
-        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
-        //     ),
-        //     backgroundColor: myOrange,
-        //     "",
-        //     colorText: myWhite,
-        //     snackStyle: SnackStyle.FLOATING,
-        //     "",
-        //     icon: Padding(
-        //       padding: EdgeInsets.only(bottom: 1.h),
-        //       child: Icon(
-        //         Icons.password_outlined,
-        //         color: Colors.white,
-        //         size: 5.h,
-        //       ),
-        //     ),
-        //     snackPosition: SnackPosition.BOTTOM,
-        //     duration: Duration(seconds: 4),
-        //     isDismissible: true,
-        //     margin: EdgeInsets.all(15),
-        //   );
-        // }
-        // if (errorSignUp!.sellerPhone!.isNotEmpty) {
-        //   Get.snackbar(
-        //     titleText: Text(
-        //       "Phone has already been taken ",
-        //       style: TextStyle(
-        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
-        //     ),
-        //     backgroundColor: myOrange,
-        //     "",
-        //     colorText: myWhite,
-        //     snackStyle: SnackStyle.FLOATING,
-        //     "",
-        //     icon: Padding(
-        //       padding: EdgeInsets.only(bottom: 1.h),
-        //       child: Icon(
-        //         Icons.phone_android,
-        //         color: Colors.white,
-        //         size: 5.h,
-        //       ),
-        //     ),
-        //     snackPosition: SnackPosition.BOTTOM,
-        //     duration: Duration(seconds: 4),
-        //     isDismissible: true,
-        //     margin: EdgeInsets.all(15),
-        //   );
-        // }
-        // if (errorSignUp!.sellerCommercialNo!.isNotEmpty) {
-        //   Get.snackbar(
-        //     titleText: Text(
-        //       "commericalNo. has already been taken ",
-        //       style: TextStyle(
-        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
-        //     ),
-        //     backgroundColor: myOrange,
-        //     "",
-        //     colorText: myWhite,
-        //     snackStyle: SnackStyle.FLOATING,
-        //     "",
-        //     icon: Padding(
-        //       padding: EdgeInsets.only(bottom: 1.h),
-        //       child: Icon(
-        //         Icons.file_copy,
-        //         color: Colors.white,
-        //         size: 5.h,
-        //       ),
-        //     ),
-        //     snackPosition: SnackPosition.BOTTOM,
-        //     duration: Duration(seconds: 4),
-        //     isDismissible: true,
-        //     margin: EdgeInsets.all(15),
-        //   );
-        // } else {
-        //   Get.snackbar(
-        //     titleText: Text(
-        //       "Shop's Name has already been taken ",
-        //       style: TextStyle(
-        //           color: myWhite, fontWeight: FontWeight.bold, fontSize: 13.sp),
-        //     ),
-        //     backgroundColor: Colors.red[900],
-        //     "",
-        //     colorText: myWhite,
-        //     snackStyle: SnackStyle.FLOATING,
-        //     "",
-        //     icon: Padding(
-        //       padding: EdgeInsets.only(bottom: 1.h),
-        //       child: Icon(
-        //         Icons.store,
-        //         color: Colors.white,
-        //         size: 5.h,
-        //       ),
-        //     ),
-        //     snackPosition: SnackPosition.BOTTOM,
-        //     duration: Duration(seconds: 4),
-        //     isDismissible: true,
-        //     margin: EdgeInsets.all(15),
-        //   );
-        // }
-
-        // print("failed");
 
         update();
       } catch (e) {
         print(" error sign up is${e.toString()}unknown");
       }
+      //  isLaoding = false;
     }
   }
 

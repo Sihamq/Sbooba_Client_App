@@ -141,7 +141,7 @@ class ProfileColoumn extends StatelessWidget {
                 DialogType: DialogType.question,
                 context: context,
                 describe: "",
-                subTitle: "Do you want to leave the apps?",
+                subTitle: "leave".tr,
                 mainTitle: "",
                 btOnpressed: () =>
                     {CashHelper.removeData("token"), Get.off(LoginScreen())});

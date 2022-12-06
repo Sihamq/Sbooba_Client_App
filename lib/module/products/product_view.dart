@@ -93,17 +93,18 @@ class ProductView extends GetView<ProductController> {
                 itemBuilder: ((context, index) => InkWell(
                     onTap: (() => {
                           controller
-                              .showProducst(controller.product!.data![index].id)
-                              .then(
-                                (value) => Get.to(() => DetailsProduct(
-                                      index: index,
-                                    )),
-                              )
+                              .showProducst(controller.productItem[index].id)
+                              .then((value) => {
+                                    Get.to(() => DetailsProduct(
+                                          index: index,
+                                        )),
+                                    print("index is ${index}")
+                                  })
                         }),
                     child: MealCard(
                       index: index,
                     ))),
-                itemCount: controller.product!.data!.length,
+                itemCount: controller.productItem.length,
               ),
             ),
             onEmpty: EmptyProduct(

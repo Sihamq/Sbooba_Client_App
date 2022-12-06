@@ -244,17 +244,13 @@ class CreateAccount extends StatelessWidget {
                             onpress: () async {
                               await controller.CreateAccount(context);
                             },
-                            title: controller.isLaoding == false
-                                ? Text(
-                                    "Create".tr,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15.sp),
-                                  )
-                                : SpinKitPouringHourGlassRefined(
-                                    color: myOrange,
-                                  ),
+                            title: Text(
+                              "Create".tr,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 15.sp),
+                            ),
                             hight: 7.h,
                             width: 48.h),
 

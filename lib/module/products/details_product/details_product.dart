@@ -14,6 +14,7 @@ class DetailsProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProductController>(
+      init: ProductController(),
       builder: (controller) => Scaffold(
         backgroundColor: myGreen,
         body: SafeArea(

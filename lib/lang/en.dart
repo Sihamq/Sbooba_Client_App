@@ -5,7 +5,7 @@ Map<String, String> en = {
   "LOGIN": "LOGIN",
   "forget password": "forget password",
   "Dont have account ?": "Dont have account ?",
-  "Confirmyourpassword": "Confirmyourpassword-",
+  "Confirmyourpassword": "Confirm your password-",
   "EnterName": "Enter your Name",
   "Create Acount": "Create Acount",
   "Create Account": "Create Account",
@@ -222,5 +222,6 @@ Map<String, String> en = {
   "deletec": "Do you want to delete  this coupon?",
   "deletep": "Do you want to delete  this product?",
   "details": "Product Details",
-  "namee": "Enter product name by English"
+  "namee": "Enter product name by English",
+  "notemail": "Email not found"
 };

@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sboba_app_client/module/login_screen/login_controller.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
-import 'package:sboba_app_client/module/products/product_binding.dart';
 
 import 'package:sizer/sizer.dart';
 
 import '../create_profile_screen/create_profile_view.dart';
-import '../home_screen/home_screen_view.dart';
 import '../shared/component/custom_text_field.dart';
 import '../shared/component/green_button.dart';
 import '../shared/function/validInput.dart';

@@ -5,7 +5,7 @@ class DioHelper {
   static late Dio dio;
   static init() {
     dio = Dio(BaseOptions(
-        baseUrl: 'http://192.168.1.104/sboba_v2/api', //http://192.168.0.102
+        baseUrl: 'http://192.168.0.102/sboba_v3/api', //http://192.168.0.102
         receiveDataWhenStatusError: true,
         headers: {
           'Content-Type': 'application/json',
@@ -56,12 +56,23 @@ class DioHelper {
     return await dio.delete(url, options: Options(headers: option));
   }
 
-  static Future<Response?> putData(
-      {required String url,
-      Map<String, dynamic>? query,
-      required Map<String, dynamic> data,
-      Map<String, dynamic>? option}) async {
+  static Future<Response?> putData({
+    required String url,
+    Map<String, dynamic>? query,
+    required Map<String, dynamic> data,
+    Map<String, dynamic>? option,
+  }) async {
     return await dio.put(url,
+        queryParameters: query, data: data, options: Options(headers: option));
+  }
+
+  static Future<Response?> putDataForm({
+    required String url,
+    Map<String, dynamic>? query,
+    required FormData data,
+    Map<String, dynamic>? option,
+  }) async {
+    return await dio.post(url,
         queryParameters: query, data: data, options: Options(headers: option));
   }
 }

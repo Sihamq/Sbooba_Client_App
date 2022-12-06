@@ -80,7 +80,7 @@ class CreateController extends GetxController {
   CreateAccount(context) async {
     if (formKey.currentState!.validate()) {
       try {
-        isLaoding = true;
+        // isLaoding = true;
         print(nameController.value.text);
         var data = await SignupData().postData(
             name: nameController.text,
@@ -99,7 +99,7 @@ class CreateController extends GetxController {
 
         print("sucess");
         if (data["status"] == 200) {
-          isLaoding = true;
+          //  isLaoding = false;
           CustomeAwesomeDialog().AwesomeDialogHeader(
             DialogType: DialogType.success,
             context: context,

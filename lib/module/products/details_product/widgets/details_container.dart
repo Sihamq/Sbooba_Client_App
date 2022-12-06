@@ -15,6 +15,7 @@ class DetailsContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     print("index:$index");
     return GetBuilder<ProductController>(
+      init: ProductController(),
       builder: (controller) => Container(
         //width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * .90,
@@ -51,7 +52,7 @@ class DetailsContainer extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      controller.showProduct[index!].name!.en!,
+                      controller.showProduct[0].name!.en!,
                       style: TextStyle(
                           color: Colors.black,
                           wordSpacing: 3,
@@ -115,7 +116,7 @@ class DetailsContainer extends StatelessWidget {
               ),
 
               Text(
-                controller.showProduct[index!].unitPrice.toString() + "SAR".tr,
+                controller.showProduct[0].unitPrice.toString() + "SAR".tr,
                 //"${140} SAR".tr,
                 style: TextStyle(
                     fontSize: 12.sp,
@@ -136,9 +137,7 @@ class DetailsContainer extends StatelessWidget {
                             fontSize: 12.sp,
                             fontWeight: FontWeight.bold)),
                     Icon(Icons.more_vert),
-                    Text(
-                        "${controller.showProduct[index!].calories} Calories"
-                            .tr,
+                    Text("${controller.showProduct[0].calories} Calories".tr,
                         style: TextStyle(
                             color: Colors.black,
                             wordSpacing: 3,
@@ -155,7 +154,7 @@ class DetailsContainer extends StatelessWidget {
                       fontWeight: FontWeight.bold)),
 
               Text(
-                controller.showProduct[index!].descriptionName!.en!,
+                controller.showProduct[0].descriptionName!.en!,
                 //"The menu has been called “a map that encourages easy navigation between hunger and satisfaction.” Mouthwatering restaurant menu descriptions can make your clients crave your offerings and happy patrons come back many times.",
                 style: TextStyle(
                     color: Colors.grey[700],
@@ -230,7 +229,7 @@ class DetailsContainer extends StatelessWidget {
                     child: CircleAvatar(
                         radius: 10,
                         child: Center(
-                            child: controller.showProduct[index!].published == 1
+                            child: controller.showProduct[0].published == 1
                                 ? Icon(
                                     Icons.done,
                                     size: 5.w,
@@ -272,7 +271,7 @@ class DetailsContainer extends StatelessWidget {
                     child: CircleAvatar(
                         radius: 10,
                         child: Center(
-                            child: controller.showProduct[index!].featured == 1
+                            child: controller.showProduct[0].featured == 1
                                 ? Icon(
                                     Icons.done,
                                     size: 5.w,

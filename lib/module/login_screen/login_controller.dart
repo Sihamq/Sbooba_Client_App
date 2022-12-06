@@ -29,7 +29,7 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    showPassword();
+    // showPassword();
     super.onInit();
   }
 
@@ -68,8 +68,10 @@ class LoginController extends GetxController {
           );
         } else if (res["status"] == 500) {
           isLoading = false;
-          if (res["message"] == "msg_password_mismatch") {
+          if (res["message"] == "Password incorrect!") {
             showSnakBarMessage(msg: "notcorrect".tr, color: Colors.red[900]);
+          } else if (res["message"] == "Email not found!") {
+            showSnakBarMessage(msg: "notemail".tr, color: Colors.red[900]);
           }
         }
 

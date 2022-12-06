@@ -10,33 +10,33 @@ import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
 
 import '../../../my_colors.dart';
 
-class DateContainer extends StatelessWidget {
+class DateContainer extends GetView<ProductController> {
   const DateContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ProductController>(
-      builder: (controller) => Padding(
+    return Padding(
         padding: EdgeInsets.all(1.h),
         child: Container(
-            width: 12.w,
-            height: 9.w,
-            decoration: BoxDecoration(
-              color: myGreen,
-              borderRadius: BorderRadius.circular(5),
+          width: 12.w,
+          height: 9.w,
+          decoration: BoxDecoration(
+            color: myGreen,
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.calendar_month,
+              color: myWhite,
             ),
-            child: IconButton(
-              icon: Icon(
-                Icons.calendar_month,
-                color: myWhite,
-              ),
-              onPressed: () {
-                slideDialog.showSlideDialog(
-                  context: context,
-                  child: Column(
+            onPressed: () {
+              slideDialog.showSlideDialog(
+                context: context,
+                child: Obx(
+                  () => Column(
                     children: [
                       SfDateRangePicker(
-                        controller: controller.dateController,
+                        controller: controller.dateController.value,
                         selectionMode: DateRangePickerSelectionMode.range,
                         onSelectionChanged: controller.selectionChanged,
                         view: DateRangePickerView.month,
@@ -52,9 +52,12 @@ class DateContainer extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(15)),
                             child: TextButton(
                                 onPressed: () {
+                                  controller.dateController.value.dispose();
+
+                                  controller.startDate.value = "00-00-00";
+                                  controller.endDate.value = "00-00-00";
+
                                   Navigator.pop(context);
-                                  controller.startDate = "00-00-00";
-                                  controller.endDate = "00-00-00";
                                 },
                                 child: Text(
                                   "Cancel".tr,
@@ -87,10 +90,10 @@ class DateContainer extends StatelessWidget {
                       ),
                     ],
                   ),
-                );
-              },
-            )),
-      ),
-    );
+                ),
+              );
+            },
+          ),
+        ));
   }
 }

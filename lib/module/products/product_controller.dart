@@ -17,41 +17,44 @@ class ProductController extends GetxController
   var selectedTime = TimeOfDay.now().obs;
   Product? product;
   var productItem = <ProductItem>[].obs;
-  var dateController = DateRangePickerController();
-  String? startDate, endDate;
-  var ProductNameArabicController = TextEditingController();
-  var ProductNameEnglishController = TextEditingController();
-  var ProductDescriptionArabicController = TextEditingController();
-  var ProductDescriptionEnglishController = TextEditingController();
+  var dateController = DateRangePickerController().obs;
+  var startDate, endDate;
+  var productNameArabicController = TextEditingController();
+  var productNameEnglishController = TextEditingController();
+  var productDescriptionArabicController = TextEditingController();
+  var productDescriptionEnglishController = TextEditingController();
 
-  var SelectCateogController = TextEditingController();
-  var UnitPriceController = TextEditingController();
-  var UnitPurchesController = TextEditingController();
+  var selectCateogController = TextEditingController();
+  var unitPriceController = TextEditingController();
+  var unitPurchesController = TextEditingController();
   var miniProController = TextEditingController();
-  var ProductTagController = TextEditingController();
+  var productTagController = TextEditingController();
   var productCaloriesController = TextEditingController();
   var productAvialbleController = TextEditingController();
+  var productDiscountController = TextEditingController();
   bool swittch = false;
+  int? published;
   bool featured = false;
+  int? feature;
   bool isLoading = false;
   List<ShowItem> showProduct = [];
   ///////////////////////////////////////methods//////////////////////////////////////
   void onInit() {
     getProducts();
     final DateTime today = DateTime.utc(0, 0, 0);
-    startDate = "00-00-00";
-    endDate = "00-00-00";
-    dateController.selectedRange;
+    startDate = "00-00-00".obs;
+    endDate = "00-00-00".obs;
+    dateController.value.selectedRange;
     // =
     // PickerDateRange(today, today.add(Duration(days: 3)));
     super.onInit();
   }
 
   void selectionChanged(DateRangePickerSelectionChangedArgs args) {
-    print(ProductTagController.text);
-    startDate =
+    print(productTagController.text);
+    startDate.value =
         DateFormat('dd, MMMM yyyy').format(args.value.startDate).toString();
-    endDate = DateFormat('dd, MMMM yyyy')
+    endDate.value = DateFormat('dd, MMMM yyyy')
         .format(args.value.endDate ?? args.value.startDate)
         .toString();
     update();
@@ -66,6 +69,7 @@ class ProductController extends GetxController
   ////////////////Get Products////////////////////////////////////////////
   Future getProducts() async {
     try {
+      productItem.value = [];
       change(productItem.value, status: RxStatus.loading());
       isLoading = true;
       var res = await Productdata().getProduct();
@@ -154,14 +158,64 @@ class ProductController extends GetxController
     }
   }
 
+  //////////////////////////////////store product////////////////////////
+  Future storeProduct() async {
+    try {
+      var res = await Productdata().addNewProduct(
+          name_ar: productNameEnglishController.text,
+          name_en: productNameArabicController.text,
+          description_ar: productDescriptionArabicController.text,
+          description_en: productDescriptionEnglishController.text,
+          category_id: 1,
+          purchase_price: unitPurchesController.text,
+          cash_on_delivery: 1,
+          min_qty: miniProController.text,
+          approved: 1,
+          calories: productCaloriesController.text,
+          featured: feature,
+          published: published,
+          discount: productDiscountController.text,
+          current_stock: 1,
+          discount_end_date: endDate,
+          discount_start_date: startDate,
+          discount_type: 1,
+          low_stock_quantity: 1,
+          stock_visibility_state: 1,
+          tags: "food",
+          unit_price: unitPriceController.text,
+          todays_deal: 1,
+          unit: 1,
+          tax: 0);
+      if (res["status"] == 200) {
+        print(res["message"]);
+      } else {
+        print("something is error in element");
+      }
+    } catch (e) {
+      print("something error ${e.toString()}");
+    }
+  }
+
   changSwitch(value) {
     swittch = value;
-    update();
+    if (swittch == true) {
+      published = 1;
+      update();
+    } else {
+      published = 0;
+      update();
+    }
   }
 
   changeFeaturedswitch(value) {
     featured = value;
-    update();
+    if (featured == true) {
+      feature = 1;
+      update();
+    } else {
+      feature = 0;
+      update();
+    }
   }
 
   @override

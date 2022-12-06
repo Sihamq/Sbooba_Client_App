@@ -41,7 +41,7 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.ProductNameArabicController,
+                    controller: controller.productNameArabicController,
                     obcure: false,
                     label: "Name".tr,
                   ),
@@ -49,7 +49,7 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.ProductNameEnglishController,
+                    controller: controller.productNameEnglishController,
                     obcure: false,
                     label: "name".tr,
                   ),
@@ -58,7 +58,7 @@ class AddProduct extends GetView<ProductController> {
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
                       maxline: 4,
-                      controller: controller.ProductDescriptionArabicController,
+                      controller: controller.productDescriptionArabicController,
                       obcure: false,
                       label: "Description/Ingredient".tr),
                 ),
@@ -67,7 +67,7 @@ class AddProduct extends GetView<ProductController> {
                   child: MyAddTextField(
                       maxline: 4,
                       controller:
-                          controller.ProductDescriptionEnglishController,
+                          controller.productDescriptionEnglishController,
                       obcure: false,
                       label: "Ingredient".tr),
                 ),
@@ -110,7 +110,7 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.ProductTagController,
+                    controller: controller.productTagController,
                     obcure: false,
                     label: "Tag".tr,
                     suffix: Icons.keyboard_arrow_right_outlined,
@@ -121,14 +121,14 @@ class AddProduct extends GetView<ProductController> {
                   child: Row(
                     children: [
                       MySmallTextField(
-                          controller: controller.ProductTagController,
+                          controller: controller.miniProController,
                           obcure: false,
                           label: "Quantity".tr),
                       SizedBox(
                         width: .5.h,
                       ),
                       MySmallTextField(
-                        controller: controller.ProductTagController,
+                        controller: controller.productTagController,
                         obcure: false,
                         label: "Flat".tr,
                         suffix: Icons.arrow_drop_down,
@@ -142,14 +142,14 @@ class AddProduct extends GetView<ProductController> {
                   child: Row(
                     children: [
                       MySmallTextField(
-                          controller: controller.ProductTagController,
+                          controller: controller.unitPriceController,
                           obcure: false,
                           label: "unitprice".tr),
                       SizedBox(
                         width: .5.h,
                       ),
                       MySmallTextField(
-                        controller: controller.ProductTagController,
+                        controller: controller.unitPurchesController,
                         obcure: false,
                         label: "unitpurchesprice".tr,
                       ),
@@ -229,78 +229,76 @@ class AddProduct extends GetView<ProductController> {
                   child: AddImages(),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: Row(
-                    children: [
-                      Text(
-                        "Range".tr,
-                        style: TextStyle(
-                            color: myOrange,
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(.5.h),
-                        child: Wrap(children: [
-                          const DateContainer(),
-                          MySmallTextField(
-                            label: "Discount".tr,
-                            type: TextInputType.number,
-                            controller: controller.ProductTagController,
-                            obcure: false,
-                          )
-                        ]),
-                      )
-                    ],
-                  ),
+                  padding: EdgeInsets.all(.5.h),
+                  child: Wrap(children: [
+                    Text(
+                      "Range".tr,
+                      style: TextStyle(
+                          color: myOrange,
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const DateContainer(),
+                    MySmallTextField(
+                      label: "Discount".tr,
+                      type: TextInputType.number,
+                      controller: controller.productDiscountController,
+                      obcure: false,
+                    )
+                  ]),
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 100.w,
-                        height: 5.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[300]),
-                        child: Padding(
-                          padding: EdgeInsets.all(1.h),
-                          child: Text(
-                            "${"start".tr}       ${controller.startDate}",
-                            style: TextStyle(
-                                color: myBlack,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.sp),
+                  child: Obx(
+                    () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 100.w,
+                          height: 5.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[300]),
+                          child: Padding(
+                            padding: EdgeInsets.all(1.h),
+                            child: Text(
+                              "${"start".tr}       ${controller.startDate.value}",
+                              style: TextStyle(
+                                  color: myBlack,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.sp),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 3.h,
-                      ),
-                      Container(
-                        width: 100.w,
-                        height: 5.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.grey[300]),
-                        child: Padding(
-                          padding: EdgeInsets.all(1.h),
-                          child: Text(
-                            "end".tr + "    ${controller.endDate}",
-                            style: TextStyle(
-                                color: myBlack,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.sp),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Container(
+                          width: 100.w,
+                          height: 5.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[300]),
+                          child: Padding(
+                            padding: EdgeInsets.all(1.h),
+                            child: Text(
+                              "end".tr + "    ${controller.endDate.value}",
+                              style: TextStyle(
+                                  color: myBlack,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.sp),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 BlueButton(
+                    onpress: () async {
+                      await controller.storeProduct();
+                    },
                     title: Text("Save".tr,
                         style: TextStyle(
                             color: myWhite, fontWeight: FontWeight.bold)),

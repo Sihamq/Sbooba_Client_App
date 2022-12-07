@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
+import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sizer/sizer.dart';
 
 class DetailsContainer extends StatelessWidget {
@@ -52,7 +53,9 @@ class DetailsContainer extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      controller.showProduct[0].name!.en!,
+                      CashHelper.getData("lang") == "er"
+                          ? controller.showProduct[0].name!.en!
+                          : controller.showProduct[0].name!.ar!,
                       style: TextStyle(
                           color: Colors.black,
                           wordSpacing: 3,
@@ -154,7 +157,9 @@ class DetailsContainer extends StatelessWidget {
                       fontWeight: FontWeight.bold)),
 
               Text(
-                controller.showProduct[0].descriptionName!.en!,
+                CashHelper.getData("lang") == "ar"
+                    ? controller.showProduct[0].descriptionName!.ar!
+                    : controller.showProduct[0].descriptionName!.en!,
                 //"The menu has been called “a map that encourages easy navigation between hunger and satisfaction.” Mouthwatering restaurant menu descriptions can make your clients crave your offerings and happy patrons come back many times.",
                 style: TextStyle(
                     color: Colors.grey[700],
@@ -281,44 +286,9 @@ class DetailsContainer extends StatelessWidget {
                                     size: 5.w,
                                   ))),
                   )
-                  // Switch(
-                  //       focusColor: myOrange,
-                  //       value: controller.swittch.value,
-                  //       onChanged: (value) {
-                  //         controller.changSwitch(
-                  //             controller.showProduct[index!].published);
-                  //       },
-                  //       activeColor: myOrange,
-                  //       inactiveThumbColor: Colors.grey,
-                  //     )
                 ]),
               ),
 
-              // Container(
-              //   color: Colors.grey[200],
-              //   child: Row(children: [
-              //     Padding(
-              //       padding: EdgeInsets.all(1.h),
-              //       child: Text("Featured".tr,
-              //           style: TextStyle(fontWeight: FontWeight.bold)),
-              //     ),
-              //     Spacer(),
-              //     // Obx(
-              //     //   () => Switch(
-              //     //     onChanged: (value) {
-              //     //       controller.changeFeaturedswitch(
-              //     //           controller.showProduct[index!].featured);
-              //     //     },
-              //     //     value: controller.featured.value,
-              //     //     // onChanged: ((value) {
-
-              //     //     // }),
-              //     //     activeColor: myOrange,
-              //     //     inactiveThumbColor: Colors.grey,
-              //     //   ),
-              //     // )
-              //   ]),
-              // ),
               Padding(
                 padding: EdgeInsets.all(2.h),
                 child: Row(
@@ -328,12 +298,12 @@ class DetailsContainer extends StatelessWidget {
                     MaterialButton(
                         minWidth: 17.h,
                         onPressed: () {},
+                        color: myGreen,
                         child: Text(
                           "Edit".tr,
                           style: TextStyle(
                               color: myWhite, fontWeight: FontWeight.bold),
-                        ),
-                        color: myGreen),
+                        )),
                     SizedBox(width: 3.h),
                     MaterialButton(
                         minWidth: 17.h,

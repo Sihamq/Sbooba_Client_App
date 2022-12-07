@@ -7,7 +7,8 @@ class ApiLink {
   // static const String details = "orders/1"; //details of order send token.
   static const String getProduct = "/seller/products"; //details
   static const String showProduct = "/seller/products/";
-  static const String storeProduct = "/seller/products"; // token
+  static const String storeProduct = "/seller/products";
+  static const String cateogryProduct = "/admin/categories"; // token
   // static const String updateProduct = "/products/1"; // update.. token
   // static const String delete = "/products/1";
   static const String allcoupons = "/seller/coupons";

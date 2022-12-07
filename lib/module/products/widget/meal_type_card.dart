@@ -47,30 +47,38 @@ class MealCard extends GetView<ProductController> {
                   ),
                 ),
               ),
-              CachedNetworkImage(
-                imageUrl: controller.productItem[index!].category!.icon!,
-                imageBuilder: (context, imageProvider) => Container(
-                  //
-                  //
-                  //
-                  width: 120.w,
+              Container(
                   height: 7.h,
-                  decoration: BoxDecoration(
-                    //shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: imageProvider, fit: BoxFit.cover),
-                  ),
-                ),
-                placeholder: (context, url) => SpinKitCircle(color: myGreen),
-                errorWidget: (context, url, error) => Center(
-                    child: Container(
-                        height: 7.h,
-                        child: const Image(
-                            fit: BoxFit.cover,
-                            image: AssetImage(
-                              "assets/121.png",
-                            )))),
-              ),
+                  child: const Image(
+                      fit: BoxFit.cover,
+                      image: AssetImage(
+                        "assets/121.png",
+                      ))),
+
+              // CachedNetworkImage(
+              //   imageUrl: "assets/121.png",
+              //   imageBuilder: (context, imageProvider) => Container(
+              //     //
+              //     //
+              //     //
+              //     width: 120.w,
+              //     height: 7.h,
+              //     decoration: BoxDecoration(
+              //       //shape: BoxShape.circle,
+              //       image: DecorationImage(
+              //           image: imageProvider, fit: BoxFit.cover),
+              //     ),
+              //   ),
+              //   placeholder: (context, url) => SpinKitCircle(color: myGreen),
+              //   errorWidget: (context, url, error) => Center(
+              //       child: Container(
+              //           height: 7.h,
+              //           child: const Image(
+              //               fit: BoxFit.cover,
+              //               image: AssetImage(
+              //                 "assets/121.png",
+              //               )))),
+              // ),
               if (controller.productItem[index!].tax != 0) DiscountContainer(),
             ]),
             Padding(

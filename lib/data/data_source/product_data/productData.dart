@@ -81,10 +81,13 @@ class Productdata {
       discount_type,
       discount_start_date,
       discount_end_date,
-      tax}) async {
+      tax,
+      slug,
+      meta_title,
+      meta_description}) async {
     FormData data = FormData.fromMap({
       "name": {"ar": name_ar, "en": name_en},
-      "description": {"ar": description_ar, "er": description_en},
+      "description": {"ar": description_ar, "en": description_en},
       "calories": calories,
       "category_id": category_id,
       "tags": tags,
@@ -97,8 +100,14 @@ class Productdata {
       "cash_on_delivery": cash_on_delivery,
       "featured": featured,
       "current_stock": current_stock,
+      "unit": unit,
+      "min_qty": min_qty,
+      "low_stock_quantity": low_stock_quantity,
       "discount": discount,
       "tax": tax,
+      "slug": slug,
+      "meta_title": meta_title,
+      "meta_description": meta_description,
       "discount_type": discount_type,
       "discount_start_date": discount_start_date,
       "discount_end_date": discount_end_date,
@@ -116,6 +125,24 @@ class Productdata {
     } else {
       response.data;
       print(response.data);
+    }
+  }
+
+  Future getCateogryProduct() async {
+    try {
+      var response =
+          await DioHelper.getData(url: ApiLink.cateogryProduct, option: {
+        "Authorization": "Bearer " + await CashHelper.getData("token"),
+        "X-localization": await CashHelper.getData("lang")
+      });
+      if (response.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

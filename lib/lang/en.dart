@@ -223,5 +223,6 @@ Map<String, String> en = {
   "deletep": "Do you want to delete  this product?",
   "details": "Product Details",
   "namee": "Enter product name by English",
-  "notemail": "Email not found"
+  "notemail": "Email not found",
+  "youhave": "You have new product"
 };

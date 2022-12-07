@@ -1,10 +1,13 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/product_data/productData.dart';
+import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/product_model.dart';
 import 'package:sboba_app_client/data/models/show_product.dart';
+import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
 
@@ -17,6 +20,7 @@ class ProductController extends GetxController
   var selectedTime = TimeOfDay.now().obs;
   Product? product;
   var productItem = <ProductItem>[].obs;
+  var productCateogry = [];
   var dateController = DateRangePickerController().obs;
   var startDate, endDate;
   var productNameArabicController = TextEditingController();
@@ -41,6 +45,7 @@ class ProductController extends GetxController
   ///////////////////////////////////////methods//////////////////////////////////////
   void onInit() {
     getProducts();
+    getCateogries();
     final DateTime today = DateTime.utc(0, 0, 0);
     startDate = "00-00-00".obs;
     endDate = "00-00-00".obs;
@@ -142,6 +147,22 @@ class ProductController extends GetxController
     }
   }
 
+  ///////////////////get Cateogry///////////////////////
+  Future getCateogries() async {
+    try {
+      var res = await Productdata().getCateogryProduct();
+      var cat = res["data"] as List;
+      if (res["Status"] == 200) {
+        productCateogry = cat.map((e) => CateogryItem.fromMap(e)).toList();
+        print(productCateogry[0]);
+        print(productCateogry.length);
+        update();
+      }
+    } catch (e) {
+      print("something error ${e.toString()}");
+    }
+  }
+
   /////////////////////delete product////////////////////
   deleteProducts(id) async {
     try {
@@ -169,15 +190,15 @@ class ProductController extends GetxController
           category_id: 1,
           purchase_price: unitPurchesController.text,
           cash_on_delivery: 1,
-          min_qty: miniProController.text,
+          min_qty: 1,
           approved: 1,
           calories: productCaloriesController.text,
           featured: feature,
           published: published,
           discount: productDiscountController.text,
           current_stock: 1,
-          discount_end_date: endDate,
-          discount_start_date: startDate,
+          discount_end_date: endDate.value,
+          discount_start_date: startDate.value,
           discount_type: 1,
           low_stock_quantity: 1,
           stock_visibility_state: 1,
@@ -185,9 +206,21 @@ class ProductController extends GetxController
           unit_price: unitPriceController.text,
           todays_deal: 1,
           unit: 1,
-          tax: 0);
+          tax: 0,
+          meta_description: "test",
+          meta_title: "test",
+          slug: "test");
       if (res["status"] == 200) {
         print(res["message"]);
+        CustomeAwesomeDialog().AwesomeDialogHeader(
+            DialogType: DialogType.success,
+            context: Get.context,
+            describe: "",
+            mainTitle: "congra".tr,
+            subTitle: "youhave".tr,
+            btOnpressed: () => {}
+            //Get.offAll(HomeScreen(), binding: ProductBinding()
+            );
       } else {
         print("something is error in element");
       }

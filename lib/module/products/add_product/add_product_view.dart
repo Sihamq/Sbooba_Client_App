@@ -83,19 +83,51 @@ class AddProduct extends GetView<ProductController> {
                       SizedBox(
                         width: 1.h,
                       ),
-                      MySmallTextField(
-                        type: TextInputType.number,
-                        controller: controller.miniProController,
-                        obcure: false,
-                        label: "Candy".tr,
-                        suffix: Icons.arrow_right_alt,
-                        suffixPressed: () {
-                          Get.defaultDialog(
-                              title: "'",
-                              content: CustomRdaioButton(),
-                              middleText: "😊");
-                        },
-                      )
+                      DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: Colors
+                                  .white, //background color of dropdown button
+                              border: Border.all(
+                                  color: Colors.grey[400]!,
+                                  width: 1), //border of dropdown button
+                              borderRadius: BorderRadius.circular(
+                                  20), //border raiuds of dropdown button
+                              boxShadow: <BoxShadow>[
+                                //apply shadow on Dropdown button
+                                BoxShadow(
+                                    color: myOrange,
+                                    blurRadius: 0.1), //shadow for button
+                              ]),
+                          child: DropdownButton(
+                            focusColor: myOrange,
+                            // isExpanded: true,
+                            underline: const SizedBox(),
+                            elevation: 2,
+                            hint: Padding(
+                              padding: EdgeInsets.all(.5.h),
+                              child: Text("choose kind of product"),
+                            ),
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_sharp,
+                              color: myOrange,
+                              size: 20,
+                            ),
+                            items: [],
+                            onChanged: ((value) {}),
+                          )
+                          // MySmallTextField(
+                          //   type: TextInputType.number,
+                          //   controller: controller.miniProController,
+                          //   obcure: false,
+                          //   label: "Candy".tr,
+                          //   suffix: Icons.arrow_right_alt,
+                          //   suffixPressed: () {
+                          //     Get.defaultDialog(
+                          //         title: "'",
+                          //         content: CustomRdaioButton(),
+                          //         middleText: "😊");
+                          //   },
+                          )
                     ],
                   ),
                 ),
@@ -297,6 +329,8 @@ class AddProduct extends GetView<ProductController> {
                 ),
                 BlueButton(
                     onpress: () async {
+                      print("stoore");
+                      FocusScope.of(context).unfocus();
                       await controller.storeProduct();
                     },
                     title: Text("Save".tr,

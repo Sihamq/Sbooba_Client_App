@@ -49,6 +49,7 @@ class MyAddTextField extends StatelessWidget {
         validator: validate,
         controller: controller,
         decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
             labelText: label,
             contentPadding: EdgeInsets.symmetric(horizontal: .5.w),
             focusedBorder: OutlineInputBorder(
@@ -57,7 +58,7 @@ class MyAddTextField extends StatelessWidget {
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: myOrange, width: 1),
+              borderSide: BorderSide(color: Colors.grey[400]!, width: 1),
             ),
             suffix: InkWell(
                 onTap: suffixPressed,

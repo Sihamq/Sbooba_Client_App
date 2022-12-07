@@ -50,7 +50,7 @@ class CustomeAwesomeDialog {
           ),
         ),
         btnOkOnPress: btOnpressed,
-        btnCancelOnPress: () {},
+        // btnCancelOnPress: () {},
         btnOkColor: myGreen)
       ..show();
   }

@@ -30,6 +30,7 @@ class DateContainer extends GetView<ProductController> {
               color: myWhite,
             ),
             onPressed: () {
+              FocusScope.of(context).unfocus();
               slideDialog.showSlideDialog(
                 context: context,
                 child: Obx(

@@ -51,6 +51,11 @@ class MySmallTextField extends StatelessWidget {
         validator: validate,
         controller: controller,
         decoration: InputDecoration(
+            //alignLabelWithHint: true,
+            floatingLabelAlignment: FloatingLabelAlignment.center,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            floatingLabelStyle:
+                TextStyle(color: myGreen, fontWeight: FontWeight.bold),
             labelText: label,
             suffixIconColor: myGreen,
             suffixIcon: suffix == null
@@ -62,11 +67,19 @@ class MySmallTextField extends StatelessWidget {
             ),
             // contentPadding: EdgeInsets.symmetric(horizontal: 6.h),
             focusedBorder: OutlineInputBorder(
+              gapPadding: 1.h,
               borderSide: const BorderSide(color: Colors.green, width: 1),
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(14.0),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              borderSide: BorderSide(
+                color: myOrange,
+                width: 2.0,
+              ),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: myOrange, width: 1),
             ),
 
@@ -80,7 +93,7 @@ class MySmallTextField extends StatelessWidget {
                     color: HexColor('#5D5E60'),
                   ),
             // focusColor: HexColor('#0063FF'),
-            hintText: label,
+            // hintText: label,
             hintStyle: TextStyle(
                 color: Colors.grey.withOpacity(.9),
                 fontSize: 7.sp,

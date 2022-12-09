@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/add_image.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/custom_radio_buttons.dart';
@@ -11,6 +12,7 @@ import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/shared/component/custom_text_field.dart';
 import 'package:sboba_app_client/module/shared/component/green_button.dart';
 import 'package:sboba_app_client/module/shared/component/small_text_field.dart';
+import 'package:sboba_app_client/module/shared/function/validInput.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../shared/component/add_text_formfield.dart';
@@ -44,6 +46,7 @@ class AddProduct extends GetView<ProductController> {
                     controller: controller.productNameArabicController,
                     obcure: false,
                     label: "Name".tr,
+                    validate: (p0) => validInput(p0!, 3, 12, "name"),
                   ),
                 ),
                 Padding(
@@ -52,6 +55,24 @@ class AddProduct extends GetView<ProductController> {
                     controller: controller.productNameEnglishController,
                     obcure: false,
                     label: "name".tr,
+                    validate: (p0) => validInput(p0!, 3, 12, "name"),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
+                      type: TextInputType.number,
+                      controller: controller.productCaloriesController,
+                      obcure: false,
+                      label: "Calories".tr),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: MyAddTextField(
+                    controller: controller.productTagController,
+                    obcure: false,
+                    label: "Tag".tr,
+                    // suffix: Icons.keyboard_arrow_right_outlined,
                   ),
                 ),
                 Padding(
@@ -76,83 +97,6 @@ class AddProduct extends GetView<ProductController> {
                   child: Row(
                     children: [
                       MySmallTextField(
-                        controller: controller.productAvialbleController,
-                        obcure: false,
-                        label: "Minium".tr,
-                      ),
-                      SizedBox(
-                        width: 1.h,
-                      ),
-                      DecoratedBox(
-                          decoration: BoxDecoration(
-                              color: Colors
-                                  .white, //background color of dropdown button
-                              border: Border.all(
-                                  color: Colors.grey[400]!,
-                                  width: 1), //border of dropdown button
-                              borderRadius: BorderRadius.circular(
-                                  20), //border raiuds of dropdown button
-                              boxShadow: <BoxShadow>[
-                                //apply shadow on Dropdown button
-                                BoxShadow(
-                                    color: myOrange,
-                                    blurRadius: 0.1), //shadow for button
-                              ]),
-                          child: DropdownButton(
-                            focusColor: myOrange,
-                            // isExpanded: true,
-                            underline: const SizedBox(),
-                            elevation: 2,
-                            hint: Padding(
-                              padding: EdgeInsets.all(.5.h),
-                              child: Text("choose kind of product"),
-                            ),
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_sharp,
-                              color: myOrange,
-                              size: 20,
-                            ),
-                            items: [],
-                            onChanged: ((value) {}),
-                          )
-                          // MySmallTextField(
-                          //   type: TextInputType.number,
-                          //   controller: controller.miniProController,
-                          //   obcure: false,
-                          //   label: "Candy".tr,
-                          //   suffix: Icons.arrow_right_alt,
-                          //   suffixPressed: () {
-                          //     Get.defaultDialog(
-                          //         title: "'",
-                          //         content: CustomRdaioButton(),
-                          //         middleText: "😊");
-                          //   },
-                          )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: MyAddTextField(
-                      type: TextInputType.number,
-                      controller: controller.productCaloriesController,
-                      obcure: false,
-                      label: "Calories".tr),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: MyAddTextField(
-                    controller: controller.productTagController,
-                    obcure: false,
-                    label: "Tag".tr,
-                    suffix: Icons.keyboard_arrow_right_outlined,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: Row(
-                    children: [
-                      MySmallTextField(
                           controller: controller.miniProController,
                           obcure: false,
                           label: "Quantity".tr),
@@ -160,12 +104,21 @@ class AddProduct extends GetView<ProductController> {
                         width: .5.h,
                       ),
                       MySmallTextField(
-                        controller: controller.productTagController,
+                        controller: controller.productAvialbleController,
                         obcure: false,
-                        label: "Flat".tr,
-                        suffix: Icons.arrow_drop_down,
-                        suffixPressed: () {},
+                        label: "Minium".tr,
+                        validate: (p0) => validInput(p0!, 3, 12, "name"),
                       ),
+                      // SizedBox(
+                      //   width: .5.h,
+                      // ),
+                      // MySmallTextField(
+                      //   controller: controller.productTagController,
+                      //   obcure: false,
+                      //   label: "Flat".tr,
+                      //   suffix: Icons.arrow_drop_down,
+                      //   suffixPressed: () {},
+                      // ),
                     ],
                   ),
                 ),
@@ -185,6 +138,73 @@ class AddProduct extends GetView<ProductController> {
                         obcure: false,
                         label: "unitpurchesprice".tr,
                       ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Row(
+                    children: [
+                      // SizedBox(
+                      //   width: 1.h,
+                      // ),
+                      Expanded(
+                        child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                color: Colors
+                                    .white, //background color of dropdown button
+                                border: Border.all(
+                                    color: myOrange,
+                                    width: 2), //border of dropdown button
+                                borderRadius: BorderRadius.circular(
+                                    20), //border raiuds of dropdown button
+                                boxShadow: <BoxShadow>[
+                                  //apply shadow on Dropdown button
+                                  BoxShadow(
+                                      color: myOrange,
+                                      blurRadius: 0.1), //shadow for button
+                                ]),
+                            child: DropdownButton(
+                              autofocus: true,
+                              dropdownColor: myGreen,
+                              focusColor: myOrange,
+                              // isExpanded: true,
+                              underline: const SizedBox(),
+                              elevation: 2,
+                              hint: Text(
+                                "kind of product",
+                                style: TextStyle(fontSize: 13.sp),
+                              ),
+                              icon: Icon(
+                                Icons.keyboard_arrow_down_sharp,
+                                color: myOrange,
+                                size: 20,
+                              ),
+                              items: controller.productCateogry
+                                  .map<DropdownMenuItem<CateogryItems>>(
+                                      (cat) => DropdownMenuItem(
+                                            value: cat,
+                                            child: Center(
+                                              child: Text(cat.name!),
+                                            ),
+                                          ))
+                                  .toList(),
+                              onChanged: ((value) {}),
+                            )
+                            // MySmallTextField(
+                            //   type: TextInputType.number,
+                            //   controller: controller.miniProController,
+                            //   obcure: false,
+                            //   label: "Candy".tr,
+                            //   suffix: Icons.arrow_right_alt,
+                            //   suffixPressed: () {
+                            //     Get.defaultDialog(
+                            //         title: "'",
+                            //         content: CustomRdaioButton(),
+                            //         middleText: "😊");
+                            //   },
+                            ),
+                      )
                     ],
                   ),
                 ),

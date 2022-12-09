@@ -50,14 +50,25 @@ class MyAddTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
+            floatingLabelAlignment: FloatingLabelAlignment.center,
             labelText: label,
+            floatingLabelStyle:
+                TextStyle(color: myGreen, fontWeight: FontWeight.bold),
             contentPadding: EdgeInsets.symmetric(horizontal: .5.w),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green, width: 1.5),
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              borderSide: BorderSide(
+                color: myOrange,
+                width: 2.0,
+              ),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
+              gapPadding: 4.0,
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: Colors.grey[400]!, width: 1),
             ),
             suffix: InkWell(
@@ -77,7 +88,7 @@ class MyAddTextField extends StatelessWidget {
                   ),
             // focusColor: HexColor('#0063FF'),
 
-            hintText: label,
+            //  hintText: label,
             hintStyle: TextStyle(
                 color: Colors.grey.withOpacity(.6),
                 fontWeight: FontWeight.bold)),

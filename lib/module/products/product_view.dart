@@ -23,6 +23,8 @@ class ProductView extends GetView<ProductController> {
   Widget build(BuildContext context) {
     Get.put(ProductController());
     controller.getProducts();
+    controller.getCateogries();
+
     print("product");
 
     return Scaffold(
@@ -55,19 +57,23 @@ class ProductView extends GetView<ProductController> {
             builder: (controller) => SizedBox(
                 // width: ,
                 height: 6.h,
-                child: ListView.separated(
-                    separatorBuilder: (context, index) => SizedBox(
-                          width: 1.5.h,
-                        ),
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return ProductCateogry(
-                        x: index,
-                      );
-                    })),
+                child: controller.productCateogry.isNotEmpty
+                    ? ListView.separated(
+                        separatorBuilder: (context, index) => SizedBox(
+                              width: 1.5.h,
+                            ),
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: 5,
+                        itemBuilder: (context, index) {
+                          print(controller.productCateogry.length);
+                          return ProductCateogry(
+                            x: index,
+                          );
+                        })
+                    : SpinKitPouringHourGlassRefined(
+                        color: myOrange, size: 30.sp)),
           ),
         ),
         AddingContainer(

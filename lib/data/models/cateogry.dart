@@ -4,12 +4,12 @@
 
 import 'dart:convert';
 
-Cateogry cateogryFromMap(String str) => Cateogry.fromMap(json.decode(str));
+Cateogries cateogryFromMap(String str) => Cateogries.fromMap(json.decode(str));
 
-String cateogryToMap(Cateogry data) => json.encode(data.toMap());
+String cateogryToMap(Cateogries data) => json.encode(data.toMap());
 
-class Cateogry {
-  Cateogry({
+class Cateogries {
+  Cateogries({
     this.result,
     this.data,
     this.message,
@@ -17,14 +17,14 @@ class Cateogry {
   });
 
   String? result;
-  List<CateogryItem>? data;
+  List<CateogryItems>? data;
   String? message;
   int? status;
 
-  factory Cateogry.fromMap(Map<String, dynamic> json) => Cateogry(
+  factory Cateogries.fromMap(Map<String, dynamic> json) => Cateogries(
         result: json["result"],
-        data: List<CateogryItem>.from(
-            json["data"].map((x) => CateogryItem.fromMap(x))),
+        data: List<CateogryItems>.from(
+            json["data"].map((x) => CateogryItems.fromMap(x))),
         message: json["message"],
         status: json["status"],
       );
@@ -37,8 +37,8 @@ class Cateogry {
       };
 }
 
-class CateogryItem {
-  CateogryItem({
+class CateogryItems {
+  CateogryItems({
     this.id,
     this.name,
     this.parentId,
@@ -70,7 +70,7 @@ class CateogryItem {
   dynamic banner;
   dynamic icon;
 
-  factory CateogryItem.fromMap(Map<String, dynamic> json) => CateogryItem(
+  factory CateogryItems.fromMap(Map<String, dynamic> json) => CateogryItems(
         id: json["id"],
         name: json["name"],
         parentId: json["parent_id"],

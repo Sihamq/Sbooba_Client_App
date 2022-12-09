@@ -224,5 +224,7 @@ Map<String, String> en = {
   "details": "Product Details",
   "namee": "Enter product name by English",
   "notemail": "Email not found",
-  "youhave": "You have new product"
+  "youhave": "You have new product",
+  "oops": "OoPs!",
+  "failed": "Adding is Failed"
 };

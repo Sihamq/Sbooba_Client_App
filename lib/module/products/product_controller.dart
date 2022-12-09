@@ -20,7 +20,8 @@ class ProductController extends GetxController
   var selectedTime = TimeOfDay.now().obs;
   Product? product;
   var productItem = <ProductItem>[].obs;
-  var productCateogry = [];
+  List<CateogryItems> productCateogry = [];
+  Cateogries? category;
   var dateController = DateRangePickerController().obs;
   var startDate, endDate;
   var productNameArabicController = TextEditingController();
@@ -44,8 +45,9 @@ class ProductController extends GetxController
   List<ShowItem> showProduct = [];
   ///////////////////////////////////////methods//////////////////////////////////////
   void onInit() {
-    getProducts();
     getCateogries();
+    getProducts();
+
     final DateTime today = DateTime.utc(0, 0, 0);
     startDate = "00-00-00".obs;
     endDate = "00-00-00".obs;
@@ -152,11 +154,17 @@ class ProductController extends GetxController
     try {
       var res = await Productdata().getCateogryProduct();
       var cat = res["data"] as List;
-      if (res["Status"] == 200) {
-        productCateogry = cat.map((e) => CateogryItem.fromMap(e)).toList();
-        print(productCateogry[0]);
-        print(productCateogry.length);
+      print(res);
+      if (res["status"] == 200) {
+        productCateogry = cat.map((e) => CateogryItems.fromMap(e)).toList();
+        category = Cateogries.fromMap(res);
+        print(category!.data![5].name);
+        print("list ${productCateogry[2].name}");
+        print("cateogryyyyy");
+        // print(productCateogry.length);
         update();
+      } else {
+        print("no correct");
       }
     } catch (e) {
       print("something error ${e.toString()}");
@@ -222,6 +230,19 @@ class ProductController extends GetxController
             //Get.offAll(HomeScreen(), binding: ProductBinding()
             );
       } else {
+        CustomeAwesomeDialog().AwesomeDialogHeader(
+            DialogType: DialogType.error,
+            context: Get.context,
+            describe: "",
+            mainTitle: "oops".tr,
+            subTitle: "failed".tr,
+            btOnpressed: () => {
+                  //Navigator.pop(Get.context!)
+                }
+            //Get.offAll(HomeScreen(), binding: ProductBinding()
+
+            );
+
         print("something is error in element");
       }
     } catch (e) {

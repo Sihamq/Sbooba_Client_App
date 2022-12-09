@@ -7,12 +7,13 @@ import 'package:sizer/sizer.dart';
 
 import '../../my_colors.dart';
 
-class ProductCateogry extends StatelessWidget {
+class ProductCateogry extends GetView<ProductController> {
   int? x;
   ProductCateogry({super.key, this.x});
 
   @override
   Widget build(BuildContext context) {
+    //controller.getCateogries();
     return GetBuilder<ProductController>(
       builder: (controller) => InkWell(
         onTap: (() => controller.getSelected(x)),
@@ -30,7 +31,7 @@ class ProductCateogry extends StatelessWidget {
           //     : Alignment(1.0, 1.0),
           child: Center(
             child: Text(
-              "Sweet",
+              controller.category!.data![x!].name!,
               style: TextStyle(
                   color: controller.selected == x ? myWhite : myBlack,
                   fontWeight: FontWeight.bold,

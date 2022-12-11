@@ -76,13 +76,15 @@ class ProductView extends GetView<ProductController> {
                         color: myOrange, size: 30.sp)),
           ),
         ),
-        AddingContainer(
-          btnTitle: "Add Product".tr,
-          label: "Add Last".tr,
-          noOfPro: controller.productItem.length.toDouble(),
-          onTap: (() {
-            Get.to(() => AddProduct());
-          }),
+        Obx(
+          () => AddingContainer(
+            btnTitle: "Add Product".tr,
+            label: "Add Last".tr,
+            noOfPro: controller.productItem.value.length.toDouble(),
+            onTap: (() {
+              Get.to(() => AddProduct());
+            }),
+          ),
         ),
         Expanded(
           child: controller.obx(

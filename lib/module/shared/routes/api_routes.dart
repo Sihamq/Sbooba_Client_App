@@ -9,7 +9,7 @@ class ApiLink {
   static const String showProduct = "/seller/products/";
   static const String storeProduct = "/seller/products";
   static const String cateogryProduct = "/admin/categories"; // token
-  // static const String updateProduct = "/products/1"; // update.. token
+  static const String updateProduct = "/seller/products/"; // update.. token
   // static const String delete = "/products/1";
   static const String allcoupons = "/seller/coupons";
 //static const String  updateCoupon="" // delete

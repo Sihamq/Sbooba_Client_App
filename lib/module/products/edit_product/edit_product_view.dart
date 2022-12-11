@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
+import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/add_image.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/custom_radio_buttons.dart';
@@ -17,19 +18,22 @@ import 'package:sizer/sizer.dart';
 
 import '../../shared/component/add_text_formfield.dart';
 
-class AddProduct extends GetView<ProductController> {
-  AddProduct({super.key});
+class EditProduct extends GetView<ProductController> {
+  ShowItem? showProduct;
+  EditProduct({super.key, this.showProduct});
   //Get.put(ProductController);
 
   @override
   Widget build(BuildContext context) {
+    print("here${showProduct!.name!.en}");
+    controller.initData(showProduct!);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
           iconTheme: IconThemeData(color: myBlack),
           elevation: 0,
           title: Text(
-            "Add Product".tr,
+            "editpro".tr,
             style: TextStyle(
                 fontSize: 12.sp, fontWeight: FontWeight.bold, color: myGreen),
           ),
@@ -43,7 +47,7 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.productNameArabicController,
+                    controller: controller.editProductNameArabicController,
                     obcure: false,
                     label: "Name".tr,
                     validate: (p0) => validInput(p0!, 3, 12, "name"),
@@ -52,7 +56,7 @@ class AddProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.productNameEnglishController,
+                    controller: controller.editProductNameEnglishController,
                     obcure: false,
                     label: "name".tr,
                     validate: (p0) => validInput(p0!, 3, 12, "name"),
@@ -62,14 +66,14 @@ class AddProduct extends GetView<ProductController> {
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
                       type: TextInputType.number,
-                      controller: controller.productCaloriesController,
+                      controller: controller.editProductCaloriesController,
                       obcure: false,
                       label: "Calories".tr),
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                    controller: controller.productTagController,
+                    controller: controller.editProductTagController,
                     obcure: false,
                     label: "Tag".tr,
                     // suffix: Icons.keyboard_arrow_right_outlined,
@@ -79,7 +83,8 @@ class AddProduct extends GetView<ProductController> {
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
                       maxline: 4,
-                      controller: controller.productDescriptionArabicController,
+                      controller:
+                          controller.editProductDescriptionArabicController,
                       obcure: false,
                       label: "Description/Ingredient".tr),
                 ),
@@ -88,7 +93,7 @@ class AddProduct extends GetView<ProductController> {
                   child: MyAddTextField(
                       maxline: 4,
                       controller:
-                          controller.productDescriptionEnglishController,
+                          controller.editProductDescriptionEnglishController,
                       obcure: false,
                       label: "Ingredient".tr),
                 ),
@@ -97,14 +102,16 @@ class AddProduct extends GetView<ProductController> {
                   child: Row(
                     children: [
                       MySmallTextField(
-                          controller: controller.miniProController,
+                          type: TextInputType.number,
+                          controller: controller.editMiniProController,
                           obcure: false,
                           label: "Quantity".tr),
                       SizedBox(
                         width: .5.h,
                       ),
                       MySmallTextField(
-                        controller: controller.productAvialbleController,
+                        type: TextInputType.number,
+                        controller: controller.editProductAvialbleController,
                         obcure: false,
                         label: "Minium".tr,
                         validate: (p0) => validInput(p0!, 3, 12, "name"),
@@ -127,14 +134,17 @@ class AddProduct extends GetView<ProductController> {
                   child: Row(
                     children: [
                       MySmallTextField(
-                          controller: controller.unitPriceController,
-                          obcure: false,
-                          label: "unitprice".tr),
+                        type: TextInputType.number,
+                        controller: controller.editUnitPriceController,
+                        obcure: false,
+                        label: "unitprice".tr,
+                      ),
                       SizedBox(
                         width: .5.h,
                       ),
                       MySmallTextField(
-                        controller: controller.unitPurchesController,
+                        type: TextInputType.number,
+                        controller: controller.editUnitPurchesController,
                         obcure: false,
                         label: "unitpurchesprice".tr,
                       ),
@@ -157,7 +167,7 @@ class AddProduct extends GetView<ProductController> {
                                     color: myOrange,
                                     width: 2), //border of dropdown button
                                 borderRadius: BorderRadius.circular(
-                                    20), //border raiuds of dropdown button
+                                    15), //border raiuds of dropdown button
                                 boxShadow: <BoxShadow>[
                                   //apply shadow on Dropdown button
                                   BoxShadow(
@@ -173,9 +183,12 @@ class AddProduct extends GetView<ProductController> {
                               elevation: 2,
                               hint: Center(
                                 child: controller.catSelect == null
-                                    ? Text(
-                                        "        kind   of    product",
-                                        style: TextStyle(fontSize: 13.sp),
+                                    ? Padding(
+                                        padding: EdgeInsets.all(1.h),
+                                        child: Text(
+                                          "kind".tr,
+                                          style: TextStyle(fontSize: 13.sp),
+                                        ),
                                       )
                                     : Text(
                                         controller.catSelect,
@@ -305,7 +318,7 @@ class AddProduct extends GetView<ProductController> {
                     MySmallTextField(
                       label: "Discount".tr,
                       type: TextInputType.number,
-                      controller: controller.productDiscountController,
+                      controller: controller.editProductDiscountController,
                       obcure: false,
                     )
                   ]),
@@ -362,9 +375,10 @@ class AddProduct extends GetView<ProductController> {
                     onpress: () async {
                       print("stoore");
                       FocusScope.of(context).unfocus();
-                      await controller.storeProduct();
+                      await controller.editProducts(
+                          id: controller.showProduct[0].id);
                     },
-                    title: Text("Save".tr,
+                    title: Text("update".tr,
                         style: TextStyle(
                             color: myWhite, fontWeight: FontWeight.bold)),
                     hight: 7.h,

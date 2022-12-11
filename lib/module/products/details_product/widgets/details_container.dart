@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
+import 'package:sboba_app_client/module/products/edit_product/edit_product_view.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sizer/sizer.dart';
@@ -140,7 +141,9 @@ class DetailsContainer extends StatelessWidget {
                             fontSize: 12.sp,
                             fontWeight: FontWeight.bold)),
                     Icon(Icons.more_vert),
-                    Text("${controller.showProduct[0].calories} Calories".tr,
+                    Text(
+                        "${controller.showProduct[0].calories}" +
+                            " Calories".tr,
                         style: TextStyle(
                             color: Colors.black,
                             wordSpacing: 3,
@@ -297,7 +300,13 @@ class DetailsContainer extends StatelessWidget {
                   children: [
                     MaterialButton(
                         minWidth: 17.h,
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => EditProduct(
+                                showProduct: controller.showProduct[0],
+                              ));
+                          // controller.editProducts(
+                          //     id: controller.showProduct[0].id);
+                        },
                         color: myGreen,
                         child: Text(
                           "Edit".tr,

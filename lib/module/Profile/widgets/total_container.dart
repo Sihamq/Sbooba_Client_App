@@ -14,8 +14,8 @@ class TotalContainer extends StatelessWidget {
     return Container(
       height: 18.w,
       width: 18.w,
-      decoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(5), color: myGreen),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: myGreen),
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

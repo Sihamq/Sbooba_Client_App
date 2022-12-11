@@ -7,9 +7,12 @@ import 'package:sboba_app_client/data/data_source/product_data/productData.dart'
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/product_model.dart';
 import 'package:sboba_app_client/data/models/show_product.dart';
+import 'package:sboba_app_client/module/products/product_binding.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
+
+import '../home_screen/home_screen_view.dart';
 
 class ProductController extends GetxController
     with StateMixin<List<ProductItem>> {
@@ -37,6 +40,21 @@ class ProductController extends GetxController
   var productCaloriesController = TextEditingController();
   var productAvialbleController = TextEditingController();
   var productDiscountController = TextEditingController();
+  ///////////////////////////////////rdit varibles///////////
+//var startDate, endDate;
+  var editProductNameArabicController = TextEditingController();
+  var editProductNameEnglishController = TextEditingController();
+  var editProductDescriptionArabicController = TextEditingController();
+  var editProductDescriptionEnglishController = TextEditingController();
+
+  var editSelectCateogController = TextEditingController();
+  var editUnitPriceController = TextEditingController();
+  var editUnitPurchesController = TextEditingController();
+  var editMiniProController = TextEditingController();
+  var editProductTagController = TextEditingController();
+  var editProductCaloriesController = TextEditingController();
+  var editProductAvialbleController = TextEditingController();
+  var editProductDiscountController = TextEditingController();
   bool swittch = false;
   int? published;
   bool featured = false;
@@ -55,6 +73,32 @@ class ProductController extends GetxController
     // =
     // PickerDateRange(today, today.add(Duration(days: 3)));
     super.onInit();
+  }
+
+  initData(ShowItem item) {
+    editProductNameArabicController.text = item.name!.ar!;
+    editProductNameEnglishController.text = item.name!.en!;
+    editProductCaloriesController.text = item.calories.toString();
+    editMiniProController.text = item.minQty.toString();
+    editProductDescriptionArabicController.text = item.descriptionName!.ar!;
+    editProductDescriptionEnglishController.text = item.descriptionName!.en!;
+    editProductTagController.text = item.tags!;
+    editUnitPriceController.text = item.unitPrice.toString();
+    editUnitPurchesController.text = item.purchasePrice.toString();
+    editProductAvialbleController.text = item.minQty.toString();
+    feature = item.featured;
+    published = item.published;
+    //cat_id = item.categoryId;
+    if (published == 1) {
+      swittch = true;
+    } else {
+      swittch = false;
+    }
+    if (feature == 1) {
+      featured = true;
+    } else {
+      featured = false;
+    }
   }
 
   void selectionChanged(DateRangePickerSelectionChangedArgs args) {
@@ -195,7 +239,7 @@ class ProductController extends GetxController
           name_en: productNameArabicController.text,
           description_ar: productDescriptionArabicController.text,
           description_en: productDescriptionEnglishController.text,
-          category_id: 1,
+          category_id: cat_id,
           purchase_price: unitPurchesController.text,
           cash_on_delivery: 1,
           min_qty: 1,
@@ -226,9 +270,8 @@ class ProductController extends GetxController
             describe: "",
             mainTitle: "congra".tr,
             subTitle: "youhave".tr,
-            btOnpressed: () => {}
-            //Get.offAll(HomeScreen(), binding: ProductBinding()
-            );
+            btOnpressed: () =>
+                {Get.offAll(HomeScreen(), binding: ProductBinding())});
       } else {
         CustomeAwesomeDialog().AwesomeDialogHeader(
             DialogType: DialogType.error,
@@ -248,6 +291,92 @@ class ProductController extends GetxController
     } catch (e) {
       print("something error ${e.toString()}");
     }
+  }
+
+  ///////////////////////////////edit product/////////////////////////////
+  Future editProducts({id}) async {
+    try {
+      //print("Name of${editProductNameArabicController.text}");
+      if (cat_id == null) {
+        CustomeAwesomeDialog().AwesomeDialogHeader(
+            DialogType: DialogType.success,
+            context: Get.context,
+            describe: "",
+            mainTitle: "".tr,
+            subTitle: "enter".tr,
+            btOnpressed: () => {});
+      } else {
+        // print("Name of${editProductNameArabicController.text}");
+        var res = await Productdata().editProduct(
+            id: id,
+            name_ar: editProductNameArabicController.text,
+            name_en: editProductNameEnglishController.text,
+            description_ar: editProductDescriptionArabicController.text,
+            description_en: editProductDescriptionEnglishController.text,
+            category_id: cat_id,
+            purchase_price: editUnitPurchesController.text,
+            cash_on_delivery: 1,
+            min_qty: 1,
+            approved: 1,
+            calories: editProductCaloriesController.text,
+            featured: feature,
+            published: published,
+            discount: editProductDiscountController.text,
+            current_stock: 1,
+            discount_end_date: endDate.value,
+            discount_start_date: startDate.value,
+            discount_type: 1,
+            low_stock_quantity: 1,
+            stock_visibility_state: 1,
+            tags: "food",
+            unit_price: editUnitPriceController.text,
+            todays_deal: 1,
+            unit: 1,
+            tax: 0,
+            meta_description: "test",
+            meta_title: "test",
+            slug: "test");
+        if (res["status"] == 200) {
+          print(res["message"]);
+          print("Name of${editProductNameArabicController.text}");
+          CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.success,
+              context: Get.context,
+              describe: "",
+              mainTitle: "congra".tr,
+              subTitle: "yupdate".tr,
+              btOnpressed: () => {
+                    // Get.offAll(HomeScreen(), binding: ProductBinding())
+                  });
+        } else {
+          CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.error,
+              context: Get.context,
+              describe: "",
+              mainTitle: "oops".tr,
+              subTitle: "failed".tr,
+              btOnpressed: () => {
+                    //Navigator.pop(Get.context!)
+                  }
+              //Get.offAll(HomeScreen(), binding: ProductBinding()
+
+              );
+
+          print("something is error in element");
+        }
+      }
+    } catch (e) {
+      print("something error ${e.toString()}");
+    }
+  }
+
+  var catSelect;
+  var cat_id;
+  void changeSelectCategory(val) {
+    catSelect = val.name;
+    cat_id = val.id;
+    print(cat_id);
+    update();
   }
 
   changSwitch(value) {

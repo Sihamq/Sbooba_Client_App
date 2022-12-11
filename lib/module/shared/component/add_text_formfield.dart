@@ -11,6 +11,7 @@ class MyAddTextField extends StatelessWidget {
   void Function(String)? onSubmit;
   void Function()? onTap;
   String? Function(String?)? validate;
+  String? Function(String?)? onChange;
   late String label;
   IconData? prefix;
   IconData? suffix;
@@ -45,6 +46,7 @@ class MyAddTextField extends StatelessWidget {
         obscureText: obcure,
         keyboardType: type,
         onChanged: (value) {},
+
         onTap: () {},
         validator: validate,
         controller: controller,
@@ -54,13 +56,13 @@ class MyAddTextField extends StatelessWidget {
             labelText: label,
             floatingLabelStyle:
                 TextStyle(color: myGreen, fontWeight: FontWeight.bold),
-            contentPadding: EdgeInsets.symmetric(horizontal: .5.w),
+            contentPadding: EdgeInsets.symmetric(horizontal: 3.w),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.green, width: 1.5),
               borderRadius: BorderRadius.circular(14),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.0),
+              borderRadius: BorderRadius.circular(17.0),
               borderSide: BorderSide(
                 color: myOrange,
                 width: 2.0,

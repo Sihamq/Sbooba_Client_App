@@ -145,4 +145,77 @@ class Productdata {
       print(e.toString());
     }
   }
+
+////////////////////////edit product///////////////
+  editProduct(
+      {name_ar,
+      id,
+      name_en,
+      description_ar,
+      description_en,
+      calories,
+      required category_id,
+      tags,
+      unit_price,
+      purchase_price,
+      todays_deal,
+      published,
+      approved,
+      stock_visibility_state,
+      cash_on_delivery,
+      featured,
+      current_stock,
+      unit,
+      min_qty,
+      low_stock_quantity,
+      discount,
+      discount_type,
+      discount_start_date,
+      discount_end_date,
+      tax,
+      slug,
+      meta_title,
+      meta_description}) async {
+    FormData data = FormData.fromMap({
+      "name": {"ar": name_ar, "en": name_en},
+      "description": {"ar": description_ar, "en": description_en},
+      "calories": calories,
+      "category_id": category_id,
+      "tags": tags,
+      "unit_price": unit_price,
+      "purchase_price": purchase_price,
+      "todays_deal": todays_deal,
+      "published": published,
+      "approved": approved,
+      "stock_visibility_state": stock_visibility_state,
+      "cash_on_delivery": cash_on_delivery,
+      "featured": featured,
+      "current_stock": current_stock,
+      "unit": unit,
+      "min_qty": min_qty,
+      "low_stock_quantity": low_stock_quantity,
+      "discount": discount,
+      "tax": tax,
+      "slug": slug,
+      "meta_title": meta_title,
+      "meta_description": meta_description,
+      "discount_type": discount_type,
+      "discount_start_date": discount_start_date,
+      "discount_end_date": discount_end_date,
+    });
+
+    var response = await DioHelper.putDataForm(
+        url: "/seller/products/${id}?_method=PUT",
+        data: data,
+        option: {
+          "Authorization": "Bearer " + await CashHelper.getData("token"),
+        });
+    if (response!.statusCode == 200) {
+      print(response.data);
+      return response.data;
+    } else {
+      response.data;
+      print(response.data);
+    }
+  }
 }

@@ -3,6 +3,8 @@ import 'package:coupon_uikit/coupon_uikit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sboba_app_client/data/models/coupons.dart';
+import 'package:sboba_app_client/module/coupons/add_coupons/edit_coupon/edit_coupon.dart';
 import 'package:sboba_app_client/module/coupons/coupons_controller.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
@@ -10,7 +12,9 @@ import 'package:sizer/sizer.dart';
 
 class HorizontalCouponExample2 extends GetView<CouponsController> {
   int? index;
-  HorizontalCouponExample2({Key? key, this.index}) : super(key: key);
+  CouponsItems? couponsItems;
+  HorizontalCouponExample2({Key? key, this.index, this.couponsItems})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +71,15 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                     // ),
                     Spacer(),
                     InkWell(
+                        onTap: () {
+                          Get.to(() => EditCoupon(
+                                couponsItems: couponsItems,
+                              ));
+                        },
                         child: Icon(
-                      Icons.edit,
-                      color: myGreen,
-                    )),
+                          Icons.edit,
+                          color: myGreen,
+                        )),
                     Icon(Icons.more_vert),
                     InkWell(
                       onTap: () {

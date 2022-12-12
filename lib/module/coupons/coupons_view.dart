@@ -59,11 +59,14 @@ class CouponsView extends GetView<CouponsController> {
                       physics: BouncingScrollPhysics(),
                       itemCount: controller.couponItem.length,
                       itemBuilder: (context, index) {
-                        return HorizontalCouponExample2(index: index);
+                        return HorizontalCouponExample2(
+                          index: index,
+                          couponsItems: controller.couponItem[index],
+                        );
                       }),
                   onEmpty:
                       EmptyProduct(img: "assets/box.png", text: "nocoupons".tr),
-                  onLoading: SpinKitPouringHourGlassRefined(
+                  onLoading: SpinKitFadingCube(
                     color: myOrange,
                     size: 80.sp,
                     // duration: const Duration(milliseconds: 800)

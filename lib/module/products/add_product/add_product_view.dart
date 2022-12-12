@@ -99,6 +99,7 @@ class AddProduct extends GetView<ProductController> {
                       MySmallTextField(
                           controller: controller.miniProController,
                           obcure: false,
+                          type: TextInputType.number,
                           label: "Quantity".tr),
                       SizedBox(
                         width: .5.h,
@@ -107,6 +108,7 @@ class AddProduct extends GetView<ProductController> {
                         controller: controller.productAvialbleController,
                         obcure: false,
                         label: "Minium".tr,
+                        type: TextInputType.number,
                         validate: (p0) => validInput(p0!, 3, 12, "name"),
                       ),
                       // SizedBox(
@@ -127,6 +129,7 @@ class AddProduct extends GetView<ProductController> {
                   child: Row(
                     children: [
                       MySmallTextField(
+                          type: TextInputType.number,
                           controller: controller.unitPriceController,
                           obcure: false,
                           label: "unitprice".tr),
@@ -134,10 +137,10 @@ class AddProduct extends GetView<ProductController> {
                         width: .5.h,
                       ),
                       MySmallTextField(
-                        controller: controller.unitPurchesController,
-                        obcure: false,
-                        label: "unitpurchesprice".tr,
-                      ),
+                          controller: controller.unitPurchesController,
+                          obcure: false,
+                          label: "unitpurchesprice".tr,
+                          type: TextInputType.number),
                     ],
                   ),
                 ),

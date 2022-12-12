@@ -18,7 +18,7 @@ class ProfileCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
         height: 17.h,
-        width: 16.h,
+        width: 13.h,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),

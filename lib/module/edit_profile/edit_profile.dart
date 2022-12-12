@@ -283,7 +283,7 @@ class EditAccount extends StatelessWidget {
                             ])),
                   ),
                 )
-              : SpinKitPouringHourGlassRefined(
+              : SpinKitFadingCube(
                   color: myOrange,
                   size: 50.sp,
                 ),

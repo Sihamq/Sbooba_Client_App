@@ -345,9 +345,8 @@ class ProductController extends GetxController
               describe: "",
               mainTitle: "congra".tr,
               subTitle: "yupdate".tr,
-              btOnpressed: () => {
-                    // Get.offAll(HomeScreen(), binding: ProductBinding())
-                  });
+              btOnpressed: () =>
+                  {Get.offAll(HomeScreen(), binding: ProductBinding())});
         } else {
           CustomeAwesomeDialog().AwesomeDialogHeader(
               DialogType: DialogType.error,

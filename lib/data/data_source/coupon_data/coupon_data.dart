@@ -38,4 +38,80 @@ class CouponData {
       print(e.toString());
     }
   }
+
+  Future storeCoupon({
+    required couponType,
+    required couponCode,
+    required discountType,
+    required discount,
+    required fromDate,
+    required toDate,
+    required status,
+    productName,
+  }) async {
+    FormData data = FormData.fromMap({
+      "coupon_type": couponType,
+      "coupon_code": couponCode,
+      "discount_type": discountType,
+      "discount": discount,
+      "from_date": fromDate,
+      "to_date": toDate,
+      "status": status,
+      "products": {"0": productName},
+    });
+    try {
+      var response = await DioHelper.postData1(
+          url: ApiLink.storeCoupon,
+          data: data,
+          option: {
+            "Authorization": "Bearer " + await CashHelper.getData("token")
+          });
+      if (response.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future editCoupon({
+    required couponType,
+    required couponCode,
+    required discountType,
+    required discount,
+    required fromDate,
+    required toDate,
+    required status,
+    productName,
+  }) async {
+    FormData data = FormData.fromMap({
+      "coupon_type": couponType,
+      "coupon_code": couponCode,
+      "discount_type": discountType,
+      "discount": discount,
+      "from_date": fromDate,
+      "to_date": toDate,
+      "status": status,
+      "products": {"0": productName},
+    });
+    try {
+      var response = await DioHelper.updateFormData(
+          url: ApiLink.storeCoupon,
+          data: data,
+          option: {
+            "Authorization": "Bearer " + await CashHelper.getData("token")
+          });
+      if (response!.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

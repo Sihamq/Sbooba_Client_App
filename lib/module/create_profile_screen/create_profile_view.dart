@@ -242,6 +242,7 @@ class CreateAccount extends StatelessWidget {
 
                         BlueButton(
                             onpress: () async {
+                              FocusScope.of(context).unfocus();
                               await controller.CreateAccount(context);
                             },
                             title: Text(

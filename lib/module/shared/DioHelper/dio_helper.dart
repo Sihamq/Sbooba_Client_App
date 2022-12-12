@@ -5,7 +5,8 @@ class DioHelper {
   static late Dio dio;
   static init() {
     dio = Dio(BaseOptions(
-        baseUrl: 'http://192.168.0.102/sboba_v3/api', //http://192.168.0.102
+        baseUrl:
+            'http://192.168.0.102/sboba_v3/api', //http://192.168.0.102  // 192.168.1.105
         receiveDataWhenStatusError: true,
         headers: {
           'Content-Type': 'application/json',

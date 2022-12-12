@@ -102,11 +102,6 @@ class MealCard extends GetView<ProductController> {
                       fontWeight: FontWeight.bold,
                       color: myOrange),
                 ),
-                Icon(
-                  Icons.discount_rounded,
-                  color: myGreen,
-                  size: 4.w,
-                ),
               ]),
             ),
             Padding(
@@ -114,6 +109,11 @@ class MealCard extends GetView<ProductController> {
               child: Wrap(
                 spacing: 2.w,
                 children: [
+                  Icon(
+                    Icons.discount_rounded,
+                    color: myGreen,
+                    size: 4.w,
+                  ),
                   Text(
                     "EndDate".tr,
                     style:

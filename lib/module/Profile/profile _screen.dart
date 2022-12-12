@@ -34,13 +34,15 @@ class ProfileScreen extends StatelessWidget {
           init: ProfileController(),
           builder: (controller) => Stack(children: [
             controller.profile == null
-                ? SpinKitFadingCube(
-                    color: myOrange,
+                ? Center(
+                    child: SpinKitFadingCube(
+                      color: myOrange,
+                    ),
                   )
                 : Column(
                     children: [
                       Stack(
-                        //alignment: Alignment.bottomCenter,
+                        //  alignment: Alignment.bottomCenter,
                         children: [
                           Container(
                             height: MediaQuery.of(context).size.height * .4,
@@ -67,23 +69,25 @@ class ProfileScreen extends StatelessWidget {
                                       )),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: 1.w),
+                                  padding: EdgeInsets.all(1.h),
                                   child: Container(
                                     width:
                                         MediaQuery.of(context).size.width * .8,
-                                    height: 18.h,
+                                    height: 19.h,
                                     decoration: BoxDecoration(
                                       color: myWhite,
                                       borderRadius: BorderRadius.circular(20),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsets.all(1.h),
+                                      padding: EdgeInsets.all(.5.h),
                                       child: Column(
                                         children: [
-                                          Wrap(
-                                            spacing: 2.w,
+                                          Row(
+                                            // spacing: 2.w,
                                             crossAxisAlignment:
-                                                WrapCrossAlignment.start,
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
                                               Padding(
                                                 padding: EdgeInsets.only(
@@ -126,11 +130,16 @@ class ProfileScreen extends StatelessWidget {
                                               )
                                             ],
                                           ),
-                                          Wrap(
-                                            spacing: 2.w,
+                                          Row(
+                                            //spacing: 2.w,
                                             crossAxisAlignment:
-                                                WrapCrossAlignment.start,
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
                                             children: [
+                                              SizedBox(
+                                                width: 6.w,
+                                              ),
                                               Icon(
                                                 MdiIcons.store,
                                                 color: myOrange,
@@ -187,7 +196,7 @@ class ProfileScreen extends StatelessWidget {
                                               Text(
                                                 "sales".tr,
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.w800,
                                                     color: myOrange),
                                               ),
                                               Text("20000" + "SAR",
@@ -198,12 +207,12 @@ class ProfileScreen extends StatelessWidget {
                                             ],
                                           ),
                                           Wrap(
-                                            spacing: 2.w,
+                                            spacing: 3.w,
                                             children: [
                                               Text(
                                                 "Your Account Balance".tr,
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
+                                                    fontWeight: FontWeight.w800,
                                                     color: myOrange),
                                               ),
                                               Text("20000" + "SAR",
@@ -224,7 +233,8 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 8.h),
+                        padding:
+                            EdgeInsets.only(top: 8.h, left: 1.h, right: 1.h),
                         child: Column(
                           children: [
                             Row(
@@ -363,11 +373,12 @@ class ProfileScreen extends StatelessWidget {
                   ),
             Positioned(
               top: MediaQuery.of(context).size.width * 0.73999,
-              left: MediaQuery.of(context).size.width * 0.08,
+              left: MediaQuery.of(context).size.width * 0.099,
               right: MediaQuery.of(context).size.width * 0.099,
-              child: Wrap(
-                crossAxisAlignment: WrapCrossAlignment.center,
-                spacing: 2.w,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //  spacing: 2.w,
                 children: [
                   TotalContainer(secondText: "totalOrder".tr),
                   TotalContainer(

@@ -229,6 +229,8 @@ Map<String, String> en = {
   "failed": "Adding is Failed",
   "editpro": "Edit Product",
   "enter": "Please enter type and status of product before updating",
-  "yupdate": "Updating sucessfully",
-  "kind": "Choose kind of product"
+  "yupdate": "Updating Successfully",
+  "kind": "Choose kind of product",
+  "Editc": "Edit Coupon",
+  "creatc": "New Coupon Added Successfully"
 };

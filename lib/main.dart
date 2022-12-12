@@ -1,6 +1,8 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 import 'package:sboba_app_client/lang/lang_controller.dart';
 import 'package:sboba_app_client/lang/translation.dart';
 import 'package:sboba_app_client/module/home_screen/home_binding.dart';
@@ -33,6 +35,15 @@ class MyApp extends StatelessWidget {
     LanguageController languageController = Get.put(LanguageController());
     return Sizer(
       builder: (context, orientation, deviceType) => GetMaterialApp(
+        builder: (context, child) => ResponsiveWrapper.builder(
+          ClampingScrollWrapper.builder(context, child!),
+          breakpoints: const [
+            ResponsiveBreakpoint.resize(450, name: MOBILE),
+            ResponsiveBreakpoint.autoScale(800, name: TABLET),
+            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
+            ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
+          ],
+        ),
         translations: Translation(),
         locale: languageController.language,
         theme: ThemeData(

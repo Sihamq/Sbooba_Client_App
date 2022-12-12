@@ -32,7 +32,8 @@ class TotalContainer extends StatelessWidget {
             ),
             Text(
               "${25}",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10.sp),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 10.sp, color: myWhite),
             ),
           ]),
     );

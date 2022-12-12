@@ -119,13 +119,13 @@ class ProductView extends GetView<ProductController> {
               img: "assets/nopro.png",
               text: "noproduct".tr,
             ),
-            onLoading: SpinKitPouringHourGlassRefined(
-              strokeWidth: 5.0,
+            onLoading: SpinKitFadingCube(
+              // strokeWidth: 5.0,
               color: myOrange,
               size: 80.sp,
               //duration: const Duration(milliseconds: 800)
             ),
-            onError: (error) => SpinKitPouringHourGlassRefined(
+            onError: (error) => SpinKitFadingCube(
               color: myOrange,
               size: 80.sp,
               // duration: const Duration(milliseconds: 800)

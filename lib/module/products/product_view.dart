@@ -72,8 +72,7 @@ class ProductView extends GetView<ProductController> {
                             x: index,
                           );
                         })
-                    : SpinKitPouringHourGlassRefined(
-                        color: myOrange, size: 30.sp)),
+                    : SpinKitFadingCube(color: myOrange, size: 30.sp)),
           ),
         ),
         Obx(

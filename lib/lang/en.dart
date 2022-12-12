@@ -232,5 +232,6 @@ Map<String, String> en = {
   "yupdate": "Updating Successfully",
   "kind": "Choose kind of product",
   "Editc": "Edit Coupon",
-  "creatc": "New Coupon Added Successfully"
+  "creatc": "New Coupon Added Successfully",
+  "typec": "Coupon Type"
 };

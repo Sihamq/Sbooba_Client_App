@@ -77,16 +77,16 @@ class CouponData {
     }
   }
 
-  Future editCoupon({
-    required couponType,
-    required couponCode,
-    required discountType,
-    required discount,
-    required fromDate,
-    required toDate,
-    required status,
-    productName,
-  }) async {
+  Future editCoupon(
+      {required couponType,
+      required couponCode,
+      required discountType,
+      required discount,
+      required fromDate,
+      required toDate,
+      required status,
+      productName,
+      required id}) async {
     FormData data = FormData.fromMap({
       "coupon_type": couponType,
       "coupon_code": couponCode,
@@ -99,7 +99,7 @@ class CouponData {
     });
     try {
       var response = await DioHelper.updateFormData(
-          url: ApiLink.storeCoupon,
+          url: ApiLink.updateCoupon + "${id}",
           data: data,
           option: {
             "Authorization": "Bearer " + await CashHelper.getData("token")

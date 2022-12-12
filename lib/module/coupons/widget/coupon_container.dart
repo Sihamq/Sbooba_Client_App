@@ -73,8 +73,7 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                     InkWell(
                         onTap: () {
                           Get.to(() => EditCoupon(
-                                couponsItems: couponsItems,
-                              ));
+                              couponsItems: couponsItems, index: index));
                         },
                         child: Icon(
                           Icons.edit,

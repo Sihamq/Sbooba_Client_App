@@ -283,9 +283,11 @@ class EditAccount extends StatelessWidget {
                             ])),
                   ),
                 )
-              : SpinKitFadingCube(
-                  color: myOrange,
-                  size: 50.sp,
+              : Center(
+                  child: SpinKitFadingCube(
+                    color: myOrange,
+                    size: 50.sp,
+                  ),
                 ),
         ),
       ),

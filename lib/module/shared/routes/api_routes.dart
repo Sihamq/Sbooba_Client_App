@@ -16,5 +16,6 @@ class ApiLink {
   static const String deleteCoupon = "/seller/coupons/";
   static const String getProfile = "/seller/profile";
   static const String updateProfile = "/seller/profile";
-  static const String storeCoupon = "/seller/coupons"; // delete
+  static const String storeCoupon = "/seller/coupons";
+  static const String updateCoupon = "/seller/coupons/"; // delete
 }

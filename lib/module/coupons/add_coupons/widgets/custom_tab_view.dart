@@ -20,148 +20,158 @@ class CustomTabView extends StatelessWidget {
     return SingleChildScrollView(
       child: GetBuilder<CouponsController>(
         init: CouponsController(),
-        builder: (controller) => Column(children: [
-          Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: Colors.grey[300],
-            ),
-            height: 5.h,
-            width: 100.w,
-            child: Row(
-              children: [
-                Center(
-                  child: Text(
-                    "Product".tr,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+        builder: (controller) => Form(
+          key: controller.formKey1,
+          child: Column(children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.grey[300],
+              ),
+              height: 5.h,
+              width: 100.w,
+              child: Row(
+                children: [
+                  Center(
+                    child: Text(
+                      "Product".tr,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-                Spacer(),
-                InkWell(
-                  child: Icon(Icons.arrow_right),
-                  onTap: () {},
-                )
-              ],
+                  Spacer(),
+                  InkWell(
+                    child: Icon(Icons.arrow_right),
+                    onTap: () {},
+                  )
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(1.h),
-            child: MyAddTextField(
-                controller: controller.couponCode,
-                obcure: false,
-                label: "Coupon Code".tr),
-          ),
-          // DecoratedBox(
-          //                   decoration: BoxDecoration(
-          //                       color: Colors
-          //                           .white, //background color of dropdown button
-          //                       border: Border.all(
-          //                           color: myOrange,
-          //                           width: 2), //border of dropdown button
-          //                       borderRadius: BorderRadius.circular(
-          //                           15), //border raiuds of dropdown button
-          //                       boxShadow: <BoxShadow>[
-          //                         //apply shadow on Dropdown button
-          //                         BoxShadow(
-          //                             color: myOrange,
-          //                             blurRadius: 0.1), //shadow for button
-          //                       ]),
-          //                   child: DropdownButton(
-          //                     autofocus: true,
-          //                     dropdownColor: myWhite,
-          //                     focusColor: myOrange,
-          //                     // isExpanded: true,
-          //                     underline: const SizedBox(),
-          //                     elevation: 2,
-          //                     hint: Center(
-          //                       child: controller.catSelect == null
-          //                           ? Padding(
-          //                               padding: EdgeInsets.all(1.h),
-          //                               child: Text(
-          //                                 "kind".tr,
-          //                                 style: TextStyle(fontSize: 13.sp),
-          //                               ),
-          //                             )
-          //                           : Text(
-          //                               controller.catSelect,
-          //                               style: TextStyle(fontSize: 13.sp),
-          //                             ),
-          //                     ),
-          //                     alignment: AlignmentDirectional.center,
-          //                     iconSize: 20.sp,
-          //                     icon: Icon(
-          //                       Icons.keyboard_arrow_down,
-          //                       color: myOrange,
-          //                       size: 25.sp,
-          //                     ),
-          //                     items: controller.discountTypeList
-          //                         .map<DropdownMenuItem>(
-          //                             (cat) => DropdownMenuItem(
-          //                                   value: cat,
-          //                                   child: Center(
-          //                                     child: Text(di),
-          //                                   ),
-          //                                 ))
-          //                         .toList(),
-          //                     onChanged: ((value) {
-          //                       controller.changeSelectCategory(value);
-          //                     }),
-          //                   )
-          //                   // MySmallTextField(
-          //                   //   type: TextInputType.number,
-          //                   //   controller: controller.miniProController,
-          //                   //   obcure: false,
-          //                   //   label: "Candy".tr,
-          //                   //   suffix: Icons.arrow_right_alt,
-          //                   //   suffixPressed: () {
-          //                   //     Get.defaultDialog(
-          //                   //         title: "'",
-          //                   //         content: CustomRdaioButton(),
-          //                   //         middleText: "😊");
-          //                   //   },
-          //                   ),
+            Padding(
+              padding: EdgeInsets.all(1.h),
+              child: MyAddTextField(
+                  controller: controller.couponCode,
+                  obcure: false,
+                  label: "Coupon Code".tr),
+            ),
+            Padding(
+              padding: EdgeInsets.all(1.h),
+              child: MyAddTextField(
+                  controller: controller.couponType,
+                  obcure: false,
+                  label: "typec".tr),
+            ),
+            // DecoratedBox(
+            //                   decoration: BoxDecoration(
+            //                       color: Colors
+            //                           .white, //background color of dropdown button
+            //                       border: Border.all(
+            //                           color: myOrange,
+            //                           width: 2), //border of dropdown button
+            //                       borderRadius: BorderRadius.circular(
+            //                           15), //border raiuds of dropdown button
+            //                       boxShadow: <BoxShadow>[
+            //                         //apply shadow on Dropdown button
+            //                         BoxShadow(
+            //                             color: myOrange,
+            //                             blurRadius: 0.1), //shadow for button
+            //                       ]),
+            //                   child: DropdownButton(
+            //                     autofocus: true,
+            //                     dropdownColor: myWhite,
+            //                     focusColor: myOrange,
+            //                     // isExpanded: true,
+            //                     underline: const SizedBox(),
+            //                     elevation: 2,
+            //                     hint: Center(
+            //                       child: controller.catSelect == null
+            //                           ? Padding(
+            //                               padding: EdgeInsets.all(1.h),
+            //                               child: Text(
+            //                                 "kind".tr,
+            //                                 style: TextStyle(fontSize: 13.sp),
+            //                               ),
+            //                             )
+            //                           : Text(
+            //                               controller.catSelect,
+            //                               style: TextStyle(fontSize: 13.sp),
+            //                             ),
+            //                     ),
+            //                     alignment: AlignmentDirectional.center,
+            //                     iconSize: 20.sp,
+            //                     icon: Icon(
+            //                       Icons.keyboard_arrow_down,
+            //                       color: myOrange,
+            //                       size: 25.sp,
+            //                     ),
+            //                     items: controller.discountTypeList
+            //                         .map<DropdownMenuItem>(
+            //                             (cat) => DropdownMenuItem(
+            //                                   value: cat,
+            //                                   child: Center(
+            //                                     child: Text(di),
+            //                                   ),
+            //                                 ))
+            //                         .toList(),
+            //                     onChanged: ((value) {
+            //                       controller.changeSelectCategory(value);
+            //                     }),
+            //                   )
+            //                   // MySmallTextField(
+            //                   //   type: TextInputType.number,
+            //                   //   controller: controller.miniProController,
+            //                   //   obcure: false,
+            //                   //   label: "Candy".tr,
+            //                   //   suffix: Icons.arrow_right_alt,
+            //                   //   suffixPressed: () {
+            //                   //     Get.defaultDialog(
+            //                   //         title: "'",
+            //                   //         content: CustomRdaioButton(),
+            //                   //         middleText: "😊");
+            //                   //   },
+            //                   ),
 
-          Padding(
-            padding: EdgeInsets.all(1.h),
-            child: MyAddTextField(
-              controller: controller.disountType,
-              type: TextInputType.number,
-              obcure: false,
-              label: "Discount Type".tr,
-              suffix: MdiIcons.arrowDownBold,
-              suffixPressed: () {},
+            Padding(
+              padding: EdgeInsets.all(1.h),
+              child: MyAddTextField(
+                controller: controller.disountType,
+                type: TextInputType.number,
+                obcure: false,
+                label: "Discount Type".tr,
+                suffix: MdiIcons.arrowDownBold,
+                suffixPressed: () {},
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(.5.h),
-            child: Row(
-              children: [
-                MySmallTextField(
-                    controller: controller.discount,
-                    type: TextInputType.number,
-                    obcure: false,
-                    label: "Discount".tr),
-                SizedBox(
-                  width: 4.w,
-                ),
-                Text(
-                  "Discount Date Rang".tr,
-                ),
-                DateContainer(),
-              ],
+            Padding(
+              padding: EdgeInsets.all(.5.h),
+              child: Row(
+                children: [
+                  MySmallTextField(
+                      controller: controller.discount,
+                      type: TextInputType.number,
+                      obcure: false,
+                      label: "Discount".tr),
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  Text(
+                    "Discount Date Rang".tr,
+                  ),
+                  DateContainer(),
+                ],
+              ),
             ),
-          ),
-          BlueButton(
-              onpress: () {
-                FocusScope.of(context).unfocus();
-                controller.createCoupon();
-              },
-              title: Text("Save".tr,
-                  style:
-                      TextStyle(color: myWhite, fontWeight: FontWeight.bold)),
-              hight: 5.h,
-              width: 100.w)
-        ]),
+            BlueButton(
+                onpress: () {
+                  FocusScope.of(context).unfocus();
+                  controller.createCoupon();
+                },
+                title: Text("Save".tr,
+                    style:
+                        TextStyle(color: myWhite, fontWeight: FontWeight.bold)),
+                hight: 5.h,
+                width: 100.w)
+          ]),
+        ),
       ),
     );
   }

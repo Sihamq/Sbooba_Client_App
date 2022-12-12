@@ -18,6 +18,8 @@ class ProductController extends GetxController
     with StateMixin<List<ProductItem>> {
   ////////////////////////////////variables/////////////////////////
   List<XFile> imageFileList = [];
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final ImagePicker imagePicker = ImagePicker();
   var selectedDate = DateTime.now().obs;
   var selectedTime = TimeOfDay.now().obs;
@@ -233,63 +235,65 @@ class ProductController extends GetxController
 
   //////////////////////////////////store product////////////////////////
   Future storeProduct() async {
-    try {
-      var res = await Productdata().addNewProduct(
-          name_ar: productNameEnglishController.text,
-          name_en: productNameArabicController.text,
-          description_ar: productDescriptionArabicController.text,
-          description_en: productDescriptionEnglishController.text,
-          category_id: cat_id,
-          purchase_price: unitPurchesController.text,
-          cash_on_delivery: 1,
-          min_qty: 1,
-          approved: 1,
-          calories: productCaloriesController.text,
-          featured: feature,
-          published: published,
-          discount: productDiscountController.text,
-          current_stock: 1,
-          discount_end_date: endDate.value,
-          discount_start_date: startDate.value,
-          discount_type: 1,
-          low_stock_quantity: 1,
-          stock_visibility_state: 1,
-          tags: "food",
-          unit_price: unitPriceController.text,
-          todays_deal: 1,
-          unit: 1,
-          tax: 0,
-          meta_description: "test",
-          meta_title: "test",
-          slug: "test");
-      if (res["status"] == 200) {
-        print(res["message"]);
-        CustomeAwesomeDialog().AwesomeDialogHeader(
-            DialogType: DialogType.success,
-            context: Get.context,
-            describe: "",
-            mainTitle: "congra".tr,
-            subTitle: "youhave".tr,
-            btOnpressed: () =>
-                {Get.offAll(HomeScreen(), binding: ProductBinding())});
-      } else {
-        CustomeAwesomeDialog().AwesomeDialogHeader(
-            DialogType: DialogType.error,
-            context: Get.context,
-            describe: "",
-            mainTitle: "oops".tr,
-            subTitle: "failed".tr,
-            btOnpressed: () => {
-                  //Navigator.pop(Get.context!)
-                }
-            //Get.offAll(HomeScreen(), binding: ProductBinding()
+    if (formKey.currentState!.validate()) {
+      try {
+        var res = await Productdata().addNewProduct(
+            name_ar: productNameEnglishController.text,
+            name_en: productNameArabicController.text,
+            description_ar: productDescriptionArabicController.text,
+            description_en: productDescriptionEnglishController.text,
+            category_id: cat_id,
+            purchase_price: unitPurchesController.text,
+            cash_on_delivery: 1,
+            min_qty: 1,
+            approved: 1,
+            calories: productCaloriesController.text,
+            featured: feature,
+            published: published,
+            discount: productDiscountController.text,
+            current_stock: 1,
+            discount_end_date: endDate.value,
+            discount_start_date: startDate.value,
+            discount_type: 1,
+            low_stock_quantity: 1,
+            stock_visibility_state: 1,
+            tags: "food",
+            unit_price: unitPriceController.text,
+            todays_deal: 1,
+            unit: 1,
+            tax: 0,
+            meta_description: "test",
+            meta_title: "test",
+            slug: "test");
+        if (res["status"] == 200) {
+          print(res["message"]);
+          CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.success,
+              context: Get.context,
+              describe: "",
+              mainTitle: "congra".tr,
+              subTitle: "youhave".tr,
+              btOnpressed: () =>
+                  {Get.offAll(HomeScreen(), binding: ProductBinding())});
+        } else {
+          CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.error,
+              context: Get.context,
+              describe: "",
+              mainTitle: "oops".tr,
+              subTitle: "failed".tr,
+              btOnpressed: () => {
+                    //Navigator.pop(Get.context!)
+                  }
+              //Get.offAll(HomeScreen(), binding: ProductBinding()
 
-            );
+              );
 
-        print("something is error in element");
+          print("something is error in element");
+        }
+      } catch (e) {
+        print("something error ${e.toString()}");
       }
-    } catch (e) {
-      print("something error ${e.toString()}");
     }
   }
 

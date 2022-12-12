@@ -12,17 +12,23 @@ import '../shared/component/awesome_dialog.dart';
 class CouponsController extends GetxController
     with StateMixin<List<CouponsItems>> {
   var couponCode = TextEditingController();
+  var couponType = TextEditingController();
   //var
   var disountType = TextEditingController();
   var discount = TextEditingController();
   //////////////////////edit controller for text////////
   var editCouponCode = TextEditingController();
 
+  var editcouponType = TextEditingController();
+
   var editDisountType = TextEditingController();
   var editDiscount = TextEditingController();
+
   var couponItem = <CouponsItems>[].obs;
   bool isLoading = false;
   List<String> discountTypeList = ["50 %", "20%"];
+  GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
   var delete;
   void onInit() {
     getCoupons();
@@ -42,7 +48,8 @@ class CouponsController extends GetxController
   initData(CouponsItems item) {
     editCouponCode.text = item.couponCode!;
     editDiscount.text = item.discount.toString();
-    editDisountType.text = item.couponType.toString();
+    editDisountType.text = item.discountType.toString();
+    editcouponType.text = item.couponType.toString();
   }
 
   /////////////fetching coupon//////////////////////
@@ -100,48 +107,55 @@ class CouponsController extends GetxController
   }
 
   createCoupon() async {
-    try {
-      var res = await CouponData().storeCoupon(
-          couponType: "1",
-          couponCode: couponCode.text,
-          discountType: disountType.text,
-          discount: discount.text,
-          fromDate: "2022-10-1",
-          toDate: "2022-12-1",
-          status: "1",
-          productName: "1");
-      if (res["status"] == 200) {
-        CustomeAwesomeDialog().AwesomeDialogHeader(
-            DialogType: DialogType.success,
-            context: Get.context,
-            describe: "",
-            mainTitle: "congra".tr,
-            subTitle: "creatc".tr,
-            btOnpressed: () => {getCoupons().then((value) => Get.back())});
-      } else {}
-    } catch (e) {}
+    if (formKey1.currentState!.validate()) {
+      try {
+        var res = await CouponData().storeCoupon(
+            couponType: couponType.text,
+            couponCode: couponCode.text,
+            discountType: disountType.text,
+            discount: discount.text,
+            fromDate: "2022-10-1",
+            toDate: "2022-12-1",
+            status: "1",
+            productName: "1");
+        if (res["status"] == 200) {
+          CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.success,
+              context: Get.context,
+              describe: "",
+              mainTitle: "congra".tr,
+              subTitle: "creatc".tr,
+              btOnpressed: () => {getCoupons().then((value) => Get.back())});
+        } else {}
+      } catch (e) {}
+    }
   }
 
-  updateCoupon() async {
-    try {
-      var res = await CouponData().storeCoupon(
-          couponType: "1",
-          couponCode: editCouponCode.text,
-          discountType: editDisountType.text,
-          discount: editDiscount.text,
-          fromDate: "2022-10-1",
-          toDate: "2022-12-1",
-          status: "1",
-          productName: "1");
-      if (res["status"] == 200) {
-        CustomeAwesomeDialog().AwesomeDialogHeader(
-            DialogType: DialogType.success,
-            context: Get.context,
-            describe: "",
-            mainTitle: "congra".tr,
-            subTitle: "yupdate".tr,
-            btOnpressed: () => {getCoupons().then((value) => Get.back())});
-      } else {}
-    } catch (e) {}
+  updateCoupon({id}) async {
+    if (formKey2.currentState!.validate()) {
+      try {
+        var res = await CouponData().editCoupon(
+            id: id,
+            couponType: editcouponType.text,
+            couponCode: editCouponCode.text,
+            discountType: editDisountType.text,
+            discount: editDiscount.text,
+            fromDate: "2022-10-1",
+            toDate: "2022-12-1",
+            status: "1",
+            productName: "1");
+        if (res["status"] == 200) {
+          CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.success,
+              context: Get.context,
+              describe: "",
+              mainTitle: "congra".tr,
+              subTitle: "yupdate".tr,
+              btOnpressed: () => {getCoupons().then((value) => Get.back())});
+        } else {}
+      } catch (e) {
+        print("Something is error  ${e.toString()}");
+      }
+    }
   }
 }

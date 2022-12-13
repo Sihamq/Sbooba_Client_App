@@ -73,6 +73,7 @@ class ShowItem {
     this.deletedAt,
     this.createdAt,
     this.updatedAt,
+    this.cateogryName,
   });
 
   int? id;
@@ -81,6 +82,7 @@ class ShowItem {
   int? addedBy;
   int? sellerId;
   int? categoryId;
+  String? cateogryName;
   int? videoProvider;
   String? videoLink;
   String? tags;
@@ -116,6 +118,7 @@ class ShowItem {
         addedBy: json["added_by"],
         sellerId: json["seller_id"],
         categoryId: json["category_id"],
+        cateogryName: json["category_name"],
         videoProvider: json["video_provider"],
         videoLink: json["video_link"],
         tags: json["tags"],
@@ -179,6 +182,7 @@ class ShowItem {
         "deleted_at": deletedAt,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
+        "category_name": cateogryName
       };
 }
 

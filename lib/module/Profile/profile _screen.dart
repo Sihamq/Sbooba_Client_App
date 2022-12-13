@@ -199,7 +199,7 @@ class ProfileScreen extends StatelessWidget {
                                                     fontWeight: FontWeight.w800,
                                                     color: myOrange),
                                               ),
-                                              Text("20000" + "SAR",
+                                              Text("20000" + "SAR".tr,
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -215,7 +215,7 @@ class ProfileScreen extends StatelessWidget {
                                                     fontWeight: FontWeight.w800,
                                                     color: myOrange),
                                               ),
-                                              Text("20000" + "SAR",
+                                              Text("20000" + "SAR".tr,
                                                   style: TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -371,10 +371,12 @@ class ProfileScreen extends StatelessWidget {
                       )
                     ],
                   ),
-            Positioned(
+            PositionedDirectional(
+              start: MediaQuery.of(context).size.width * 0.099,
+              // start: MediaQuery.of(context).size.width * 0.73999,
               top: MediaQuery.of(context).size.width * 0.73999,
-              left: MediaQuery.of(context).size.width * 0.099,
-              right: MediaQuery.of(context).size.width * 0.099,
+              // left: MediaQuery.of(context).size.width * 0.099,
+              end: MediaQuery.of(context).size.width * 0.099,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -392,7 +394,7 @@ class ProfileScreen extends StatelessWidget {
                   )
                 ],
               ),
-            ),
+            )
           ]),
         )));
   }

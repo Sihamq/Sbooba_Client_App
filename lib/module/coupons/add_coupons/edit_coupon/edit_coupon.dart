@@ -12,6 +12,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../my_colors.dart';
 import '../../../shared/component/green_button.dart';
+import '../../../shared/function/validInput.dart';
 
 class EditCoupon extends GetView<CouponsController> {
   CouponsItems? couponsItems;
@@ -65,15 +66,22 @@ class EditCoupon extends GetView<CouponsController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
-                      controller: controller.editCouponCode,
-                      obcure: false,
-                      label: "Coupon Code".tr),
+                    controller: controller.editCouponCode,
+                    obcure: false,
+                    label: "Coupon Code".tr,
+                    validate: ((p0) {
+                      return validInput(p0!, 1, 10, "number");
+                    }),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
                     controller: controller.editcouponType,
                     type: TextInputType.number,
+                    validate: ((p0) {
+                      return validInput(p0!, 1, 10, "number");
+                    }),
                     obcure: false,
                     label: "typec".tr,
                     //suffix: MdiIcons.arrowDownBold,
@@ -167,10 +175,14 @@ class EditCoupon extends GetView<CouponsController> {
                   child: Row(
                     children: [
                       MySmallTextField(
-                          controller: controller.editDiscount,
-                          type: TextInputType.number,
-                          obcure: false,
-                          label: "Discount".tr),
+                        controller: controller.editDiscount,
+                        type: TextInputType.number,
+                        obcure: false,
+                        label: "Discount".tr,
+                        validate: ((p0) {
+                          return validInput(p0!, 1, 10, "number");
+                        }),
+                      ),
                       SizedBox(
                         width: 4.w,
                       ),

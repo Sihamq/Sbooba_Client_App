@@ -4,6 +4,7 @@ class OrderController extends GetxController {
   List listItems = ["ALL", "Pending", "Accept"];
   int? selected = 0;
   bool isLoading = false;
+  List orderList = [];
 
   getSelected(x) {
     selected = x;

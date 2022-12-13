@@ -108,10 +108,11 @@ Map<String, String> ar = {
   "Bank Routing Numbe": "توجيه البنك",
   "Bank Acount Number": "رقم الحساب البنكي",
   "Save": "حفظ",
-  "Large": "كبير",
+  "large": "كبير",
   "Calories": "سعرات حراريه  ",
   "Description/Ingredient": " الوصف/المكونات بالعربية",
-  "Tags": "Tags",
+  "Tags": "شعارات",
+  "tags": "شعارات",
   "Published": "نشر",
   "Featured": "متميز",
   "Edit": "Edit",
@@ -213,7 +214,7 @@ Map<String, String> ar = {
   "phoneistaken": "رقم الهاتف مستخدم",
   "Shopnameistaken": "اسم المتجر مستخدم",
   "commericalistaken": "رقم السجل التجاري مستخدم",
-  "nocoupons": "!لا كوبونات حاليا",
+  "nocoupons": "لا كوبونات حاليا!",
   "noproduct": "لا منتجات حاليا",
   "deletec": "هل تريد بالفعل حذف الكوبون؟",
   "deletep": "هل تريد بالفعل حذف المنتج؟",
@@ -227,5 +228,7 @@ Map<String, String> ar = {
   "kind": "حدد نوع المنتج",
   "Editc": "تعديل الكوبون",
   "creatc": "تم اضافة كوبون جديد بنجاح",
-  "typec": "نوع الكوبون"
+  "typec": "نوع الكوبون",
+  "price": "السعر ",
+  "noorder": "لا طلبات حاليا!"
 };

@@ -35,15 +35,6 @@ class MyApp extends StatelessWidget {
     LanguageController languageController = Get.put(LanguageController());
     return Sizer(
       builder: (context, orientation, deviceType) => GetMaterialApp(
-        builder: (context, child) => ResponsiveWrapper.builder(
-          ClampingScrollWrapper.builder(context, child!),
-          breakpoints: const [
-            ResponsiveBreakpoint.resize(480, name: MOBILE),
-            ResponsiveBreakpoint.autoScale(800, name: TABLET),
-            ResponsiveBreakpoint.resize(1000, name: DESKTOP),
-            ResponsiveBreakpoint.autoScale(1700, name: 'XL'),
-          ],
-        ),
         translations: Translation(),
         locale: languageController.language,
         theme: ThemeData(

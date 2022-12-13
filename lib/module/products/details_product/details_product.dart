@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/details_product/widgets/details_container.dart';
 import 'package:sboba_app_client/module/products/details_product/widgets/image_container.dart';
@@ -9,7 +10,8 @@ import '../product_controller.dart';
 
 class DetailsProduct extends StatelessWidget {
   int? index;
-  DetailsProduct({super.key, this.index});
+  ShowItem? showItem;
+  DetailsProduct({super.key, this.index, this.showItem});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class DetailsProduct extends StatelessWidget {
               ImageContainer(),
               DetailsContainer(
                 index: index,
+                showItem: showItem,
               ),
             ]),
           ),

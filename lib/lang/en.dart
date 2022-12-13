@@ -112,7 +112,7 @@ Map<String, String> en = {
   "Bank Routing Numbe": "Bank Routing Number",
   "Bank Acount Number": "Bank Acount Number",
   "Save": "Save",
-  "Large": "Large",
+  "large": "Large",
   "Calories": "  Calories  ",
   "Description/Ingredient": "  Description/Ingredient  ",
   "Tags": " Tags ",
@@ -233,5 +233,8 @@ Map<String, String> en = {
   "kind": "Choose kind of product",
   "Editc": "Edit Coupon",
   "creatc": "New Coupon Added Successfully",
-  "typec": "Coupon Type"
+  "typec": "Coupon Type",
+  "tags": "Tags",
+  "price": "Price",
+  "noorder": "No Order Now !"
 };

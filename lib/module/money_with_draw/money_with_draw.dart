@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/money_with_draw/widgets/add_withDraw.dart';
 import 'package:sboba_app_client/module/money_with_draw/widgets/money_card.dart';
-import 'package:sboba_app_client/module/products/widget/add_button.dart';
 import 'package:sizer/sizer.dart';
 
 import '../my_colors.dart';
 import '../products/widget/adding_container.dart';
-import '../ticket/widget/ticket_card.dart';
 
 class MoneyWithDraw extends StatelessWidget {
   MoneyWithDraw({super.key});

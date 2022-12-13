@@ -238,8 +238,8 @@ class ProductController extends GetxController
     if (formKey.currentState!.validate()) {
       try {
         var res = await Productdata().addNewProduct(
-            name_ar: productNameEnglishController.text,
-            name_en: productNameArabicController.text,
+            name_ar: productNameArabicController.text,
+            name_en: productNameEnglishController.text,
             description_ar: productDescriptionArabicController.text,
             description_en: productDescriptionEnglishController.text,
             category_id: cat_id,

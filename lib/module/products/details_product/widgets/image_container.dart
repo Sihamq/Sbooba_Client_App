@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
@@ -38,23 +40,56 @@ class ImageContainer extends GetView<ProductController> {
                         ))),
                       )),
                 ),
+                // Positioned(
+                //   bottom: 45.w,
+                //   left: 2.h,
+                //   child: InkWell(
+                //     onTap: () => {
+                //       // controller.getProducts().then(
+                //       //       (value) => navigator!.pop(),
+                //       //     ),
+
+                //       // controller.getProducts().then(
+                //       //       (value) =>
+                //       navigator!.pop(),
+                //       //  ),
+                //     },
+                //     child: Container(
+                //       height: 12.h,
+                //       width: 4.h,
+                //       color: Colors.transparent,
+                //       child: Icon(
+                //         CashHelper.getData("lang") == "ar"
+                //             ? Icons.arrow_forward_ios
+                //             : Icons.arrow_back_ios,
+                //         color: myOrange,
+                //         size: 20.sp,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Positioned(
                   bottom: 45.w,
-                  left: 2.h,
+                  right: 2.h,
                   child: InkWell(
                     onTap: () => {
-                      controller.getProducts().then(
-                            (value) => navigator!.pop(),
-                          ),
+                      // controller.getProducts().then(
+                      //       (value) => navigator!.pop(),
+                      //     ),
+
+                      // controller.getProducts().then(
+                      //       (value) => navigator!.pop(),
+                      //     ),
+                      navigator!.pop(),
                     },
                     child: Container(
                       height: 12.h,
-                      // width: 100,
+                      width: 4.h,
                       color: Colors.transparent,
                       child: Icon(
-                        CashHelper.getData("lang") == "ar"
-                            ? Icons.arrow_forward_ios
-                            : Icons.arrow_back_ios,
+                        CashHelper.getData("lang") == "en"
+                            ? Icons.arrow_back_ios
+                            : Icons.arrow_forward_ios,
                         color: myOrange,
                         size: 20.sp,
                       ),

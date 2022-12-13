@@ -98,7 +98,10 @@ class AddProduct extends GetView<ProductController> {
                         validate: (p0) => validInput(p0!, 3, 500, "name"),
                       )),
                   Padding(
-                    padding: EdgeInsets.all(.5.h),
+                    padding: EdgeInsets.only(
+                      top: .5.h,
+                      bottom: .5.h,
+                    ),
                     child: Row(
                       children: [
                         MySmallTextField(
@@ -130,7 +133,10 @@ class AddProduct extends GetView<ProductController> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(.5.h),
+                    padding: EdgeInsets.only(
+                      top: .5.h,
+                      bottom: .5.h,
+                    ),
                     child: Row(
                       children: [
                         MySmallTextField(

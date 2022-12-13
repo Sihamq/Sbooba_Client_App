@@ -5,7 +5,6 @@ import 'package:sizer/sizer.dart';
 import '../../my_colors.dart';
 import '../../shared/component/add_text_formfield.dart';
 import '../../shared/component/green_button.dart';
-import '../../shared/component/small_text_field.dart';
 
 class PaymentInfo extends StatelessWidget {
   var bankName = TextEditingController();

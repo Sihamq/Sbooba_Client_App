@@ -11,6 +11,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../my_colors.dart';
 import '../../../shared/component/green_button.dart';
+import '../../../shared/function/validInput.dart';
 
 class CustomTabView extends StatelessWidget {
   const CustomTabView({super.key});
@@ -49,16 +50,24 @@ class CustomTabView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(1.h),
               child: MyAddTextField(
-                  controller: controller.couponCode,
-                  obcure: false,
-                  label: "Coupon Code".tr),
+                controller: controller.couponCode,
+                obcure: false,
+                label: "Coupon Code".tr,
+                validate: ((p0) {
+                  return validInput(p0!, 1, 10, "number");
+                }),
+              ),
             ),
             Padding(
               padding: EdgeInsets.all(1.h),
               child: MyAddTextField(
-                  controller: controller.couponType,
-                  obcure: false,
-                  label: "typec".tr),
+                controller: controller.couponType,
+                obcure: false,
+                label: "typec".tr,
+                validate: ((p0) {
+                  return validInput(p0!, 1, 10, "number");
+                }),
+              ),
             ),
             // DecoratedBox(
             //                   decoration: BoxDecoration(
@@ -138,6 +147,9 @@ class CustomTabView extends StatelessWidget {
                 obcure: false,
                 label: "Discount Type".tr,
                 suffix: MdiIcons.arrowDownBold,
+                validate: ((p0) {
+                  return validInput(p0!, 1, 10, "number");
+                }),
                 suffixPressed: () {},
               ),
             ),
@@ -146,10 +158,14 @@ class CustomTabView extends StatelessWidget {
               child: Row(
                 children: [
                   MySmallTextField(
-                      controller: controller.discount,
-                      type: TextInputType.number,
-                      obcure: false,
-                      label: "Discount".tr),
+                    controller: controller.discount,
+                    type: TextInputType.number,
+                    obcure: false,
+                    label: "Discount".tr,
+                    validate: ((p0) {
+                      return validInput(p0!, 1, 10, "number");
+                    }),
+                  ),
                   SizedBox(
                     width: 4.w,
                   ),

@@ -69,7 +69,7 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                     // SizedBox(
                     //   width: 10.5.h,
                     // ),
-                    Spacer(),
+                    const Spacer(),
                     InkWell(
                         onTap: () {
                           Get.to(() => EditCoupon(
@@ -99,7 +99,7 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                   ],
                 ),
                 SizedBox(
-                  height: 2.w,
+                  height: 4.w,
                 ),
                 Row(
                   children: [
@@ -108,11 +108,14 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     SizedBox(
-                      width: 1.w,
+                      width: 2.w,
                     ),
                     Text(
                       "${controller.couponItem[index!].discount}",
                       style: TextStyle(color: myOrange),
+                    ),
+                    SizedBox(
+                      width: 2.w,
                     ),
                     Icon(
                       MdiIcons.ticket,
@@ -121,7 +124,7 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                     )
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Wrap(
                   spacing: 1.w,
                   children: [

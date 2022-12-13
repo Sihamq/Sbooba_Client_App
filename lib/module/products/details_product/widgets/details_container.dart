@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/edit_product/edit_product_view.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
@@ -12,7 +13,8 @@ import 'package:sizer/sizer.dart';
 
 class DetailsContainer extends StatelessWidget {
   int? index;
-  DetailsContainer({super.key, this.index});
+  ShowItem? showItem;
+  DetailsContainer({super.key, this.index, this.showItem});
 
   @override
   Widget build(BuildContext context) {
@@ -44,23 +46,26 @@ class DetailsContainer extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        "details".tr,
-                        style: TextStyle(
-                            color: myGreen,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.sp),
+                      Padding(
+                        padding: EdgeInsets.all(1.h),
+                        child: Text(
+                          "details".tr,
+                          style: TextStyle(
+                              color: myGreen,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.sp),
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsets.all(1.h),
                         child: Row(
                           children: [
                             Text(
-                              CashHelper.getData("lang") == "er"
+                              CashHelper.getData("lang") == "en"
                                   ? controller.showProduct[0].name!.en!
                                   : controller.showProduct[0].name!.ar!,
                               style: TextStyle(
-                                  color: Colors.black,
+                                  color: myOrange,
                                   wordSpacing: 3,
                                   fontSize: 18.sp,
                                   fontWeight: FontWeight.bold),
@@ -69,17 +74,17 @@ class DetailsContainer extends StatelessWidget {
                               width: 12.h,
                             ),
                             Container(
-                                width: 22.w,
-                                height: 3.h,
+                                width: 30.w,
+                                height: 4.h,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
                                     color: myGreen.withOpacity(.3)),
                                 child: Center(
                                   child: Text(
-                                    "Sweets",
+                                    controller.showProduct[0].cateogryName!,
                                     style: TextStyle(
                                         color: Colors.black,
-                                        wordSpacing: 3,
+                                        // wordSpacing: 3,
                                         fontSize: 12.sp,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -88,49 +93,62 @@ class DetailsContainer extends StatelessWidget {
                         ),
                       ),
 
-                      Wrap(
-                        spacing: 3.w,
-                        children: [
-                          Text(
-                            "${100.0}SAR".tr,
-                            style: TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                fontSize: 8.sp),
-                          ),
-                          Text(
-                            "${10.0}",
-                            style: TextStyle(
-                                fontSize: 8.sp,
-                                fontWeight: FontWeight.bold,
-                                color: myGreen),
-                          ),
-                          Icon(
-                            MdiIcons.ticket,
-                            size: 2.h,
-                            color: myGreen,
-                          ),
-                          Text(
-                            "Date".tr,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 8.sp),
-                          ),
-                          Text(
-                            "${100.0}",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 8.sp),
-                          ),
-                        ],
+                      Padding(
+                        padding: EdgeInsets.all(1.h),
+                        child: Wrap(
+                          spacing: 3.w,
+                          children: [
+                            Text(
+                              "${100.0}" "SAR".tr,
+                              style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontSize: 8.sp),
+                            ),
+                            Text(
+                              "${10.0}",
+                              style: TextStyle(
+                                  fontSize: 8.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: myGreen),
+                            ),
+                            Icon(
+                              MdiIcons.ticket,
+                              size: 2.h,
+                              color: myGreen,
+                            ),
+                            Text(
+                              "Date".tr,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 8.sp),
+                            ),
+                            Text(
+                              "12-12-2022",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 8.sp),
+                            ),
+                          ],
+                        ),
                       ),
 
-                      Text(
-                        controller.showProduct[0].unitPrice.toString() +
-                            "SAR".tr,
-                        //"${140} SAR".tr,
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            color: myOrange,
-                            fontWeight: FontWeight.bold),
-                        maxLines: 3,
+                      Padding(
+                        padding: EdgeInsets.all(1.h),
+                        child: Wrap(spacing: 5.w, children: [
+                          Text(
+                            "price".tr,
+                            style: TextStyle(
+                                color: myOrange, fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            controller.showProduct[0].unitPrice.toString() +
+                                "SAR".tr,
+                            //"${140} SAR".tr,
+                            style: TextStyle(
+                                fontSize: 12.sp,
+                                color: myBlack,
+                                fontWeight: FontWeight.bold),
+                            maxLines: 3,
+                          ),
+                        ]),
                       ),
 
                       Padding(
@@ -138,7 +156,7 @@ class DetailsContainer extends StatelessWidget {
                         child: Wrap(
                           spacing: 3.w,
                           children: [
-                            Text("${1} Large".tr,
+                            Text("${1}${"large".tr}",
                                 style: TextStyle(
                                     color: Colors.black,
                                     wordSpacing: 3,
@@ -147,7 +165,8 @@ class DetailsContainer extends StatelessWidget {
                             Icon(Icons.more_vert),
                             Text(
                                 "${controller.showProduct[0].calories}" +
-                                    " Calories".tr,
+                                    "   " +
+                                    "Calories".tr,
                                 style: TextStyle(
                                     color: Colors.black,
                                     wordSpacing: 3,
@@ -156,30 +175,39 @@ class DetailsContainer extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Text("Description/Ingredient".tr,
-                          style: TextStyle(
-                              color: Colors.black,
-                              wordSpacing: 3,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold)),
-
-                      Text(
-                        CashHelper.getData("lang") == "ar"
-                            ? controller.showProduct[0].descriptionName!.ar!
-                            : controller.showProduct[0].descriptionName!.en!,
-                        //"The menu has been called “a map that encourages easy navigation between hunger and satisfaction.” Mouthwatering restaurant menu descriptions can make your clients crave your offerings and happy patrons come back many times.",
-                        style: TextStyle(
-                            color: Colors.grey[700],
-                            height: 2,
-                            fontWeight: FontWeight.bold),
-                        maxLines: 5,
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 1.h),
+                        child: Text("Description/Ingredient".tr,
+                            style: TextStyle(
+                                color: myOrange,
+                                wordSpacing: 3,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold)),
                       ),
-                      Text("Tags".tr,
+
+                      Padding(
+                        padding: EdgeInsets.all(.5.h),
+                        child: Text(
+                          CashHelper.getData("lang") == "en"
+                              ? controller.showProduct[0].descriptionName!.en!
+                              : controller.showProduct[0].descriptionName!.ar!,
+                          //"The menu has been called “a map that encourages easy navigation between hunger and satisfaction.” Mouthwatering restaurant menu descriptions can make your clients crave your offerings and happy patrons come back many times.",
                           style: TextStyle(
-                              color: Colors.black,
-                              wordSpacing: 3,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.bold)),
+                              color: Colors.grey[700],
+                              height: 2,
+                              fontWeight: FontWeight.bold),
+                          maxLines: 5,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text("tags".tr,
+                            style: TextStyle(
+                                color: myOrange,
+                                wordSpacing: 3,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold)),
+                      ),
                       Padding(
                         padding: EdgeInsets.all(1.h),
                         child: Wrap(
@@ -188,7 +216,7 @@ class DetailsContainer extends StatelessWidget {
                             Chip(
                               padding: EdgeInsets.only(left: 2.h, right: 2.h),
                               label: Text(
-                                "Tag",
+                                "Tag".tr,
                                 style: TextStyle(
                                     color: Colors.grey[500],
                                     wordSpacing: 3,
@@ -200,7 +228,7 @@ class DetailsContainer extends StatelessWidget {
                             Chip(
                               padding: EdgeInsets.only(left: 2.h, right: 2.h),
                               label: Text(
-                                "Tag",
+                                "Tag".tr,
                                 style: TextStyle(
                                     color: Colors.grey[500],
                                     wordSpacing: 3,
@@ -231,10 +259,11 @@ class DetailsContainer extends StatelessWidget {
                             padding: EdgeInsets.all(1.h),
                             child: Text(
                               "Published".tr,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: myGreen),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           CircleAvatar(
                             radius: 15,
                             backgroundColor: myGreen,
@@ -248,20 +277,10 @@ class DetailsContainer extends StatelessWidget {
                                                 size: 5.w,
                                               )
                                             : Icon(
-                                                Icons.cancel,
+                                                Icons.cancel_outlined,
                                                 size: 5.w,
                                               ))),
                           )
-                          // Switch(
-                          //       focusColor: myOrange,
-                          //       value: controller.swittch.value,
-                          //       onChanged: (value) {
-                          //         controller.changSwitch(
-                          //             controller.showProduct[index!].published);
-                          //       },
-                          //       activeColor: myOrange,
-                          //       inactiveThumbColor: Colors.grey,
-                          //     )
                         ]),
                       ),
                       SizedBox(
@@ -274,10 +293,11 @@ class DetailsContainer extends StatelessWidget {
                             padding: EdgeInsets.all(1.h),
                             child: Text(
                               "Featured".tr,
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: myGreen),
                             ),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           CircleAvatar(
                             radius: 15,
                             backgroundColor: myGreen,
@@ -291,7 +311,7 @@ class DetailsContainer extends StatelessWidget {
                                                 size: 5.w,
                                               )
                                             : Icon(
-                                                Icons.cancel,
+                                                Icons.cancel_outlined,
                                                 size: 5.w,
                                               ))),
                           )

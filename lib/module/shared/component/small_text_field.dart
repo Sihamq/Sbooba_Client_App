@@ -35,9 +35,11 @@ class MySmallTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 6.h,
+      //  height: 6.h,
       width: 41.w,
       child: TextFormField(
+        //  cursorHeight: 6.h,
+        //  minLines: 3,
         maxLines: maxline == null ? 1 : maxline,
         //  scrollPadding: EdgeInsets.all(8),
         // Added this
@@ -51,6 +53,8 @@ class MySmallTextField extends StatelessWidget {
         validator: validate,
         controller: controller,
         decoration: InputDecoration(
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.h),
             //alignLabelWithHint: true,
             floatingLabelAlignment: FloatingLabelAlignment.center,
             floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -67,12 +71,12 @@ class MySmallTextField extends StatelessWidget {
             ),
             // contentPadding: EdgeInsets.symmetric(horizontal: 6.h),
             focusedBorder: OutlineInputBorder(
-              gapPadding: 1.h,
+              //  gapPadding: 1.h,
               borderSide: const BorderSide(color: Colors.green, width: 1),
               borderRadius: BorderRadius.circular(14.0),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(25.0),
+              borderRadius: BorderRadius.circular(20.0),
               borderSide: BorderSide(
                 color: myOrange,
                 width: 2.0,

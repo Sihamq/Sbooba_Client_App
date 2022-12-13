@@ -53,24 +53,29 @@ class CouponsView extends GetView<CouponsController> {
 
           Expanded(
               child: controller.obx(
-                  (state) => ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      itemCount: controller.couponItem.length,
-                      itemBuilder: (context, index) {
-                        return HorizontalCouponExample2(
-                          index: index,
-                          couponsItems: controller.couponItem[index],
-                        );
-                      }),
-                  onEmpty:
-                      EmptyProduct(img: "assets/box.png", text: "nocoupons".tr),
-                  onLoading: SpinKitFadingCube(
-                    color: myOrange,
-                    size: 80.sp,
-                    // duration: const Duration(milliseconds: 800)
-                  ))),
+            (state) => ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                itemCount: controller.couponItem.length,
+                itemBuilder: (context, index) {
+                  return HorizontalCouponExample2(
+                    index: index,
+                    couponsItems: controller.couponItem[index],
+                  );
+                }),
+            onEmpty: EmptyProduct(img: "assets/box.png", text: "nocoupons".tr),
+            onLoading: SpinKitFadingCube(
+              color: myOrange,
+              size: 80.sp,
+              // duration: const Duration(milliseconds: 800)
+            ),
+            onError: (error) => SpinKitFadingCube(
+              color: myOrange,
+              size: 80.sp,
+              // duration: const Duration(milliseconds: 800)
+            ),
+          )),
 
           SizedBox(
             height: 1.h,

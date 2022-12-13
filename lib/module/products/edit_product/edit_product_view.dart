@@ -98,7 +98,8 @@ class EditProduct extends GetView<ProductController> {
                       label: "Ingredient".tr),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(1.h),
+                  padding:
+                      EdgeInsets.only(top: .5.h, bottom: .5.h, right: .5.h),
                   child: Row(
                     children: [
                       MySmallTextField(
@@ -130,7 +131,8 @@ class EditProduct extends GetView<ProductController> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(1.h),
+                  padding:
+                      EdgeInsets.only(top: .5.h, bottom: .5.h, right: .5.h),
                   child: Row(
                     children: [
                       MySmallTextField(
@@ -341,7 +343,7 @@ class EditProduct extends GetView<ProductController> {
                             child: Text(
                               "${"start".tr}       ${controller.startDate.value}",
                               style: TextStyle(
-                                  color: myBlack,
+                                  color: myGreen,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12.sp),
                             ),
@@ -361,7 +363,7 @@ class EditProduct extends GetView<ProductController> {
                             child: Text(
                               "end".tr + "    ${controller.endDate.value}",
                               style: TextStyle(
-                                  color: myBlack,
+                                  color: myGreen,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 12.sp),
                             ),

@@ -10,28 +10,31 @@ class EmptyProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 50.h,
-            child: Image(
-              image: AssetImage(img!),
-              fit: BoxFit.cover,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 50.h,
+              child: Image(
+                image: AssetImage(img!),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(1.h),
-            child: Text(
-              text!,
-              style: TextStyle(
-                  color: myOrange,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.sp),
+            Padding(
+              padding: EdgeInsets.all(1.h),
+              child: Text(
+                text!,
+                style: TextStyle(
+                    color: myOrange,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.sp),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

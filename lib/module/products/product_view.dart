@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sboba_app_client/module/products/add_product/add_product_view.dart';
@@ -98,15 +99,20 @@ class ProductView extends GetView<ProductController> {
                     mainAxisSpacing: 5,
                     crossAxisSpacing: 3),
                 itemBuilder: ((context, index) => InkWell(
-                    onTap: (() => {
-                          controller
-                              .showProducst(controller.productItem[index].id)
+                    onTap: (() async => {
+                          await showDialog(
+                                  context: context,
+                                  builder: (context) => FutureProgressDialog(
+                                      progress: SpinKitDualRing(
+                                        color: myOrange,
+                                      ),
+                                      controller.showProducst(
+                                          controller.productItem[index].id)))
                               .then((value) => {
                                     Get.to(() => DetailsProduct(
                                           index: index,
-                                        )),
-                                    print("index is ${index}")
-                                  })
+                                        ))
+                                  }),
                         }),
                     child: MealCard(
                       index: index,

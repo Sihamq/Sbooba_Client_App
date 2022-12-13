@@ -57,6 +57,7 @@ dependencies:
   slide_popup_dialog_null_safety: ^1.0.0
   pretty_dio_logger: ^1.1.1
   responsive_framework:
+  future_progress_dialog: ^0.2.1
   
 
   file_picker: 

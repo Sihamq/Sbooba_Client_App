@@ -11,6 +11,7 @@ class AddCoupons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         iconTheme: IconThemeData(color: myBlack),
         title: Text(
@@ -20,7 +21,7 @@ class AddCoupons extends StatelessWidget {
         backgroundColor: myWhite,
         elevation: 0,
       ),
-      body: CustomTabBar(),
+      body: const CustomTabBar(),
     );
   }
 }

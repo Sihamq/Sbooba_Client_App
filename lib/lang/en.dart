@@ -130,7 +130,7 @@ Map<String, String> en = {
   "Discount Date Rang": "Discount Date Rang",
   "Minimum Shopping": "Minimum Shopping",
   "Add Coupons": "Add Coupons",
-  "Money With Draw": "Money With Draw",
+  "MoneyWithDraw": "Money With Draw",
   "Add with draw": "Add with draw",
   "Subject": "Subject",
   "Create a Ticket": "Create a Ticket",
@@ -236,5 +236,8 @@ Map<String, String> en = {
   "typec": "Coupon Type",
   "tags": "Tags",
   "price": "Price",
-  "noorder": "No Order Now !"
+  "noorder": "No Order Now !",
+  "nonotification": "No Notifications Now !",
+  "upprofile": "Your profile has been updated successfully",
+  "updd": "Please make sure to enter the gender again.",
 };

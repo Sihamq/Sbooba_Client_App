@@ -24,6 +24,7 @@ class AddProduct extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
           iconTheme: IconThemeData(color: myBlack),
@@ -36,6 +37,7 @@ class AddProduct extends GetView<ProductController> {
           backgroundColor: myWhite),
       body: GetBuilder<ProductController>(
         builder: (controller) => SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.all(2.h),
             child: Form(

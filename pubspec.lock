@@ -574,13 +574,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.4"
-  responsive_framework:
-    dependency: "direct main"
-    description:
-      name: responsive_framework
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   rive:
     dependency: transitive
     description:
@@ -658,13 +651,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.15"
-  skeletons:
-    dependency: "direct main"
-    description:
-      name: skeletons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   sky_engine:
     dependency: transitive
     description: flutter

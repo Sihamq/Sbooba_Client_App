@@ -36,10 +36,10 @@ class CustomTabView extends StatelessWidget {
                   Center(
                     child: Text(
                       "Product".tr,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   InkWell(
                     child: Icon(Icons.arrow_right),
                     onTap: () {},
@@ -61,6 +61,7 @@ class CustomTabView extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(1.h),
               child: MyAddTextField(
+                type: TextInputType.number,
                 controller: controller.couponType,
                 obcure: false,
                 label: "typec".tr,
@@ -172,7 +173,7 @@ class CustomTabView extends StatelessWidget {
                   Text(
                     "Discount Date Rang".tr,
                   ),
-                  DateContainer(),
+                  const DateContainer(),
                 ],
               ),
             ),

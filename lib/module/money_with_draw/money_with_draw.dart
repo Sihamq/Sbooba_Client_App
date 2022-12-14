@@ -18,7 +18,7 @@ class MoneyWithDraw extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: myBlack),
         title: Text(
-          "Money With Draw".tr,
+          "MoneyWithDraw".tr,
           style: TextStyle(color: myBlack, fontWeight: FontWeight.bold),
         ),
         backgroundColor: myWhite,
@@ -61,6 +61,5 @@ class MoneyWithDraw extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

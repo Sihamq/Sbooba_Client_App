@@ -2,20 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:sboba_app_client/module/products/add_product/add_product_view.dart';
 import 'package:sboba_app_client/module/products/details_product/details_product.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
-import 'package:sboba_app_client/module/products/widget/add_button.dart';
 import 'package:sboba_app_client/module/products/widget/adding_container.dart';
 import 'package:sboba_app_client/module/shared/component/empty_screen.dart';
 import 'package:sboba_app_client/module/products/widget/meal_type_card.dart';
 import 'package:sboba_app_client/module/products/widget/product_cateogry.dart';
 import 'package:sizer/sizer.dart';
-import 'package:skeletons/skeletons.dart';
 
 import '../my_colors.dart';
-import '../order/widgets/grid_view.dart';
 
 class ProductView extends GetView<ProductController> {
   const ProductView({super.key});
@@ -94,10 +90,10 @@ class ProductView extends GetView<ProductController> {
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    childAspectRatio: 2 / 2,
+                    childAspectRatio: 3 / 4,
                     maxCrossAxisExtent: 320,
                     mainAxisSpacing: 5,
-                    crossAxisSpacing: 3),
+                    crossAxisSpacing: 5),
                 itemBuilder: ((context, index) => InkWell(
                     onTap: (() async => {
                           await showDialog(
@@ -137,6 +133,9 @@ class ProductView extends GetView<ProductController> {
             ),
           ),
         ),
+        SizedBox(
+          height: 5.h,
+        )
       ]),
     );
   }

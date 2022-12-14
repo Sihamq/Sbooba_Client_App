@@ -21,6 +21,7 @@ class DetailsProduct extends StatelessWidget {
         backgroundColor: myGreen,
         body: SafeArea(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(//alignment: AlignmentDirectional.bottomEnd,
                 children: [
               ImageContainer(),

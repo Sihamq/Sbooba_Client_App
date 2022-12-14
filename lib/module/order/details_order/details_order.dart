@@ -59,7 +59,7 @@ class DetailsOrder extends StatelessWidget {
             Padding(
               padding:
                   EdgeInsets.only(top: 1.h, bottom: 1.h, left: 3.h, right: 3.h),
-              child: MySeparator(),
+              child: const MySeparator(),
             ),
             ClientDetails(
               apartNo: "apartment",

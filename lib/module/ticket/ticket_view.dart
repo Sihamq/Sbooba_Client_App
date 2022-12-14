@@ -36,7 +36,7 @@ class Ticket extends StatelessWidget {
             label: "Tickets ".tr,
             noOfPro: 5,
             onTap: (() {
-              Get.to(() => AddProduct());
+              //Get.to(() => AddProduct());
             }),
           ),
           Expanded(

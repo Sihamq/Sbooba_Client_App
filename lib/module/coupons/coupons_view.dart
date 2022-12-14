@@ -7,7 +7,6 @@ import 'package:sboba_app_client/module/coupons/widget/coupon_container.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/shared/component/empty_screen.dart';
 import 'package:sizer/sizer.dart';
-import 'package:skeletons/skeletons.dart';
 
 import '../products/widget/adding_container.dart';
 

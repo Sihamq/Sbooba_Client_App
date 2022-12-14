@@ -12,7 +12,6 @@ import 'package:sboba_app_client/module/edit_profile/widgets/gender.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 
 import 'package:sizer/sizer.dart';
-import 'package:skeletons/skeletons.dart';
 
 import '../shared/component/custom_text_field.dart';
 import '../shared/component/green_button.dart';
@@ -32,7 +31,7 @@ class EditAccount extends StatelessWidget {
           appBar: AppBar(
             title: Text(
               "Edit Profile".tr,
-              style: TextStyle(color: myGreen),
+              style: TextStyle(color: myGreen, fontWeight: FontWeight.bold),
             ),
             backgroundColor: Colors.grey[50],
             elevation: 0,
@@ -42,6 +41,7 @@ class EditAccount extends StatelessWidget {
               ? Form(
                   key: controller.formKey,
                   child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
                     child: Padding(
                         padding: EdgeInsets.only(
                           top: .2.h,
@@ -49,15 +49,15 @@ class EditAccount extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: EdgeInsets.all(2.h),
-                                child: Center(
-                                  child: Text("Edit Account".tr,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 22.sp)),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: EdgeInsets.all(2.h),
+                              //   child: Center(
+                              //     child: Text("Edit Account".tr,
+                              //         style: TextStyle(
+                              //             fontWeight: FontWeight.bold,
+                              //             fontSize: 22.sp)),
+                              //   ),
+                              // ),
                               Center(
                                 child: InkWell(
                                   onTap: () {
@@ -207,18 +207,18 @@ class EditAccount extends StatelessWidget {
                                   prefix: Icons.file_copy,
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    left: 3.h, right: 3.h, top: 1.w),
-                                child: Text(
-                                  "By Registering you agree to our terms and condition"
-                                      .tr,
-                                  style: TextStyle(
-                                      fontSize: 10.sp,
-                                      color: myOrange,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: EdgeInsets.only(
+                              //       left: 3.h, right: 3.h, top: 1.w),
+                              //   child: Text(
+                              //     "By Registering you agree to our terms and condition"
+                              //         .tr,
+                              //     style: TextStyle(
+                              //         fontSize: 10.sp,
+                              //         color: myOrange,
+                              //         fontWeight: FontWeight.bold),
+                              //   ),
+                              // ),
 
                               Padding(
                                   padding: EdgeInsets.only(

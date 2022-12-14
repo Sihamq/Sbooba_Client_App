@@ -15,6 +15,7 @@ class DateContainer extends GetView<ProductController> {
 
   @override
   Widget build(BuildContext context) {
+    //Get.put(Coupo)
     return Padding(
         padding: EdgeInsets.all(1.h),
         child: Container(
@@ -37,6 +38,8 @@ class DateContainer extends GetView<ProductController> {
                   () => Column(
                     children: [
                       SfDateRangePicker(
+                        navigationDirection:
+                            DateRangePickerNavigationDirection.vertical,
                         controller: controller.dateController.value,
                         selectionMode: DateRangePickerSelectionMode.range,
                         onSelectionChanged: controller.selectionChanged,

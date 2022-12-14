@@ -1,8 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:responsive_framework/responsive_framework.dart';
-import 'package:responsive_framework/responsive_wrapper.dart';
+
 import 'package:sboba_app_client/lang/lang_controller.dart';
 import 'package:sboba_app_client/lang/translation.dart';
 import 'package:sboba_app_client/module/home_screen/home_binding.dart';

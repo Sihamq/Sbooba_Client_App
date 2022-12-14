@@ -128,7 +128,7 @@ Map<String, String> ar = {
   "Maximum Discount Amount": "الحد الاقصى للخصم",
   "Minimum Shopping": "الحد الادنى للتسوق",
   "Add Coupons": "Add Coupons",
-  "Money With Draw": "المال مع السحب",
+  "MoneyWithDraw": "المال مع السحب",
   "Add with draw": "اضافة مع  السحب",
   "Subject": "الموضوع",
   "Create a Ticket": "انشاء بطاقه",
@@ -230,5 +230,8 @@ Map<String, String> ar = {
   "creatc": "تم اضافة كوبون جديد بنجاح",
   "typec": "نوع الكوبون",
   "price": "السعر ",
-  "noorder": "لا طلبات حاليا!"
+  "noorder": "لا طلبات حاليا!",
+  "nonotification": "لا تنبيهات حاليا!",
+  "upprofile": "تم تحديث ملفك الشخصي بنجاح",
+  "updd": "الرجاء التأكد من ادخال الجنس مرة اخرى",
 };

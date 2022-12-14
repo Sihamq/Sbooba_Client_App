@@ -40,8 +40,10 @@ class ProfileController extends GetxController {
   }
 
   int? gender = 0;
+  int? genterTo;
   changeGender(value) {
     gender = value;
+    genterTo = 1;
     update();
   }
 
@@ -68,40 +70,50 @@ class ProfileController extends GetxController {
 
   /////////////////////update profile////////////////////////////////
   updateProfileInformation(context) async {
-    if (formKey.currentState!.validate()) {
-      try {
-        isLoading = true;
-        var res = await ProfileData().updateData(
-            name: editName.text,
-            email: editEmail.text,
-            shopname: editShopName.text,
-            shopAdress: editShopAdress.text,
-            phone: editPhone.text,
-            gender: gender,
-            commercial_no: editCommerical.text,
-            cityId: 1,
-            latitude: 0,
-            longitude: 0);
-        if (res["status"] == 200) {
-          CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.success,
-              context: context,
-              describe: "",
-              mainTitle: "Sucessfully update your profile",
-              subTitle: " Please Login again😊",
-              btOnpressed: () =>
-                  Get.off(LoginScreen(), binding: LoginBinding()));
-          update();
-        } else {
-          showSnakBarMessage(msg: "Failed Updating", color: Colors.red[900]);
+    if (genterTo == 1) {
+      if (formKey.currentState!.validate()) {
+        try {
+          isLoading = true;
+          var res = await ProfileData().updateData(
+              name: editName.text,
+              email: editEmail.text,
+              shopname: editShopName.text,
+              shopAdress: editShopAdress.text,
+              phone: editPhone.text,
+              gender: gender,
+              commercial_no: editCommerical.text,
+              cityId: 1,
+              latitude: 0,
+              longitude: 0);
+          if (res["status"] == 200) {
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.success,
+                context: context,
+                describe: "",
+                mainTitle: "",
+                subTitle: "upprofile".tr,
+                btOnpressed: () =>
+                    Get.off(LoginScreen(), binding: LoginBinding()));
+            update();
+          } else {
+            showSnakBarMessage(msg: "Failed Updating", color: Colors.red[900]);
 
+            isLoading = false;
+            update();
+          }
+        } catch (e) {
           isLoading = false;
-          update();
+          print("something error ${e.toString()}");
         }
-      } catch (e) {
-        isLoading = false;
-        print("something error ${e.toString()}");
       }
+    } else {
+      CustomeAwesomeDialog().AwesomeDialogHeader(
+          DialogType: DialogType.warning,
+          context: context,
+          describe: "",
+          mainTitle: "",
+          subTitle: "updd".tr,
+          btOnpressed: () => {});
     }
   }
 }

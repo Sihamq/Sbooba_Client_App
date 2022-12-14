@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';

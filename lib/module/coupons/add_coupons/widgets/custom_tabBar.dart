@@ -33,7 +33,7 @@ class CustomTabBar extends StatelessWidget {
                       alignment: Alignment.center,
                       child: Text(
                         "Product Base".tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -60,7 +60,7 @@ class CustomTabBar extends StatelessWidget {
               ]),
           const Expanded(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(8.0),
             child:
                 TabBarView(children: [CustomTabView(), CustomTabOrderView()]),
           )),

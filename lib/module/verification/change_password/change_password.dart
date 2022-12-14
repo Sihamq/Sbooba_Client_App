@@ -22,11 +22,11 @@ class ChangePassword extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         actions: [
-          InkWell(
-              onTap: (() {
-                navigator!.pop();
-              }),
-              child: ArrowContainer()),
+          // InkWell(
+          //     onTap: (() {
+          //       navigator!.pop();
+          //     }),
+          //     child: ArrowContainer()),
         ],
       ),
 

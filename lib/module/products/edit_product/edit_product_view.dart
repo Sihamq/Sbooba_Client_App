@@ -1,16 +1,11 @@
-import 'dart:io';
-
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/add_image.dart';
-import 'package:sboba_app_client/module/products/add_product/widgets/custom_radio_buttons.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/date_container.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
-import 'package:sboba_app_client/module/shared/component/custom_text_field.dart';
 import 'package:sboba_app_client/module/shared/component/green_button.dart';
 import 'package:sboba_app_client/module/shared/component/small_text_field.dart';
 import 'package:sboba_app_client/module/shared/function/validInput.dart';
@@ -101,6 +96,8 @@ class EditProduct extends GetView<ProductController> {
                   padding:
                       EdgeInsets.only(top: .5.h, bottom: .5.h, right: .5.h),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       MySmallTextField(
                           type: TextInputType.number,
@@ -134,6 +131,8 @@ class EditProduct extends GetView<ProductController> {
                   padding:
                       EdgeInsets.only(top: .5.h, bottom: .5.h, right: .5.h),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       MySmallTextField(
                         type: TextInputType.number,

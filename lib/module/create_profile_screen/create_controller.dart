@@ -105,7 +105,7 @@ class CreateController extends GetxController {
             context: context,
             describe: "",
             mainTitle: "congra".tr,
-            subTitle: "Signup".tr,
+            subTitle: "signup".tr,
             btOnpressed: () =>
                 Get.offAll(LoginScreen(), binding: LoginBinding()),
           );

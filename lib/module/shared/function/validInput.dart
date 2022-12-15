@@ -23,7 +23,7 @@ validInput(String val, int min, int max, String type) {
   }
 
   if (val.length < min) {
-    return "${"lessthan ".tr}$min";
+    return "${"lessthan".tr}$min";
   }
 
   if (val.length > max) {

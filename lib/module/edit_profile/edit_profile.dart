@@ -198,7 +198,7 @@ class EditAccount extends StatelessWidget {
                                   onChanged: (p0) => {},
                                   labelText: "Commerical Number",
                                   validate: ((p0) {
-                                    return validInput(p0!, 3, 15, "number");
+                                    return validInput(p0!, 4, 10, "number");
                                   }),
                                   controller: controller.editCommerical,
                                   obcure: false,

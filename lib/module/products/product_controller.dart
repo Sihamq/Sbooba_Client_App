@@ -11,6 +11,7 @@ import 'package:sboba_app_client/module/products/product_binding.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
+//package:intl/src/intl/date_format.dart
 
 import '../home_screen/home_screen_view.dart';
 
@@ -261,7 +262,7 @@ class ProductController extends GetxController
             unit_price: unitPriceController.text,
             todays_deal: 1,
             unit: 1,
-            tax: 0,
+            tax: 1,
             meta_description: "test",
             meta_title: "test",
             slug: "test");
@@ -336,7 +337,7 @@ class ProductController extends GetxController
             unit_price: editUnitPriceController.text,
             todays_deal: 1,
             unit: 1,
-            tax: 0,
+            tax: 1,
             meta_description: "test",
             meta_title: "test",
             slug: "test");

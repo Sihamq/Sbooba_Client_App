@@ -1,13 +1,16 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sboba_app_client/data/models/coupons.dart';
 import 'package:sboba_app_client/module/coupons/coupons_binding.dart';
 import 'package:sboba_app_client/module/coupons/coupons_view.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../data/data_source/coupon_data/coupon_data.dart';
 import '../shared/component/awesome_dialog.dart';
+import 'package:intl/intl.dart';
 
 class CouponsController extends GetxController
     with StateMixin<List<CouponsItems>> {
@@ -30,8 +33,17 @@ class CouponsController extends GetxController
   GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
   var delete;
+  var selectedDate = DateTime.now().obs;
+  var selectedTime = TimeOfDay.now().obs;
+  var startDate, endDate;
+
+  var dateController = DateRangePickerController().obs;
   void onInit() {
     getCoupons();
+    final DateTime today = DateTime.utc(0, 0, 0);
+    startDate = "00-00-00".obs;
+    endDate = "00-00-00".obs;
+    dateController.value.selectedRange;
     super.onInit();
   }
 
@@ -50,6 +62,15 @@ class CouponsController extends GetxController
     editDiscount.text = item.discount.toString();
     editDisountType.text = item.discountType.toString();
     editcouponType.text = item.couponType.toString();
+  }
+
+  void selectionChanged(DateRangePickerSelectionChangedArgs args) {
+    startDate.value =
+        DateFormat("dd, MMMM yyyy").format(args.value.startDate).toString();
+    endDate.value = DateFormat('dd, MMMM yyyy')
+        .format(args.value.endDate ?? args.value.startDate)
+        .toString();
+    update();
   }
 
   /////////////fetching coupon//////////////////////

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sboba_app_client/data/models/coupons.dart';
 import 'package:sboba_app_client/module/coupons/coupons_controller.dart';
+import 'package:sboba_app_client/module/coupons/widget/date_coupon.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/date_container.dart';
 import 'package:sboba_app_client/module/shared/component/add_text_formfield.dart';
 import 'package:sboba_app_client/module/shared/component/small_text_field.dart';
@@ -189,10 +190,59 @@ class EditCoupon extends GetView<CouponsController> {
                       Text(
                         "Discount Date Rang".tr,
                       ),
-                      DateContainer(),
+                      DateCoupon(),
                     ],
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Obx(
+                    () => Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 100.w,
+                          height: 5.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[300]),
+                          child: Padding(
+                            padding: EdgeInsets.all(1.h),
+                            child: Text(
+                              "${"start".tr}       ${controller.startDate.value}",
+                              style: TextStyle(
+                                  color: myGreen,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.sp),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 3.h,
+                        ),
+                        Container(
+                          width: 100.w,
+                          height: 5.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[300]),
+                          child: Padding(
+                            padding: EdgeInsets.all(1.h),
+                            child: Text(
+                              "end".tr + "    ${controller.endDate.value}",
+                              style: TextStyle(
+                                  color: myGreen,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.sp),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
                 BlueButton(
                     onpress: () {
                       FocusScope.of(context).unfocus();

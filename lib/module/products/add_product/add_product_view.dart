@@ -105,6 +105,8 @@ class AddProduct extends GetView<ProductController> {
                       bottom: .5.h,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         MySmallTextField(
                             controller: controller.miniProController,
@@ -140,6 +142,8 @@ class AddProduct extends GetView<ProductController> {
                       bottom: .5.h,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         MySmallTextField(
                             type: TextInputType.number,

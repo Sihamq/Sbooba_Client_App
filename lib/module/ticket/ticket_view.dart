@@ -33,7 +33,7 @@ class Ticket extends StatelessWidget {
         children: [
           AddingContainer(
             btnTitle: "Add with draw".tr,
-            label: "Tickets ".tr,
+            label: "Tickets".tr,
             noOfPro: 5,
             onTap: (() {
               //Get.to(() => AddProduct());

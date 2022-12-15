@@ -2,12 +2,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../my_colors.dart';
 
 class MoneyCard extends StatelessWidget {
-  const MoneyCard({super.key});
+  String? text;
+  MoneyCard({super.key, this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +86,7 @@ class MoneyCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 child: Center(
                   child: Text(
-                    "Pending",
+                    text!,
                     style: TextStyle(color: myWhite, fontSize: 10.sp),
                   ),
                 ),

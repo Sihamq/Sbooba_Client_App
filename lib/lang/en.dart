@@ -240,4 +240,6 @@ Map<String, String> en = {
   "nonotification": "No Notifications Now !",
   "upprofile": "Your profile has been updated successfully",
   "updd": "Please make sure to enter the gender again.",
+  "earn": "Seller Earning",
+  "pending": "Pending"
 };

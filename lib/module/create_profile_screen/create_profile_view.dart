@@ -64,7 +64,10 @@ class CreateAccount extends StatelessWidget {
                                 child: Center(
                                     child: controller.imagee == null
                                         ? const Icon(Icons.add_a_photo)
-                                        : Image.file(controller.imagee!))),
+                                        : Image.file(
+                                            controller.imagee!,
+                                            fit: BoxFit.cover,
+                                          ))),
                           ),
                         ),
 
@@ -152,7 +155,7 @@ class CreateAccount extends StatelessWidget {
                           padding: EdgeInsets.all(1.h),
                           child: Text(
                             "shopi".tr,
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                         ),
                         Padding(

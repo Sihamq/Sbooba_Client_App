@@ -78,12 +78,17 @@ class OrderView extends StatelessWidget {
                                 mainAxisSpacing: 5,
                                 crossAxisSpacing: 10),
                         itemBuilder: ((context, index) => InkWell(
-                            onTap: (() => Get.to(() => DetailsOrder())),
+                            onTap: (() => Get.to(() => const DetailsOrder())),
                             child: const PendingCard())),
                         itemCount: 10),
                   ),
                 )
-              : EmptyProduct(img: "assets/fork.png", text: "noorder".tr),
+              : EmptyProduct(
+                  img: "assets/no1.png",
+                  text: "noorder".tr,
+                  height: 40.h,
+                  width: MediaQuery.of(context).size.width,
+                ),
         ]),
       ),
     );

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sboba_app_client">
    <application
-        android:label="sboba_app_client"
+        android:label="sbobaFamilies"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

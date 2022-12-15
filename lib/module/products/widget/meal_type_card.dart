@@ -107,7 +107,7 @@ class MealCard extends GetView<ProductController> {
                         style: TextStyle(
                             fontSize: 8.sp, fontWeight: FontWeight.bold),
                       ),
-                      Text("22-Novmber-2022",
+                      Text("22-december-2022",
                           style: TextStyle(
                               fontSize: 8.sp, fontWeight: FontWeight.bold))
                     ],

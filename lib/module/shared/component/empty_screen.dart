@@ -6,22 +6,21 @@ import 'package:sizer/sizer.dart';
 
 class EmptyProduct extends StatelessWidget {
   String? img, text;
-  EmptyProduct({super.key, this.img, this.text});
+  double? width, height;
+  EmptyProduct({super.key, this.img, this.text, this.height, this.width});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(2.h),
       child: Center(
         child: Column(
           children: [
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: 50.h,
-              child: Image(
-                image: AssetImage(img!),
-                fit: BoxFit.cover,
-              ),
+            Image(
+              height: height,
+              width: width,
+              image: AssetImage(img!),
+              fit: BoxFit.cover,
             ),
             Padding(
               padding: EdgeInsets.all(1.h),

@@ -119,6 +119,8 @@ class ProductView extends GetView<ProductController> {
             onEmpty: EmptyProduct(
               img: "assets/nopro.png",
               text: "noproduct".tr,
+              height: 35.h,
+              width: MediaQuery.of(context).size.width,
             ),
             onLoading: SpinKitFadingCube(
               // strokeWidth: 5.0,

@@ -8,8 +8,8 @@ import 'package:sizer/sizer.dart';
 import '../my_colors.dart';
 import '../products/widget/adding_container.dart';
 
-class MoneyWithDraw extends StatelessWidget {
-  MoneyWithDraw({super.key});
+class CommisionHistory extends StatelessWidget {
+  CommisionHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class MoneyWithDraw extends StatelessWidget {
       appBar: AppBar(
         iconTheme: IconThemeData(color: myBlack),
         title: Text(
-          "MoneyWithDraw".tr,
+          "Commision History".tr,
           style: TextStyle(color: myBlack, fontWeight: FontWeight.bold),
         ),
         backgroundColor: myWhite,
@@ -38,13 +38,12 @@ class MoneyWithDraw extends StatelessWidget {
             child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: EdgeInsets.all(1.h),
                     child: InkWell(
-                      child: MoneyCard(text: "pending".tr),
                       onTap: (() => showBottomSheet(
                           shape: const RoundedRectangleBorder(
                             // <-- SEE HERE
@@ -53,7 +52,8 @@ class MoneyWithDraw extends StatelessWidget {
                             ),
                           ),
                           context: context,
-                          builder: (context) => AddMoney())),
+                          builder: (context) => const AddMoney())),
+                      child: MoneyCard(text: "earn".tr),
                     ),
                   );
                 }),

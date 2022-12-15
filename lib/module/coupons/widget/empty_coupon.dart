@@ -12,10 +12,14 @@ class EmptyCoupon extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(1.h),
-            child: const Image(
-              image: AssetImage("assets/e.png"),
-              fit: BoxFit.cover,
+            padding: EdgeInsets.all(2.h),
+            child: Container(
+              height: 10.h,
+              width: 20.h,
+              child: const Image(
+                image: AssetImage("assets/noc.png"),
+                // fit: BoxFit.cover,
+              ),
             ),
           ),
           Padding(

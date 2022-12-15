@@ -35,6 +35,7 @@ class EditProduct extends GetView<ProductController> {
           backgroundColor: myWhite),
       body: GetBuilder<ProductController>(
         builder: (controller) => SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.all(2.h),
             child: Column(

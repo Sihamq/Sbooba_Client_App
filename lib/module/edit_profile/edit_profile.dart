@@ -61,7 +61,8 @@ class EditAccount extends StatelessWidget {
                               Center(
                                 child: InkWell(
                                   onTap: () {
-                                    // controller.getImageBloc(ImageSource.gallery);
+                                    controller
+                                        .getImageBloc(ImageSource.gallery);
                                   },
                                   child: Container(
                                       decoration: BoxDecoration(
@@ -70,14 +71,13 @@ class EditAccount extends StatelessWidget {
                                       ),
                                       width: 22.h,
                                       height: 15.h,
-                                      child: const Center(
-                                          child:
-                                              //controller.imagee == null
-                                              // ?
-                                              Icon(Icons.add_a_photo)
-                                          // :
-                                          // Image.file(controller.imagee!)
-                                          )),
+                                      child: Center(
+                                          child: controller.imagee == null
+                                              ? const Icon(Icons.add_a_photo)
+                                              : Image.file(
+                                                  controller.imagee!,
+                                                  fit: BoxFit.cover,
+                                                ))),
                                 ),
                               ),
 

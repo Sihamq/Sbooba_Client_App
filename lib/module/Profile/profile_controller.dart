@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/profile_data/profile_data.dart';
 import 'package:sboba_app_client/data/models/product_model.dart';
 import 'package:sboba_app_client/data/models/profile_model.dart';
@@ -65,6 +68,20 @@ class ProfileController extends GetxController {
       }
     } catch (e) {
       print("something error ${e.toString()}");
+    }
+  }
+
+  final picker = ImagePicker();
+  var pickedFile;
+  File? imagee;
+  Future getImageBloc(ImageSource src) async {
+    pickedFile = await picker.pickImage(source: src, imageQuality: 50);
+    if (pickedFile != null) {
+      imagee = File(pickedFile.path);
+      update();
+      print("image selected");
+    } else {
+      print("no image selected");
     }
   }
 

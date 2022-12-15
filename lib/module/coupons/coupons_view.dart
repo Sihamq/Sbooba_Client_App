@@ -45,7 +45,7 @@ class CouponsView extends GetView<CouponsController> {
             label: "Coupons Count".tr,
             noOfPro: controller.couponItem.length.toDouble(),
             onTap: (() {
-              Get.to(() => AddCoupons());
+              Get.to(() => const AddCoupons());
             }),
           ),
           //HorizontalCouponExample2()
@@ -63,7 +63,12 @@ class CouponsView extends GetView<CouponsController> {
                     couponsItems: controller.couponItem[index],
                   );
                 }),
-            onEmpty: EmptyProduct(img: "assets/box.png", text: "nocoupons".tr),
+            onEmpty: EmptyProduct(
+              img: "assets/noc.png",
+              text: "nocoupons".tr,
+              //  width: 100.w,
+              height: 40.h,
+            ),
             onLoading: SpinKitFadingCube(
               color: myOrange,
               size: 80.sp,

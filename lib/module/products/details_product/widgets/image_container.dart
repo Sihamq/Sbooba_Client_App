@@ -66,9 +66,9 @@ class ImageContainer extends GetView<ProductController> {
                 //     ),
                 //   ),
                 // ),
-                Positioned(
+                PositionedDirectional(
                   bottom: 45.w,
-                  right: 2.h,
+                  start: 2.h,
                   child: InkWell(
                     onTap: () => {
                       // controller.getProducts().then(
@@ -85,9 +85,11 @@ class ImageContainer extends GetView<ProductController> {
                       width: 4.h,
                       color: Colors.transparent,
                       child: Icon(
-                        CashHelper.getData("lang") == "en"
-                            ? Icons.arrow_back_ios
-                            : Icons.arrow_forward_ios,
+                        // CashHelper.getData("lang") == "ar"
+                        // ?
+                        Icons.arrow_back_ios,
+                        //Icons.arrow_forward_ios,
+                        // : Icons.arrow_back_ios,
                         color: myOrange,
                         size: 20.sp,
                       ),

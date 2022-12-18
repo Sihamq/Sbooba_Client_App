@@ -7,8 +7,6 @@ import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sizer/sizer.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-import 'package:slide_popup_dialog_null_safety/slide_popup_dialog.dart'
-    as slideDialog;
 
 class DateCoupon extends GetView<CouponsController> {
   const DateCoupon({super.key});

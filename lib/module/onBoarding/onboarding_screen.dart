@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/module/login_screen/login_screen_view.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/onBoarding/on_boarding_controller.dart';
 import 'package:sboba_app_client/module/onBoarding/onboarding_item.dart';
@@ -50,9 +51,9 @@ class OnBoardibgScreen extends StatelessWidget {
                             effect: ScrollingDotsEffect(
                               dotHeight: 15,
                               dotWidth: 15,
-                              activeDotColor: myGreen,
+                              activeDotColor: myOrange,
                               spacing: 20,
-                              dotColor: myGreen.withOpacity(.2),
+                              dotColor: myOrange.withOpacity(.2),
                             ),
 
                             // ExpandingDotsEffect(
@@ -86,7 +87,7 @@ class OnBoardibgScreen extends StatelessWidget {
                                       )),
                               onPressed: () {
                                 CashHelper.putData("onBoard", true);
-                                Get.off(() => SplashScreen());
+                                Get.off(() => LoginScreen());
                                 //  submitData(context);
                               })
                         ],

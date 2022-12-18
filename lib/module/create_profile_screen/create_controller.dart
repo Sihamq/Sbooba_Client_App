@@ -4,7 +4,7 @@ import 'dart:math';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
+//import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,21 +54,21 @@ class CreateController extends GetxController {
   }
   //var pickedFile;
 
-  FilePickerResult? result;
-  void pickFiles(mediaXtype, bool allowMultiple) async {
-    result = (await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: mediaXtype,
-      allowMultiple: allowMultiple,
-      withReadStream: true,
-      withData: true,
-    ));
-    update();
-    if (result == null) {
-    } else {
-      update();
-    }
-  }
+  // FilePickerResult? result;
+  // void pickFiles(mediaXtype, bool allowMultiple) async {
+  //   result = (await FilePicker.platform.pickFiles(
+  //     type: FileType.custom,
+  //     allowedExtensions: mediaXtype,
+  //     allowMultiple: allowMultiple,
+  //     withReadStream: true,
+  //     withData: true,
+  //   ));
+  //   update();
+  //   if (result == null) {
+  //   } else {
+  //     update();
+  //   }
+  // }
 
   ErrorSignUp? errorSignUp;
   List<String>? sellerEmail;

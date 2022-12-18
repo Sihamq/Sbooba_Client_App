@@ -35,7 +35,7 @@ class InfoCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20)),
                       elevation: 5,
                       child: Container(
-                        width: MediaQuery.of(context).size.width * .75,
+                        width: MediaQuery.of(context).size.width * .70,
                         height: 19.h,
                         decoration: BoxDecoration(
                           color: myWhite,

@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/data/data_source/auth/login_data.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+//import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:sboba_app_client/module/home_screen/home_screen_view.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_binding.dart';

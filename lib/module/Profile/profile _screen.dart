@@ -51,36 +51,13 @@ class ProfileScreen extends StatelessWidget {
                             //     end: Alignment.bottomRight),
                             ),
                       ),
-                      InfoCard()
+                    const  InfoCard()
                     ],
                   ),
-                  ProfilesCard(),
+                 const ProfilesCard(),
                 ],
               ),
-              // PositionedDirectional(
-              //   start: MediaQuery.of(context).size.width * 0.099,
-              //   // start: MediaQuery.of(context).size.width * 0.73999,
-              //   top: MediaQuery.of(context).size.width * 0.73999,
-              //   // left: MediaQuery.of(context).size.width * 0.099,
-              //   end: MediaQuery.of(context).size.width * 0.099,
-              //   child: Row(
-              //     crossAxisAlignment: CrossAxisAlignment.center,
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     //  spacing: 2.w,
-              //     children: [
-              //       TotalContainer(secondText: "totalOrder".tr),
-              //       TotalContainer(
-              //         secondText: "Total Products".tr,
-              //       ),
-              //       TotalContainer(
-              //         secondText: "sucess".tr,
-              //       ),
-              //       TotalContainer(
-              //         secondText: "canceled".tr,
-              //       )
-              //     ],
-              //   ),
-              // )
+
             ]),
           ),
         ),

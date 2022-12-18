@@ -49,18 +49,18 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   device_preview: ^1.1.0
   awesome_dialog: ^3.0.2
-  awesome_snackbar_content: ^0.1.0
+  
   flutter_spinkit: ^5.1.0
   
   cached_network_image: ^3.2.2
   syncfusion_flutter_datepicker: ^20.3.58
-  slide_popup_dialog_null_safety: ^1.0.0
+  
   pretty_dio_logger: ^1.1.1
   
   future_progress_dialog: ^0.2.1
   
 
-  file_picker: 
+  
 
 dev_dependencies:
   flutter_lints: ^2.0.0

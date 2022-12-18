@@ -241,5 +241,8 @@ Map<String, String> en = {
   "upprofile": "Your profile has been updated successfully",
   "updd": "Please make sure to enter the gender again.",
   "earn": "Seller Earning",
-  "pending": "Pending"
+  "pending": "Pending",
+  "coupon": "Select coupon type",
+  "dic": "Select discount type",
+  "choosse": "You must choose the type of coupon and discount"
 };

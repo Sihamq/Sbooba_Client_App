@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/Profile/profile%20_screen.dart';
-import 'package:sboba_app_client/module/Profile/profile_view.dart';
+
 import 'package:sboba_app_client/module/coupons/coupons_view.dart';
 import 'package:sboba_app_client/module/notification/notification_view.dart';
 import 'package:sboba_app_client/module/order/order_screen_view.dart';

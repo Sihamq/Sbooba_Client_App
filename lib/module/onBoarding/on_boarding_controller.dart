@@ -5,7 +5,7 @@ import 'package:sboba_app_client/module/onBoarding/onBoardingModel.dart';
 class OnBaordingController extends GetxController {
   List<OnBoardingModel> images = [
     OnBoardingModel(
-        image: "assets/o1.png",
+        image: "assets/o3.png",
         title: "Title one",
         body: "Description step one"),
     OnBoardingModel(
@@ -13,7 +13,7 @@ class OnBaordingController extends GetxController {
         title: "Title two",
         body: "Description step two"),
     OnBoardingModel(
-        image: "assets/o3.png",
+        image: "assets/o1.png",
         title: "Title three",
         body: "Description step three"),
   ];

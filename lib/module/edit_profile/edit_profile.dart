@@ -118,6 +118,7 @@ class EditAccount extends StatelessWidget {
                                 padding: EdgeInsets.only(
                                     bottom: 2.h, left: 2.h, right: 2.h),
                                 child: MyTextField(
+                                  type: TextInputType.phone,
                                   validate: ((p0) {
                                     return validInput(p0!, 7, 10, "phone");
                                   }),

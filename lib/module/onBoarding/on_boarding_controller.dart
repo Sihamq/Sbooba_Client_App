@@ -5,17 +5,10 @@ import 'package:sboba_app_client/module/onBoarding/onBoardingModel.dart';
 class OnBaordingController extends GetxController {
   List<OnBoardingModel> images = [
     OnBoardingModel(
-        image: "assets/o3.png",
-        title: "Title one",
-        body: "Description step one"),
+        image: "assets/o3.png", title: "passi".tr, body: "passii".tr),
+    OnBoardingModel(image: "assets/o2.png", title: "del".tr, body: "allp".tr),
     OnBoardingModel(
-        image: "assets/o2.png",
-        title: "Title two",
-        body: "Description step two"),
-    OnBoardingModel(
-        image: "assets/o1.png",
-        title: "Title three",
-        body: "Description step three"),
+        image: "assets/o1.png", title: "spread".tr, body: "spreadd".tr),
   ];
   bool isLast = false;
   var boardController = PageController();

@@ -21,6 +21,25 @@ class Productdata {
     }
   }
 
+  Future getProductByCateogry(id) async {
+    try {
+      var response = await DioHelper.getData(url: ApiLink.getProduct, option: {
+        "Authorization": "Bearer " + await CashHelper.getData("token"),
+        "X-localization": await CashHelper.getData("lang")
+      }, query: {
+        'category': id
+      });
+      if (response.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   Future showSingleProduct(id) async {
     try {
       var response =
@@ -84,7 +103,9 @@ class Productdata {
       tax,
       slug,
       meta_title,
-      meta_description}) async {
+      meta_description,
+      attachmentable,
+      image}) async {
     FormData data = FormData.fromMap({
       "name": {"ar": name_ar, "en": name_en},
       "description": {"ar": description_ar, "en": description_en},
@@ -111,6 +132,8 @@ class Productdata {
       "discount_type": discount_type,
       "discount_start_date": discount_start_date,
       "discount_end_date": discount_end_date,
+      "attachments[]": attachmentable,
+      "image": image
     });
 
     var response = await DioHelper.postData1(
@@ -142,7 +165,7 @@ class Productdata {
         return response.data;
       }
     } catch (e) {
-      print(e.toString());
+      print("error pro here....${e.toString()}");
     }
   }
 

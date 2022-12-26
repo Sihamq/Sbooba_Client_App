@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/onBoarding/onBoardingModel.dart';
 import 'package:sizer/sizer.dart';
 
@@ -11,14 +10,24 @@ class OnBoardingItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image(image: AssetImage(onBarding!.image)),
         Text(
           onBarding!.title,
-          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+          style: TextStyle(
+              fontSize: 15.sp, fontWeight: FontWeight.bold, color: myOrange),
         ),
-        Text(onBarding!.body,
-            style: TextStyle(fontSize: 12.sp, color: Colors.grey[400]))
+        Center(
+          child: Padding(
+            padding: EdgeInsets.only(left: 3.h, right: 3.h),
+            child: Text(
+              onBarding!.body,
+              style: TextStyle(fontSize: 9.sp, color: Colors.grey[400]),
+            ),
+          ),
+        )
       ],
     );
   }

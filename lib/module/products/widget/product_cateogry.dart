@@ -16,7 +16,10 @@ class ProductCateogry extends GetView<ProductController> {
     //controller.getCateogries();
     return GetBuilder<ProductController>(
       builder: (controller) => InkWell(
-        onTap: (() => controller.getSelected(x)),
+        onTap: (() {
+          controller.getProductsByCateogrries(x);
+          controller.getSelected(x);
+        }),
         child: AnimatedContainer(
           duration: const Duration(seconds: 2),
           decoration: BoxDecoration(

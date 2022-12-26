@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/lang/lang_controller.dart';
 
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sizer/sizer.dart';
@@ -15,6 +16,7 @@ class HomeScreen extends GetWidget<HomeController> {
   TabController? cont;
   Widget tabItem(String path, String label, {bool isSelected = false}) {
     Get.put(HomeController);
+    // Get.put(LanguageController());
     return AnimatedContainer(
         height: 10.h,
         width: 46.w,
@@ -51,9 +53,12 @@ class HomeScreen extends GetWidget<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    //Get.put(LanguageController());
     // Get.find();
-    return GetBuilder<HomeController>(
-      builder: (controller) => Scaffold(
+    return Obx(
+      () =>
+          // Get.put(LanguageController());
+          Scaffold(
         extendBody: true,
         backgroundColor: myWhite,
         bottomNavigationBar:
@@ -70,27 +75,29 @@ class HomeScreen extends GetWidget<HomeController> {
                 child: ClipRRect(
                     borderRadius: BorderRadius.circular(30.0),
                     child: Container(
-                      color: Colors.grey[50],
+                      color: Colors.grey[100],
                       child: DefaultTabController(
                         length: 5,
                         // onTap: ((value) => controller.changCurrentIndex(value)),
                         // controller: cont,
                         child: TabBar(
-                          onTap: ((value) =>
-                              controller.changCurrentIndex(value)),
+                          onTap: ((value) {
+                            // Get.find<LanguageController>();
+                            controller.changCurrentIndex(value);
+                          }),
                           controller: cont,
                           tabs: [
                             for (int i = 0; i < controller.icon.length; i++)
                               tabItem(
                                 controller.icon[i],
-                                controller.label[i],
-                                isSelected: i == controller.currentIndex,
+                                controller.label.value[i],
+                                isSelected: i == controller.currentIndex.value,
                               ),
                           ],
                         ),
                       ),
                     ))),
-        body: controller.list[controller.currentIndex],
+        body: controller.list[controller.currentIndex.value],
       ),
     );
   }

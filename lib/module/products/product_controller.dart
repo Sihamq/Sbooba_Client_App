@@ -1,7 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart' hide MultipartFile;
+//import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/product_data/productData.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
@@ -11,6 +11,8 @@ import 'package:sboba_app_client/module/products/product_binding.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
+import 'package:dio/src/multipart_file.dart';
 //package:intl/src/intl/date_format.dart
 
 import '../home_screen/home_screen_view.dart';
@@ -26,6 +28,8 @@ class ProductController extends GetxController
   var selectedTime = TimeOfDay.now().obs;
   Product? product;
   var productItem = <ProductItem>[].obs;
+  Product? products;
+  var productItems = <ProductItem>[].obs;
   List<CateogryItems> productCateogry = [];
   Cateogries? category;
   var dateController = DateRangePickerController().obs;
@@ -104,6 +108,20 @@ class ProductController extends GetxController
     }
   }
 
+  final picker = ImagePicker();
+  var pickedFile;
+  File? imagee;
+  Future getImageBloc(ImageSource src) async {
+    pickedFile = await picker.pickImage(source: src, imageQuality: 50);
+    if (pickedFile != null) {
+      imagee = File(pickedFile.path);
+      update();
+      print("image selected");
+    } else {
+      print("no image selected");
+    }
+  }
+
   void selectionChanged(DateRangePickerSelectionChangedArgs args) {
     print(productTagController.text);
     startDate.value =
@@ -127,6 +145,36 @@ class ProductController extends GetxController
       change(productItem.value, status: RxStatus.loading());
       isLoading = true;
       var res = await Productdata().getProduct();
+      var pro = res["data"] as List;
+      if (res["status"] == 200) {
+        isLoading = false;
+        productItem.value = pro.map((e) => ProductItem.fromJson(e)).toList();
+        change(productItem.value, status: RxStatus.success());
+        print(productItem.length);
+        if (productItem.isEmpty) {
+          change(productItem.value, status: RxStatus.empty());
+        }
+        product = Product.fromJson(res);
+        // print(product!.data![0].id);
+        // print(productItem[0]["name"]);
+        // update();
+      } else {
+        change(productItem.value, status: RxStatus.error());
+        isLoading = true;
+        // update();
+      }
+    } catch (e) {
+      change(productItem.value, status: RxStatus.error(e.toString()));
+      print("something error ${e.toString()}");
+    }
+  }
+
+  Future getProductsByCateogrries(id) async {
+    try {
+      // productItem.value = [];
+      change(productItem.value, status: RxStatus.loading());
+      isLoading = true;
+      var res = await Productdata().getProductByCateogry(id);
       var pro = res["data"] as List;
       if (res["status"] == 200) {
         isLoading = false;
@@ -236,6 +284,10 @@ class ProductController extends GetxController
 
   //////////////////////////////////store product////////////////////////
   Future storeProduct() async {
+    List y = [];
+    for (var x in imageFileList) {
+      y.add(MultipartFile.fromFileSync(x.path));
+    }
     if (formKey.currentState!.validate()) {
       try {
         var res = await Productdata().addNewProduct(
@@ -265,7 +317,9 @@ class ProductController extends GetxController
             tax: 1,
             meta_description: "test",
             meta_title: "test",
-            slug: "test");
+            slug: "test",
+            attachmentable: y,
+            image: MultipartFile.fromFileSync(imagee!.path));
         if (res["status"] == 200) {
           print(res["message"]);
           CustomeAwesomeDialog().AwesomeDialogHeader(
@@ -293,7 +347,7 @@ class ProductController extends GetxController
           print("something is error in element");
         }
       } catch (e) {
-        print("something error ${e.toString()}");
+        print("something error  in error product${e.toString()}");
       }
     }
   }

@@ -28,10 +28,11 @@ class MealCard extends GetView<ProductController> {
                 Container(
                     height: 12.h,
                     width: 100.w,
-                    child: const Image(
+                    child: Image(
                         fit: BoxFit.cover,
-                        image: AssetImage(
-                          "assets/pp.jpg",
+                        image: NetworkImage(
+                          'http://192.168.0.102/sboba_v3/storage/app/' +
+                              controller.productItem[index!].image,
                         ))),
                 Align(
                   alignment: AlignmentDirectional.topStart,
@@ -54,7 +55,7 @@ class MealCard extends GetView<ProductController> {
                   ),
                 ),
                 if (controller.productItem[index!].tax != 0)
-                  Align(
+                  const Align(
                       alignment: AlignmentDirectional.topEnd,
                       child: DiscountContainer()),
               ]),

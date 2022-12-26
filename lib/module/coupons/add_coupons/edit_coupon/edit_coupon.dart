@@ -154,11 +154,9 @@ class EditCoupon extends GetView<CouponsController> {
                           ]),
                       child: DropdownButton(
                         isExpanded: true,
-                        //style: TextStyle(color: myOrange),
                         autofocus: true,
                         dropdownColor: myWhite,
                         focusColor: myOrange,
-                        // isExpanded: true,
                         underline: const SizedBox(),
                         elevation: 2,
                         hint: Center(
@@ -280,17 +278,17 @@ class EditCoupon extends GetView<CouponsController> {
                 //                   //   },
                 //                   ),
 
-                Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: MyAddTextField(
-                    controller: controller.editDisountType,
-                    type: TextInputType.number,
-                    obcure: false,
-                    label: "Discount Type".tr,
-                    suffix: MdiIcons.arrowDownBold,
-                    suffixPressed: () {},
-                  ),
-                ),
+                // Padding(
+                //   padding: EdgeInsets.all(1.h),
+                //   child: MyAddTextField(
+                //     controller: controller.editDisountType,
+                //     type: TextInputType.number,
+                //     obcure: false,
+                //     label: "Discount Type".tr,
+                //     suffix: MdiIcons.arrowDownBold,
+                //     suffixPressed: () {},
+                //   ),
+                // ),
                 Padding(
                   padding: EdgeInsets.all(.5.h),
                   child: Row(

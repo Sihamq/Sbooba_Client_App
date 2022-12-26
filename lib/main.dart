@@ -1,4 +1,4 @@
-import 'package:device_preview/device_preview.dart';
+//import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -19,10 +19,7 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await DioHelper.init();
   await CashHelper.init();
-  runApp(DevicePreview(
-    builder: (context) => const MyApp(),
-    enabled: true,
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +31,9 @@ class MyApp extends StatelessWidget {
     LanguageController languageController = Get.put(LanguageController());
     return Sizer(
       builder: (context, orientation, deviceType) => GetMaterialApp(
+        // useInheritedMediaQuery: true,
         translations: Translation(),
+        
         locale: languageController.language,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
@@ -51,7 +50,7 @@ class MyApp extends StatelessWidget {
         initialBinding: HomeBinding(),
         debugShowCheckedModeBanner: false,
         title: 'Sboba App',
-        home: SplashScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

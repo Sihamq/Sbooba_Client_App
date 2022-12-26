@@ -7,6 +7,6 @@ class LangBinding extends Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(LanguageController());
+    Get.put(LanguageController(), permanent: true);
   }
 }

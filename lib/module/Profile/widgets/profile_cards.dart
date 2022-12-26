@@ -25,6 +25,7 @@ class ProfilesCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<LanguageController>();
     return Padding(
       padding: EdgeInsets.only(top: 1.h, left: 1.h, right: 1.h),
       child: Column(
@@ -71,11 +72,11 @@ class ProfilesCard extends StatelessWidget {
                   iconData: Icons.person,
                   text: "Edit Profile".tr,
                   onTap: (() =>
-                      Get.to(() => EditAccount(), binding: ProfileBinding()))),
+                      Get.to(() => const EditAccount(), binding: ProfileBinding()))),
               ProfileCard(
                   iconData: Icons.lock,
                   text: "Change Password".tr,
-                  onTap: (() => Get.to(() => ChangePassword()))),
+                  onTap: (() => Get.to(() => const ChangePassword()))),
             ],
           ),
           Row(
@@ -156,7 +157,7 @@ class ProfilesCard extends StatelessWidget {
                                     TextButton(
                                         onPressed: () {
                                           controller.changeLang("en");
-                                          Navigator.pop(context);
+                                          navigator!.pop();
                                         },
                                         child: Text(
                                           "English".tr,

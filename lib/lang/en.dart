@@ -244,5 +244,12 @@ Map<String, String> en = {
   "pending": "Pending",
   "coupon": "Select coupon type",
   "dic": "Select discount type",
-  "choosse": "You must choose the type of coupon and discount"
+  "choosse": "You must choose the type of coupon and discount",
+  "passi": "Find your passion",
+  "passii": "There are no limits to your passion\n dreams and ideas.",
+  "del": "Delivery services",
+  "allp": "Your project through us reaches everywhere",
+  "spread": "Requests",
+  "spreadd": "Your requests come to you",
+  "main":"Main picture of the product"
 };

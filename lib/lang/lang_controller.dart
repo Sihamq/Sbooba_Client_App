@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/module/home_screen/home_controller.dart';
 import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,6 +13,8 @@ class LanguageController extends GetxController {
     CashHelper.putData("lang", langcode);
 
     Get.updateLocale(locale);
+    Get.find<HomeController>().update();
+    update();
   }
 
   @override
@@ -29,6 +32,7 @@ class LanguageController extends GetxController {
       language = Locale(Get.deviceLocale!.languageCode);
     }
     Get.updateLocale(language!);
+    update();
 
     super.onInit();
   }

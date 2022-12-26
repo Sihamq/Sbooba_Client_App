@@ -26,12 +26,14 @@ class OnBoardibgScreen extends StatelessWidget {
           init: OnBaordingController(),
           builder: (controller) => Center(
             child: Padding(
-              padding: EdgeInsets.only(top: 26.h),
+              padding: EdgeInsets.only(top: 15.h),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Expanded(
                         child: PageView.builder(
+                            physics: const BouncingScrollPhysics(),
                             itemCount: controller.images.length,
                             controller: controller.boardController,
                             onPageChanged: ((value) =>
@@ -41,7 +43,7 @@ class OnBoardibgScreen extends StatelessWidget {
                                   onBarding: controller.images[index]);
                             })),
                     const SizedBox(
-                      height: 30,
+                      height: 20,
                     ),
                     Padding(
                       padding: EdgeInsets.all(2.h),

@@ -1,9 +1,6 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:dio/dio.dart';
 //import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,10 +9,7 @@ import 'package:sboba_app_client/data/data_source/auth/signUp_data.dart';
 import 'package:sboba_app_client/data/models/error_signup.dart';
 import 'package:sboba_app_client/module/login_screen/login_binding.dart';
 import 'package:sboba_app_client/module/login_screen/login_screen_view.dart';
-import 'package:sboba_app_client/module/my_colors.dart';
-import 'package:sboba_app_client/module/shared/component/green_button.dart';
 import 'package:sboba_app_client/module/shared/component/snack_message.dart';
-import 'package:sizer/sizer.dart';
 
 import '../shared/component/awesome_dialog.dart';
 
@@ -129,16 +123,17 @@ class CreateController extends GetxController {
         print("tags$tags");
         if (tags.isNotEmpty) {
           isLaoding = false;
-          showSnakBarMessage(msg: "emailistaken", color: Colors.red[900]);
+          showSnakBarMessage(msg: "emailistaken".tr, color: Colors.red[900]);
         } else if (tags1.isNotEmpty) {
           isLaoding = false;
-          showSnakBarMessage(msg: "phoneistaken", color: Colors.red[900]);
+          showSnakBarMessage(msg: "phoneistaken".tr, color: Colors.red[900]);
         } else if (tags2.isNotEmpty) {
           isLaoding = false;
-          showSnakBarMessage(msg: "Shopnameistaken", color: Colors.red[900]);
+          showSnakBarMessage(msg: "Shopnameistaken".tr, color: Colors.red[900]);
         } else if (tags3.isNotEmpty) {
           isLaoding = false;
-          showSnakBarMessage(msg: "commericalistaken", color: Colors.red[900]);
+          showSnakBarMessage(
+              msg: "commericalistaken".tr, color: Colors.red[900]);
         }
 
         update();

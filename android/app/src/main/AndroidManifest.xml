@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sboba_app_client">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="sbobaFamilies"
         android:name="${applicationName}"

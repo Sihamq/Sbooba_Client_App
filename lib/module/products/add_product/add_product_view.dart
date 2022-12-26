@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/add_image.dart';
@@ -44,6 +45,34 @@ class AddProduct extends GetView<ProductController> {
               key: controller.formKey,
               child: Column(
                 children: [
+                  Text(
+                    "main".tr,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: InkWell(
+                        onTap: () {
+                          controller.getImageBloc(ImageSource.gallery);
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey[300],
+                            ),
+                            width: 22.h,
+                            height: 15.h,
+                            child: Center(
+                                child: controller.imagee == null
+                                    ? const Icon(Icons.add_a_photo)
+                                    : Image.file(
+                                        controller.imagee!,
+                                        fit: BoxFit.cover,
+                                      ))),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.all(1.h),
                     child: MyAddTextField(
@@ -192,6 +221,7 @@ class AddProduct extends GetView<ProductController> {
                                     left: 2.h,
                                     right: 2.h),
                                 child: DropdownButton(
+                                  isExpanded: true,
                                   autofocus: true,
                                   dropdownColor: myWhite,
                                   focusColor: myOrange,
@@ -335,6 +365,7 @@ class AddProduct extends GetView<ProductController> {
                         type: TextInputType.number,
                         controller: controller.productDiscountController,
                         obcure: false,
+                        // validate: (p0) => p0>,
                       )
                     ]),
                   ),
@@ -388,7 +419,7 @@ class AddProduct extends GetView<ProductController> {
                   ),
                   BlueButton(
                       onpress: () async {
-                        print("stoore");
+                        // print("stoore");
                         FocusScope.of(context).unfocus();
                         await controller.storeProduct();
                       },

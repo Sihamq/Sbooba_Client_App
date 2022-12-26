@@ -69,6 +69,8 @@ class ProductItem {
     this.metaImg,
     this.metaDescription,
     this.metaKeywords,
+    this.image,
+    this.attachmentable,
   });
 
   int? id;
@@ -102,6 +104,9 @@ class ProductItem {
   String? metaDescription;
   dynamic metaKeywords;
 
+  dynamic image;
+  List<Attachmentable>? attachmentable;
+
   factory ProductItem.fromJson(Map<String, dynamic> json) => ProductItem(
         id: json["id"],
         name: json["name"],
@@ -133,6 +138,9 @@ class ProductItem {
         metaImg: json["meta_img"],
         metaDescription: json["meta_description"],
         metaKeywords: json["meta_keywords"],
+        image:  json["image"],
+        attachmentable: List<Attachmentable>.from(
+            json["attachmentable"].map((x) => Attachmentable.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -166,6 +174,49 @@ class ProductItem {
         "meta_img": metaImg,
         "meta_description": metaDescription,
         "meta_keywords": metaKeywords,
+        "image": image,
+        "attachmentable":
+            List<dynamic>.from(attachmentable!.map((x) => x.toJson())),
+      };
+}
+
+class Attachmentable {
+  Attachmentable({
+    this.id,
+    this.attachmentableType,
+    this.attachmentableId,
+    this.title,
+    this.description,
+    this.path,
+    this.createdAt,
+  });
+
+  int? id;
+  String? attachmentableType;
+  int? attachmentableId;
+  dynamic title;
+  dynamic description;
+  String? path;
+  DateTime? createdAt;
+
+  factory Attachmentable.fromJson(Map<String, dynamic> json) => Attachmentable(
+        id: json["id"],
+        attachmentableType: json["attachmentable_type"],
+        attachmentableId: json["attachmentable_id"],
+        title: json["title"],
+        description: json["description"],
+        path: json["path"],
+        createdAt: DateTime.parse(json["created_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "attachmentable_type": attachmentableType,
+        "attachmentable_id": attachmentableId,
+        "title": title,
+        "description": description,
+        "path": path,
+        "created_at": createdAt!.toIso8601String(),
       };
 }
 

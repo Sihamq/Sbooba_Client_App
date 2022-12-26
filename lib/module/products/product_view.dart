@@ -62,7 +62,7 @@ class ProductView extends GetView<ProductController> {
                         scrollDirection: Axis.horizontal,
                         shrinkWrap: true,
                         physics: const BouncingScrollPhysics(),
-                        itemCount: 5,
+                        itemCount: controller.productCateogry.length,
                         itemBuilder: (context, index) {
                           print(controller.productCateogry.length);
                           return ProductCateogry(

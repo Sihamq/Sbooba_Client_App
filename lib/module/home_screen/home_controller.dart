@@ -1,6 +1,7 @@
 //import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/lang/lang_controller.dart';
 import 'package:sboba_app_client/module/Profile/profile%20_screen.dart';
 
 import 'package:sboba_app_client/module/coupons/coupons_view.dart';
@@ -11,21 +12,16 @@ import 'package:sboba_app_client/module/products/product_view.dart';
 import '../my_colors.dart';
 
 class HomeController extends GetxController {
+  LanguageController languageController = Get.put(LanguageController());
   var list = [
     OrderView(),
-    ProductView(),
-    NotificationView(),
-    CouponsView(),
+    const ProductView(),
+    const NotificationView(),
+    const CouponsView(),
     //ProfileView(),
-    ProfileScreen()
+    const ProfileScreen()
   ];
-  var label = [
-    "order".tr,
-    "Products".tr,
-    "Notification".tr,
-    "Coupons".tr,
-    "Profile".tr
-  ];
+  var label = ["order", "Products", "Notification", "Coupons", "Profile"].obs;
   List<String> icon = [
     "assets/tracking.png",
     "assets/product.png",
@@ -33,10 +29,11 @@ class HomeController extends GetxController {
     "assets/vou.png",
     "assets/use.png",
   ];
-  int currentIndex = 0;
+  var currentIndex = 0.obs;
   TabController? tabController;
   @override
   void onInit() {
+    // Get.put(LanguageController()).update();
     super.onInit();
   }
 
@@ -51,7 +48,7 @@ class HomeController extends GetxController {
   }
 
   changCurrentIndex(index) {
-    currentIndex = index;
+    currentIndex.value = index;
     update();
   }
 }

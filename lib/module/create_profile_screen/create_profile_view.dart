@@ -33,6 +33,7 @@ class CreateAccount extends StatelessWidget {
           body: Form(
             key: controller.formKey,
             child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: Padding(
                   padding: EdgeInsets.only(
                     top: .2.h,
@@ -107,6 +108,7 @@ class CreateAccount extends StatelessWidget {
                           padding: EdgeInsets.only(
                               bottom: 2.h, left: 2.h, right: 2.h),
                           child: MyTextField(
+                            type: TextInputType.phone,
                             validate: ((p0) {
                               return validInput(p0!, 7, 10, "phone");
                             }),

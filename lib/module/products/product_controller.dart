@@ -15,10 +15,11 @@ import 'dart:io';
 import 'package:dio/src/multipart_file.dart';
 //package:intl/src/intl/date_format.dart
 
+import '../../data/models/get_product_model.dart';
 import '../home_screen/home_screen_view.dart';
 
 class ProductController extends GetxController
-    with StateMixin<List<ProductItem>> {
+    with StateMixin<List<GetProductItem>> {
   ////////////////////////////////variables/////////////////////////
   List<XFile> imageFileList = [];
 
@@ -26,10 +27,10 @@ class ProductController extends GetxController
   final ImagePicker imagePicker = ImagePicker();
   var selectedDate = DateTime.now().obs;
   var selectedTime = TimeOfDay.now().obs;
-  Product? product;
-  var productItem = <ProductItem>[].obs;
-  Product? products;
-  var productItems = <ProductItem>[].obs;
+  GetProduct? product;
+  var productItem = <GetProductItem>[].obs;
+//  Product? products;
+  // var productItems = <ProductItem>[].obs;
   List<CateogryItems> productCateogry = [];
   Cateogries? category;
   var dateController = DateRangePickerController().obs;
@@ -68,6 +69,11 @@ class ProductController extends GetxController
   int? feature;
   bool isLoading = false;
   List<ShowItem> showProduct = [];
+  List<CateogryItems> discountTypeList = [
+    CateogryItems(name: "خصم بالنسبة", id: 1),
+    CateogryItems(name: "خصم بالمبلغ", id: 2),
+  ].obs;
+
   ///////////////////////////////////////methods//////////////////////////////////////
   void onInit() {
     getCateogries();
@@ -125,8 +131,8 @@ class ProductController extends GetxController
   void selectionChanged(DateRangePickerSelectionChangedArgs args) {
     print(productTagController.text);
     startDate.value =
-        DateFormat('dd, MMMM yyyy').format(args.value.startDate).toString();
-    endDate.value = DateFormat('dd, MMMM yyyy')
+        DateFormat("yyyy-MM-dd").format(args.value.startDate).toString();
+    endDate.value = DateFormat("yyyy-MM-dd")
         .format(args.value.endDate ?? args.value.startDate)
         .toString();
     update();
@@ -148,13 +154,13 @@ class ProductController extends GetxController
       var pro = res["data"] as List;
       if (res["status"] == 200) {
         isLoading = false;
-        productItem.value = pro.map((e) => ProductItem.fromJson(e)).toList();
+        productItem.value = pro.map((e) => GetProductItem.fromJson(e)).toList();
         change(productItem.value, status: RxStatus.success());
         print(productItem.length);
         if (productItem.isEmpty) {
           change(productItem.value, status: RxStatus.empty());
         }
-        product = Product.fromJson(res);
+        product = GetProduct.fromJson(res);
         // print(product!.data![0].id);
         // print(productItem[0]["name"]);
         // update();
@@ -178,13 +184,13 @@ class ProductController extends GetxController
       var pro = res["data"] as List;
       if (res["status"] == 200) {
         isLoading = false;
-        productItem.value = pro.map((e) => ProductItem.fromJson(e)).toList();
+        productItem.value = pro.map((e) => GetProductItem.fromJson(e)).toList();
         change(productItem.value, status: RxStatus.success());
         print(productItem.length);
         if (productItem.isEmpty) {
           change(productItem.value, status: RxStatus.empty());
         }
-        product = Product.fromJson(res);
+        product = GetProduct.fromJson(res);
         // print(product!.data![0].id);
         // print(productItem[0]["name"]);
         // update();
@@ -197,6 +203,13 @@ class ProductController extends GetxController
       change(productItem.value, status: RxStatus.error(e.toString()));
       print("something error ${e.toString()}");
     }
+  }
+
+  var deleteImage = [];
+  void deleteImages(String image) {
+    deleteImage.add(image);
+    print("the delete image$deleteImage");
+    update();
   }
 
   void selectImages(context) async {
@@ -307,7 +320,7 @@ class ProductController extends GetxController
             current_stock: 1,
             discount_end_date: endDate.value,
             discount_start_date: startDate.value,
-            discount_type: 1,
+            discount_type: dis_id,
             low_stock_quantity: 1,
             stock_visibility_state: 1,
             tags: "food",
@@ -365,36 +378,51 @@ class ProductController extends GetxController
             subTitle: "enter".tr,
             btOnpressed: () => {});
       } else {
+        List y = [];
+
+        for (var x in imageFileList) {
+          y.add(MultipartFile.fromFileSync(x.path));
+        }
+
         // print("Name of${editProductNameArabicController.text}");
         var res = await Productdata().editProduct(
-            id: id,
-            name_ar: editProductNameArabicController.text,
-            name_en: editProductNameEnglishController.text,
-            description_ar: editProductDescriptionArabicController.text,
-            description_en: editProductDescriptionEnglishController.text,
-            category_id: cat_id,
-            purchase_price: editUnitPurchesController.text,
-            cash_on_delivery: 1,
-            min_qty: 1,
-            approved: 1,
-            calories: editProductCaloriesController.text,
-            featured: feature,
-            published: published,
-            discount: editProductDiscountController.text,
-            current_stock: 1,
-            discount_end_date: endDate.value,
-            discount_start_date: startDate.value,
-            discount_type: 1,
-            low_stock_quantity: 1,
-            stock_visibility_state: 1,
-            tags: "food",
-            unit_price: editUnitPriceController.text,
-            todays_deal: 1,
-            unit: 1,
-            tax: 1,
-            meta_description: "test",
-            meta_title: "test",
-            slug: "test");
+          id: id,
+          name_ar: editProductNameArabicController.text,
+          name_en: editProductNameEnglishController.text,
+          description_ar: editProductDescriptionArabicController.text,
+          description_en: editProductDescriptionEnglishController.text,
+          category_id: cat_id,
+          purchase_price: editUnitPurchesController.text,
+          cash_on_delivery: 1,
+          min_qty: 1,
+          approved: 1,
+          calories: editProductCaloriesController.text,
+          featured: feature,
+          published: published,
+          discount: editProductDiscountController.text,
+          current_stock: 1,
+          discount_end_date: // "2022-09-30",
+              endDate.value,
+
+          //"2022-09-30", //endDate.value,
+          discount_start_date: //"2022-09-30",
+              startDate.value,
+
+          //"2022-09-30", //startDate.value,
+          discount_type: 1,
+          low_stock_quantity: 1,
+          stock_visibility_state: 1,
+          tags: "food",
+          unit_price: editUnitPriceController.text,
+          todays_deal: 1,
+          unit: 1,
+          tax: 1,
+          meta_description: "test",
+          meta_title: "test",
+          slug: "test",
+          attachment_delete: deleteImage,
+          attachments: y,
+        );
         if (res["status"] == 200) {
           print(res["message"]);
           print("Name of${editProductNameArabicController.text}");
@@ -429,11 +457,20 @@ class ProductController extends GetxController
   }
 
   var catSelect;
+  var disSelected = "".obs;
   var cat_id;
+  var dis_id = 0.obs;
   void changeSelectCategory(val) {
     catSelect = val.name;
     cat_id = val.id;
     print(cat_id);
+    update();
+  }
+
+  void changeSelectDiscount(val) {
+    disSelected.value = val.name;
+    dis_id.value = val.id;
+    print(dis_id.value);
     update();
   }
 

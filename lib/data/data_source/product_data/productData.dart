@@ -133,7 +133,8 @@ class Productdata {
       "discount_start_date": discount_start_date,
       "discount_end_date": discount_end_date,
       "attachments[]": attachmentable,
-      "image": image
+      "image": image,
+      "discount_type": discount_type
     });
 
     var response = await DioHelper.postData1(
@@ -198,7 +199,9 @@ class Productdata {
       tax,
       slug,
       meta_title,
-      meta_description}) async {
+      meta_description,
+      attachment_delete,
+      attachments}) async {
     FormData data = FormData.fromMap({
       "name": {"ar": name_ar, "en": name_en},
       "description": {"ar": description_ar, "en": description_en},
@@ -225,6 +228,9 @@ class Productdata {
       "discount_type": discount_type,
       "discount_start_date": discount_start_date,
       "discount_end_date": discount_end_date,
+      "attachment_delete[]": attachment_delete,
+      "attachments[]": attachments,
+      
     });
 
     var response = await DioHelper.putDataForm(

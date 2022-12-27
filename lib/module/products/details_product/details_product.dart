@@ -24,7 +24,7 @@ class DetailsProduct extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             child: Column(//alignment: AlignmentDirectional.bottomEnd,
                 children: [
-              ImageContainer(),
+              ImageContainer(showItem: showItem),
               DetailsContainer(
                 index: index,
                 showItem: showItem,

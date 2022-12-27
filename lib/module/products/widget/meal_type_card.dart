@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/products/widget/discount_container.dart';
+import 'package:sboba_app_client/module/shared/routes/api_routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../my_colors.dart';
@@ -31,8 +32,8 @@ class MealCard extends GetView<ProductController> {
                     child: Image(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          'http://192.168.0.102/sboba_v3/storage/app/' +
-                              controller.productItem[index!].image,
+                          ApiLink.storeageImage +
+                              controller.productItem[index!].image!,
                         ))),
                 Align(
                   alignment: AlignmentDirectional.topStart,
@@ -54,10 +55,14 @@ class MealCard extends GetView<ProductController> {
                     ),
                   ),
                 ),
-                if (controller.productItem[index!].tax != 0)
-                  const Align(
-                      alignment: AlignmentDirectional.topEnd,
-                      child: DiscountContainer()),
+                if (controller.productItem[index!].discountedPrice != 0)
+                  Align(
+                    alignment: AlignmentDirectional.topEnd,
+                    child: DiscountContainer(
+                      productItem: controller.productItem[index!],
+                      index: index,
+                    ),
+                  ),
               ]),
               Padding(
                 padding: EdgeInsets.all(.5.h),
@@ -80,16 +85,30 @@ class MealCard extends GetView<ProductController> {
                         fontSize: 10.sp),
                   ),
                   Text(
-                    controller.productItem[index!].unitPrice.toString() +
+                    controller.productItem[index!].purchasePrice.toString() +
                         "SAR".tr,
                     style: TextStyle(
+                        decoration:
+                            controller.productItem[index!].discountedPrice != 0
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
                         fontSize: 9.sp,
                         fontWeight: FontWeight.bold,
                         color: myOrange),
                   ),
+                  if (controller.productItem[index!].discountedPrice != 0)
+                    Text(
+                      controller.productItem[index!].discountedPrice
+                              .toString() +
+                          "SAR".tr,
+                      style: TextStyle(
+                          fontSize: 9.sp,
+                          fontWeight: FontWeight.bold,
+                          color: myOrange),
+                    ),
                 ]),
               ),
-              if (controller.productItem[index!].tax != 0)
+              if (controller.productItem[index!].discountedPrice != 0)
                 Padding(
                   padding: EdgeInsets.only(
                     left: 1.w,
@@ -108,7 +127,10 @@ class MealCard extends GetView<ProductController> {
                         style: TextStyle(
                             fontSize: 8.sp, fontWeight: FontWeight.bold),
                       ),
-                      Text("22-december-2022",
+                      Text(
+                          controller
+                              .productItem[index!].discount![0].discountEndDate!
+                              .toString(),
                           style: TextStyle(
                               fontSize: 8.sp, fontWeight: FontWeight.bold))
                     ],

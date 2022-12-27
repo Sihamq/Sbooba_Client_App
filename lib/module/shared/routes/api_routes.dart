@@ -17,5 +17,7 @@ class ApiLink {
   static const String getProfile = "/seller/profile";
   static const String updateProfile = "/seller/profile";
   static const String storeCoupon = "/seller/coupons";
-  static const String updateCoupon = "/seller/coupons/"; // delete
+  static const String updateCoupon = "/seller/coupons/";
+  static const String storeageImage =
+      "http://192.168.0.102/sboba_v3/storage/app/"; // delete
 }

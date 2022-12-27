@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/shared/cash_helper.dart';
+import 'package:sboba_app_client/module/shared/routes/api_routes.dart';
 import 'package:sizer/sizer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageContainer extends GetView<ProductController> {
   var pageController = PageController();
-  ImageContainer({super.key});
+  ShowItem? showItem;
+  ImageContainer({super.key, this.showItem});
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +23,39 @@ class ImageContainer extends GetView<ProductController> {
               children: [
                 Center(
                   child: Container(
-                      height: MediaQuery.of(context).size.height * .35,
-                      // width: MediaQuery.of(context).size.width,
-                      decoration: const BoxDecoration(
-                          //shape: BoxShape.circle
-                          ),
-                      child: PageView.builder(
-                        allowImplicitScrolling: true,
-                        controller: pageController,
-                        itemCount: 3,
-                        itemBuilder: (context, index) => Container(
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage(
-                            "assets/pp.jpg",
-                          ),
-                        ))),
-                      )),
+                    height: MediaQuery.of(context).size.height * .35,
+                    // width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                        //shape: BoxShape.circle
+                        ),
+                    child: controller.showProduct[0].attachment!.isNotEmpty
+                        ? PageView.builder(
+                            allowImplicitScrolling: true,
+                            controller: pageController,
+                            itemCount:
+                                controller.showProduct[0].attachment!.length,
+                            itemBuilder: (context, index) =>
+                                controller.showProduct[0].attachment!.isNotEmpty
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: NetworkImage(
+                                          ApiLink.storeageImage +
+                                              controller.showProduct[0]
+                                                  .attachment![index],
+                                        ),
+                                      )))
+                                    : Center(
+                                        child: SpinKitFadingCube(
+                                        color: myOrange,
+                                      )),
+                          )
+                        : Center(
+                            child: SpinKitFadingCube(
+                            color: myOrange,
+                          )),
+                  ),
                 ),
                 // Positioned(
                 //   bottom: 45.w,
@@ -107,7 +126,7 @@ class ImageContainer extends GetView<ProductController> {
                       dotColor: myWhite,
                     ),
                     controller: pageController,
-                    count: 3,
+                    count: controller.showProduct[0].attachment!.length,
                   ),
                 ),
               ],

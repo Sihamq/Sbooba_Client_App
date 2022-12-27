@@ -1,15 +1,21 @@
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../shared/component/awesome_dialog.dart';
+import '../../../shared/routes/api_routes.dart';
+
 class AddImages extends StatelessWidget {
+  ShowItem? showProduct;
   var proControoler = Get.put(ProductController);
-  AddImages({super.key});
+  AddImages({super.key, this.showProduct});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +38,66 @@ class AddImages extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              showProduct!.attachment!.isNotEmpty
+                  ? SizedBox(
+                      height: 150,
+                      width: MediaQuery.of(context).size.width,
+                      child: GridView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 200,
+                                  childAspectRatio: 3 / 2,
+                                  crossAxisSpacing: 20,
+                                  mainAxisSpacing: 20),
+                          itemCount:
+                              controller.showProduct[0].attachment!.length,
+                          itemBuilder: (BuildContext ctx, index) {
+                            return Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                        color: Colors.grey[50],
+                                        image: DecorationImage(
+                                            image: NetworkImage(
+                                                ApiLink.storeageImage +
+                                                    controller.showProduct[0]
+                                                        .attachment![index]))),
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      CustomeAwesomeDialog().AwesomeDialogHeader(
+                                          DialogType: DialogType.question,
+                                          context: context,
+                                          describe: "",
+                                          subTitle:
+                                              "هل انت متأكد من اضافة الصورة لسلة المهملات عند تعديل المنتج؟",
+                                          mainTitle: "",
+                                          btOnpressed: () =>
+                                              controller.deleteImages(controller
+                                                  .showProduct[0]
+                                                  .attachment![index]));
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 10,
+                                      backgroundColor: myWhite,
+                                      child: const Icon(Icons.cancel),
+                                    ),
+                                  )
+                                ]);
+                          }),
+                    )
+                  : Center(
+                      child: Text(
+                        "جميع الصور محذوفة حاليا",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey[400]),
+                      ),
+                    ),
               SizedBox(
                 height: 12.h,
                 width: MediaQuery.of(context).size.width,

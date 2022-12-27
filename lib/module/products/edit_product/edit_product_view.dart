@@ -304,7 +304,7 @@ class EditProduct extends GetView<ProductController> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
-                  child: AddImages(),
+                  child: AddImages(showProduct: showProduct),
                 ),
                 Padding(
                   padding: EdgeInsets.all(.5.h),

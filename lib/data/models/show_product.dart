@@ -74,6 +74,8 @@ class ShowItem {
     this.createdAt,
     this.updatedAt,
     this.cateogryName,
+    this.attachment,
+    this.image
   });
 
   int? id;
@@ -110,6 +112,10 @@ class ShowItem {
   dynamic deletedAt;
   DateTime? createdAt;
   DateTime? updatedAt;
+   String? image;
+   
+  List<String>? attachment;
+
 
   factory ShowItem.fromJson(Map<String, dynamic> json) => ShowItem(
         id: json["id"],
@@ -146,6 +152,9 @@ class ShowItem {
         deletedAt: json["deleted_at"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+         image: json["image"],
+        
+        attachment: List<String>.from(json["attachment"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -182,7 +191,10 @@ class ShowItem {
         "deleted_at": deletedAt,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-        "category_name": cateogryName
+        "category_name": cateogryName,
+         "image": image,
+        
+        "attachment": List<dynamic>.from(attachment!.map((x) => x)),
       };
 }
 

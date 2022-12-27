@@ -251,5 +251,6 @@ Map<String, String> en = {
   "allp": "Your project through us reaches everywhere",
   "spread": "Requests",
   "spreadd": "Your requests come to you",
-  "main":"Main picture of the product"
+  "main": "Main picture of the product",
+  "dis": "Select the type of discount"
 };

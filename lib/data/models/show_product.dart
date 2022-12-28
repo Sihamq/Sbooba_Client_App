@@ -75,7 +75,9 @@ class ShowItem {
     this.updatedAt,
     this.cateogryName,
     this.attachment,
-    this.image
+    this.image,
+    this.discountedPrice,
+    this.discount,
   });
 
   int? id;
@@ -112,10 +114,10 @@ class ShowItem {
   dynamic deletedAt;
   DateTime? createdAt;
   DateTime? updatedAt;
-   String? image;
-   
+  String? image;
+  Discount? discount;
   List<String>? attachment;
-
+  double? discountedPrice;
 
   factory ShowItem.fromJson(Map<String, dynamic> json) => ShowItem(
         id: json["id"],
@@ -152,8 +154,9 @@ class ShowItem {
         deletedAt: json["deleted_at"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-         image: json["image"],
-        
+        image: json["image"],
+        discount: Discount.fromJson(json["discount"]),
+        discountedPrice: json["discounted_price"].toDouble(),
         attachment: List<String>.from(json["attachment"].map((x) => x)),
       );
 
@@ -192,9 +195,55 @@ class ShowItem {
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
         "category_name": cateogryName,
-         "image": image,
-        
+        "image": image,
         "attachment": List<dynamic>.from(attachment!.map((x) => x)),
+        "discount": discount!.toJson(),
+        "attachment": List<dynamic>.from(attachment!.map((x) => x)),
+        "discounted_price": discountedPrice,
+      };
+}
+
+class Discount {
+  Discount({
+    this.id,
+    this.productId,
+    this.discount,
+    this.discountType,
+    this.discountStartDate,
+    this.discountEndDate,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int? id;
+  int? productId;
+  int? discount;
+  String? discountType;
+  DateTime? discountStartDate;
+  DateTime? discountEndDate;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  factory Discount.fromJson(Map<String, dynamic> json) => Discount(
+        id: json["id"],
+        productId: json["product_id"],
+        discount: json["discount"],
+        discountType: json["discount_type"],
+        discountStartDate: DateTime.parse(json["discount_start_date"]),
+        discountEndDate: DateTime.parse(json["discount_end_date"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "product_id": productId,
+        "discount": discount,
+        "discount_type": discountType,
+        "discount_start_date": discountStartDate!.toIso8601String(),
+        "discount_end_date": discountEndDate!.toIso8601String(),
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
       };
 }
 

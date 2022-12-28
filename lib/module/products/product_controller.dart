@@ -29,6 +29,7 @@ class ProductController extends GetxController
   var selectedTime = TimeOfDay.now().obs;
   GetProduct? product;
   var productItem = <GetProductItem>[].obs;
+  var getProductItem = GetProductItem().obs;
 //  Product? products;
   // var productItems = <ProductItem>[].obs;
   List<CateogryItems> productCateogry = [];
@@ -78,6 +79,7 @@ class ProductController extends GetxController
   void onInit() {
     getCateogries();
     getProducts();
+    // getProductsByCateogrries(1);
 
     final DateTime today = DateTime.utc(0, 0, 0);
     startDate = "00-00-00".obs;
@@ -88,6 +90,7 @@ class ProductController extends GetxController
     super.onInit();
   }
 
+  var editSelectettedId;
   initData(ShowItem item) {
     editProductNameArabicController.text = item.name!.ar!;
     editProductNameEnglishController.text = item.name!.en!;
@@ -99,8 +102,25 @@ class ProductController extends GetxController
     editUnitPriceController.text = item.unitPrice.toString();
     editUnitPurchesController.text = item.purchasePrice.toString();
     editProductAvialbleController.text = item.minQty.toString();
+    editProductDiscountController.text = item.discount!.discount.toString();
+    cat_id = item.categoryId;
+    catSelect = item.cateogryName;
+    disSelected.value = item.discount!.discountType!;
+    if (disSelected == "1") {
+      dis_id.value = 1;
+      disSelected.value = "خصم بالنسبة";
+    } else {
+      dis_id.value = 2;
+      disSelected.value = "خصم بالمبلغ";
+    }
     feature = item.featured;
     published = item.published;
+    startDate.value = DateFormat("yyyy-MM-dd")
+        .format(item.discount!.discountEndDate!)
+        .toString();
+    endDate.value = DateFormat("yyyy-MM-dd")
+        .format(item.discount!.discountEndDate!)
+        .toString();
     //cat_id = item.categoryId;
     if (published == 1) {
       swittch = true;
@@ -138,9 +158,9 @@ class ProductController extends GetxController
     update();
   }
 
-  int? selected = 0;
+  var selected = 0.obs;
   getSelected(x) {
-    selected = x;
+    selected.value = x;
     update();
   }
 

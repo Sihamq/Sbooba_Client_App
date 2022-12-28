@@ -180,7 +180,7 @@ class EditProduct extends GetView<ProductController> {
                               autofocus: true,
                               dropdownColor: myWhite,
                               focusColor: myOrange,
-                              // isExpanded: true,
+                              isExpanded: true,
                               underline: const SizedBox(),
                               elevation: 2,
                               hint: Center(
@@ -305,6 +305,67 @@ class EditProduct extends GetView<ProductController> {
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: AddImages(showProduct: showProduct),
+                ),
+                Obx(
+                  () => Padding(
+                    padding: EdgeInsets.all(1.h),
+                    child: DecoratedBox(
+                        decoration: BoxDecoration(
+                            color: Colors
+                                .white, //background color of dropdown button
+                            border: Border.all(
+                                color: myOrange,
+                                width: 2), //border of dropdown button
+                            borderRadius: BorderRadius.circular(
+                                15), //border raiuds of dropdown button
+                            boxShadow: <BoxShadow>[
+                              //apply shadow on Dropdown button
+                              BoxShadow(
+                                  color: myOrange,
+                                  blurRadius: 0.1), //shadow for button
+                            ]),
+                        child: DropdownButton(
+                          isExpanded: true,
+                          autofocus: true,
+                          dropdownColor: myWhite,
+                          focusColor: myOrange,
+                          underline: const SizedBox(),
+                          elevation: 2,
+                          hint: Center(
+                            child: controller.disSelected.value == ""
+                                ? Padding(
+                                    padding: EdgeInsets.all(1.h),
+                                    child: Text(
+                                      "dis".tr,
+                                      style: TextStyle(fontSize: 13.sp),
+                                    ),
+                                  )
+                                : Text(
+                                    controller.disSelected.value,
+                                    style: TextStyle(fontSize: 13.sp),
+                                  ),
+                          ),
+                          alignment: AlignmentDirectional.center,
+                          iconSize: 20.sp,
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: myOrange,
+                            size: 25.sp,
+                          ),
+                          items: controller.discountTypeList
+                              .map<DropdownMenuItem<CateogryItems>>(
+                                  (cat) => DropdownMenuItem(
+                                        value: cat,
+                                        child: Center(
+                                          child: Text(cat.name!),
+                                        ),
+                                      ))
+                              .toList(),
+                          onChanged: ((value) {
+                            controller.changeSelectDiscount(value);
+                          }),
+                        )),
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(.5.h),

@@ -141,8 +141,8 @@ class GetProductItem {
         metaDescription: json["meta_description"],
         metaKeywords: json["meta_keywords"],
         image: json["image"],
-        discount: List<Discount>.from(
-            json["discount"].map((x) => Discount.fromJson(x))),
+        discount: (json["discount"] as List).isNotEmpty? List<Discount>.from(
+            json["discount"].map((x) => Discount.fromJson(x))) :null,
         discountedPrice: json["discounted_price"].toDouble(),
       );
 

@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sboba_app_client/data/models/profile_model.dart';
 import 'package:sboba_app_client/lang/lang_controller.dart';
 import 'package:sboba_app_client/module/Profile/profile_binding.dart';
 import 'package:sboba_app_client/module/Profile/widgets/profile_card.dart';
@@ -21,6 +22,7 @@ import '../../ticket/ticket_view.dart';
 import 'total_container.dart';
 
 class ProfilesCard extends StatelessWidget {
+   
   const ProfilesCard({super.key});
 
   @override

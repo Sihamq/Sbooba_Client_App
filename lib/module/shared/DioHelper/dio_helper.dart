@@ -7,7 +7,7 @@ class DioHelper {
   static init() {
     dio = Dio(BaseOptions(
         baseUrl:
-            'http://192.168.0.102/sboba_v3/api', //http://192.168.0.102  // 192.168.1.105
+            'http://192.168.137.1/sboba_v3/api', //http://192.168.0.102  // 192.168.1.105
         receiveDataWhenStatusError: true,
         headers: {
           'Content-Type': 'application/json',
@@ -21,7 +21,7 @@ class DioHelper {
       responseHeader: false,
       compact: false,
     ));
-    dio.interceptors.add(DioCacheManager(CacheConfig()).interceptor);
+    // dio.interceptors.add(DioCacheManager(CacheConfig()).interceptor);
   }
 
   static Future<Response> getData(
@@ -30,11 +30,14 @@ class DioHelper {
       Map<String, dynamic>? option}) async {
     return await dio.get(url,
         queryParameters: query,
-        options: buildCacheOptions(Duration(days: 7),
-            forceRefresh: true,
-            options: Options(
-              headers: option,
-            )));
+        // options:
+        //buildCacheOptions(Duration(days: 7),
+        // forceRefresh: true,
+        options: Options(
+          headers: option,
+        )
+        // )
+        );
   }
 
   static Future<Response> postData(

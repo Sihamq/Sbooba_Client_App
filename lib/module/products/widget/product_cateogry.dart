@@ -14,10 +14,12 @@ class ProductCateogry extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     //controller.getCateogries();
-    return GetBuilder<ProductController>(
-      builder: (controller) => InkWell(
+    return Obx(()=> InkWell(
         onTap: (() {
-          controller.getProductsByCateogrries(x);
+          print("the x is  ......$x");
+          print("the id..................${controller.productCateogry[x!].id}");
+          controller
+              .getProductsByCateogrries(controller.productCateogry[x!].id);
           controller.getSelected(x);
         }),
         child: AnimatedContainer(

@@ -1,4 +1,6 @@
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide FormData;
+import 'dart:convert';
+import 'package:dio/dio.dart';
 
 import '../../../module/shared/DioHelper/dio_helper.dart';
 import '../../../module/shared/cash_helper.dart';
@@ -32,24 +34,24 @@ class ProfileData {
       required commercial_no,
       required cityId,
       required latitude,
-      required longitude}) async {
-    Map<String, dynamic> data = {
-      "seller": {
-        "name": name,
-        "email": email,
-        "shop_name": shopname,
-        "phone": phone,
-        "gender": gender,
-        "commercial_no": commercial_no,
-        "city_id": cityId,
-        "address": shopAdress,
-        "latitude": latitude,
-        "longitude": longitude
-      }
-    };
+      required longitude,
+      image}) async {
+    FormData data = FormData.fromMap({
+      "name": name,
+      "email": email,
+      "shop_name": shopname,
+      "phone": phone,
+      "gender": gender,
+      "commercial_no": commercial_no,
+      "city_id": cityId,
+      "address": shopAdress,
+      "latitude": latitude,
+      "longitude": longitude,
+      "image": image
+    });
 
-    var response = await DioHelper.putData(
-        url: ApiLink.updateProfile,
+    var response = await DioHelper.putDataForm(
+        url: "${ApiLink.updateProfile}?_method=PUT",
         data: data,
         option: {
           "Authorization": "Bearer " + await CashHelper.getData("token")

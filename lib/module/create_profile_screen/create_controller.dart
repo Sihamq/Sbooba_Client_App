@@ -1,9 +1,10 @@
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dio/dio.dart';
 //import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide MultipartFile;
 import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/auth/signUp_data.dart';
 import 'package:sboba_app_client/data/models/error_signup.dart';
@@ -88,7 +89,8 @@ class CreateController extends GetxController {
             cityId: 1,
             gender: gender,
             latitude: 0,
-            longitude: 0);
+            longitude: 0,
+            image: MultipartFile.fromFileSync(imagee!.path));
         print(data);
 
         print("sucess");

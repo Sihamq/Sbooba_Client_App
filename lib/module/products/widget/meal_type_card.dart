@@ -6,6 +6,7 @@ import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/products/widget/discount_container.dart';
 import 'package:sboba_app_client/module/shared/routes/api_routes.dart';
 import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
 
 import '../../my_colors.dart';
 import '../../shared/component/awesome_dialog.dart';
@@ -127,12 +128,17 @@ class MealCard extends GetView<ProductController> {
                         style: TextStyle(
                             fontSize: 8.sp, fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                          controller
-                              .productItem[index!].discount![0].discountEndDate!
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: 8.sp, fontWeight: FontWeight.bold))
+                      // if ()
+                      if (controller.productItem[index!].discountedPrice != 0)
+                        Text(
+                            controller.productItem[index!].discount != null
+                                ? DateFormat("yyyy-MM-dd")
+                                    .format(controller.productItem[index!]
+                                        .discount![0].discountEndDate!)
+                                    .toString()
+                                : "",
+                            style: TextStyle(
+                                fontSize: 8.sp, fontWeight: FontWeight.bold))
                     ],
                   ),
                 ),

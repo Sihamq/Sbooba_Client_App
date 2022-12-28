@@ -17,11 +17,13 @@ import '../shared/component/custom_text_field.dart';
 import '../shared/component/green_button.dart';
 import '../shared/function/validInput.dart';
 
-class EditAccount extends StatelessWidget {
+class EditAccount extends GetView<ProfileController> {
   const EditAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
+    controller.initData(controller.profile!);
     return Scaffold(
       backgroundColor: Colors.white,
       // appBar: AppBar(backgroundColor: Colors.white),
@@ -72,12 +74,24 @@ class EditAccount extends StatelessWidget {
                                       width: 22.h,
                                       height: 15.h,
                                       child: Center(
-                                          child: controller.imagee == null
+                                          child: controller.imagee == null ||
+                                                  controller.profile!.data!
+                                                          .image ==
+                                                      null
                                               ? const Icon(Icons.add_a_photo)
-                                              : Image.file(
-                                                  controller.imagee!,
-                                                  fit: BoxFit.cover,
-                                                ))),
+                                              : controller.imagee != null
+                                                  ? Image.file(
+                                                      controller.imagee!,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : controller.profile!.data!
+                                                              .image !=
+                                                          null
+                                                      ? Image.network(controller
+                                                          .profile!
+                                                          .data!
+                                                          .image!)
+                                                      : Icon(Icons.camera))),
                                 ),
                               ),
 

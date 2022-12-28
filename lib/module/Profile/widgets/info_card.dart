@@ -8,6 +8,8 @@ import 'package:sboba_app_client/module/Profile/profile_controller.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../shared/routes/api_routes.dart';
+
 class InfoCard extends StatelessWidget {
   const InfoCard({super.key});
 
@@ -19,13 +21,26 @@ class InfoCard extends StatelessWidget {
         child: Column(
           children: [
             Center(
-              child: CircleAvatar(
-                  backgroundColor: myOrange,
-                  radius: 45.sp,
-                  child: CircleAvatar(
-                    radius: 40.sp,
-                    backgroundImage: const AssetImage("assets/img.jpg"),
-                  )),
+              child: controller.profile != null
+                  ? CircleAvatar(
+                      backgroundColor: myOrange,
+                      radius: 45.sp,
+                      child: controller.profile!.data!.image == null
+                          ? CircleAvatar(
+                              radius: 40.sp,
+                              backgroundImage:
+                                  const AssetImage("assets/img.jpg"))
+                          : CircleAvatar(
+                              radius: 40.sp,
+                              backgroundImage: NetworkImage(
+                                  ApiLink.storeageImage +
+                                      controller.profile!.data!.image!)),
+                    )
+                  : Center(
+                      child: SpinKitFadingCube(
+                        color: myOrange,
+                      ),
+                    ),
             ),
             Padding(
               padding: EdgeInsets.all(1.h),

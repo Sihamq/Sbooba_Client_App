@@ -21,9 +21,9 @@ class SignupData {
       required commercial_no,
       cityId,
       latitude,
-      longitude}) async {
+      longitude,image}) async {
     FormData data = FormData.fromMap({
-      "seller": {
+     
         "name": name,
         "email": email,
         "password": pasword,
@@ -35,8 +35,9 @@ class SignupData {
         "city_id": cityId,
         "address": shopAdress,
         "latitude": latitude,
-        "longitude": longitude
-      }
+        "longitude": longitude,
+        "image":image
+
     });
 
     var response = await DioHelper.postData1(url: ApiLink.register, data: data);

@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../data/models/get_product_model.dart';
 import '../../my_colors.dart';
 
 class DiscountContainer extends StatelessWidget {
-  var productItem;
+  GetProductItem?
+  productItem;
   int? index;
 
   DiscountContainer({super.key, this.productItem, this.index});
@@ -27,10 +29,10 @@ class DiscountContainer extends StatelessWidget {
           child: Center(
               child: Wrap(children: [
             Text(
-              controller.productItem[index!].discount![0].discount.toString(),
+              productItem!.discount![0].discount.toString(),
               style: TextStyle(color: myWhite, fontWeight: FontWeight.w600),
             ),
-            controller.productItem[index!].discount![0].discountType == "1"
+            productItem!.discount![0].discountType == "1"
                 ? Text(
                     "%",
                     style:

@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get.dart' hide MultipartFile;
 import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/profile_data/profile_data.dart';
 import 'package:sboba_app_client/data/models/product_model.dart';
@@ -24,6 +25,17 @@ class ProfileController extends GetxController {
   void onInit() {
     getProfileInformation();
     super.onInit();
+  }
+
+  String? img;
+  initData(Profile item) {
+    editName.text = item.data!.name!;
+    editEmail.text = item.data!.email!;
+    editPhone.text = item.data!.phone!;
+    editShopName.text = item.data!.shopName!;
+    editShopAdress.text = item.data!.address!;
+    editCommerical.text = item.data!.commercialNo!;
+    img = item.data!.image;
   }
 
   @override
@@ -87,6 +99,7 @@ class ProfileController extends GetxController {
 
   /////////////////////update profile////////////////////////////////
   updateProfileInformation(context) async {
+    print(editName.text);
     if (genterTo == 1) {
       if (formKey.currentState!.validate()) {
         try {
@@ -101,7 +114,8 @@ class ProfileController extends GetxController {
               commercial_no: editCommerical.text,
               cityId: 1,
               latitude: 0,
-              longitude: 0);
+              longitude: 0,
+              image: MultipartFile.fromFileSync(imagee!.path));
           if (res["status"] == 200) {
             CustomeAwesomeDialog().AwesomeDialogHeader(
                 DialogType: DialogType.success,

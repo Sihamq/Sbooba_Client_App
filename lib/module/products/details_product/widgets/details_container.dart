@@ -10,6 +10,7 @@ import 'package:sboba_app_client/module/products/edit_product/edit_product_view.
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
 
 class DetailsContainer extends StatelessWidget {
   int? index;
@@ -92,43 +93,61 @@ class DetailsContainer extends StatelessWidget {
                           ],
                         ),
                       ),
-
-                      Padding(
-                        padding: EdgeInsets.all(1.h),
-                        child: Wrap(
-                          spacing: 3.w,
-                          children: [
-                            Text(
-                              "${100.0}" "SAR".tr,
-                              style: TextStyle(
-                                  decoration: TextDecoration.lineThrough,
-                                  fontSize: 8.sp),
-                            ),
-                            Text(
-                              "${10.0}",
-                              style: TextStyle(
-                                  fontSize: 8.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: myGreen),
-                            ),
-                            Icon(
-                              MdiIcons.ticket,
-                              size: 2.h,
-                              color: myGreen,
-                            ),
-                            Text(
-                              "Date".tr,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 8.sp),
-                            ),
-                            Text(
-                              "12-12-2022",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 8.sp),
-                            ),
-                          ],
+                      if (controller.showProduct[0].discountedPrice != 0)
+                        Padding(
+                          padding: EdgeInsets.all(1.h),
+                          child: Wrap(
+                            spacing: 3.w,
+                            children: [
+                              Text(
+                                controller.showProduct[0].purchasePrice
+                                        .toString() +
+                                    "SAR".tr,
+                                style: TextStyle(
+                                    decoration: TextDecoration.lineThrough,
+                                    fontSize: 8.sp),
+                              ),
+                              Text(
+                                controller.showProduct[0].discount!.discount
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 8.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: myGreen),
+                              ),
+                              if (controller
+                                      .showProduct[0].discount!.discountType ==
+                                  "1")
+                                Text(
+                                  "%",
+                                  style: TextStyle(
+                                      fontSize: 8.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: myGreen),
+                                ),
+                              Icon(
+                                MdiIcons.ticket,
+                                size: 2.h,
+                                color: myGreen,
+                              ),
+                              Text(
+                                "Date".tr,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 8.sp),
+                              ),
+                              Text(
+                                DateFormat("yyyy-MM-dd")
+                                    .format(controller.showProduct[0].discount!
+                                        .discountEndDate!)
+                                    .toString(),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 8.sp),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
 
                       Padding(
                         padding: EdgeInsets.all(1.h),
@@ -139,7 +158,8 @@ class DetailsContainer extends StatelessWidget {
                                 color: myOrange, fontWeight: FontWeight.bold),
                           ),
                           Text(
-                            controller.showProduct[0].unitPrice.toString() +
+                            controller.showProduct[0].discountedPrice
+                                    .toString() +
                                 "SAR".tr,
                             //"${140} SAR".tr,
                             style: TextStyle(

@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:sboba_app_client/data/models/list_product.dart';
 import 'package:sboba_app_client/module/coupons/coupons_controller.dart';
 import 'package:sboba_app_client/module/coupons/widget/date_coupon.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/date_container.dart';
@@ -20,6 +21,7 @@ class CustomTabView extends GetView<CouponsController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.getProductList();
     return SingleChildScrollView(
       child: Obx(
         () => Form(
@@ -43,7 +45,30 @@ class CustomTabView extends GetView<CouponsController> {
                   const Spacer(),
                   InkWell(
                     child: const Icon(Icons.arrow_right),
-                    onTap: () {},
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                                clipBehavior: Clip.antiAliasWithSaveLayer,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0)),
+                                child: Column(
+                                  children: controller.ProdctList.map(
+                                      (e) => RadioListTile(
+                                            activeColor: myGreen,
+                                            title: Text("${e.name}"),
+                                            groupValue: 1,
+                                            value: e.id,
+                                            onChanged: (val) {
+                                              // setState(() {
+                                              //   radioItem = data.name ;
+                                              //   id = data.index;
+                                              // });
+                                            },
+                                          )).toList(),
+                                ),
+                              ));
+                    },
                   )
                 ],
               ),

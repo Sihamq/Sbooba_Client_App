@@ -38,6 +38,23 @@ class CouponData {
       print(e.toString());
     }
   }
+  Future getProduct() async {
+    try {
+      var response = await DioHelper.getData(url: ApiLink.listProduct, option: {
+        "Authorization": "Bearer " + await CashHelper.getData("token"),
+        "X-localization": await CashHelper.getData("lang")
+      });
+      if (response.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
 
   Future storeCoupon({
     required couponType,

@@ -42,7 +42,7 @@ class CheckScreen extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(1.h),
+                        padding: EdgeInsets.all(2.h),
                         child: Center(
                           child: Text("Please Check your Email".tr,
                               style: TextStyle(

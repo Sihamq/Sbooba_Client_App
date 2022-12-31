@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/coupons.dart';
+import 'package:sboba_app_client/data/models/list_product.dart';
 import 'package:sboba_app_client/module/coupons/coupons_binding.dart';
 import 'package:sboba_app_client/module/coupons/coupons_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -196,6 +197,31 @@ class CouponsController extends GetxController
       }
     }
   }
+  List<CouponProductItem> ProdctList=[];
+    Future getProductList() async {
+    try{
+      isLoading = true;
+      var res = await CouponData().getProduct();
+      if (res["status"] == 200) {
+        isLoading = false;
+        var coupons = res["data"] as List;
+
+       ProdctList =
+            coupons.map((e) => CouponProductItem.fromJson(e)).toList();
+       
+       // print(couponItem);
+       
+        update();
+      } else {
+        isLoading = true;
+        change(couponItem.value, status: RxStatus.empty());
+        }
+    } catch (e) {
+      print("something error ${e.toString()}");
+      change(couponItem.value, status: RxStatus.empty());
+    }
+  }
+
 
   updateCoupon({id}) async {
     if (catSelect.value.isEmpty && discountSelect.value.isEmpty) {

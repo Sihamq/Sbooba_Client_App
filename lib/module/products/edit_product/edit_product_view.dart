@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
@@ -9,6 +10,7 @@ import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/shared/component/green_button.dart';
 import 'package:sboba_app_client/module/shared/component/small_text_field.dart';
 import 'package:sboba_app_client/module/shared/function/validInput.dart';
+import 'package:sboba_app_client/module/shared/routes/api_routes.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../shared/component/add_text_formfield.dart';
@@ -40,6 +42,33 @@ class EditProduct extends GetView<ProductController> {
             padding: EdgeInsets.all(2.h),
             child: Column(
               children: [
+                Padding(
+                  padding: EdgeInsets.all(1.h),
+                  child: Center(
+                    child: InkWell(
+                      onTap: () {
+                        controller.getImageBloc(ImageSource.gallery);
+                      },
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.grey[300],
+                          ),
+                          width: 22.h,
+                          height: 15.h,
+                          child: Center(
+                              child: controller.imagee == null
+                                  ? Image.network(
+                                      ApiLink.storeageImage + controller.img!,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.file(
+                                      controller.imagee!,
+                                      fit: BoxFit.cover,
+                                    ))),
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(

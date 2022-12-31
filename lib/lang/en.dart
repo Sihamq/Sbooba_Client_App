@@ -252,5 +252,10 @@ Map<String, String> en = {
   "spread": "Requests",
   "spreadd": "Your requests come to you",
   "main": "Main picture of the product",
-  "dis": "Select the type of discount"
+  "dis": "Select the type of discount",
+  "Coupons": "Coupons for one product",
+  "percent": "Coupons for the total order",
+   "c1":"كوبون متابع مخلص",
+  "c2":"كوبون ماقبل الاطلاق",
+  "c3":"كوبون نسبة خصم",
 };

@@ -1,3 +1,5 @@
+//import 'dart:html';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -16,13 +18,13 @@ import 'package:sizer/sizer.dart';
 import '../shared/component/custom_text_field.dart';
 import '../shared/component/green_button.dart';
 import '../shared/function/validInput.dart';
+import '../shared/routes/api_routes.dart';
 
 class EditAccount extends GetView<ProfileController> {
   const EditAccount({super.key});
 
   @override
   Widget build(BuildContext context) {
-    
     controller.initData(controller.profile!);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -60,6 +62,7 @@ class EditAccount extends GetView<ProfileController> {
                               //             fontSize: 22.sp)),
                               //   ),
                               // ),
+
                               Center(
                                 child: InkWell(
                                   onTap: () {
@@ -74,24 +77,17 @@ class EditAccount extends GetView<ProfileController> {
                                       width: 22.h,
                                       height: 15.h,
                                       child: Center(
-                                          child: controller.imagee == null ||
-                                                  controller.profile!.data!
-                                                          .image ==
-                                                      null
-                                              ? const Icon(Icons.add_a_photo)
-                                              : controller.imagee != null
-                                                  ? Image.file(
-                                                      controller.imagee!,
-                                                      fit: BoxFit.cover,
-                                                    )
-                                                  : controller.profile!.data!
-                                                              .image !=
-                                                          null
-                                                      ? Image.network(controller
-                                                          .profile!
-                                                          .data!
-                                                          .image!)
-                                                      : Icon(Icons.camera))),
+                                          child: controller.imagee == null
+                                              ? Image.network(
+                                                  ApiLink.storeageImage +
+                                                      controller.profile!.data!
+                                                          .image!,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : Image.file(
+                                                  controller.imagee!,
+                                                  fit: BoxFit.cover,
+                                                ))),
                                 ),
                               ),
 

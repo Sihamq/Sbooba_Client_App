@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_advanced_avatar/flutter_advanced_avatar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -26,10 +27,16 @@ class InfoCard extends StatelessWidget {
                       backgroundColor: myOrange,
                       radius: 45.sp,
                       child: controller.profile!.data!.image == null
-                          ? CircleAvatar(
-                              radius: 40.sp,
-                              backgroundImage:
-                                  const AssetImage("assets/img.jpg"))
+                          ? AdvancedAvatar(
+                              name: controller.profile!.data!.name,
+                              foregroundDecoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Colors.deepOrange.withOpacity(0.75),
+                                  width: 5.0,
+                                ),
+                              ),
+                            )
                           : CircleAvatar(
                               radius: 40.sp,
                               backgroundImage: NetworkImage(

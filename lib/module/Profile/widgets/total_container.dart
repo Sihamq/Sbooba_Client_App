@@ -7,7 +7,8 @@ import 'package:sizer/sizer.dart';
 
 class TotalContainer extends StatelessWidget {
   String? secondText;
-  TotalContainer({super.key, this.secondText});
+  int? total;
+  TotalContainer({super.key, this.secondText,this.total});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class TotalContainer extends StatelessWidget {
               ),
             ),
             Text(
-              "${25}",
+              total.toString(),
               style: TextStyle(
                   fontWeight: FontWeight.bold, fontSize: 10.sp, color: myWhite),
             ),

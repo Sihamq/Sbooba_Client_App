@@ -45,8 +45,8 @@ class CouponsController extends GetxController
 
   var dateController = DateRangePickerController().obs;
   List<CateogryItems> couponsItem = [
-    CateogryItems(name: "money Coupons", id: 0),
-    CateogryItems(name: "Percent-off coupons", id: 1)
+    CateogryItems(name: "c1".tr, id: 0),
+    CateogryItems(name: "c2".tr, id: 1)
   ].obs;
   var catSelect = "".obs;
   var cat_id = 0.obs;

@@ -15,11 +15,14 @@ import '../my_colors.dart';
 
 class ProductView extends GetView<ProductController> {
   const ProductView({super.key});
+  Future<void> refreshProducts(BuildContext context) async {
+    return controller.getProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
     Get.put(ProductController());
-    controller.getProducts();
+   // controller.getProducts();
     controller.getCateogries();
 
     print("product");
@@ -47,29 +50,31 @@ class ProductView extends GetView<ProductController> {
         elevation: 0,
       ),
       body: Column(children: [
-        Padding(
-          padding: EdgeInsets.all(2.h),
-          child: GetBuilder<ProductController>(
-            init: ProductController(),
-            builder: (controller) => SizedBox(
-                // width: ,
-                height: 6.h,
-                child: controller.productCateogry.isNotEmpty
-                    ? ListView.separated(
-                        separatorBuilder: (context, index) => SizedBox(
-                              width: 1.5.h,
-                            ),
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: controller.productCateogry.length,
-                        itemBuilder: (context, index) {
-                          print(controller.productCateogry.length);
-                          return ProductCateogry(
-                            x: index,
-                          );
-                        })
-                    : SpinKitFadingCube(color: myOrange, size: 30.sp)),
+        SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(2.h),
+            child: GetBuilder<ProductController>(
+              init: ProductController(),
+              builder: (controller) => SizedBox(
+                  // width: ,
+                  height: 6.h,
+                  child: controller.productCateogry.isNotEmpty
+                      ? ListView.separated(
+                          separatorBuilder: (context, index) => SizedBox(
+                                width: 1.5.h,
+                              ),
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: controller.productCateogry.length,
+                          itemBuilder: (context, index) {
+                            print(controller.productCateogry.length);
+                            return ProductCateogry(
+                              x: index,
+                            );
+                          })
+                      : SpinKitFadingCube(color: myOrange, size: 30.sp)),
+            ),
           ),
         ),
         Obx(
@@ -86,34 +91,37 @@ class ProductView extends GetView<ProductController> {
           child: controller.obx(
             (state) => Padding(
               padding: EdgeInsets.all(1.h),
-              child: GridView.builder(
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    childAspectRatio: 3 / 4,
-                    maxCrossAxisExtent: 320,
-                    mainAxisSpacing: 5,
-                    crossAxisSpacing: 5),
-                itemBuilder: ((context, index) => InkWell(
-                    onTap: (() async => {
-                          await showDialog(
-                                  context: context,
-                                  builder: (context) => FutureProgressDialog(
-                                      progress: SpinKitDualRing(
-                                        color: myOrange,
-                                      ),
-                                      controller.showProducst(
-                                          controller.productItem[index].id)))
-                              .then((value) => {
-                                    Get.to(() => DetailsProduct(
-                                          index: index,
-                                        ))
-                                  }),
-                        }),
-                    child: MealCard(
-                      index: index,
-                    ))),
-                itemCount: controller.productItem.length,
+              child: RefreshIndicator(
+                onRefresh: () => refreshProducts(context),
+                child: GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      childAspectRatio: 3 / 4,
+                      maxCrossAxisExtent: 320,
+                      mainAxisSpacing: 5,
+                      crossAxisSpacing: 5),
+                  itemBuilder: ((context, index) => InkWell(
+                      onTap: (() async => {
+                            await showDialog(
+                                    context: context,
+                                    builder: (context) => FutureProgressDialog(
+                                        progress: SpinKitDualRing(
+                                          color: myOrange,
+                                        ),
+                                        controller.showProducst(
+                                            controller.productItem[index].id)))
+                                .then((value) => {
+                                      Get.to(() => DetailsProduct(
+                                            index: index,
+                                          ))
+                                    }),
+                          }),
+                      child: MealCard(
+                        index: index,
+                      ))),
+                  itemCount: controller.productItem.length,
+                ),
               ),
             ),
             onEmpty: EmptyProduct(

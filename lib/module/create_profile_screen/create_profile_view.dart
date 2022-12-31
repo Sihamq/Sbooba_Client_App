@@ -83,7 +83,7 @@ class CreateAccount extends StatelessWidget {
                           padding: EdgeInsets.all(2.h),
                           child: MyTextField(
                             validate: ((p0) {
-                              return validInput(p0!, 3, 40, "name");
+                              return validInput(p0!, 4, 40, "name");
                             }),
                             controller: controller.nameController,
                             obcure: false,

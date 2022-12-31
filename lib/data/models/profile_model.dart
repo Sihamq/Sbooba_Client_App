@@ -56,6 +56,10 @@ class ProfileItem {
     this.metaImg,
     this.metaDescription,
     this.metaKeywords,
+    this.totalProducts,
+    this.totalOrders,
+    this.acceptOrders,
+    this.canceledOrders,
   });
 
   int? id;
@@ -76,6 +80,10 @@ class ProfileItem {
   dynamic metaImg;
   dynamic metaDescription;
   dynamic metaKeywords;
+  int? totalProducts;
+  int? totalOrders;
+  int? acceptOrders;
+  int? canceledOrders;
 
   factory ProfileItem.fromJson(Map<String, dynamic> json) => ProfileItem(
         id: json["id"],
@@ -96,6 +104,10 @@ class ProfileItem {
         metaImg: json["meta_img"],
         metaDescription: json["meta_description"],
         metaKeywords: json["meta_keywords"],
+        totalProducts: json["total_products"],
+        totalOrders: json["total_orders"],
+        acceptOrders: json["accept_orders"],
+        canceledOrders: json["Canceled _orders"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -117,5 +129,9 @@ class ProfileItem {
         "meta_img": metaImg,
         "meta_description": metaDescription,
         "meta_keywords": metaKeywords,
+        "total_products": totalProducts,
+        "total_orders": totalOrders,
+        "accept_orders": acceptOrders,
+        "Canceled _orders": canceledOrders,
       };
 }

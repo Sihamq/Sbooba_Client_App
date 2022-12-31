@@ -5,7 +5,6 @@ import 'package:get/get.dart' hide MultipartFile;
 import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/product_data/productData.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
-import 'package:sboba_app_client/data/models/product_model.dart';
 import 'package:sboba_app_client/data/models/show_product.dart';
 import 'package:sboba_app_client/module/products/product_binding.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
@@ -78,8 +77,8 @@ class ProductController extends GetxController
   ///////////////////////////////////////methods//////////////////////////////////////
   void onInit() {
     getCateogries();
-    getProducts();
-    // getProductsByCateogrries(1);
+    // getProducts();
+    getProductsByCateogrries(0);
 
     final DateTime today = DateTime.utc(0, 0, 0);
     startDate = "00-00-00".obs;
@@ -90,6 +89,7 @@ class ProductController extends GetxController
     super.onInit();
   }
 
+  String? img;
   var editSelectettedId;
   initData(ShowItem item) {
     editProductNameArabicController.text = item.name!.ar!;
@@ -105,6 +105,7 @@ class ProductController extends GetxController
     editProductDiscountController.text = item.discount!.discount.toString();
     cat_id = item.categoryId;
     catSelect = item.cateogryName;
+    img = item.image;
     disSelected.value = item.discount!.discountType!;
     if (disSelected == "1") {
       dis_id.value = 1;
@@ -321,66 +322,81 @@ class ProductController extends GetxController
     for (var x in imageFileList) {
       y.add(MultipartFile.fromFileSync(x.path));
     }
-    if (formKey.currentState!.validate()) {
-      try {
-        var res = await Productdata().addNewProduct(
-            name_ar: productNameArabicController.text,
-            name_en: productNameEnglishController.text,
-            description_ar: productDescriptionArabicController.text,
-            description_en: productDescriptionEnglishController.text,
-            category_id: cat_id,
-            purchase_price: unitPurchesController.text,
-            cash_on_delivery: 1,
-            min_qty: 1,
-            approved: 1,
-            calories: productCaloriesController.text,
-            featured: feature,
-            published: published,
-            discount: productDiscountController.text,
-            current_stock: 1,
-            discount_end_date: endDate.value,
-            discount_start_date: startDate.value,
-            discount_type: dis_id,
-            low_stock_quantity: 1,
-            stock_visibility_state: 1,
-            tags: "food",
-            unit_price: unitPriceController.text,
-            todays_deal: 1,
-            unit: 1,
-            tax: 1,
-            meta_description: "test",
-            meta_title: "test",
-            slug: "test",
-            attachmentable: y,
-            image: MultipartFile.fromFileSync(imagee!.path));
-        if (res["status"] == 200) {
-          print(res["message"]);
-          CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.success,
-              context: Get.context,
-              describe: "",
-              mainTitle: "congra".tr,
-              subTitle: "youhave".tr,
-              btOnpressed: () =>
-                  {Get.offAll(HomeScreen(), binding: ProductBinding())});
-        } else {
-          CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.error,
-              context: Get.context,
-              describe: "",
-              mainTitle: "oops".tr,
-              subTitle: "failed".tr,
-              btOnpressed: () => {
-                    //Navigator.pop(Get.context!)
-                  }
-              //Get.offAll(HomeScreen(), binding: ProductBinding()
+    if (imagee == null) {
+      CustomeAwesomeDialog().AwesomeDialogHeader(
+          DialogType: DialogType.warning,
+          context: Get.context,
+          describe: "",
+          mainTitle: "يجب عليك اضافة صورة رئيسية للمنتج",
+          subTitle: "failed".tr,
+          btOnpressed: () => {
+                //Navigator.pop(Get.context!)
+              });
+    } else {
+      if (formKey.currentState!.validate()) {
+        try {
+          var res = await Productdata().addNewProduct(
+              name_ar: productNameArabicController.text,
+              name_en: productNameEnglishController.text,
+              description_ar: productDescriptionArabicController.text,
+              description_en: productDescriptionEnglishController.text,
+              category_id: cat_id,
+              purchase_price: unitPurchesController.text,
+              cash_on_delivery: 1,
+              min_qty: 1,
+              approved: 1,
+              calories: productCaloriesController.text,
+              featured: feature,
+              published: published,
+              discount: productDiscountController.text,
+              current_stock: 1,
+              discount_end_date: endDate.value,
+              discount_start_date: startDate.value,
+              discount_type: dis_id,
+              low_stock_quantity: 1,
+              stock_visibility_state: 1,
+              tags: "food",
+              unit_price: unitPriceController.text,
+              todays_deal: 1,
+              unit: 1,
+              tax: 1,
+              meta_description: "test",
+              meta_title: "test",
+              slug: "test",
+              attachmentable: y,
+              image: MultipartFile.fromFileSync(imagee!.path));
+          if (res["status"] == 200) {
+            print(res["message"]);
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.success,
+                context: Get.context,
+                describe: "",
+                mainTitle: "congra".tr,
+                subTitle: "youhave".tr,
+                btOnpressed: () => {
+                      imagee == null,
+                      imageFileList = [],
+                      Get.offAll(HomeScreen(), binding: ProductBinding())
+                    });
+          } else {
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.error,
+                context: Get.context,
+                describe: "",
+                mainTitle: "oops".tr,
+                subTitle: "failed".tr,
+                btOnpressed: () => {
+                      //Navigator.pop(Get.context!)
+                    }
+                //Get.offAll(HomeScreen(), binding: ProductBinding()
 
-              );
+                );
 
-          print("something is error in element");
+            print("something is error in element");
+          }
+        } catch (e) {
+          print("something error  in error product${e.toString()}");
         }
-      } catch (e) {
-        print("something error  in error product${e.toString()}");
       }
     }
   }
@@ -389,23 +405,15 @@ class ProductController extends GetxController
   Future editProducts({id}) async {
     try {
       //print("Name of${editProductNameArabicController.text}");
-      if (cat_id == null) {
-        CustomeAwesomeDialog().AwesomeDialogHeader(
-            DialogType: DialogType.success,
-            context: Get.context,
-            describe: "",
-            mainTitle: "".tr,
-            subTitle: "enter".tr,
-            btOnpressed: () => {});
-      } else {
-        List y = [];
 
-        for (var x in imageFileList) {
-          y.add(MultipartFile.fromFileSync(x.path));
-        }
+      List y = [];
 
-        // print("Name of${editProductNameArabicController.text}");
-        var res = await Productdata().editProduct(
+      for (var x in imageFileList) {
+        y.add(MultipartFile.fromFileSync(x.path));
+      }
+
+      // print("Name of${editProductNameArabicController.text}");
+      var res = await Productdata().editProduct(
           id: id,
           name_ar: editProductNameArabicController.text,
           name_en: editProductNameEnglishController.text,
@@ -442,34 +450,33 @@ class ProductController extends GetxController
           slug: "test",
           attachment_delete: deleteImage,
           attachments: y,
-        );
-        if (res["status"] == 200) {
-          print(res["message"]);
-          print("Name of${editProductNameArabicController.text}");
-          CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.success,
-              context: Get.context,
-              describe: "",
-              mainTitle: "congra".tr,
-              subTitle: "yupdate".tr,
-              btOnpressed: () =>
-                  {Get.offAll(HomeScreen(), binding: ProductBinding())});
-        } else {
-          CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.error,
-              context: Get.context,
-              describe: "",
-              mainTitle: "oops".tr,
-              subTitle: "failed".tr,
-              btOnpressed: () => {
-                    //Navigator.pop(Get.context!)
-                  }
-              //Get.offAll(HomeScreen(), binding: ProductBinding()
+          image: MultipartFile.fromFileSync(imagee!.path));
+      if (res["status"] == 200) {
+        print(res["message"]);
+        print("Name of${editProductNameArabicController.text}");
+        CustomeAwesomeDialog().AwesomeDialogHeader(
+            DialogType: DialogType.success,
+            context: Get.context,
+            describe: "",
+            mainTitle: "congra".tr,
+            subTitle: "yupdate".tr,
+            btOnpressed: () =>
+                {Get.offAll(HomeScreen(), binding: ProductBinding())});
+      } else {
+        CustomeAwesomeDialog().AwesomeDialogHeader(
+            DialogType: DialogType.error,
+            context: Get.context,
+            describe: "",
+            mainTitle: "oops".tr,
+            subTitle: "failed".tr,
+            btOnpressed: () => {
+                  //Navigator.pop(Get.context!)
+                }
+            //Get.offAll(HomeScreen(), binding: ProductBinding()
 
-              );
+            );
 
-          print("something is error in element");
-        }
+        print("something is error in element");
       }
     } catch (e) {
       print("something error ${e.toString()}");

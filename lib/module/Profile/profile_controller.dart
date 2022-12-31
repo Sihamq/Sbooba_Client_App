@@ -36,6 +36,7 @@ class ProfileController extends GetxController {
     editShopAdress.text = item.data!.address!;
     editCommerical.text = item.data!.commercialNo!;
     img = item.data!.image;
+    gender = item.data!.gender;
   }
 
   @override
@@ -100,51 +101,44 @@ class ProfileController extends GetxController {
   /////////////////////update profile////////////////////////////////
   updateProfileInformation(context) async {
     print(editName.text);
-    if (genterTo == 1) {
-      if (formKey.currentState!.validate()) {
-        try {
-          isLoading = true;
-          var res = await ProfileData().updateData(
-              name: editName.text,
-              email: editEmail.text,
-              shopname: editShopName.text,
-              shopAdress: editShopAdress.text,
-              phone: editPhone.text,
-              gender: gender,
-              commercial_no: editCommerical.text,
-              cityId: 1,
-              latitude: 0,
-              longitude: 0,
-              image: MultipartFile.fromFileSync(imagee!.path));
-          if (res["status"] == 200) {
-            CustomeAwesomeDialog().AwesomeDialogHeader(
-                DialogType: DialogType.success,
-                context: context,
-                describe: "",
-                mainTitle: "",
-                subTitle: "upprofile".tr,
-                btOnpressed: () =>
-                    Get.off(LoginScreen(), binding: LoginBinding()));
-            update();
-          } else {
-            showSnakBarMessage(msg: "Failed Updating", color: Colors.red[900]);
 
-            isLoading = false;
-            update();
-          }
-        } catch (e) {
+    if (formKey.currentState!.validate()) {
+      try {
+        isLoading = true;
+        var res = await ProfileData().updateData(
+            name: editName.text,
+            email: editEmail.text,
+            shopname: editShopName.text,
+            shopAdress: editShopAdress.text,
+            phone: editPhone.text,
+            gender: gender,
+            commercial_no: editCommerical.text,
+            cityId: 1,
+            latitude: 0,
+            longitude: 0,
+            image: imagee == null
+                ? null
+                : MultipartFile.fromFileSync(imagee!.path));
+        if (res["status"] == 200) {
+          CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.success,
+              context: context,
+              describe: "",
+              mainTitle: "",
+              subTitle: "upprofile".tr,
+              btOnpressed: () =>
+                  Get.off(LoginScreen(), binding: LoginBinding()));
+          update();
+        } else {
+          showSnakBarMessage(msg: "Failed Updating", color: Colors.red[900]);
+
           isLoading = false;
-          print("something error ${e.toString()}");
+          update();
         }
+      } catch (e) {
+        isLoading = false;
+        print("something error ${e.toString()}");
       }
-    } else {
-      CustomeAwesomeDialog().AwesomeDialogHeader(
-          DialogType: DialogType.warning,
-          context: context,
-          describe: "",
-          mainTitle: "",
-          subTitle: "updd".tr,
-          btOnpressed: () => {});
     }
   }
 }

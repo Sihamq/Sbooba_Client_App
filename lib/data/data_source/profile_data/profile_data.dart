@@ -25,16 +25,16 @@ class ProfileData {
   }
 
   Future updateData(
-      {required name,
-      required email,
-      required shopname,
-      required shopAdress,
-      required phone,
-      required gender,
-      required commercial_no,
-      required cityId,
-      required latitude,
-      required longitude,
+      { name,
+      email,
+       shopname,
+ shopAdress,
+      phone,
+       gender,
+       commercial_no,
+       cityId,
+       latitude,
+       longitude,
       image}) async {
     FormData data = FormData.fromMap({
       "name": name,

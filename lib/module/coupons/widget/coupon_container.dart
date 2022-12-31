@@ -56,16 +56,27 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
               children: [
                 Row(
                   children: [
-                    Text(
-                      controller.couponItem[index!].couponType.toString(),
-                      // 'Product Base',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        color: secondaryColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    controller.couponItem[index!].couponType == 0
+                        ? Text(
+                            "c1".tr,
+                            // 'Product Base',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              color: secondaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Text(
+                            "c2".tr,
+                            // 'Product Base',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 9.sp,
+                              color: secondaryColor,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                     // SizedBox(
                     //   width: 10.5.h,
                     // ),

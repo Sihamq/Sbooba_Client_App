@@ -73,76 +73,91 @@ class CreateController extends GetxController {
 
   /////////////////sign up code///////////////////////
   CreateAccount(context) async {
-    if (formKey.currentState!.validate()) {
-      try {
-        // isLaoding = true;
-        print(nameController.value.text);
-        var data = await SignupData().postData(
-            name: nameController.text,
-            email: emailController.text,
-            pasword: passwordController.text,
-            confirmPassword: confirmController.text,
-            shopname: shopController.text,
-            shopAdress: addressController.text,
-            phone: phoneController.text,
-            commercial_no: commericalController.text,
-            cityId: 1,
-            gender: gender,
-            latitude: 0,
-            longitude: 0,
-            image: MultipartFile.fromFileSync(imagee!.path));
-        print(data);
-
-        print("sucess");
-        if (data["status"] == 200) {
-          //  isLaoding = false;
-          CustomeAwesomeDialog().AwesomeDialogHeader(
-            DialogType: DialogType.success,
-            context: context,
-            describe: "",
-            mainTitle: "congra".tr,
-            subTitle: "signup".tr,
-            btOnpressed: () =>
-                Get.offAll(LoginScreen(), binding: LoginBinding()),
+    if (imagee == null) {
+      CustomeAwesomeDialog().AwesomeDialogHeader(
+          DialogType: DialogType.warning,
+          context: context,
+          describe: "اختيار شعار متجرك ضروري لاكمال التسجيل".tr,
+          mainTitle: "تنبيه",
+          subTitle: "",
+          btOnpressed: () => {}
+          //Get.offAll(LoginScreen(), binding: LoginBinding()
+          //),
           );
+    } else {
+      if (formKey.currentState!.validate()) {
+        try {
+          // isLaoding = true;
+          print(nameController.value.text);
+          var data = await SignupData().postData(
+              name: nameController.text,
+              email: emailController.text,
+              pasword: passwordController.text,
+              confirmPassword: confirmController.text,
+              shopname: shopController.text,
+              shopAdress: addressController.text,
+              phone: phoneController.text,
+              commercial_no: commericalController.text,
+              cityId: 1,
+              gender: gender,
+              latitude: 0,
+              longitude: 0,
+              image: MultipartFile.fromFileSync(imagee!.path));
+          print(data);
+
+          print("sucess");
+          if (data["status"] == 200) {
+            //  isLaoding = false;
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+              DialogType: DialogType.success,
+              context: context,
+              describe: "",
+              mainTitle: "congra".tr,
+              subTitle: "signup".tr,
+              btOnpressed: () =>
+                  Get.offAll(LoginScreen(), binding: LoginBinding()),
+            );
+          }
+          var res = data["email"];
+          var res1 = data["phone"];
+          var res2 = data["shop_name"];
+          var res3 = data["commercial_no"];
+
+          print(res);
+          // var tagsJson = jsonDecode(data)['seller.email'];
+          List<String> tags = [];
+          tags = res != null ? List.from(res) : [];
+          List<String> tags1 = [];
+          tags1 = res1 != null ? List.from(res1) : [];
+          List<String> tags2 = [];
+          tags2 = res2 != null ? List.from(res2) : [];
+          List<String> tags3 = [];
+          tags3 = res3 != null ? List.from(res3) : [];
+
+          print("tags$tags");
+          if (tags.isNotEmpty) {
+            isLaoding = false;
+            showSnakBarMessage(msg: "emailistaken".tr, color: Colors.red[900]);
+          } else if (tags1.isNotEmpty) {
+            isLaoding = false;
+            showSnakBarMessage(msg: "phoneistaken".tr, color: Colors.red[900]);
+          } else if (tags2.isNotEmpty) {
+            isLaoding = false;
+            showSnakBarMessage(
+                msg: "Shopnameistaken".tr, color: Colors.red[900]);
+          } else if (tags3.isNotEmpty) {
+            isLaoding = false;
+            showSnakBarMessage(
+                msg: "commericalistaken".tr, color: Colors.red[900]);
+          }
+
+          update();
+        } catch (e) {
+          print(" error sign up is${e.toString()}unknown");
         }
-        var res = data["seller.email"];
-        var res1 = data["seller.phone"];
-        var res2 = data["seller.shop_name"];
-        var res3 = data["seller.commercial_no"];
+        //  isLaoding = false;
 
-        print(res);
-        // var tagsJson = jsonDecode(data)['seller.email'];
-        List<String> tags = [];
-        tags = res != null ? List.from(res) : [];
-        List<String> tags1 = [];
-        tags1 = res1 != null ? List.from(res1) : [];
-        List<String> tags2 = [];
-        tags2 = res2 != null ? List.from(res2) : [];
-        List<String> tags3 = [];
-        tags3 = res3 != null ? List.from(res3) : [];
-
-        print("tags$tags");
-        if (tags.isNotEmpty) {
-          isLaoding = false;
-          showSnakBarMessage(msg: "emailistaken".tr, color: Colors.red[900]);
-        } else if (tags1.isNotEmpty) {
-          isLaoding = false;
-          showSnakBarMessage(msg: "phoneistaken".tr, color: Colors.red[900]);
-        } else if (tags2.isNotEmpty) {
-          isLaoding = false;
-          showSnakBarMessage(msg: "Shopnameistaken".tr, color: Colors.red[900]);
-        } else if (tags3.isNotEmpty) {
-          isLaoding = false;
-          showSnakBarMessage(
-              msg: "commericalistaken".tr, color: Colors.red[900]);
-        }
-
-        update();
-      } catch (e) {
-        print(" error sign up is${e.toString()}unknown");
       }
-      //  isLaoding = false;
     }
   }
 

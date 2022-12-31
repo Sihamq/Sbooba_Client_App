@@ -201,7 +201,8 @@ class Productdata {
       meta_title,
       meta_description,
       attachment_delete,
-      attachments}) async {
+      attachments,
+      image}) async {
     FormData data = FormData.fromMap({
       "name": {"ar": name_ar, "en": name_en},
       "description": {"ar": description_ar, "en": description_en},
@@ -230,7 +231,7 @@ class Productdata {
       "discount_end_date": discount_end_date,
       "attachment_delete[]": attachment_delete,
       "attachments[]": attachments,
-      
+      "image": image
     });
 
     var response = await DioHelper.putDataForm(

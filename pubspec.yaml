@@ -49,6 +49,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
  
   awesome_dialog: ^3.0.2
+  flutter_advanced_avatar: ^1.1.0
   
   flutter_spinkit: ^5.1.0
   

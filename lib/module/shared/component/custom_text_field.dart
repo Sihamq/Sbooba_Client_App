@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sizer/sizer.dart';
+import 'package:flutter/services.dart';
 
 //import 'package:flutter_hex_color/flutter_hex_color.dart';
 
@@ -47,6 +48,9 @@ class MyTextField extends StatelessWidget {
     return SizedBox(
       //height: MediaQuery.of(context).size.height * .08,
       child: TextFormField(
+        inputFormatters: [
+          FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))
+        ],
         maxLines: maxline == null ? 1 : maxline,
         //  scrollPadding: EdgeInsets.all(8),
         // Added this

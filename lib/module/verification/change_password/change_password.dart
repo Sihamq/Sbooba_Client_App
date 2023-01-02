@@ -52,14 +52,8 @@ class ChangePassword extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(1.h),
                     child: Text("Set a new Password".tr,
-                        style:const TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 20)),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(1.h),
-                    child: Text("Set a new Password".tr,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 14)),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
@@ -78,7 +72,7 @@ class ChangePassword extends StatelessWidget {
                     child: MyTextField(
                       controller: controller.newPasswordController,
                       obcure: true,
-                      label: "Confirm  your password".tr,
+                      label: "newPass".tr,
                       prefix: Icons.lock,
                       suffix: Icons.visibility,
                     ),
@@ -89,7 +83,7 @@ class ChangePassword extends StatelessWidget {
                     child: MyTextField(
                       controller: controller.confirmPasswordController,
                       obcure: true,
-                      label: "Confirm  your password".tr,
+                      label: "Confirmyourpassword".tr,
                       prefix: Icons.lock,
                       suffix: Icons.visibility,
                     ),
@@ -116,6 +110,5 @@ class ChangePassword extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

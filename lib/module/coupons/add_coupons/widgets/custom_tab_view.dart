@@ -48,24 +48,56 @@ class CustomTabView extends GetView<CouponsController> {
                     onTap: () {
                       showDialog(
                           context: context,
-                          builder: (context) => Dialog(
-                                clipBehavior: Clip.antiAliasWithSaveLayer,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                child: Column(
-                                  children: controller.ProdctList.map(
-                                      (e) => RadioListTile(
-                                            activeColor: myGreen,
-                                            title: Text("${e.name}"),
-                                            groupValue: 1,
-                                            value: e.id,
-                                            onChanged: (val) {
-                                              // setState(() {
-                                              //   radioItem = data.name ;
-                                              //   id = data.index;
-                                              // });
-                                            },
-                                          )).toList(),
+                          builder: (context) => Obx(
+                                () => Dialog(
+                                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(20.0)),
+                                  child: ListView(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.all(1.h),
+                                        child: Container(
+                                          // ignore: sort_child_properties_last
+                                          child: Center(
+                                            child: Text(
+                                              "اختر المنتج",
+                                              style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  const BorderRadius.all(
+                                                      Radius.circular(10)),
+                                              color: myGreen.withOpacity(.1)),
+                                        ),
+                                      ),
+                                      Column(
+                                        children: controller.ProdctList.map(
+                                            (e) => RadioListTile(
+                                                  activeColor: myGreen,
+                                                  title: Text(
+                                                    "${e.name}",
+                                                    style: TextStyle(
+                                                        color: myOrange,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                  groupValue: e
+                                                      .id, //controller.radioId.value,
+                                                  value: controller
+                                                      .radioId.value, //e.id,
+                                                  onChanged: (val) {
+                                                    controller
+                                                        .changeRadioButton(e);
+                                                  },
+                                                )).toList(),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ));
                     },
@@ -84,64 +116,64 @@ class CustomTabView extends GetView<CouponsController> {
                 }),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(1.h),
-              child: DecoratedBox(
-                  decoration: BoxDecoration(
-                      color: Colors.white, //background color of dropdown button
-                      border: Border.all(
-                          color: myOrange,
-                          width: 2), //border of dropdown button
-                      borderRadius: BorderRadius.circular(
-                          15), //border raiuds of dropdown button
-                      boxShadow: <BoxShadow>[
-                        //apply shadow on Dropdown button
-                        BoxShadow(
-                            color: myOrange,
-                            blurRadius: 0.1), //shadow for button
-                      ]),
-                  child: DropdownButton(
-                    isExpanded: true,
-                    autofocus: true,
-                    dropdownColor: myWhite,
-                    focusColor: myOrange,
-                    underline: const SizedBox(),
-                    elevation: 2,
-                    hint: Center(
-                      child: controller.catSelect.value == ""
-                          ? Padding(
-                              padding: EdgeInsets.all(1.h),
-                              child: Text(
-                                "coupon".tr,
-                                style: TextStyle(fontSize: 13.sp),
-                              ),
-                            )
-                          : Text(
-                              controller.catSelect.value,
-                              style: TextStyle(fontSize: 13.sp),
-                            ),
-                    ),
-                    alignment: AlignmentDirectional.center,
-                    iconSize: 20.sp,
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: myOrange,
-                      size: 25.sp,
-                    ),
-                    items: controller.couponsItem
-                        .map<DropdownMenuItem<CateogryItems>>(
-                            (cat) => DropdownMenuItem(
-                                  value: cat,
-                                  child: Center(
-                                    child: Text(cat.name!),
-                                  ),
-                                ))
-                        .toList(),
-                    onChanged: ((value) {
-                      controller.changeSelectCategory(value);
-                    }),
-                  )),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(1.h),
+            //   child: DecoratedBox(
+            //       decoration: BoxDecoration(
+            //           color: Colors.white, //background color of dropdown button
+            //           border: Border.all(
+            //               color: myOrange,
+            //               width: 2), //border of dropdown button
+            //           borderRadius: BorderRadius.circular(
+            //               15), //border raiuds of dropdown button
+            //           boxShadow: <BoxShadow>[
+            //             //apply shadow on Dropdown button
+            //             BoxShadow(
+            //                 color: myOrange,
+            //                 blurRadius: 0.1), //shadow for button
+            //           ]),
+            //       child: DropdownButton(
+            //         isExpanded: true,
+            //         autofocus: true,
+            //         dropdownColor: myWhite,
+            //         focusColor: myOrange,
+            //         underline: const SizedBox(),
+            //         elevation: 2,
+            //         hint: Center(
+            //           child: controller.catSelect.value == ""
+            //               ? Padding(
+            //                   padding: EdgeInsets.all(1.h),
+            //                   child: Text(
+            //                     "coupon".tr,
+            //                     style: TextStyle(fontSize: 13.sp),
+            //                   ),
+            //                 )
+            //               : Text(
+            //                   controller.catSelect.value,
+            //                   style: TextStyle(fontSize: 13.sp),
+            //                 ),
+            //         ),
+            //         alignment: AlignmentDirectional.center,
+            //         iconSize: 20.sp,
+            //         icon: Icon(
+            //           Icons.keyboard_arrow_down,
+            //           color: myOrange,
+            //           size: 25.sp,
+            //         ),
+            //         items: controller.couponsItem
+            //             .map<DropdownMenuItem<CateogryItems>>(
+            //                 (cat) => DropdownMenuItem(
+            //                       value: cat,
+            //                       child: Center(
+            //                         child: Text(cat.name!),
+            //                       ),
+            //                     ))
+            //             .toList(),
+            //         onChanged: ((value) {
+            //           controller.changeSelectCategory(value);
+            //         }),
+            //       )),
+            // ),
             Padding(
               padding: EdgeInsets.all(1.h),
               child: DecoratedBox(

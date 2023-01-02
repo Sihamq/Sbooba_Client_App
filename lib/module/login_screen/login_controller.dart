@@ -17,7 +17,7 @@ class LoginController extends GetxController {
   var passwordController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isshowpassword = true;
-  var isLoading = false;
+  var isLoading = false.obs;
   IconData? iconVisiblity = Icons.visibility_off;
   showPassword() {
     isshowpassword = !isshowpassword;
@@ -49,11 +49,12 @@ class LoginController extends GetxController {
       try {
         print(nameController.text);
         print(passwordController.text);
-        isLoading = true;
+        isLoading.value = true;
         var res = await LoginData().postData(
-            email: nameController.text, password: passwordController.text);
+            email: nameController.text.trim(),
+            password: passwordController.text.trim());
         if (res["status"] == 200) {
-          isLoading = false;
+          isLoading.value = false;
           String token = res["data"]["token"];
           print(token.toString());
           CashHelper.putData("token", token);
@@ -67,7 +68,7 @@ class LoginController extends GetxController {
                 Get.offAll(HomeScreen(), binding: ProductBinding()),
           );
         } else if (res["status"] == 500) {
-          isLoading = false;
+          isLoading.value = false;
           if (res["message"] == "Password incorrect!") {
             showSnakBarMessage(msg: "notcorrect".tr, color: Colors.red[900]);
           } else if (res["message"] == "Email not found!") {
@@ -77,7 +78,7 @@ class LoginController extends GetxController {
 
         update();
       } catch (e) {
-        isLoading = false;
+        isLoading.value = false;
         print(e.toString());
         //print("email or password not correct");
       }

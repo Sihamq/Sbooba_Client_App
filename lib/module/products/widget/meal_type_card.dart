@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
@@ -30,12 +31,25 @@ class MealCard extends GetView<ProductController> {
                 Container(
                     height: 12.h,
                     width: 100.w,
-                    child: Image(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          ApiLink.storeageImage +
-                              controller.productItem[index!].image!,
-                        ))),
+                    child: CachedNetworkImage(
+                      imageUrl: ApiLink.storeageImage +
+                          controller.productItem[index!].image!,
+                      fit: BoxFit.cover,
+                      errorWidget: (context, url, error) =>
+                          Image.asset("assets/sh.png"),
+                      // NetworkImage(
+                      //       ApiLink.storeageImage +
+                      //           controller.productItem[index!].image!,
+                      //     )),
+
+                      //    Image(
+                      //       fit: BoxFit.cover,
+                      //       image: NetworkImage(
+                      //         ApiLink.storeageImage +
+                      //             controller.productItem[index!].image!,
+                      //       )),
+                      //
+                    )),
                 Align(
                   alignment: AlignmentDirectional.topStart,
                   child: InkWell(

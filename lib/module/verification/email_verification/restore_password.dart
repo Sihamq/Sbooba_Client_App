@@ -17,8 +17,6 @@ class RestorePassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var passwordController = TextEditingController();
-    var ConfirmPasswordController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -42,7 +40,7 @@ class RestorePassword extends StatelessWidget {
                 top: 8.h,
               ),
               child: Form(
-                key: controller.formKey,
+                key: controller.formKey1,
                 child: Column(children: [
                   Padding(
                     padding: EdgeInsets.all(1.h),
@@ -59,7 +57,7 @@ class RestorePassword extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(1.h),
                     child: Text("Set a new Password".tr,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 14)),
                   ),
                   Padding(
@@ -79,7 +77,7 @@ class RestorePassword extends StatelessWidget {
                     child: MyTextField(
                       controller: controller.confiremController,
                       obcure: true,
-                      label: "Confirm  your password".tr,
+                      label: "Confirmyourpassword".tr,
                       prefix: Icons.lock,
                       suffix: Icons.visibility,
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:sboba_app_client/lang/lang_controller.dart';
 import 'package:sboba_app_client/module/login_screen/login_controller.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 
@@ -20,11 +21,56 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(backgroundColor: Colors.white),
+      appBar: AppBar(backgroundColor: Colors.white, elevation: 0, actions: [
+        Padding(
+          padding: EdgeInsets.all(1.h),
+          child: InkWell(
+              child: Icon(
+                Icons.language,
+                color: myOrange,
+                size: 23.sp,
+              ),
+              onTap: () => Get.defaultDialog(
+                  backgroundColor: myWhite,
+                  buttonColor: myGreen,
+                  title: "Language".tr,
+                  titleStyle: const TextStyle(fontWeight: FontWeight.bold),
+                  content: Column(children: [
+                    GetBuilder<LanguageController>(
+                        init: LanguageController(),
+                        builder: (controller) => Column(
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      controller.changeLang("ar");
+                                      navigator!.pop();
+                                    },
+                                    child: Text(
+                                      "Arabic".tr,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: myGreen),
+                                    )),
+                                TextButton(
+                                    onPressed: () {
+                                      controller.changeLang("en");
+                                      navigator!.pop();
+                                    },
+                                    child: Text(
+                                      "English".tr,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: myGreen),
+                                    ))
+                              ],
+                            )),
+                  ]))),
+        ),
+      ]),
       body: SingleChildScrollView(
         child: Padding(
             padding: EdgeInsets.only(
-              top: 7.h,
+              top: 2.h,
             ),
             child: GetBuilder<LoginController>(
               init: LoginController(),
@@ -70,24 +116,27 @@ class LoginScreen extends StatelessWidget {
                       onTapIcon: () => controller.showPassword(),
                     ),
                   ),
-                  BlueButton(
-                      onpress: () async {
-                        FocusScope.of(context).unfocus();
-                        await controller.login(context);
-                      },
-                      title: controller.isLoading == true
-                          ? SpinKitPouringHourGlassRefined(
-                              color: myOrange,
-                            )
-                          : Text(
-                              "LOGIN".tr,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 14.sp),
-                            ),
-                      hight: 7.h,
-                      width: 49.h),
+                  Obx(
+                    () => BlueButton(
+                        onpress: () async {
+                          FocusScope.of(context).unfocus();
+                          await controller.login(context);
+                        },
+                        title: controller.isLoading == true
+                            ? SpinKitDualRing(
+                                size: 20.sp,
+                                color: myOrange,
+                              )
+                            : Text(
+                                "LOGIN".tr,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.sp),
+                              ),
+                        hight: 7.h,
+                        width: 49.h),
+                  ),
                   InkWell(
                     onTap: (() {
                       Get.to(EmailVerification());
@@ -102,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                   ),
                   //Spacer(),
                   SizedBox(
-                    height: 20.h,
+                    height: 17.h,
                   ),
                   InkWell(
                     onTap: () {},

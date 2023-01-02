@@ -32,10 +32,8 @@ class CouponsController extends GetxController
   var couponItem = <CouponsItems>[].obs;
   bool isLoading = false;
   List<CateogryItems> discountTypeList = [
-    CateogryItems(name: "100%", id: 0),
-    CateogryItems(name: "50%", id: 1),
-    CateogryItems(name: "20%", id: 2),
-    CateogryItems(name: "10%", id: 3),
+    CateogryItems(name: "خصم بالنسبة", id: 1),
+    CateogryItems(name: "خصم بالمبلغ", id: 2),
   ].obs;
   GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
@@ -49,13 +47,24 @@ class CouponsController extends GetxController
     CateogryItems(name: "c1".tr, id: 0),
     CateogryItems(name: "c2".tr, id: 1)
   ].obs;
+  var radioItem = "".obs;
+  var radioId = 0.obs;
+  //   id = data.index;
   var catSelect = "".obs;
   var cat_id = 0.obs;
   var discountSelect = "".obs;
   var discountId = 0.obs;
+  void changeRadioButton(val) {
+    radioItem.value = val.name;
+    radioId.value = val.id;
+  }
+
+  var idies = [].obs;
   void changeSelectDiscount(val) {
     discountSelect.value = val.name;
+
     discountId.value = val.id;
+    idies.value.add(discountId);
 
     update();
   }
@@ -64,6 +73,15 @@ class CouponsController extends GetxController
     catSelect.value = val.name;
     cat_id.value = val.id;
     print(cat_id);
+    update();
+  }
+
+  void selectionChanged(DateRangePickerSelectionChangedArgs args) {
+    startDate.value =
+        DateFormat("yyyy-MM-dd").format(args.value.startDate).toString();
+    endDate.value = DateFormat("yyyy-MM-dd")
+        .format(args.value.endDate ?? args.value.startDate)
+        .toString();
     update();
   }
 
@@ -91,16 +109,21 @@ class CouponsController extends GetxController
     editDiscount.text = item.discount.toString();
     editDisountType.text = item.discountType.toString();
     editcouponType.text = item.couponType.toString();
-    // cat_id.value = item.couponType!;
-  }
-
-  void selectionChanged(DateRangePickerSelectionChangedArgs args) {
+    cat_id.value = item.couponType!;
+    discountId.value = item.discountType!;
+    if (discountId == 1) {
+      // dis_id.value = 1;
+      discountSelect.value = "خصم بالنسبة";
+    } else {
+      // dis_id.value = 2;
+      discountSelect.value = "خصم بالمبلغ";
+    }
     startDate.value =
-        DateFormat("dd, MMMM yyyy").format(args.value.startDate).toString();
-    endDate.value = DateFormat('dd, MMMM yyyy')
-        .format(args.value.endDate ?? args.value.startDate)
-        .toString();
-    update();
+        DateFormat("yyyy-MM-dd").format(item.fromDate!).toString();
+    endDate.value = DateFormat("yyyy-MM-dd").format(item.toDate!).toString();
+   // idies.add(item.)
+
+    // cat_id.value = item.couponType!;
   }
 
   /////////////fetching coupon//////////////////////
@@ -170,14 +193,14 @@ class CouponsController extends GetxController
       if (formKey1.currentState!.validate()) {
         try {
           var res = await CouponData().storeCoupon(
-              couponType: cat_id,
+              couponType: 1,
               couponCode: couponCode.text,
               discountType: discountId,
               discount: discount.text,
-              fromDate: "2022-10-1",
-              toDate: "2022-12-1",
+              fromDate: startDate.value,
+              toDate: endDate.value,
               status: "1",
-              productName: "1");
+              productName: idies);
           if (res["status"] == 200) {
             CustomeAwesomeDialog().AwesomeDialogHeader(
                 DialogType: DialogType.success,
@@ -192,36 +215,52 @@ class CouponsController extends GetxController
                       discount.clear(),
                       getCoupons().then((value) => Get.back())
                     });
-          } else {}
-        } catch (e) {}
+          } else {
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.success,
+                context: Get.context,
+                describe: "",
+                mainTitle: "error".tr,
+                subTitle: "لم يتم اضافة كوبون جديد".tr,
+                btOnpressed: () => {
+                      couponCode.clear(),
+                      catSelect.value = "",
+                      discountSelect.value = "",
+                      discount.clear(),
+                      getCoupons().then((value) => Get.back())
+                    });
+          }
+        } catch (e) {
+          print("errors is ${e.toString()}");
+        }
       }
     }
   }
-  List<CouponProductItem> ProdctList=[];
-    Future getProductList() async {
-    try{
+
+  var ProdctList = [].obs;
+  Future getProductList() async {
+    try {
       isLoading = true;
       var res = await CouponData().getProduct();
       if (res["status"] == 200) {
         isLoading = false;
         var coupons = res["data"] as List;
 
-       ProdctList =
+        ProdctList.value =
             coupons.map((e) => CouponProductItem.fromJson(e)).toList();
-       
-       // print(couponItem);
-       
+
+        // print(couponItem);
+
         update();
       } else {
         isLoading = true;
-        change(couponItem.value, status: RxStatus.empty());
-        }
+        //  change(couponItem.value, status: RxStatus.empty());
+      }
     } catch (e) {
       print("something error ${e.toString()}");
       change(couponItem.value, status: RxStatus.empty());
     }
   }
-
 
   updateCoupon({id}) async {
     if (catSelect.value.isEmpty && discountSelect.value.isEmpty) {
@@ -241,8 +280,8 @@ class CouponsController extends GetxController
               couponCode: editCouponCode.text,
               discountType: discount,
               discount: editDiscount.text,
-              fromDate: "2022-10-1",
-              toDate: "2022-12-1",
+              fromDate: startDate.value,
+              toDate: endDate.value,
               status: "1",
               productName: "1");
           if (res["status"] == 200) {
@@ -253,7 +292,15 @@ class CouponsController extends GetxController
                 mainTitle: "congra".tr,
                 subTitle: "yupdate".tr,
                 btOnpressed: () => {getCoupons().then((value) => Get.back())});
-          } else {}
+          } else {
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.success,
+                context: Get.context,
+                describe: "",
+                mainTitle: "error".tr,
+                subTitle: "لم يتم تحديث الكوبون".tr,
+                btOnpressed: () => {});
+          }
         } catch (e) {
           print("Something is error  ${e.toString()}");
         }

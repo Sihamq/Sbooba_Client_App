@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:image_picker/image_picker.dart';
@@ -95,8 +96,9 @@ class CreateAccount extends StatelessWidget {
                           padding: EdgeInsets.only(
                               bottom: 2.h, left: 2.h, right: 2.h),
                           child: MyTextField(
+                            type: TextInputType.emailAddress,
                             validate: ((p0) {
-                              return validInput(p0!, 3, 20, "email");
+                              return validInput(p0!, 3, 1000, "email");
                             }),
                             controller: controller.emailController,
                             obcure: false,
@@ -245,20 +247,28 @@ class CreateAccount extends StatelessWidget {
                               ),
                             )),
 
-                        BlueButton(
-                            onpress: () async {
-                              FocusScope.of(context).unfocus();
-                              await controller.CreateAccount(context);
-                            },
-                            title: Text(
-                              "Create".tr,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 15.sp),
-                            ),
-                            hight: 7.h,
-                            width: 48.h),
+                        Obx(
+                          () => BlueButton(
+                              onpress: () async {
+                                FocusScope.of(context).unfocus();
+
+                                await controller.CreateAccount(context);
+                              },
+                              title: controller.isLoading == true
+                                  ? SpinKitDualRing(
+                                      size: 20.sp,
+                                      color: myOrange,
+                                    )
+                                  : Text(
+                                      "Create".tr,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15.sp),
+                                    ),
+                              hight: 7.h,
+                              width: 48.h),
+                        ),
 
                         //Spacer(),
                       ])),

@@ -18,11 +18,10 @@ class ApiLink {
   static const String updateProfile = "/seller/profile";
   static const String storeCoupon = "/seller/coupons";
   static const String updateCoupon = "/seller/coupons/";
-  static const String storeageImage =
-      "http://192.168.1.105/sboba_v3/public/storage/";
+  static const String storeageImage = "https://demo.sboba.net/storage/";
   static const String changePassword = "/seller/change-password";
   static const String forgetPassword = "/seller/forgot/password";
   static const String sendOtp = "/seller/password/reset_token";
   static const String restorePassword = "/seller/password/reset";
-  static const String listProduct="/seller/list-product" ;// delete
+  static const String listProduct = "/seller/list-product"; // delete
 }

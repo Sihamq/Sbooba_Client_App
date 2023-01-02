@@ -2,12 +2,18 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/data/data_source/auth/forgetPass.dart';
+import 'package:sboba_app_client/module/login_screen/login_binding.dart';
+import 'package:sboba_app_client/module/login_screen/login_controller.dart';
+import 'package:sboba_app_client/module/login_screen/login_screen_view.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
 import 'package:sboba_app_client/module/verification/email_verification/restore_password.dart';
+
+import 'check_screen.dart';
 
 class EmailVerificationController extends GetxController {
   var emailVerifyController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
   var pinController = TextEditingController();
   var passwordController = TextEditingController();
   var confiremController = TextEditingController();
@@ -25,24 +31,15 @@ class EmailVerificationController extends GetxController {
             .ForgetPassword(email: emailVerifyController.text);
         if (res["status"] == 200) {
           isLoading = false;
-
-          CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.success,
-              context: context,
-              describe: "",
-              mainTitle: "congra".tr,
-              subTitle: "تم تغيير كلمة المرور بنجاح",
-              btOnpressed: () => {}
-              // Get.offAll(HomeScreen(), binding: ProductBinding()),
-              );
-        } else if (res["status"] == 500) {
+          Get.to(() => const CheckScreen());
+        } else {
           isLoading = false;
           CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.success,
+              DialogType: DialogType.error,
               context: context,
               describe: "",
-              mainTitle: "حدث خطأ",
-              subTitle: "لم يتم تغيير كلمة المرور",
+              mainTitle: "error".tr,
+              subTitle: "noreg".tr,
               btOnpressed: () => {}
               // Get.offAll(HomeScreen(), binding: ProductBinding()),
               );
@@ -60,6 +57,7 @@ class EmailVerificationController extends GetxController {
 
   sendOtpCode(context) async {
     if (formKey.currentState!.validate()) {
+      print(emailVerifyController.text);
       try {
         isLoading = true;
         var res = await ForgetPassdData().OtpData(
@@ -74,8 +72,8 @@ class EmailVerificationController extends GetxController {
               DialogType: DialogType.success,
               context: context,
               describe: "",
-              mainTitle: "حدث خطأ",
-              subTitle: "تأكد من الرمز الذي ادخلته",
+              mainTitle: "error".tr,
+              subTitle: "verify".tr,
               btOnpressed: () => {}
               // Get.offAll(HomeScreen(), binding: ProductBinding()),
               );
@@ -92,7 +90,7 @@ class EmailVerificationController extends GetxController {
   }
 
   sendRestorePassword(context) async {
-    if (formKey.currentState!.validate()) {
+    if (formKey1.currentState!.validate()) {
       try {
         isLoading = true;
         var res = await ForgetPassdData().restorePass(
@@ -104,25 +102,23 @@ class EmailVerificationController extends GetxController {
           isLoading = false;
 
           CustomeAwesomeDialog().AwesomeDialogHeader(
-              DialogType: DialogType.success,
-              context: context,
-              describe: "",
-              mainTitle: "congra".tr,
-              subTitle: "تم تغيير كلمة المرور بنجاح",
-              btOnpressed: () => {}
-              // Get.offAll(HomeScreen(), binding: ProductBinding()),
-              );
-        } else if (res["status"] == 500) {
+            DialogType: DialogType.success,
+            context: context,
+            describe: "",
+            mainTitle: "congra".tr,
+            subTitle: "change".tr,
+            btOnpressed: () =>
+                Get.offAll(LoginScreen(), binding: LoginBinding()),
+          );
+        } else {
           isLoading = false;
           CustomeAwesomeDialog().AwesomeDialogHeader(
               DialogType: DialogType.success,
               context: context,
               describe: "",
-              mainTitle: "حدث خطأ",
-              subTitle: "لم يتم تغيير كلمة المرور",
-              btOnpressed: () => {}
-              // Get.offAll(HomeScreen(), binding: ProductBinding()),
-              );
+              mainTitle: "error".tr,
+              subTitle: "nochange".tr,
+              btOnpressed: () => {});
         }
 
         update();

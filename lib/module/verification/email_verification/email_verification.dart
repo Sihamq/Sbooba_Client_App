@@ -21,9 +21,9 @@ class EmailVerification extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          ArrowContainer(),
-        ],
+        // actions: [
+        //   ArrowContainer(),
+        // ],
       ),
       // appBar: AppBar(backgroundColor: Colors.white),
       body: SingleChildScrollView(
@@ -65,11 +65,11 @@ class EmailVerification extends StatelessWidget {
                   BlueButton(
                       onpress: () {
                         controller.forgetePass(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const CheckScreen()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => const CheckScreen()),
+                        // );
                       },
                       title: Text(
                         "Send Code".tr,

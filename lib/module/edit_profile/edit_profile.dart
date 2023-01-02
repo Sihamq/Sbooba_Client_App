@@ -1,5 +1,6 @@
 //import 'dart:html';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -78,12 +79,22 @@ class EditAccount extends GetView<ProfileController> {
                                       height: 15.h,
                                       child: Center(
                                           child: controller.imagee == null
-                                              ? Image.network(
-                                                  ApiLink.storeageImage +
-                                                      controller.profile!.data!
-                                                          .image!,
-                                                  fit: BoxFit.cover,
+                                              ? CachedNetworkImage(
+                                                  imageUrl:
+                                                      ApiLink.storeageImage +
+                                                          controller.profile!
+                                                              .data!.image!,
+                                                  errorWidget: (context, url,
+                                                          error) =>
+                                                      Icon(Icons
+                                                          .add_a_photo_outlined),
                                                 )
+                                              //  Image.network(
+                                              //     ApiLink.storeageImage +
+                                              //         controller.profile!.data!
+                                              //             .image!,
+                                              //     fit: BoxFit.cover,
+                                              //   )
                                               : Image.file(
                                                   controller.imagee!,
                                                   fit: BoxFit.cover,
@@ -276,8 +287,8 @@ class EditAccount extends GetView<ProfileController> {
                                         .updateProfileInformation(context);
                                     // await controller.CreateAccount(context);
                                   },
-                                  title: controller.isLoading
-                                      ? SpinKitPouringHourGlass(
+                                  title: controller.isLoading == true
+                                      ? SpinKitDualRing(
                                           color: myOrange,
                                         )
                                       : Text(
@@ -295,9 +306,9 @@ class EditAccount extends GetView<ProfileController> {
                   ),
                 )
               : Center(
-                  child: SpinKitFadingCube(
+                  child: SpinKitDualRing(
                     color: myOrange,
-                    size: 50.sp,
+                    size: 20.sp,
                   ),
                 ),
         ),

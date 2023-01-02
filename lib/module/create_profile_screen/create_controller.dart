@@ -10,8 +10,11 @@ import 'package:sboba_app_client/data/data_source/auth/signUp_data.dart';
 import 'package:sboba_app_client/data/models/error_signup.dart';
 import 'package:sboba_app_client/module/login_screen/login_binding.dart';
 import 'package:sboba_app_client/module/login_screen/login_screen_view.dart';
+import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sboba_app_client/module/shared/component/snack_message.dart';
 
+import '../home_screen/home_screen_view.dart';
+import '../products/product_binding.dart';
 import '../shared/component/awesome_dialog.dart';
 
 class CreateController extends GetxController {
@@ -25,10 +28,11 @@ class CreateController extends GetxController {
   var commericalController;
 
   int? gender = 0;
+  var isLoading = false.obs;
 
   var shopController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  bool isLaoding = false;
+  // bool isLaoding = false;
   final picker = ImagePicker();
   var pickedFile;
   File? imagee;
@@ -87,7 +91,7 @@ class CreateController extends GetxController {
     } else {
       if (formKey.currentState!.validate()) {
         try {
-          // isLaoding = true;
+          isLoading.value = true;
           print(nameController.value.text);
           var data = await SignupData().postData(
               name: nameController.text,
@@ -107,7 +111,12 @@ class CreateController extends GetxController {
 
           print("sucess");
           if (data["status"] == 200) {
-            //  isLaoding = false;
+           isLoading.value = false;
+
+            String token = data["data"]["token"];
+            CashHelper.putData("token", token);
+            print("token$token");
+
             CustomeAwesomeDialog().AwesomeDialogHeader(
               DialogType: DialogType.success,
               context: context,
@@ -115,8 +124,11 @@ class CreateController extends GetxController {
               mainTitle: "congra".tr,
               subTitle: "signup".tr,
               btOnpressed: () =>
-                  Get.offAll(LoginScreen(), binding: LoginBinding()),
+                  // Get.offAll(LoginScreen(), binding: LoginBinding()),
+                  Get.offAll(HomeScreen(), binding: ProductBinding()),
             );
+          } else {
+            isLoading.value = false;
           }
           var res = data["email"];
           var res1 = data["phone"];
@@ -136,21 +148,21 @@ class CreateController extends GetxController {
 
           print("tags$tags");
           if (tags.isNotEmpty) {
-            isLaoding = false;
+            // isLaoding = true;
             showSnakBarMessage(msg: "emailistaken".tr, color: Colors.red[900]);
           } else if (tags1.isNotEmpty) {
-            isLaoding = false;
+            // isLaoding = true;
             showSnakBarMessage(msg: "phoneistaken".tr, color: Colors.red[900]);
           } else if (tags2.isNotEmpty) {
-            isLaoding = false;
+            // isLaoding = true;
             showSnakBarMessage(
                 msg: "Shopnameistaken".tr, color: Colors.red[900]);
           } else if (tags3.isNotEmpty) {
-            isLaoding = false;
+            // isLaoding = true;
             showSnakBarMessage(
                 msg: "commericalistaken".tr, color: Colors.red[900]);
           }
-
+          //isLaoding = true;
           update();
         } catch (e) {
           print(" error sign up is${e.toString()}unknown");

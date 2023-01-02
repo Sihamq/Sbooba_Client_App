@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -61,11 +62,21 @@ class AddImages extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
                                         color: Colors.grey[50],
-                                        image: DecorationImage(
-                                            image: NetworkImage(
-                                                ApiLink.storeageImage +
-                                                    controller.showProduct[0]
-                                                        .attachment![index]))),
+                                       // image: DecorationImage(
+                                            // image
+                                            // : 
+                                           
+                                            // NetworkImage(
+                                            //     ApiLink.storeageImage +
+                                            //         controller.showProduct[0]
+                                            //             .attachment![index])
+                                                       // )
+                                                        ),child:  CachedNetworkImage(
+                                        errorWidget: (context, url, error) =>
+                                            Image.asset("assets/sh.png"),
+                                        imageUrl: ApiLink.storeageImage +
+                                            controller.img!,
+                                      ),
                                   ),
                                   InkWell(
                                     onTap: () {

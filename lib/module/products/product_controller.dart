@@ -70,8 +70,8 @@ class ProductController extends GetxController
   bool isLoading = false;
   List<ShowItem> showProduct = [];
   List<CateogryItems> discountTypeList = [
-    CateogryItems(name: "خصم بالنسبة", id: 1),
-    CateogryItems(name: "خصم بالمبلغ", id: 2),
+    CateogryItems(name: "c1".tr, id: 1),
+    CateogryItems(name: "c2".tr, id: 2),
   ].obs;
 
   ///////////////////////////////////////methods//////////////////////////////////////
@@ -327,7 +327,7 @@ class ProductController extends GetxController
           DialogType: DialogType.warning,
           context: Get.context,
           describe: "",
-          mainTitle: "يجب عليك اضافة صورة رئيسية للمنتج",
+          mainTitle: "should".tr,
           subTitle: "failed".tr,
           btOnpressed: () => {
                 //Navigator.pop(Get.context!)
@@ -335,6 +335,7 @@ class ProductController extends GetxController
     } else {
       if (formKey.currentState!.validate()) {
         try {
+          isLoading = true;
           var res = await Productdata().addNewProduct(
               name_ar: productNameArabicController.text,
               name_en: productNameEnglishController.text,
@@ -350,9 +351,11 @@ class ProductController extends GetxController
               published: published,
               discount: productDiscountController.text,
               current_stock: 1,
-              discount_end_date: endDate.value,
-              discount_start_date: startDate.value,
-              discount_type: dis_id,
+              discount_end_date:
+                  endDate.value == "00-00-00" ? null : endDate.value,
+              discount_start_date:
+                  startDate.value == "00-00-00" ? null : startDate.value,
+              discount_type: dis_id.value == 0 ? null : dis_id.value,
               low_stock_quantity: 1,
               stock_visibility_state: 1,
               tags: "food",
@@ -366,6 +369,7 @@ class ProductController extends GetxController
               attachmentable: y,
               image: MultipartFile.fromFileSync(imagee!.path));
           if (res["status"] == 200) {
+            isLoading = false;
             print(res["message"]);
             CustomeAwesomeDialog().AwesomeDialogHeader(
                 DialogType: DialogType.success,
@@ -379,6 +383,7 @@ class ProductController extends GetxController
                       Get.offAll(HomeScreen(), binding: ProductBinding())
                     });
           } else {
+            isLoading = false;
             CustomeAwesomeDialog().AwesomeDialogHeader(
                 DialogType: DialogType.error,
                 context: Get.context,
@@ -395,6 +400,7 @@ class ProductController extends GetxController
             print("something is error in element");
           }
         } catch (e) {
+          isLoading = false;
           print("something error  in error product${e.toString()}");
         }
       }
@@ -405,7 +411,7 @@ class ProductController extends GetxController
   Future editProducts({id}) async {
     try {
       //print("Name of${editProductNameArabicController.text}");
-
+      isLoading = true;
       List y = [];
 
       for (var x in imageFileList) {
@@ -427,7 +433,9 @@ class ProductController extends GetxController
           calories: editProductCaloriesController.text,
           featured: feature,
           published: published,
-          discount: editProductDiscountController.text,
+          discount: editProductDiscountController.text == ""
+              ? null
+              : editProductDiscountController.text,
           current_stock: 1,
           discount_end_date: // "2022-09-30",
               endDate.value,
@@ -437,7 +445,7 @@ class ProductController extends GetxController
               startDate.value,
 
           //"2022-09-30", //startDate.value,
-          discount_type: 1,
+          discount_type: dis_id,
           low_stock_quantity: 1,
           stock_visibility_state: 1,
           tags: "food",
@@ -449,9 +457,11 @@ class ProductController extends GetxController
           meta_title: "test",
           slug: "test",
           attachment_delete: deleteImage,
-          attachments: y,
-          image: MultipartFile.fromFileSync(imagee!.path));
+          attachments: y.isEmpty ? null : y,
+          image:
+              imagee == null ? null : MultipartFile.fromFileSync(imagee!.path));
       if (res["status"] == 200) {
+        isLoading = false;
         print(res["message"]);
         print("Name of${editProductNameArabicController.text}");
         CustomeAwesomeDialog().AwesomeDialogHeader(
@@ -463,6 +473,7 @@ class ProductController extends GetxController
             btOnpressed: () =>
                 {Get.offAll(HomeScreen(), binding: ProductBinding())});
       } else {
+        isLoading = false;
         CustomeAwesomeDialog().AwesomeDialogHeader(
             DialogType: DialogType.error,
             context: Get.context,

@@ -20,13 +20,15 @@ class CheckScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          actions: [ArrowContainer()],
+          // actions: [ArrowContainer()],
         ),
         // appBar: AppBar(backgroundColor: Colors.white),
         body: SingleChildScrollView(
             child: Padding(
                 padding: EdgeInsets.only(
-                  top: 26.h,
+                  left: .3.h,
+                  right: .3.h,
+                  top: 15.h,
                 ),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -41,14 +43,10 @@ class CheckScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.all(2.h),
-                        child: Center(
-                          child: Text("Please Check your Email".tr,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 19.sp)),
-                        ),
+                      Center(
+                        child: Text("Please Check your Email".tr,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15.sp)),
                       ),
                       Padding(
                         padding: EdgeInsets.all(1.h),

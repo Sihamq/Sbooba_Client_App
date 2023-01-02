@@ -24,13 +24,7 @@ class OTPScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          InkWell(
-              onTap: () {
-                navigator!.pop();
-              },
-              child: ArrowContainer()),
-        ],
+       
       ),
       // appBar: AppBar(backgroundColor: Colors.white),
       body: SingleChildScrollView(

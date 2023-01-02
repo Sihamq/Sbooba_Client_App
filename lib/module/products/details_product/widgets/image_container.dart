@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -28,7 +29,7 @@ class ImageContainer extends GetView<ProductController> {
                     decoration: const BoxDecoration(
                         //shape: BoxShape.circle
                         ),
-                    child: controller.showProduct[0].attachment!.isNotEmpty
+                    child: controller.showProduct.isNotEmpty
                         ? PageView.builder(
                             allowImplicitScrolling: true,
                             controller: pageController,
@@ -37,15 +38,27 @@ class ImageContainer extends GetView<ProductController> {
                             itemBuilder: (context, index) =>
                                 controller.showProduct[0].attachment!.isNotEmpty
                                     ? Container(
-                                        decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                          ApiLink.storeageImage +
+                                        decoration: BoxDecoration(),
+                                        // image: DecorationImage(
+                                        //  fit: BoxFit.cover,
+                                        child: CachedNetworkImage(
+                                          imageUrl: ApiLink.storeageImage +
                                               controller.showProduct[0]
                                                   .attachment![index],
-                                        ),
-                                      )))
+                                          fit: BoxFit.cover,
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
+                                            "assets/sh.png",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                        //  NetworkImage(
+                                        //   ApiLink.storeageImage +
+                                        //       controller.showProduct[0]
+                                        //           .attachment![index],
+                                        // ),
+                                        //  )
+                                        )
                                     : Center(
                                         child: SpinKitFadingCube(
                                         color: myOrange,
@@ -126,7 +139,9 @@ class ImageContainer extends GetView<ProductController> {
                       dotColor: myWhite,
                     ),
                     controller: pageController,
-                    count: controller.showProduct[0].attachment!.length,
+                    count: controller.showProduct.isEmpty
+                        ? 1
+                        : controller.showProduct[0].attachment!.length,
                   ),
                 ),
               ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sboba_app_client/data/models/list_product.dart';
@@ -111,9 +112,9 @@ class CustomTabView extends GetView<CouponsController> {
                 controller: controller.couponCode,
                 obcure: false,
                 label: "Coupon Code".tr,
-                validate: ((p0) {
-                  return validInput(p0!, 1, 10, "number");
-                }),
+                // validate: ((p0) {
+                //   return validInput(p0!, 1, 10, "number");
+                // }),
               ),
             ),
             // Padding(
@@ -316,13 +317,15 @@ class CustomTabView extends GetView<CouponsController> {
               ),
             ),
             BlueButton(
-                onpress: () {
+                onpress: () async {
                   FocusScope.of(context).unfocus();
-                  controller.createCoupon();
+                  await controller.createCoupon(catId: 1);
                 },
-                title: Text("Save".tr,
-                    style:
-                        TextStyle(color: myWhite, fontWeight: FontWeight.bold)),
+                title: controller.isLoading.value == false
+                    ? Text("Save".tr,
+                        style: TextStyle(
+                            color: myWhite, fontWeight: FontWeight.bold))
+                    : SpinKitDualRing(color: myOrange, size: 20.sp),
                 hight: 5.h,
                 width: 100.w)
           ]),

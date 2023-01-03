@@ -11,6 +11,11 @@ validInput(String val, int min, int max, String type) {
       return "validemail".tr;
     }
   }
+  if (type == "number") {
+    if (!GetUtils.isNum(val)) {
+      return "validemail".tr;
+    }
+  }
 
   if (type == "phone") {
     if (!GetUtils.isPhoneNumber(val)) {

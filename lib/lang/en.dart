@@ -264,5 +264,16 @@ Map<String, String> en = {
   "error": "Error Occured",
   "nochange": "Password has not been changed",
   "newPass": "New password",
-  "should": "You must choose the main image"
+  "should": "You must choose the main image",
+  "lic": "Enter the license number",
+  "licm": "Attach a copy of the license",
+  "licf": "License information",
+  "notmatch":" The password confirmation does not match.",
+  "All":"All",
+  "Successful":"Successful",
+  "canceled":"canceled",
+  "pending":"pending"
+
+
+  
 };

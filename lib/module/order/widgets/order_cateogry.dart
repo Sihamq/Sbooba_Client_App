@@ -30,7 +30,7 @@ class OrderCatogrey extends StatelessWidget {
           //     : Alignment(1.0, 1.0),
           child: Center(
             child: Text(
-              "All",
+              controller.listItems[x!],
               style: TextStyle(
                   color: controller.selected == x ? myWhite : myBlack,
                   fontWeight: FontWeight.bold,

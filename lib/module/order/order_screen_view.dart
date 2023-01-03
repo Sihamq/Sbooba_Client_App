@@ -55,7 +55,7 @@ class OrderView extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
-                  itemCount: 3,
+                  itemCount: controller.listItems.length,
                   itemBuilder: (context, index) {
                     return OrderCatogrey(
                       x: index,
@@ -79,7 +79,9 @@ class OrderView extends StatelessWidget {
                                 crossAxisSpacing: 10),
                         itemBuilder: ((context, index) => InkWell(
                             onTap: (() => Get.to(() => const DetailsOrder())),
-                            child: const PendingCard())),
+                            child: PendingCard(
+                              index: index,
+                            ))),
                         itemCount: 10),
                   ),
                 )

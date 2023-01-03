@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
+import 'package:sboba_app_client/data/models/order_model.dart';
 
 class OrderController extends GetxController {
-  List listItems = ["ALL", "Pending", "Accept"];
+  List listItems = ["All".tr,"Successful".tr,"canceled".tr,"pending".tr];
   int? selected = 0;
   bool isLoading = false;
   List orderList = [];

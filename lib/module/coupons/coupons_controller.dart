@@ -2,12 +2,9 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/coupons.dart';
 import 'package:sboba_app_client/data/models/list_product.dart';
-import 'package:sboba_app_client/module/coupons/coupons_binding.dart';
-import 'package:sboba_app_client/module/coupons/coupons_view.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../../data/data_source/coupon_data/coupon_data.dart';
@@ -17,10 +14,17 @@ import 'package:intl/intl.dart';
 class CouponsController extends GetxController
     with StateMixin<List<CouponsItems>> {
   var couponCode = TextEditingController();
-  var couponType = TextEditingController();
+
+  // var couponType = TextEditingController();
   //var
   var disountType = TextEditingController();
   var discount = TextEditingController();
+  var OrdercouponCode = TextEditingController();
+
+  //var couponType = TextEditingController();
+  //var
+  var orderDisountType = TextEditingController();
+  var orderDiscount = TextEditingController();
   //////////////////////edit controller for text////////
   var editCouponCode = TextEditingController();
 
@@ -28,9 +32,12 @@ class CouponsController extends GetxController
 
   var editDisountType = TextEditingController();
   var editDiscount = TextEditingController();
+  var limitMinController = TextEditingController();
+  var limitMaxController = TextEditingController();
 
+  var selectedItemsIndexes = [].obs;
   var couponItem = <CouponsItems>[].obs;
-  bool isLoading = false;
+//  bool isLoading = false;
   List<CateogryItems> discountTypeList = [
     CateogryItems(name: "خصم بالنسبة", id: 1),
     CateogryItems(name: "خصم بالمبلغ", id: 2),
@@ -49,6 +56,7 @@ class CouponsController extends GetxController
   ].obs;
   var radioItem = "".obs;
   var radioId = 0.obs;
+  var isLoading = false.obs;
   //   id = data.index;
   var catSelect = "".obs;
   var cat_id = 0.obs;
@@ -111,6 +119,7 @@ class CouponsController extends GetxController
     editcouponType.text = item.couponType.toString();
     cat_id.value = item.couponType!;
     discountId.value = item.discountType!;
+    var isLoading = false.obs;
     if (discountId == 1) {
       // dis_id.value = 1;
       discountSelect.value = "خصم بالنسبة";
@@ -121,7 +130,7 @@ class CouponsController extends GetxController
     startDate.value =
         DateFormat("yyyy-MM-dd").format(item.fromDate!).toString();
     endDate.value = DateFormat("yyyy-MM-dd").format(item.toDate!).toString();
-   // idies.add(item.)
+    // idies.add(item.)
 
     // cat_id.value = item.couponType!;
   }
@@ -130,10 +139,10 @@ class CouponsController extends GetxController
   Future getCoupons() async {
     try {
       change(couponItem.value, status: RxStatus.loading());
-      isLoading = true;
+      //isLoading = true;
       var res = await CouponData().getCoupons();
       if (res["status"] == 200) {
-        isLoading = false;
+        // isLoading = false;
         var coupons = res["data"] as List;
 
         couponItem.value =
@@ -145,7 +154,7 @@ class CouponsController extends GetxController
         }
         update();
       } else {
-        isLoading = true;
+        // isLoading = true;
         change(couponItem.value, status: RxStatus.empty());
       }
     } catch (e) {
@@ -156,19 +165,15 @@ class CouponsController extends GetxController
 
   deleteCoupons(id) async {
     try {
-      isLoading = true;
+      //  isLoading = true;
       print("Id:$id");
       var res = await CouponData().deleteCoupon(id: id);
       if (res["status"] == 200) {
         getCoupons();
-        // isLoading = false;
-        // print(res[""]);
-        //print(couponItem);
+
         print(res);
         // update();
-      } else {
-        // isLoading = true;
-      }
+      } else {}
     } catch (e) {
       print("something error ${e.toString()}");
     }
@@ -180,7 +185,7 @@ class CouponsController extends GetxController
     update();
   }
 
-  createCoupon() async {
+  createCoupon({catId}) async {
     if (catSelect.isEmpty && discountSelect.isEmpty) {
       CustomeAwesomeDialog().AwesomeDialogHeader(
           DialogType: DialogType.warning,
@@ -192,16 +197,24 @@ class CouponsController extends GetxController
     } else {
       if (formKey1.currentState!.validate()) {
         try {
+          isLoading.value = true;
           var res = await CouponData().storeCoupon(
-              couponType: 1,
+              couponType: catId,
               couponCode: couponCode.text,
               discountType: discountId,
               discount: discount.text,
               fromDate: startDate.value,
               toDate: endDate.value,
               status: "1",
-              productName: idies);
+              productName: catId == 1 ? idies : selectedItemsIndexes,
+              limit_min: limitMaxController.text.isEmpty
+                  ? null
+                  : limitMaxController.text,
+              limit_max: limitMaxController.text.isEmpty
+                  ? null
+                  : limitMaxController.text);
           if (res["status"] == 200) {
+            isLoading.value = false;
             CustomeAwesomeDialog().AwesomeDialogHeader(
                 DialogType: DialogType.success,
                 context: Get.context,
@@ -216,6 +229,7 @@ class CouponsController extends GetxController
                       getCoupons().then((value) => Get.back())
                     });
           } else {
+            isLoading.value = false;
             CustomeAwesomeDialog().AwesomeDialogHeader(
                 DialogType: DialogType.success,
                 context: Get.context,
@@ -240,10 +254,10 @@ class CouponsController extends GetxController
   var ProdctList = [].obs;
   Future getProductList() async {
     try {
-      isLoading = true;
+      // isLoading. = true;
       var res = await CouponData().getProduct();
       if (res["status"] == 200) {
-        isLoading = false;
+        //   isLoading = false;
         var coupons = res["data"] as List;
 
         ProdctList.value =
@@ -253,7 +267,7 @@ class CouponsController extends GetxController
 
         update();
       } else {
-        isLoading = true;
+        // isLoading = true;
         //  change(couponItem.value, status: RxStatus.empty());
       }
     } catch (e) {

@@ -8,7 +8,8 @@ import 'package:sboba_app_client/module/shared/dot_line.dart';
 import 'package:sizer/sizer.dart';
 
 class PendingCard extends StatelessWidget {
-  const PendingCard({super.key});
+  int? index;
+ PendingCard({super.key,this.index});
 
   @override
   Widget build(BuildContext context) {

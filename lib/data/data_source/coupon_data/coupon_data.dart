@@ -65,6 +65,7 @@ class CouponData {
     required toDate,
     required status,
     productName,
+    limit_min,limit_max
   }) async {
     FormData data = FormData.fromMap({
       "coupon_type": couponType,
@@ -75,6 +76,8 @@ class CouponData {
       "to_date": toDate,
       "status": status,
       "products": {"0": productName},
+      "limit_min":limit_min,
+      "limit_max":limit_max
     });
     try {
       var response = await DioHelper.postData1(

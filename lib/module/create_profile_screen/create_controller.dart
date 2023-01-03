@@ -26,6 +26,7 @@ class CreateController extends GetxController {
   var confirmController;
   var phoneController;
   var commericalController;
+  var licenseController;
 
   int? gender = 0;
   var isLoading = false.obs;
@@ -36,6 +37,7 @@ class CreateController extends GetxController {
   final picker = ImagePicker();
   var pickedFile;
   File? imagee;
+  File? imagee1;
   changeGender(value) {
     gender = value;
     update();
@@ -45,6 +47,17 @@ class CreateController extends GetxController {
     pickedFile = await picker.pickImage(source: src, imageQuality: 50);
     if (pickedFile != null) {
       imagee = File(pickedFile.path);
+      update();
+      print("image selected");
+    } else {
+      print("no image selected");
+    }
+  }
+
+  Future getImageLicense(ImageSource src) async {
+    pickedFile = await picker.pickImage(source: src, imageQuality: 50);
+    if (pickedFile != null) {
+      imagee1 = File(pickedFile.path);
       update();
       print("image selected");
     } else {
@@ -111,7 +124,7 @@ class CreateController extends GetxController {
 
           print("sucess");
           if (data["status"] == 200) {
-           isLoading.value = false;
+            isLoading.value = false;
 
             String token = data["data"]["token"];
             CashHelper.putData("token", token);
@@ -134,6 +147,7 @@ class CreateController extends GetxController {
           var res1 = data["phone"];
           var res2 = data["shop_name"];
           var res3 = data["commercial_no"];
+          var res4 = data["password"];
 
           print(res);
           // var tagsJson = jsonDecode(data)['seller.email'];
@@ -145,6 +159,8 @@ class CreateController extends GetxController {
           tags2 = res2 != null ? List.from(res2) : [];
           List<String> tags3 = [];
           tags3 = res3 != null ? List.from(res3) : [];
+          List<String> tags4 = [];
+          tags4 = res4 != null ? List.from(res4) : [];
 
           print("tags$tags");
           if (tags.isNotEmpty) {
@@ -161,6 +177,9 @@ class CreateController extends GetxController {
             // isLaoding = true;
             showSnakBarMessage(
                 msg: "commericalistaken".tr, color: Colors.red[900]);
+          } else if (tags4.isNotEmpty) {
+            // isLaoding = true;
+            showSnakBarMessage(msg: "notmatch".tr, color: Colors.red[900]);
           }
           //isLaoding = true;
           update();
@@ -183,6 +202,7 @@ class CreateController extends GetxController {
     confirmController = TextEditingController();
     phoneController = TextEditingController();
     commericalController = TextEditingController();
+    licenseController = TextEditingController();
 
     super.onInit();
   }

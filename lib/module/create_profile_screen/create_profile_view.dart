@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -201,6 +203,58 @@ class CreateAccount extends StatelessWidget {
                             prefix: Icons.file_copy,
                           ),
                         ),
+
+                        Padding(
+                          padding: EdgeInsets.all(1.h),
+                          child: Text(
+                            "licf".tr,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(
+                              bottom: 2.h, left: 2.h, right: 2.h),
+                          child: MyTextField(
+                            type: TextInputType.phone,
+                            validate: ((p0) {
+                              return validInput(p0!, 4, 50, "number");
+                            }),
+                            controller: controller.licenseController,
+                            obcure: false,
+                            label: "lic".tr,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(right: .5.h, left: .5.h),
+                          child: Row(
+                            children: [
+                              Text(
+                                "licm".tr,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 6.h,
+                              ),
+                              InkWell(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.grey[300],
+                                    ),
+                                    width: 22.h,
+                                    height: 15.h,
+                                    child: Center(
+                                        child: controller.imagee1 == null
+                                            ? const Icon(Icons.add_a_photo)
+                                            : Image.file(
+                                                controller.imagee1!,
+                                                fit: BoxFit.cover,
+                                              ))),
+                              ),
+                            ],
+                          ),
+                        ),
                         Padding(
                           padding:
                               EdgeInsets.only(left: 3.h, right: 3.h, top: 1.w),
@@ -213,39 +267,39 @@ class CreateAccount extends StatelessWidget {
                           ),
                         ),
 
-                        Padding(
-                            padding: EdgeInsets.only(
-                                bottom: 3.h, top: 2.w, left: 2.h, right: 2.h),
-                            child: InkWell(
-                              onTap: () {},
-                              child: Container(
-                                height: 5.h,
-                                width: 100.w,
-                                decoration: BoxDecoration(
-                                    color: myWhite,
-                                    border:
-                                        Border.all(color: Colors.grey[400]!),
-                                    borderRadius: BorderRadius.circular(5)),
-                                child: Center(
-                                  child: Wrap(
-                                    spacing: 20.h,
-                                    children: [
-                                      Text(
-                                        "location".tr,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12.sp,
-                                            color: myBlack),
-                                      ),
-                                      Icon(
-                                        Icons.map_rounded,
-                                        color: myGreen,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            )),
+                        // Padding(
+                        //     padding: EdgeInsets.only(
+                        //         bottom: 3.h, top: 2.w, left: 2.h, right: 2.h),
+                        //     child: InkWell(
+                        //       onTap: () {},
+                        //       child: Container(
+                        //         height: 5.h,
+                        //         width: 100.w,
+                        //         decoration: BoxDecoration(
+                        //             color: myWhite,
+                        //             border:
+                        //                 Border.all(color: Colors.grey[400]!),
+                        //             borderRadius: BorderRadius.circular(5)),
+                        //         child: Center(
+                        //           child: Wrap(
+                        //             spacing: 20.h,
+                        //             children: [
+                        //               Text(
+                        //                 "location".tr,
+                        //                 style: TextStyle(
+                        //                     fontWeight: FontWeight.bold,
+                        //                     fontSize: 12.sp,
+                        //                     color: myBlack),
+                        //               ),
+                        //               Icon(
+                        //                 Icons.map_rounded,
+                        //                 color: myGreen,
+                        //               )
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     )),
 
                         Obx(
                           () => BlueButton(

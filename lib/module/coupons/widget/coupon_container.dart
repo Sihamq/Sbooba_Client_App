@@ -9,6 +9,7 @@ import 'package:sboba_app_client/module/coupons/coupons_controller.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
 import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
 
 class HorizontalCouponExample2 extends GetView<CouponsController> {
   int? index;
@@ -147,7 +148,9 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "29-3-2022",
+                      DateFormat("yyyy-MM-dd")
+                          .format(controller.couponItem[index!].fromDate!)
+                          .toString(),
                       style: TextStyle(
                           color: myGreen,
                           fontSize: 8.sp,
@@ -161,7 +164,9 @@ class HorizontalCouponExample2 extends GetView<CouponsController> {
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "29-3-2022",
+                      DateFormat("yyyy-MM-dd")
+                          .format(controller.couponItem[index!].toDate!)
+                          .toString(),
                       style: TextStyle(
                           color: myGreen,
                           fontSize: 8.sp,

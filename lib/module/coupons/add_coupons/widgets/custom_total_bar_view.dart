@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
@@ -10,6 +11,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../../my_colors.dart';
 import '../../../shared/component/green_button.dart';
+import '../../../shared/function/validInput.dart';
 import '../../widget/date_coupon.dart';
 
 class CustomTabOrderView extends StatelessWidget {
@@ -17,10 +19,11 @@ class CustomTabOrderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: GetBuilder<CouponsController>(
-        init: CouponsController(),
-        builder: (controller) => Column(children: [
+    return GetBuilder<CouponsController>(
+      init: CouponsController(),
+      builder: (controller) => Form(
+        key: controller.formKey3,
+        child: ListView(physics: const BouncingScrollPhysics(), children: [
           Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
@@ -33,12 +36,12 @@ class CustomTabOrderView extends StatelessWidget {
                 Center(
                   child: Text(
                     "Product".tr,
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
-                  child: Icon(Icons.arrow_right),
+                  child: const Icon(Icons.arrow_right),
                   onTap: () {
                     showDialog(
                         context: context,
@@ -123,9 +126,13 @@ class CustomTabOrderView extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(1.h),
             child: MyAddTextField(
-                controller: controller.OrdercouponCode,
-                obcure: false,
-                label: "Coupon Code".tr),
+              controller: controller.OrdercouponCode,
+              obcure: false,
+              label: "Coupon Code".tr,
+              validate: ((p0) {
+                return validInput(p0!, 1, 30, "name");
+              }),
+            ),
           ),
           Padding(
             padding: EdgeInsets.all(1.h),
@@ -204,7 +211,10 @@ class CustomTabOrderView extends StatelessWidget {
                 MySmallTextField(
                     controller: controller.orderDiscount,
                     obcure: false,
-                    label: "Discount".tr),
+                    label: "Discount".tr,
+                    validate: ((p0) {
+                      return validInput(p0!, 1, 30, "number");
+                    })),
                 SizedBox(
                   width: 4.w,
                 ),
@@ -250,7 +260,7 @@ class CustomTabOrderView extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.all(1.h),
                     child: Text(
-                      "end".tr + "    ${controller.endDate.value}",
+                      "${"end".tr}    ${controller.endDate.value}",
                       style: TextStyle(
                           color: myGreen,
                           fontWeight: FontWeight.bold,
@@ -264,26 +274,39 @@ class CustomTabOrderView extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(1.h),
             child: MyAddTextField(
+                type: TextInputType.number,
                 controller: controller.limitMinController,
                 obcure: false,
-                label: "Minimum Shopping".tr),
+                label: "Minimum Shopping".tr,
+                validate: ((p0) {
+                  return validInput(p0!, 1, 30, "number");
+                })),
           ),
           Padding(
             padding: EdgeInsets.all(1.h),
             child: MyAddTextField(
+                type: TextInputType.number,
                 controller: controller.limitMaxController,
                 obcure: false,
-                label: "Maximum Discount Amount".tr),
+                label: "Maximum Discount Amount".tr,
+                validate: ((p0) {
+                  return validInput(p0!, 1, 30, "number");
+                })),
           ),
-          BlueButton(
-              onpress: () async {
-                await controller.createCoupon(catId: 2);
-              },
-              title: Text("Save".tr,
-                  style:
-                      TextStyle(color: myWhite, fontWeight: FontWeight.bold)),
-              hight: 5.h,
-              width: 100.w)
+          Obx(
+            () => BlueButton(
+                onpress: () async {
+                  FocusScope.of(context).unfocus();
+                  await controller.createOrderCoupon(catId: 2);
+                },
+                title: controller.isLoading.value == false
+                    ? Text("Save".tr,
+                        style: TextStyle(
+                            color: myWhite, fontWeight: FontWeight.bold))
+                    : SpinKitDualRing(color: myOrange, size: 20.sp),
+                hight: 5.h,
+                width: 100.w),
+          )
         ]),
       ),
     );

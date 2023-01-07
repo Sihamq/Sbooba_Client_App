@@ -44,6 +44,7 @@ class CouponsController extends GetxController
   ].obs;
   GlobalKey<FormState> formKey1 = GlobalKey<FormState>();
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey3 = GlobalKey<FormState>();
   var delete;
   var selectedDate = DateTime.now().obs;
   var selectedTime = TimeOfDay.now().obs;
@@ -186,7 +187,7 @@ class CouponsController extends GetxController
   }
 
   createCoupon({catId}) async {
-    if (catSelect.isEmpty && discountSelect.isEmpty) {
+    if (discountSelect.isEmpty) {
       CustomeAwesomeDialog().AwesomeDialogHeader(
           DialogType: DialogType.warning,
           context: Get.context,
@@ -241,6 +242,75 @@ class CouponsController extends GetxController
                       catSelect.value = "",
                       discountSelect.value = "",
                       discount.clear(),
+                      getCoupons().then((value) => Get.back())
+                    });
+          }
+        } catch (e) {
+          print("errors is ${e.toString()}");
+        }
+      }
+    }
+  }
+
+  createOrderCoupon({catId}) async {
+    if (selectedItemsIndexes.isEmpty) {
+      CustomeAwesomeDialog().AwesomeDialogHeader(
+          DialogType: DialogType.warning,
+          context: Get.context,
+          describe: "",
+          mainTitle: "",
+          subTitle: "choosse".tr,
+          btOnpressed: () => {});
+    } else {
+      if (formKey3.currentState!.validate()) {
+        try {
+          isLoading.value = true;
+          var res = await CouponData().storeCoupon(
+              couponType: catId,
+              couponCode: OrdercouponCode.text,
+              discountType: discountId,
+              discount: orderDiscount.text,
+              fromDate: startDate.value,
+              toDate: endDate.value,
+              status: "1",
+              productName: catId == 1 ? idies : selectedItemsIndexes,
+              limit_min: limitMaxController.text.isEmpty
+                  ? null
+                  : limitMaxController.text,
+              limit_max: limitMaxController.text.isEmpty
+                  ? null
+                  : limitMaxController.text);
+          if (res["status"] == 200) {
+            isLoading.value = false;
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.success,
+                context: Get.context,
+                describe: "",
+                mainTitle: "congra".tr,
+                subTitle: "creatc".tr,
+                btOnpressed: () => {
+                      couponCode.clear(),
+                      catSelect.value = "",
+                      discountSelect.value = "",
+                      discount.clear(),
+                      getCoupons().then((value) => Get.back())
+                    });
+          } else {
+            isLoading.value = false;
+            CustomeAwesomeDialog().AwesomeDialogHeader(
+                DialogType: DialogType.success,
+                context: Get.context,
+                describe: "",
+                mainTitle: "error".tr,
+                subTitle: "لم يتم اضافة كوبون جديد".tr,
+                btOnpressed: () => {
+                      OrdercouponCode.clear(),
+                      catSelect.value = "",
+                      discountSelect.value = "",
+                      orderDiscount.clear(),
+                      limitMaxController.clear(),
+                      limitMinController.clear(),
+                      selectedItemsIndexes.clear(),
                       getCoupons().then((value) => Get.back())
                     });
           }

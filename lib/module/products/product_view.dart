@@ -4,6 +4,7 @@ import 'package:future_progress_dialog/future_progress_dialog.dart';
 import 'package:get/get.dart';
 import 'package:sboba_app_client/module/products/add_product/add_product_view.dart';
 import 'package:sboba_app_client/module/products/details_product/details_product.dart';
+import 'package:sboba_app_client/module/products/product_cateogry.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/products/widget/adding_container.dart';
 import 'package:sboba_app_client/module/shared/component/empty_screen.dart';
@@ -22,7 +23,7 @@ class ProductView extends GetView<ProductController> {
   @override
   Widget build(BuildContext context) {
     Get.put(ProductController());
-   // controller.getProducts();
+    // controller.getProducts();
     controller.getCateogries();
 
     print("product");
@@ -83,7 +84,7 @@ class ProductView extends GetView<ProductController> {
             label: "Add Last".tr,
             noOfPro: controller.productItem.value.length.toDouble(),
             onTap: (() {
-              Get.to(() => AddProduct());
+              Get.to(() => ProductCateogries());
             }),
           ),
         ),

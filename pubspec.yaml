@@ -60,6 +60,7 @@ dependencies:
   
   future_progress_dialog: ^0.2.1
   dio_http_cache: any
+  expansion_tile_card: ^2.0.0
   
 
   

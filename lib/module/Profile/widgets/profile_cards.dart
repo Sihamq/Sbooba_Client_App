@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:sboba_app_client/data/models/profile_model.dart';
 import 'package:sboba_app_client/lang/lang_controller.dart';
 import 'package:sboba_app_client/module/Profile/profile_binding.dart';
 import 'package:sboba_app_client/module/Profile/profile_controller.dart';

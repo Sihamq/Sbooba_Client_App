@@ -63,6 +63,8 @@ class ProductController extends GetxController
   var editProductCaloriesController = TextEditingController();
   var editProductAvialbleController = TextEditingController();
   var editProductDiscountController = TextEditingController();
+   var addingProductController = TextEditingController();
+   var partUnitPrice=TextEditingController();
   bool swittch = false;
   int? published;
   bool featured = false;

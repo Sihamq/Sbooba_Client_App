@@ -11,6 +11,7 @@ import 'package:sboba_app_client/module/shared/cash_helper.dart';
 import 'package:sboba_app_client/splash_screen/splash_screen_animation.dart';
 import 'package:sizer/sizer.dart';
 
+import 'module/products/product_cateogry.dart';
 import 'module/shared/DioHelper/dio_helper.dart';
 
 void main() async {
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) => GetMaterialApp(
         // useInheritedMediaQuery: true,
         translations: Translation(),
-        
+
         locale: languageController.language,
         theme: ThemeData(
           appBarTheme: AppBarTheme(
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Sboba App',
         home: const SplashScreen(),
+        // ProductCateogry(),
       ),
     );
   }

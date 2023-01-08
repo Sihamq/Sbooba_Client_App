@@ -30,7 +30,8 @@ class MyAddTextField extends StatelessWidget {
       this.prefix,
       this.suffix,
       this.suffixPressed,
-      this.maxline})
+      this.maxline,
+      this.onChange})
       : super(key: key);
 
   @override
@@ -45,7 +46,7 @@ class MyAddTextField extends StatelessWidget {
         //  cursorHeight: MediaQuery.of(context).size.height * .08,
         obscureText: obcure,
         keyboardType: type,
-        onChanged: (value) {},
+        onChanged: onChange,
 
         onTap: () {},
         validator: validate,

@@ -57,6 +57,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.3.58
   
   pretty_dio_logger: ^1.1.1
+  material_tag_editor: ^0.1.2
   
   future_progress_dialog: ^0.2.1
   dio_http_cache: any

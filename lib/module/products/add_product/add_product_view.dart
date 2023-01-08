@@ -2,10 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:material_tag_editor/tag_editor.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
+import 'package:sboba_app_client/module/products/add_product/widgets/custom_chip.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/date_container.dart';
+import 'package:sboba_app_client/module/products/add_product/widgets/extra_widget.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/products/widget/add_pro_images.dart';
 import 'package:sboba_app_client/module/products/widget/adding_container.dart';
@@ -311,7 +315,7 @@ class AddProduct extends GetView<ProductController> {
                     ),
                     child: ExpansionTileCard(
                         heightFactorCurve: Curves.bounceInOut,
-                        baseColor: myWhite,
+                        // baseColor: myWhite,
                         title: Text(
                           "اضافة الوحدات مع الاسعار",
                           style: TextStyle(),
@@ -594,12 +598,94 @@ class AddProduct extends GetView<ProductController> {
                   //   ),
                   // ),
                   ExpansionTileCard(
+                    animateTrailing: true,
                     title: Text("الاضافات"),
-                    children: [Column(children: [
-                      Text("ضع اضافاتك  التي قد يطلبها العميل منك")
-                      MyAddTextField(controller:AddingContainer.tex, obcure: false, label: "اضافاتي")
-                    ],)
-  
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          InkWell(
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.only(left: .5.h, right: .5.h),
+                                  child: Text(
+                                      "ضع اضافاتك  التي قد يطلبها العميل منك"),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.all(1.h),
+                                  child: Container(
+                                    width: 12.h,
+                                    height: 4.h,
+                                    decoration: BoxDecoration(
+                                        color: myGreen,
+                                        shape: BoxShape.rectangle,
+                                        borderRadius:
+                                            BorderRadius.circular(20)),
+                                    child: MaterialButton(
+                                      //minWidth: 10.h,
+                                      onPressed: () async {
+                                        Get.defaultDialog(
+                                          title: "ادخل الاضافة",
+                                          content: Extra(),
+                                        );
+                                      },
+                                      child: Text("اضافة".tr,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 11.sp,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onTap: () {},
+                          ),
+                          Container(
+                            //height: 50,
+                            // width: 200,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: controller.chipList1.length,
+                                //  scrollDirection: Axis.horizontal,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 1.h, right: 1.h),
+                                    child: CustomChip(
+                                        label2: controller.chipList2[index],
+                                        label: controller.chipList1[index],
+                                        index: controller.chipList1.length),
+                                  );
+                                }),
+                          ),
+
+                          //  Extra()
+
+                          // TagEditor(
+                          //   length: controller.chipList.length,
+                          //   delimiters: [',', ' '],
+                          //   hasAddButton: true,
+                          //   //enableSuggestions: true,
+                          //   inputDecoration: const InputDecoration(
+                          //     border: InputBorder.none,
+                          //     hintText: 'ضع  اضافاتك...',
+                          //   ),
+                          //   onTagChanged: (newValue) {
+                          //     controller.addingChipItems(newValue);
+                          //   },
+                          //   tagBuilder: (context, index) => CustomChip(
+                          //     index: index,
+                          //     label: controller.chipList[index],
+                          //     // onDeleted: onDelete,
+                          //   ),
+                          // )
+                        ],
+                      )
                     ],
                   ),
                   Padding(

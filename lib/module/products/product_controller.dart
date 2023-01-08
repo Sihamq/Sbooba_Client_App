@@ -63,8 +63,12 @@ class ProductController extends GetxController
   var editProductCaloriesController = TextEditingController();
   var editProductAvialbleController = TextEditingController();
   var editProductDiscountController = TextEditingController();
-   var addingProductController = TextEditingController();
-   var partUnitPrice=TextEditingController();
+  var addingProductController = TextEditingController();
+  var partUnitPrice = TextEditingController();
+  var arabicAdding = TextEditingController();
+  var englishAdding = TextEditingController();
+  var chipList1 = [];
+  var chipList2 = [];
   bool swittch = false;
   int? published;
   bool featured = false;
@@ -89,6 +93,18 @@ class ProductController extends GetxController
     // =
     // PickerDateRange(today, today.add(Duration(days: 3)));
     super.onInit();
+  }
+
+  addingChipItems(value) {
+    //chipList1 = [];
+    chipList1.add(value);
+    update();
+  }
+
+  addingChipItemenglish(value) {
+    // chipList2 = [];
+    chipList2.add(value);
+    update();
   }
 
   String? img;

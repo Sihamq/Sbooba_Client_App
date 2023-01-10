@@ -6,6 +6,7 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_tag_editor/tag_editor.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
+import 'package:sboba_app_client/data/models/units_model.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/custom_chip.dart';
 import 'package:sboba_app_client/module/products/add_product/widgets/date_container.dart';
@@ -23,7 +24,10 @@ import '../../shared/component/add_text_formfield.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 
 class AddProduct extends GetView<ProductController> {
-  AddProduct({super.key});
+  AddProduct({super.key}) {
+    controller.getProductUnit();
+  }
+
   //Get.put(ProductController);
 
   @override
@@ -316,13 +320,13 @@ class AddProduct extends GetView<ProductController> {
                     child: ExpansionTileCard(
                         heightFactorCurve: Curves.bounceInOut,
                         // baseColor: myWhite,
-                        title: Text(
+                        title: const Text(
                           "اضافة الوحدات مع الاسعار",
                           style: TextStyle(),
                         ),
                         children: [
-                          Container(
-                            height: 40.h,
+                          SizedBox(
+                            height: 20.h,
                             child: Column(children: [
                               Row(
                                 children: [
@@ -362,47 +366,46 @@ class AddProduct extends GetView<ProductController> {
                                         top: 1.h,
                                         bottom: 1.h,
                                       ),
-                                      child: DropdownButton(
-                                        isExpanded: true,
-                                        autofocus: true,
-                                        dropdownColor: myWhite,
-                                        focusColor: myOrange,
-                                        // isExpanded: true,
-                                        underline: const SizedBox(),
-                                        elevation: 2,
-                                        hint: Center(
-                                          child: Text(
-                                            "الوحده",
-                                            style: TextStyle(fontSize: 13.sp),
+                                      child: GetBuilder<ProductController>(
+                                        builder: (controller) => DropdownButton(
+                                          isExpanded: true,
+                                          autofocus: true,
+                                          dropdownColor: myWhite,
+                                          focusColor: myOrange,
+                                          // isExpanded: true,
+                                          underline: const SizedBox(),
+                                          elevation: 2,
+                                          hint: Center(
+                                            child: Text(
+                                              "الوحده",
+                                              style: TextStyle(fontSize: 13.sp),
+                                            ),
                                           ),
+                                          alignment:
+                                              AlignmentDirectional.center,
+                                          iconSize: 20.sp,
+                                          icon: Icon(
+                                            Icons.keyboard_arrow_down,
+                                            color: myOrange,
+                                            size: 25.sp,
+                                          ),
+                                          items: controller.unitList
+                                              .map<DropdownMenuItem<UnitsItem>>(
+                                                  (cat) => DropdownMenuItem(
+                                                        value: cat,
+                                                        child: Center(
+                                                          child:
+                                                              Text(cat.name!),
+                                                        ),
+                                                      ))
+                                              .toList(),
+                                          onChanged: ((value) {
+                                            controller.changeSelectUnits(value);
+                                          }),
                                         ),
-                                        alignment: AlignmentDirectional.center,
-                                        iconSize: 20.sp,
-                                        icon: Icon(
-                                          Icons.keyboard_arrow_down,
-                                          color: myOrange,
-                                          size: 25.sp,
-                                        ),
-                                        items: [],
-                                        onChanged: ((value) {
-                                          // controller.changeSelectCategory(value);
-                                        }),
                                       ),
                                     ),
                                     //),
-
-                                    // MySmallTextField(
-                                    //   type: TextInputType.number,
-                                    //   controller: controller.miniProController,
-                                    //   obcure: false,
-                                    //   label: "Candy".tr,
-                                    //   suffix: Icons.arrow_right_alt,
-                                    //   suffixPressed: () {
-                                    //     Get.defaultDialog(
-                                    //         title: "'",
-                                    //         content: CustomRdaioButton(),
-                                    //         middleText: "😊");
-                                    //   },
                                   ),
                                 ],
                               ),
@@ -429,123 +432,111 @@ class AddProduct extends GetView<ProductController> {
                                   ),
                                 ),
                               ),
-                              ExpansionTileCard(
-                                elevation: 0,
-                                title: Text("وحدات فرعية للمنتج الواحد"),
-                                children: [
-                                  Container(
-                                    height: 10.h,
-                                    child: Row(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: MySmallTextField(
-                                              controller:
-                                                  controller.miniProController,
-                                              obcure: false,
-                                              type: TextInputType.number,
-                                              label: "unitprice".tr),
-                                        ),
-                                        SizedBox(
-                                          width: 3.h,
-                                        ),
-                                        Container(
-                                          height: 6.h,
-                                          width: 19.h,
-                                          decoration: BoxDecoration(
-                                              color: Colors
-                                                  .white, //background color of dropdown button
-                                              border: Border.all(
-                                                  color: myOrange,
-                                                  width:
-                                                      2), //border of dropdown button
-                                              borderRadius: BorderRadius.circular(
-                                                  20), //border raiuds of dropdown button
-                                              boxShadow: <BoxShadow>[
-                                                //apply shadow on Dropdown button
-                                                BoxShadow(
-                                                    color: myOrange,
-                                                    blurRadius:
-                                                        0.1), //shadow for button
-                                              ]),
-                                          child: Padding(
-                                            padding: EdgeInsets.only(
-                                              top: 1.h,
-                                              bottom: 1.h,
-                                            ),
-                                            child: DropdownButton(
-                                              isExpanded: true,
-                                              autofocus: true,
-                                              dropdownColor: myWhite,
-                                              focusColor: myOrange,
-                                              // isExpanded: true,
-                                              underline: const SizedBox(),
-                                              elevation: 2,
-                                              hint: Center(
-                                                child: Text(
-                                                  "الوحده",
-                                                  style: TextStyle(
-                                                      fontSize: 13.sp),
-                                                ),
-                                              ),
-                                              alignment:
-                                                  AlignmentDirectional.center,
-                                              iconSize: 20.sp,
-                                              icon: Icon(
-                                                Icons.keyboard_arrow_down,
-                                                color: myOrange,
-                                                size: 25.sp,
-                                              ),
-                                              items: [],
-                                              onChanged: ((value) {
-                                                // controller.changeSelectCategory(value);
-                                              }),
-                                            ),
-                                          ),
-                                          //),
+                              // ExpansionTileCard(
+                              //   elevation: 0,
+                              //   title: Text("وحدات فرعية للمنتج الواحد"),
+                              //   children: [
+                              //     Container(
+                              //       height: 10.h,
+                              //       child: Row(
+                              //         children: [
+                              //           Padding(
+                              //             padding: const EdgeInsets.all(8.0),
+                              //             child: MySmallTextField(
+                              //                 controller:
+                              //                     controller.miniProController,
+                              //                 obcure: false,
+                              //                 type: TextInputType.number,
+                              //                 label: "unitprice".tr),
+                              //           ),
+                              //           SizedBox(
+                              //             width: 3.h,
+                              //           ),
+                              //           Container(
+                              //             height: 6.h,
+                              //             width: 19.h,
+                              //             decoration: BoxDecoration(
+                              //                 color: Colors
+                              //                     .white, //background color of dropdown button
+                              //                 border: Border.all(
+                              //                     color: myOrange,
+                              //                     width:
+                              //                         2), //border of dropdown button
+                              //                 borderRadius: BorderRadius.circular(
+                              //                     20), //border raiuds of dropdown button
+                              //                 boxShadow: <BoxShadow>[
+                              //                   //apply shadow on Dropdown button
+                              //                   BoxShadow(
+                              //                       color: myOrange,
+                              //                       blurRadius:
+                              //                           0.1), //shadow for button
+                              //                 ]),
+                              //             child: Padding(
+                              //               padding: EdgeInsets.only(
+                              //                 top: 1.h,
+                              //                 bottom: 1.h,
+                              //               ),
+                              //               child: DropdownButton(
+                              //                 isExpanded: true,
+                              //                 autofocus: true,
+                              //                 dropdownColor: myWhite,
+                              //                 focusColor: myOrange,
+                              //                 // isExpanded: true,
+                              //                 underline: const SizedBox(),
+                              //                 elevation: 2,
+                              //                 hint: Center(
+                              //                   child: Text(
+                              //                     "الوحده",
+                              //                     style: TextStyle(
+                              //                         fontSize: 13.sp),
+                              //                   ),
+                              //                 ),
+                              //                 alignment:
+                              //                     AlignmentDirectional.center,
+                              //                 iconSize: 20.sp,
+                              //                 icon: Icon(
+                              //                   Icons.keyboard_arrow_down,
+                              //                   color: myOrange,
+                              //                   size: 25.sp,
+                              //                 ),
+                              //                 items: [],
+                              //                 onChanged: ((value) {
+                              //                   // controller.changeSelectCategory(value);
+                              //                 }),
+                              //               ),
+                              //             ),
+                              //             //),
 
-                                          // MySmallTextField(
-                                          //   type: TextInputType.number,
-                                          //   controller: controller.miniProController,
-                                          //   obcure: false,
-                                          //   label: "Candy".tr,
-                                          //   suffix: Icons.arrow_right_alt,
-                                          //   suffixPressed: () {
-                                          //     Get.defaultDialog(
-                                          //         title: "'",
-                                          //         content: CustomRdaioButton(),
-                                          //         middleText: "😊");
-                                          //   },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.all(1.h),
-                                    child: Container(
-                                      width: 12.h,
-                                      height: 4.h,
-                                      decoration: BoxDecoration(
-                                          color: myGreen,
-                                          shape: BoxShape.rectangle,
-                                          borderRadius:
-                                              BorderRadius.circular(20)),
-                                      child: MaterialButton(
-                                        //minWidth: 10.h,
-                                        onPressed: () async {
-                                          controller.selectImages(context);
-                                        },
-                                        child: Text("اضافة".tr,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 11.sp,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              )
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //     Padding(
+                              //       padding: EdgeInsets.all(1.h),
+                              //       child: Container(
+                              //         width: 12.h,
+                              //         height: 4.h,
+                              //         decoration: BoxDecoration(
+                              //             color: myGreen,
+                              //             shape: BoxShape.rectangle,
+                              //             borderRadius:
+                              //                 BorderRadius.circular(20)),
+                              //         child: MaterialButton(
+                              //           //minWidth: 10.h,
+                              //           onPressed: () async {
+                              //             controller.selectImages(context);
+                              //           },
+                              //           child: Text("اضافة".tr,
+                              //               style: TextStyle(
+                              //                 color: Colors.white,
+                              //                 fontWeight: FontWeight.bold,
+                              //                 fontSize: 11.sp,
+                              //               )),
+                              //         ),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // )
                             ]),
                           ),
                         ]),

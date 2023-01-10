@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sboba_app_client/data/data_source/product_data/productData.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/show_product.dart';
+import 'package:sboba_app_client/data/models/units_model.dart';
 import 'package:sboba_app_client/module/products/product_binding.dart';
 import 'package:sboba_app_client/module/shared/component/awesome_dialog.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -16,6 +17,7 @@ import 'package:dio/src/multipart_file.dart';
 
 import '../../data/models/get_product_model.dart';
 import '../home_screen/home_screen_view.dart';
+import '../shared/component/snack_message.dart';
 
 class ProductController extends GetxController
     with StateMixin<List<GetProductItem>> {
@@ -54,6 +56,7 @@ class ProductController extends GetxController
   var editProductNameEnglishController = TextEditingController();
   var editProductDescriptionArabicController = TextEditingController();
   var editProductDescriptionEnglishController = TextEditingController();
+  var editStoreController = TextEditingController();
 
   var editSelectCateogController = TextEditingController();
   var editUnitPriceController = TextEditingController();
@@ -85,6 +88,7 @@ class ProductController extends GetxController
     getCateogries();
     // getProducts();
     getProductsByCateogrries(0);
+    //getProductUnit();
 
     final DateTime today = DateTime.utc(0, 0, 0);
     startDate = "00-00-00".obs;
@@ -98,6 +102,26 @@ class ProductController extends GetxController
   addingChipItems(value) {
     //chipList1 = [];
     chipList1.add(value);
+    update();
+  }
+
+  bool increaseValue = false;
+  bool decreaseValue = false;
+  String? increase;
+  incrementData(value) {
+    increaseValue = value;
+    if (value == true) {
+      increase = "incres";
+    }
+    print(increase);
+    update();
+  }
+
+  decrementData(value) {
+    decreaseValue = value;
+    if (value == true) {
+      increase = "decrease";
+    }
     update();
   }
 
@@ -318,6 +342,24 @@ class ProductController extends GetxController
     }
   }
 
+  var unitList = [];
+  Future getProductUnit() async {
+    try {
+      var res = await Productdata().getUnits();
+      var cat = res["data"] as List;
+      print(res);
+      if (res["status"] == 200) {
+        unitList = cat.map((e) => UnitsItem.fromJson(e)).toList();
+
+        update();
+      } else {
+        print("no correct");
+      }
+    } catch (e) {
+      print("something error in Unit ${e.toString()}");
+    }
+  }
+
   /////////////////////delete product////////////////////
   deleteProducts(id) async {
     try {
@@ -331,6 +373,21 @@ class ProductController extends GetxController
       } else {}
     } catch (e) {
       print("something error ${e.toString()}");
+    }
+  }
+
+  editAmountStore() async {
+    try {
+      if (decreaseValue == true &&
+          int.parse(editStoreController.text) > showProduct[0].store!) {
+        showSnakBarMessage(
+            color: Colors.red[900], msg: "لقد تخطيت كمية المخزون");
+      } else {
+        var res = await Productdata()
+            .updateStore(editStoreController.text, increase, showProduct[0].id);
+      }
+    } catch (e) {
+      print("error when update store value${e.toString()}");
     }
   }
 
@@ -527,6 +584,15 @@ class ProductController extends GetxController
     disSelected.value = val.name;
     dis_id.value = val.id;
     print(dis_id.value);
+    update();
+  }
+
+  var unitSelecte = "";
+  var unitId = 0;
+  void changeSelectUnits(val) {
+    unitSelecte = val.name;
+   unitId  = val.id;
+   // print(dis_id.value);
     update();
   }
 

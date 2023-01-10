@@ -21,6 +21,23 @@ class Productdata {
     }
   }
 
+  Future getUnits() async {
+    try {
+      var response = await DioHelper.getData(url: ApiLink.units, option: {
+        "Authorization": "Bearer " + await CashHelper.getData("token"),
+        "X-localization": await CashHelper.getData("lang")
+      });
+      if (response.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   Future getProductByCateogry(id) async {
     try {
       var response = await DioHelper.getData(url: ApiLink.getProduct, option: {
@@ -43,7 +60,7 @@ class Productdata {
   Future showSingleProduct(id) async {
     try {
       var response =
-          await DioHelper.getData(url: ApiLink.showProduct + "${id}", option: {
+          await DioHelper.getData(url: "${ApiLink.showProduct}${id}", option: {
         "Authorization": "Bearer " + await CashHelper.getData("token"),
         "X-localization": await CashHelper.getData("lang")
       });
@@ -75,6 +92,26 @@ class Productdata {
       print(e.toString());
     }
   }
+
+// Future productUnits() async {
+//   try {
+//     var response = await DioHelper.getData(
+//       url: ApiLink.units,
+//       option: {
+//         "Authorization": "Bearer " + await CashHelper.getData("token"),
+//         "X-localization": await CashHelper.getData("lang")
+//       },
+//     );
+//     if (response.statusCode == 200) {
+//       print(response.data);
+//       return response.data;
+//     } else {
+//       return response.data;
+//     }
+//   } catch (e) {
+//     print(e.toString());
+//   }
+// }
 
   addNewProduct(
       {required name_ar,
@@ -246,6 +283,31 @@ class Productdata {
     } else {
       response.data;
       print(response.data);
+    }
+  }
+
+  Future updateStore(value, type, id) async {
+    try {
+      Map<String, dynamic> data = {
+        "product_id": id,
+        "value": value,
+        "type": type
+      };
+      var response = await DioHelper.postData(
+          url: ApiLink.updateStore,
+          data: data,
+          option: {
+            "Authorization": "Bearer " + await CashHelper.getData("token"),
+          });
+      if (response.statusCode == 200) {
+        print(response.data);
+        return response.data;
+      } else {
+        response.data;
+        print(response.data);
+      }
+    } catch (e) {
+      print("error when edit store is${e.toString()}");
     }
   }
 }

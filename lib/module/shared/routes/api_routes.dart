@@ -23,5 +23,8 @@ class ApiLink {
   static const String forgetPassword = "/seller/forgot/password";
   static const String sendOtp = "/seller/password/reset_token";
   static const String restorePassword = "/seller/password/reset";
-  static const String listProduct = "/seller/list-product"; // delete
+  static const String listProduct = "/seller/list-product";
+  static const String units = "/units";
+  static const String updateStore = "/seller/update-store";
+  // delete
 }

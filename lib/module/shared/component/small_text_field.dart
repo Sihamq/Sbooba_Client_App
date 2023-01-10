@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
 import 'package:sizer/sizer.dart';
@@ -38,6 +39,9 @@ class MySmallTextField extends StatelessWidget {
       //  height: 6.h,
       width: 41.w,
       child: TextFormField(
+        inputFormatters: [
+          FilteringTextInputFormatter.deny(RegExp(r"\s\b|\b\s"))
+        ],
         //  cursorHeight: 6.h,
         //  minLines: 3,
         maxLines: maxline == null ? 1 : maxline,

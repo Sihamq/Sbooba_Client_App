@@ -78,6 +78,9 @@ class ShowItem {
     this.image,
     this.discountedPrice,
     this.discount,
+    this.type,
+    this.store,
+    this.option,
   });
 
   int? id;
@@ -118,47 +121,54 @@ class ShowItem {
   Discount? discount;
   List<String>? attachment;
   double? discountedPrice;
+  int? type;
+  int? store;
+  List<dynamic>? option;
 
   factory ShowItem.fromJson(Map<String, dynamic> json) => ShowItem(
-        id: json["id"],
-        name: Name.fromJson(json["name"]),
-        calories: json["calories"],
-        addedBy: json["added_by"],
-        sellerId: json["seller_id"],
-        categoryId: json["category_id"],
-        cateogryName: json["category_name"],
-        videoProvider: json["video_provider"],
-        videoLink: json["video_link"],
-        tags: json["tags"],
-        descriptionName: Name.fromJson(json["description"]),
-        unitPrice: json["unit_price"],
-        purchasePrice: json["purchase_price"],
-        attributes: json["attributes"],
-        todaysDeal: json["todays_deal"],
-        published: json["published"],
-        approved: json["approved"],
-        cashOnDelivery: json["cash_on_delivery"],
-        featured: json["featured"],
-        sellerFeatured: json["seller_featured"],
-        unit: json["unit"],
-        minQty: json["min_qty"],
-        lowStockQuantity: json["low_stock_quantity"],
-        tax: json["tax"],
-        taxType: json["tax_type"],
-        barcode: json["barcode"],
-        slug: json["slug"],
-        metaTitle: json["meta_title"],
-        metaDescription: json["meta_description"],
-        metaImg: json["meta_img"],
-        metaKeywords: json["meta_keywords"],
-        deletedAt: json["deleted_at"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
-        image: json["image"],
-        discount: Discount.fromJson(json["discount"]),
-        discountedPrice: json["discounted_price"].toDouble(),
-        attachment: List<String>.from(json["attachment"].map((x) => x)),
-      );
+      id: json["id"],
+      name: Name.fromJson(json["name"]),
+      calories: json["calories"],
+      addedBy: json["added_by"],
+      sellerId: json["seller_id"],
+      categoryId: json["category_id"],
+      cateogryName: json["category_name"],
+      videoProvider: json["video_provider"],
+      videoLink: json["video_link"],
+      tags: json["tags"],
+      descriptionName: Name.fromJson(json["description"]),
+      unitPrice: json["unit_price"],
+      purchasePrice: json["purchase_price"],
+      attributes: json["attributes"],
+      todaysDeal: json["todays_deal"],
+      published: json["published"],
+      approved: json["approved"],
+      cashOnDelivery: json["cash_on_delivery"],
+      featured: json["featured"],
+      sellerFeatured: json["seller_featured"],
+      unit: json["unit"],
+      minQty: json["min_qty"],
+      lowStockQuantity: json["low_stock_quantity"],
+      tax: json["tax"],
+      taxType: json["tax_type"],
+      barcode: json["barcode"],
+      slug: json["slug"],
+      metaTitle: json["meta_title"],
+      metaDescription: json["meta_description"],
+      metaImg: json["meta_img"],
+      metaKeywords: json["meta_keywords"],
+      deletedAt: json["deleted_at"],
+      createdAt: DateTime.parse(json["created_at"]),
+      updatedAt: DateTime.parse(json["updated_at"]),
+      image: json["image"],
+      discount: Discount.fromJson(json["discount"]),
+      discountedPrice: json["discounted_price"].toDouble(),
+      attachment: List<String>.from(json["attachment"].map((x) => x)),
+      type: json["type"],
+      store: json["store"],
+      option: json["option"] == null
+          ? []
+          : List<dynamic>.from(json["option"]!.map((x) => x)));
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -200,6 +210,8 @@ class ShowItem {
         "discount": discount!.toJson(),
         "attachment": List<dynamic>.from(attachment!.map((x) => x)),
         "discounted_price": discountedPrice,
+        "option":
+        option == null ? [] : List<dynamic>.from(option!.map((x) => x)),
       };
 }
 

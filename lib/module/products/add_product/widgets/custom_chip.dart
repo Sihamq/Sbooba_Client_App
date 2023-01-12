@@ -40,15 +40,15 @@ class CustomChip extends StatelessWidget {
           ],
         ),
       ),
-      deleteIcon: Icon(
-        Icons.cancel_outlined,
-        size: 20,
-        color: myOrange,
-      ),
-      onDeleted: () {
-    // onDeleted(index);
-    
-      },
+      //   deleteIcon: Icon(
+      //     Icons.cancel_outlined,
+      //     size: 20,
+      //     color: myOrange,
+      //   ),
+      //   onDeleted: () {
+      // // onDeleted(index);
+
+      //   },
     );
   }
 }

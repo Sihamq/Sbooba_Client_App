@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:sboba_app_client/module/shared/DioHelper/dio_helper.dart';
 import 'package:sboba_app_client/module/shared/cash_helper.dart';
@@ -142,7 +144,11 @@ class Productdata {
       meta_title,
       meta_description,
       attachmentable,
-      image}) async {
+      image,
+      option,
+      type,
+      pepole,
+      time}) async {
     FormData data = FormData.fromMap({
       "name": {"ar": name_ar, "en": name_en},
       "description": {"ar": description_ar, "en": description_en},
@@ -171,7 +177,11 @@ class Productdata {
       "discount_end_date": discount_end_date,
       "attachments[]": attachmentable,
       "image": image,
-      "discount_type": discount_type
+      "discount_type": discount_type,
+      "option": jsonEncode(option),
+      "type": type,
+      "time": time,
+      "people": pepole,
     });
 
     var response = await DioHelper.postData1(
@@ -239,7 +249,9 @@ class Productdata {
       meta_description,
       attachment_delete,
       attachments,
-      image}) async {
+      image,
+      time,
+      people}) async {
     FormData data = FormData.fromMap({
       "name": {"ar": name_ar, "en": name_en},
       "description": {"ar": description_ar, "en": description_en},
@@ -268,7 +280,9 @@ class Productdata {
       "discount_end_date": discount_end_date,
       "attachment_delete[]": attachment_delete,
       "attachments[]": attachments,
-      "image": image
+      "image": image,
+      "time": time,
+      "people": people
     });
 
     var response = await DioHelper.putDataForm(

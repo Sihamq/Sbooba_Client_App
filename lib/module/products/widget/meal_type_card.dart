@@ -100,7 +100,7 @@ class MealCard extends GetView<ProductController> {
                         fontSize: 10.sp),
                   ),
                   Text(
-                    controller.productItem[index!].purchasePrice.toString() +
+                    controller.productItem[index!].unitPrice.toString() +
                         "SAR".tr,
                     style: TextStyle(
                         decoration:

@@ -216,9 +216,9 @@ class CreateAccount extends StatelessWidget {
                               bottom: 2.h, left: 2.h, right: 2.h),
                           child: MyTextField(
                             type: TextInputType.phone,
-                            validate: ((p0) {
-                              return validInput(p0!, 4, 50, "number");
-                            }),
+                            // validate: ((p0) {
+                            //   return validInput(p0!, 4, 50, "number");
+                            // }),
                             controller: controller.licenseController,
                             obcure: false,
                             label: "lic".tr,

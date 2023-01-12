@@ -16,8 +16,8 @@ class CateogryCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-        height: 20.h,
-        width: 16.h,
+        height: 16.h,
+        width: 100.h,
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),

@@ -22,7 +22,7 @@ class Extra extends GetView<ProductController> {
           MyAddTextField(
             controller: controller.arabicAdding,
             obcure: false,
-            label: "اضافتك بالعربية",
+            label: "adda".tr,
             // onChange: (value) {
             //   controller.addingChipItems(value);
             // },
@@ -33,7 +33,7 @@ class Extra extends GetView<ProductController> {
           MyAddTextField(
             controller: controller.englishAdding,
             obcure: false,
-            label: "اضافتك بالانجليزية",
+            label: "adde".tr,
             // onChange: (value) => controller.addingChipItemenglish(value),
           ),
           Padding(
@@ -48,12 +48,13 @@ class Extra extends GetView<ProductController> {
               child: MaterialButton(
                 //minWidth: 10.h,
                 onPressed: () async {
-                  controller.addingChipItems(controller.arabicAdding.text);
-                  controller
-                      .addingChipItemenglish(controller.englishAdding.text);
+                  controller.addingChipItems(controller.arabicAdding.text,
+                      controller.englishAdding.text);
+                  // controller
+                  //     .addingChipItemenglish(controller.englishAdding.text);
                   navigator!.pop();
                 },
-                child: Text("اضافة".tr,
+                child: Text("add".tr,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,

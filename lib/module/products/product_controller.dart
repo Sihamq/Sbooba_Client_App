@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide MultipartFile;
 //import 'package:get/get_state_manager/get_state_manager.dart';
@@ -72,6 +73,8 @@ class ProductController extends GetxController
   var englishAdding = TextEditingController();
   var chipList1 = [];
   var chipList2 = [];
+  var timeController = TextEditingController();
+  var peopleController = TextEditingController();
   bool swittch = false;
   int? published;
   bool featured = false;
@@ -82,6 +85,9 @@ class ProductController extends GetxController
     CateogryItems(name: "c1".tr, id: 1),
     CateogryItems(name: "c2".tr, id: 2),
   ].obs;
+  //Option? option;
+  var editPeople = TextEditingController();
+  var editTime = TextEditingController();
 
   ///////////////////////////////////////methods//////////////////////////////////////
   void onInit() {
@@ -99,9 +105,14 @@ class ProductController extends GetxController
     super.onInit();
   }
 
-  addingChipItems(value) {
+  //List<Option> optionList = [];
+  var data = [];
+  addingChipItems(valueAr, valueEn) {
     //chipList1 = [];
-    chipList1.add(value);
+    data.add({"ar": valueAr.toString(), "en": valueEn.toString()});
+    //print(optionList[0]);
+    chipList1.add(valueAr);
+    chipList2.add(valueEn);
     update();
   }
 
@@ -134,6 +145,7 @@ class ProductController extends GetxController
   String? img;
   var editSelectettedId;
   initData(ShowItem item) {
+    getProductUnit();
     editProductNameArabicController.text = item.name!.ar!;
     editProductNameEnglishController.text = item.name!.en!;
     editProductCaloriesController.text = item.calories.toString();
@@ -144,17 +156,24 @@ class ProductController extends GetxController
     editUnitPriceController.text = item.unitPrice.toString();
     editUnitPurchesController.text = item.purchasePrice.toString();
     editProductAvialbleController.text = item.minQty.toString();
-    editProductDiscountController.text = item.discount!.discount.toString();
+    // editProductDiscountController.text = item.discount!.discount.toString();
+    editPeople.text = item.people == null ? "" : item.people;
+    editTime.text = item.time == null ? "" : item.time;
+    // unitId = item.unit.toString();
     cat_id = item.categoryId;
+    // editPeople = item.people ;
+    //editTime = item.time ;
+
     catSelect = item.cateogryName;
+    unitSelecte = item.unit_name;
     img = item.image;
     disSelected.value = item.discount!.discountType!;
     if (disSelected == "1") {
       dis_id.value = 1;
-      disSelected.value = "خصم بالنسبة";
+      disSelected.value = "c1".tr;
     } else {
       dis_id.value = 2;
-      disSelected.value = "خصم بالمبلغ";
+      disSelected.value = "c2".tr;
     }
     feature = item.featured;
     published = item.published;
@@ -376,15 +395,23 @@ class ProductController extends GetxController
     }
   }
 
+  var newStore;
   editAmountStore() async {
     try {
       if (decreaseValue == true &&
           int.parse(editStoreController.text) > showProduct[0].store!) {
-        showSnakBarMessage(
-            color: Colors.red[900], msg: "لقد تخطيت كمية المخزون");
+        showSnakBarMessage(color: Colors.red[900], msg: "exceed".tr);
       } else {
         var res = await Productdata()
             .updateStore(editStoreController.text, increase, showProduct[0].id);
+        if (res["status"] == 200) {
+          showSnakBarMessage(color: Colors.green[900], msg: "edits".tr);
+          newStore = res["data"];
+          editStoreController.clear();
+          navigator!.pop();
+          update();
+        }
+        update();
       }
     } catch (e) {
       print("error when update store value${e.toString()}");
@@ -392,7 +419,7 @@ class ProductController extends GetxController
   }
 
   //////////////////////////////////store product////////////////////////
-  Future storeProduct() async {
+  Future storeProduct({type}) async {
     List y = [];
     for (var x in imageFileList) {
       y.add(MultipartFile.fromFileSync(x.path));
@@ -417,7 +444,7 @@ class ProductController extends GetxController
               description_ar: productDescriptionArabicController.text,
               description_en: productDescriptionEnglishController.text,
               category_id: cat_id,
-              purchase_price: unitPurchesController.text,
+              purchase_price: 0,
               cash_on_delivery: 1,
               min_qty: 1,
               approved: 1,
@@ -436,13 +463,18 @@ class ProductController extends GetxController
               tags: "food",
               unit_price: unitPriceController.text,
               todays_deal: 1,
-              unit: 1,
+              unit: unitId,
               tax: 1,
               meta_description: "test",
               meta_title: "test",
               slug: "test",
               attachmentable: y,
-              image: MultipartFile.fromFileSync(imagee!.path));
+              image: MultipartFile.fromFileSync(imagee!.path),
+              pepole:
+                  peopleController.text.isEmpty ? null : peopleController.text,
+              type: type,
+              time: timeController.text.isEmpty ? null : timeController.text,
+              option: data);
           if (res["status"] == 200) {
             isLoading = false;
             print(res["message"]);
@@ -526,11 +558,13 @@ class ProductController extends GetxController
           tags: "food",
           unit_price: editUnitPriceController.text,
           todays_deal: 1,
-          unit: 1,
+          unit: unitId,
           tax: 1,
           meta_description: "test",
           meta_title: "test",
           slug: "test",
+          time: editTime.text,
+          people: editPeople.text,
           attachment_delete: deleteImage,
           attachments: y.isEmpty ? null : y,
           image:
@@ -587,12 +621,12 @@ class ProductController extends GetxController
     update();
   }
 
-  var unitSelecte = "";
+  var unitSelecte;
   var unitId = 0;
   void changeSelectUnits(val) {
     unitSelecte = val.name;
-   unitId  = val.id;
-   // print(dis_id.value);
+    unitId = val.id;
+    // print(dis_id.value);
     update();
   }
 

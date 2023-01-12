@@ -102,8 +102,7 @@ class DetailsContainer extends StatelessWidget {
                             spacing: 3.w,
                             children: [
                               Text(
-                                controller.showProduct[0].purchasePrice
-                                        .toString() +
+                                controller.showProduct[0].unitPrice.toString() +
                                     "SAR".tr,
                                 style: TextStyle(
                                     decoration: TextDecoration.lineThrough,
@@ -159,17 +158,17 @@ class DetailsContainer extends StatelessWidget {
                             style: TextStyle(
                                 color: myOrange, fontWeight: FontWeight.bold),
                           ),
-                          Text(
-                            controller.showProduct[0].discountedPrice
-                                    .toString() +
-                                "SAR".tr,
-                            //"${140} SAR".tr,
-                            style: TextStyle(
-                                fontSize: 12.sp,
-                                color: myBlack,
-                                fontWeight: FontWeight.bold),
-                            maxLines: 3,
-                          ),
+                          // Text(
+                          //   controller.showProduct[0].discountedPrice
+                          //           .toString() +
+                          //       "SAR".tr,
+                          //   //"${140} SAR".tr,
+                          //   style: TextStyle(
+                          //       fontSize: 12.sp,
+                          //       color: myBlack,
+                          //       fontWeight: FontWeight.bold),
+                          //   maxLines: 3,
+                          // ),
                         ]),
                       ),
 
@@ -178,7 +177,7 @@ class DetailsContainer extends StatelessWidget {
                         child: Wrap(
                           spacing: 3.w,
                           children: [
-                            Text("${1}${"large".tr}",
+                            Text(controller.showProduct[0].unit_name!,
                                 style: TextStyle(
                                     color: Colors.black,
                                     wordSpacing: 3,
@@ -208,7 +207,7 @@ class DetailsContainer extends StatelessWidget {
                       ),
 
                       Padding(
-                        padding: EdgeInsets.all(.5.h),
+                        padding: EdgeInsets.all(1.h),
                         child: Text(
                           CashHelper.getData("lang") == "en"
                               ? controller.showProduct[0].descriptionName!.en!
@@ -218,12 +217,12 @@ class DetailsContainer extends StatelessWidget {
                               color: Colors.grey[700],
                               height: 2,
                               fontWeight: FontWeight.bold),
-                          maxLines: 5,
+                          maxLines: 9,
                         ),
                       ),
                       Padding(
                           padding: EdgeInsets.only(bottom: 1.h),
-                          child: Text("الاضافات".tr,
+                          child: Text("option".tr,
                               style: TextStyle(
                                   color: myOrange,
                                   wordSpacing: 3,
@@ -231,139 +230,222 @@ class DetailsContainer extends StatelessWidget {
                                   fontWeight: FontWeight.bold))),
 
                       controller.showProduct[0].option!.isNotEmpty
-                          ? ListView.builder(
-                              itemBuilder: (context, index) => Container(
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: myGreen.withOpacity(.1)),
-                                child: Text(
-                                    controller.showProduct[0].option![index]),
+                          ? ListView.separated(
+                              separatorBuilder: (context, index) =>
+                                  SizedBox(height: .5.w),
+                              itemCount:
+                                  controller.showProduct[0].option!.length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) => Padding(
+                                padding: EdgeInsets.all(1.h),
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: myGreen.withOpacity(.1)),
+                                    child: CashHelper.getData("lang") == "en"
+                                        ? Padding(
+                                            padding: EdgeInsets.all(1.h),
+                                            child: Text(controller
+                                                .showProduct[0]
+                                                .option![index]
+                                                .name!
+                                                .en!),
+                                          )
+                                        : Padding(
+                                            padding: EdgeInsets.all(1.h),
+                                            child: Text(
+                                              controller.showProduct[0]
+                                                  .option![index].name!.ar!,
+                                              style: TextStyle(color: myGreen),
+                                            ),
+                                          )),
                               ),
                             )
-                          : Text("لم تقم بوضع اي اضافة"),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text("المخزون من المنتج",
-                            style: TextStyle(
-                                color: myOrange,
-                                wordSpacing: 3,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.bold)),
-                      ),
+                          : Text("nooption".tr),
+                      if (controller.showProduct[0].type == 1)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("store".tr,
+                              style: TextStyle(
+                                  color: myOrange,
+                                  wordSpacing: 3,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold)),
+                        ),
 
-                      Padding(
-                        padding: EdgeInsets.all(1.h),
-                        child: Row(
-                          //  spacing: 2.w,
-                          children: [
-                            Icon(
-                              Icons.store,
-                              color: myGreen,
-                            ),
-                            Container(
-                              height: 5.h,
-                              width: 15.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  shape: BoxShape.rectangle,
-                                  color: myGreen.withOpacity(.1)),
-                              child: Center(
-                                child: Text(
-                                    controller.showProduct[0].store.toString()),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(1.h),
-                              child: Text("تعديل المخزون",
-                                  style: TextStyle(
-                                      color: myOrange,
-                                      wordSpacing: 3,
-                                      fontSize: 9.sp,
-                                      fontWeight: FontWeight.bold)),
-                            ),
-                            InkWell(
-                              onTap: () => Get.defaultDialog(
-                                  title: "تعديل بيانات المخزون",
-                                  content: GetBuilder<ProductController>(
-                                    builder: (controller) => Column(
-                                      children: [
-                                        MySmallTextField(
-                                            controller:
-                                                controller.editStoreController,
-                                            obcure: false,
-                                            label: "تعديل المخزون"),
-                                        Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Text("زيادة"),
-                                            Checkbox(
-                                                value: controller.increaseValue,
-                                                onChanged: (value) {
-                                                  controller
-                                                      .incrementData(value);
-                                                }),
-                                            Text("نقصان"),
-                                            Checkbox(
-                                                value: controller.decreaseValue,
-                                                onChanged: (value) {
-                                                  controller
-                                                      .decrementData(value);
-                                                }),
-                                          ],
-                                        ),
-                                        Container(
-                                          width: 12.h,
-                                          height: 4.h,
-                                          decoration: BoxDecoration(
-                                              color: myGreen,
-                                              shape: BoxShape.rectangle,
-                                              borderRadius:
-                                                  BorderRadius.circular(20)),
-                                          child: MaterialButton(
-                                            //minWidth: 10.h,
-                                            onPressed: () async {
-                                              controller.editAmountStore();
-                                            },
-                                            child: Text("تعديل المنتج".tr,
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 11.sp,
-                                                )),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )),
-                              child: Icon(
-                                Icons.edit,
+                      if (controller.showProduct[0].type == 1)
+                        Padding(
+                          padding: EdgeInsets.all(1.h),
+                          child: Row(
+                            //  spacing: 2.w,
+                            children: [
+                              Icon(
+                                Icons.store,
                                 color: myGreen,
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(
-                        color: Colors.grey[200],
-                        child: Row(children: [
-                          Padding(
-                            padding: EdgeInsets.all(1.h),
-                            child: Text(
-                              "Published".tr,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, color: myGreen),
-                            ),
-                          ),
-                          const Spacer(),
-                          CircleAvatar(
-                            radius: 15,
-                            backgroundColor: myGreen,
-                            child: CircleAvatar(
-                                radius: 10,
+                              Container(
+                                height: 5.h,
+                                width: 15.h,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    shape: BoxShape.rectangle,
+                                    color: myGreen.withOpacity(.1)),
                                 child: Center(
-                                    child:
-                                        controller.showProduct[0].published == 1
+                                  child: controller.newStore != null
+                                      ? Text(controller.newStore.toString())
+                                      : Text(controller.showProduct[0].store
+                                          .toString()),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(1.h),
+                                child: Text("editstore".tr,
+                                    style: TextStyle(
+                                        color: myOrange,
+                                        wordSpacing: 3,
+                                        fontSize: 9.sp,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                              InkWell(
+                                onTap: () => Get.defaultDialog(
+                                    title: "editstore".tr,
+                                    content: GetBuilder<ProductController>(
+                                      builder: (controller) => Column(
+                                        children: [
+                                          MySmallTextField(
+                                              controller: controller
+                                                  .editStoreController,
+                                              obcure: false,
+                                              label: "editstore".tr),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text("incre".tr),
+                                              Checkbox(
+                                                  value:
+                                                      controller.increaseValue,
+                                                  onChanged: (value) {
+                                                    controller
+                                                        .incrementData(value);
+                                                  }),
+                                              Text("decre".tr),
+                                              Checkbox(
+                                                  value:
+                                                      controller.decreaseValue,
+                                                  onChanged: (value) {
+                                                    controller
+                                                        .decrementData(value);
+                                                  }),
+                                            ],
+                                          ),
+                                          Container(
+                                            width: 12.h,
+                                            height: 4.h,
+                                            decoration: BoxDecoration(
+                                                color: myGreen,
+                                                shape: BoxShape.rectangle,
+                                                borderRadius:
+                                                    BorderRadius.circular(20)),
+                                            child: MaterialButton(
+                                              //minWidth: 10.h,
+                                              onPressed: () async {
+                                                controller.editAmountStore();
+                                              },
+                                              child: Text("update".tr,
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 11.sp,
+                                                  )),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                child: Icon(
+                                  Icons.edit,
+                                  color: myGreen,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                      if (controller.showProduct[0].type == 2)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("people".tr,
+                              style: TextStyle(
+                                  color: myOrange,
+                                  wordSpacing: 3,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      if (controller.showProduct[0].type == 2)
+                        Padding(
+                          padding: EdgeInsets.all(.5.h),
+                          child: Row(
+                            children: [
+                              Text(controller.showProduct[0].people),
+                              SizedBox(
+                                width: .5.h,
+                              ),
+                              Text("person".tr)
+                            ],
+                          ),
+                        ),
+                      if (controller.showProduct[0].type == 2)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("time".tr,
+                              style: TextStyle(
+                                  color: myOrange,
+                                  wordSpacing: 3,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      if (controller.showProduct[0].type == 2)
+                        Padding(
+                          padding: EdgeInsets.all(.5.h),
+                          child: Row(
+                            children: [
+                              Text(controller.showProduct[0].time!),
+                              SizedBox(
+                                width: .5.h,
+                              ),
+                              Text("hour".tr)
+                            ],
+                          ),
+                        ),
+
+                      if (controller.showProduct[0].type == 2)
+                        Padding(
+                          padding: EdgeInsets.all(1.h),
+                          child: Container(
+                            color: Colors.grey[200],
+                            child: Row(children: [
+                              Padding(
+                                padding: EdgeInsets.all(1.h),
+                                child: Text(
+                                  "Published".tr,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: myGreen),
+                                ),
+                              ),
+                              const Spacer(),
+                              CircleAvatar(
+                                radius: 15,
+                                backgroundColor: myGreen,
+                                child: CircleAvatar(
+                                    radius: 10,
+                                    child: Center(
+                                        child: controller
+                                                    .showProduct[0].published ==
+                                                1
                                             ? Icon(
                                                 Icons.done,
                                                 size: 5.w,
@@ -372,9 +454,10 @@ class DetailsContainer extends StatelessWidget {
                                                 Icons.cancel_outlined,
                                                 size: 5.w,
                                               ))),
-                          )
-                        ]),
-                      ),
+                              )
+                            ]),
+                          ),
+                        ),
                       SizedBox(
                         height: 1.h,
                       ),

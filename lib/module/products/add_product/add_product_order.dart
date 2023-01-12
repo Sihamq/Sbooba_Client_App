@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:material_tag_editor/tag_editor.dart';
 import 'package:sboba_app_client/data/models/cateogry.dart';
 import 'package:sboba_app_client/data/models/units_model.dart';
 import 'package:sboba_app_client/module/my_colors.dart';
@@ -10,6 +13,7 @@ import 'package:sboba_app_client/module/products/add_product/widgets/date_contai
 import 'package:sboba_app_client/module/products/add_product/widgets/extra_widget.dart';
 import 'package:sboba_app_client/module/products/product_controller.dart';
 import 'package:sboba_app_client/module/products/widget/add_pro_images.dart';
+import 'package:sboba_app_client/module/products/widget/adding_container.dart';
 import 'package:sboba_app_client/module/shared/component/green_button.dart';
 import 'package:sboba_app_client/module/shared/component/small_text_field.dart';
 import 'package:sboba_app_client/module/shared/function/validInput.dart';
@@ -19,8 +23,8 @@ import 'package:sizer/sizer.dart';
 import '../../shared/component/add_text_formfield.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 
-class AddProduct extends GetView<ProductController> {
-  AddProduct({super.key}) {
+class AddProductOrder extends GetView<ProductController> {
+  AddProductOrder({super.key}) {
     controller.getProductUnit();
   }
 
@@ -200,6 +204,42 @@ class AddProduct extends GetView<ProductController> {
                         validate: (p0) => validInput(p0!, 3, 500, "name"),
                       )),
                   Padding(
+                    padding: EdgeInsets.all(1.h),
+                    child: Row(
+                      children: [
+                        MySmallTextField(
+                          type: TextInputType.number,
+                          controller: controller.timeController,
+                          obcure: false,
+                          label: "time".tr,
+                          validate: (p0) => validInput(p0!, 1, 500, "name"),
+                        ),
+                        SizedBox(
+                          width: 2.h,
+                        ),
+                        Text("hour".tr),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.h),
+                    child: Row(
+                      children: [
+                        MySmallTextField(
+                          type: TextInputType.number,
+                          controller: controller.peopleController,
+                          obcure: false,
+                          label: "people".tr,
+                          validate: (p0) => validInput(p0!, 1, 500, "name"),
+                        ),
+                        SizedBox(
+                          width: 2.h,
+                        ),
+                        Text("person".tr),
+                      ],
+                    ),
+                  ),
+                  Padding(
                     padding: EdgeInsets.only(
                       top: .5.h,
                       bottom: .5.h,
@@ -209,7 +249,7 @@ class AddProduct extends GetView<ProductController> {
                         // baseColor: myWhite,
                         title: Text(
                           "addunit".tr,
-                          style: TextStyle(),
+                          //  style: TextStyle(),
                         ),
                         children: [
                           SizedBox(
@@ -375,6 +415,25 @@ class AddProduct extends GetView<ProductController> {
                           ),
 
                           //  Extra()
+
+                          // TagEditor(
+                          //   length: controller.chipList.length,
+                          //   delimiters: [',', ' '],
+                          //   hasAddButton: true,
+                          //   //enableSuggestions: true,
+                          //   inputDecoration: const InputDecoration(
+                          //     border: InputBorder.none,
+                          //     hintText: 'ضع  اضافاتك...',
+                          //   ),
+                          //   onTagChanged: (newValue) {
+                          //     controller.addingChipItems(newValue);
+                          //   },
+                          //   tagBuilder: (context, index) => CustomChip(
+                          //     index: index,
+                          //     label: controller.chipList[index],
+                          //     // onDeleted: onDelete,
+                          //   ),
+                          // )
                         ],
                       )
                     ],
@@ -551,7 +610,7 @@ class AddProduct extends GetView<ProductController> {
                         onpress: () async {
                           // print("stoore");
                           FocusScope.of(context).unfocus();
-                          await controller.storeProduct(type: 1);
+                          await controller.storeProduct(type: 2);
                         },
                         title: controller.isLoading == false
                             ? Text("Save".tr,

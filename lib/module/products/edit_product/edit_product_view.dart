@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -15,6 +16,7 @@ import 'package:sboba_app_client/module/shared/function/validInput.dart';
 import 'package:sboba_app_client/module/shared/routes/api_routes.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../data/models/units_model.dart';
 import '../../shared/component/add_text_formfield.dart';
 
 class EditProduct extends GetView<ProductController> {
@@ -74,6 +76,78 @@ class EditProduct extends GetView<ProductController> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(1.h),
+                  child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: Colors
+                              .white, //background color of dropdown button
+                          border: Border.all(
+                              color: myOrange,
+                              width: 2), //border of dropdown button
+                          borderRadius: BorderRadius.circular(
+                              15), //border raiuds of dropdown button
+                          boxShadow: <BoxShadow>[
+                            //apply shadow on Dropdown button
+                            BoxShadow(
+                                color: myOrange,
+                                blurRadius: 0.1), //shadow for button
+                          ]),
+                      child: DropdownButton(
+                        autofocus: true,
+                        dropdownColor: myWhite,
+                        focusColor: myOrange,
+                        isExpanded: true,
+                        underline: const SizedBox(),
+                        elevation: 2,
+                        hint: Center(
+                          child: controller.catSelect == null
+                              ? Padding(
+                                  padding: EdgeInsets.all(1.h),
+                                  child: Text(
+                                    "kind".tr,
+                                    style: TextStyle(fontSize: 13.sp),
+                                  ),
+                                )
+                              : Text(
+                                  controller.catSelect,
+                                  style: TextStyle(fontSize: 13.sp),
+                                ),
+                        ),
+                        alignment: AlignmentDirectional.center,
+                        iconSize: 20.sp,
+                        icon: Icon(
+                          Icons.keyboard_arrow_down,
+                          color: myOrange,
+                          size: 25.sp,
+                        ),
+                        items: controller.productCateogry
+                            .map<DropdownMenuItem<CateogryItems>>(
+                                (cat) => DropdownMenuItem(
+                                      value: cat,
+                                      child: Center(
+                                        child: Text(cat.name!),
+                                      ),
+                                    ))
+                            .toList(),
+                        onChanged: ((value) {
+                          controller.changeSelectCategory(value);
+                        }),
+                      )
+                      // MySmallTextField(
+                      //   type: TextInputType.number,
+                      //   controller: controller.miniProController,
+                      //   obcure: false,
+                      //   label: "Candy".tr,
+                      //   suffix: Icons.arrow_right_alt,
+                      //   suffixPressed: () {
+                      //     Get.defaultDialog(
+                      //         title: "'",
+                      //         content: CustomRdaioButton(),
+                      //         middleText: "😊");
+                      //   },
+                      ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
                     controller: controller.editProductNameArabicController,
                     obcure: false,
@@ -98,15 +172,7 @@ class EditProduct extends GetView<ProductController> {
                       obcure: false,
                       label: "Calories".tr),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: MyAddTextField(
-                    controller: controller.editProductTagController,
-                    obcure: false,
-                    label: "Tag".tr,
-                    // suffix: Icons.keyboard_arrow_right_outlined,
-                  ),
-                ),
+
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: MyAddTextField(
@@ -125,181 +191,173 @@ class EditProduct extends GetView<ProductController> {
                       obcure: false,
                       label: "Ingredient".tr),
                 ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: .5.h, bottom: .5.h, right: .5.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      MySmallTextField(
-                          type: TextInputType.number,
-                          controller: controller.editMiniProController,
-                          obcure: false,
-                          label: "Quantity".tr),
-                      SizedBox(
-                        width: .5.h,
-                      ),
-                      MySmallTextField(
-                        type: TextInputType.number,
-                        controller: controller.editProductAvialbleController,
-                        obcure: false,
-                        label: "Minium".tr,
-                        validate: (p0) => validInput(p0!, 3, 12, "name"),
-                      ),
-                      // SizedBox(
-                      //   width: .5.h,
-                      // ),
-                      // MySmallTextField(
-                      //   controller: controller.productTagController,
-                      //   obcure: false,
-                      //   label: "Flat".tr,
-                      //   suffix: Icons.arrow_drop_down,
-                      //   suffixPressed: () {},
-                      // ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.only(top: .5.h, bottom: .5.h, right: .5.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      MySmallTextField(
-                        type: TextInputType.number,
-                        controller: controller.editUnitPriceController,
-                        obcure: false,
-                        label: "unitprice".tr,
-                      ),
-                      SizedBox(
-                        width: .5.h,
-                      ),
-                      MySmallTextField(
-                        type: TextInputType.number,
-                        controller: controller.editUnitPurchesController,
-                        obcure: false,
-                        label: "unitpurchesprice".tr,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: Row(
-                    children: [
-                      // SizedBox(
-                      //   width: 1.h,
-                      // ),
-                      Expanded(
-                        child: DecoratedBox(
-                            decoration: BoxDecoration(
-                                color: Colors
-                                    .white, //background color of dropdown button
-                                border: Border.all(
-                                    color: myOrange,
-                                    width: 2), //border of dropdown button
-                                borderRadius: BorderRadius.circular(
-                                    15), //border raiuds of dropdown button
-                                boxShadow: <BoxShadow>[
-                                  //apply shadow on Dropdown button
-                                  BoxShadow(
-                                      color: myOrange,
-                                      blurRadius: 0.1), //shadow for button
-                                ]),
-                            child: DropdownButton(
-                              autofocus: true,
-                              dropdownColor: myWhite,
-                              focusColor: myOrange,
-                              isExpanded: true,
-                              underline: const SizedBox(),
-                              elevation: 2,
-                              hint: Center(
-                                child: controller.catSelect == null
-                                    ? Padding(
-                                        padding: EdgeInsets.all(1.h),
-                                        child: Text(
-                                          "kind".tr,
-                                          style: TextStyle(fontSize: 13.sp),
-                                        ),
-                                      )
-                                    : Text(
-                                        controller.catSelect,
-                                        style: TextStyle(fontSize: 13.sp),
-                                      ),
-                              ),
-                              alignment: AlignmentDirectional.center,
-                              iconSize: 20.sp,
-                              icon: Icon(
-                                Icons.keyboard_arrow_down,
-                                color: myOrange,
-                                size: 25.sp,
-                              ),
-                              items: controller.productCateogry
-                                  .map<DropdownMenuItem<CateogryItems>>(
-                                      (cat) => DropdownMenuItem(
-                                            value: cat,
-                                            child: Center(
-                                              child: Text(cat.name!),
-                                            ),
-                                          ))
-                                  .toList(),
-                              onChanged: ((value) {
-                                controller.changeSelectCategory(value);
-                              }),
-                            )
-                            // MySmallTextField(
-                            //   type: TextInputType.number,
-                            //   controller: controller.miniProController,
-                            //   obcure: false,
-                            //   label: "Candy".tr,
-                            //   suffix: Icons.arrow_right_alt,
-                            //   suffixPressed: () {
-                            //     Get.defaultDialog(
-                            //         title: "'",
-                            //         content: CustomRdaioButton(),
-                            //         middleText: "😊");
-                            //   },
-                            ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(1.h),
-                  child: Container(
-                    width: 100.w,
-                    height: 5.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey[300]),
-                    child: Padding(
-                      padding: EdgeInsets.all(1.h),
-                      child: Row(
-                        children: [
-                          Text(
-                            "Featured".tr,
-                            style: TextStyle(
-                                color: myGreen,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.sp),
-                          ),
-                          const Spacer(),
-                          Switch(
-                            focusColor: myOrange,
-                            value: controller.swittch,
-                            onChanged: (value) {
-                              controller.changSwitch(value);
-                            },
-                            activeColor: myOrange,
-                            inactiveThumbColor: Colors.grey,
-                          )
-                        ],
-                      ),
+                // Padding(
+                //   padding:
+                //       EdgeInsets.only(top: .5.h, bottom: .5.h, right: .5.h),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     crossAxisAlignment: CrossAxisAlignment.center,
+                //     children: [
+                //       MySmallTextField(
+                //           type: TextInputType.number,
+                //           controller: controller.editMiniProController,
+                //           obcure: false,
+                //           label: "Quantity".tr),
+                //       SizedBox(
+                //         width: .5.h,
+                //       ),
+                //       MySmallTextField(
+                //         type: TextInputType.number,
+                //         controller: controller.editProductAvialbleController,
+                //         obcure: false,
+                //         label: "Minium".tr,
+                //         validate: (p0) => validInput(p0!, 3, 12, "name"),
+                //       ),
+                //       // SizedBox(
+                //       //   width: .5.h,
+                //       // ),
+                //       // MySmallTextField(
+                //       //   controller: controller.productTagController,
+                //       //   obcure: false,
+                //       //   label: "Flat".tr,
+                //       //   suffix: Icons.arrow_drop_down,
+                //       //   suffixPressed: () {},
+                //       // ),
+                //     ],
+                //   ),
+                // ),
+                if (controller.showProduct[0].people != null)
+                  Padding(
+                    padding: EdgeInsets.all(1.h),
+                    child: Row(
+                      children: [
+                        MySmallTextField(
+                            controller: controller.editTime,
+                            obcure: false,
+                            label: "time".tr),
+                        SizedBox(
+                          width: 2.h,
+                        ),
+                        Text("hour".tr),
+                      ],
                     ),
                   ),
+                if (controller.showProduct[0].people != null)
+                  Padding(
+                    padding: EdgeInsets.all(1.h),
+                    child: Row(
+                      children: [
+                        MySmallTextField(
+                            controller: controller.editPeople,
+                            obcure: false,
+                            label: "people".tr),
+                        SizedBox(
+                          width: 2.h,
+                        ),
+                        Text("person".tr),
+                      ],
+                    ),
+                  ),
+
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: .5.h,
+                    bottom: .5.h,
+                  ),
+                  child: ExpansionTileCard(
+                      heightFactorCurve: Curves.bounceInOut,
+                      // baseColor: myWhite,
+                      title: Text(
+                        "addunit".tr,
+                        style: TextStyle(),
+                      ),
+                      children: [
+                        SizedBox(
+                          height: 20.h,
+                          child: Column(children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: MySmallTextField(
+                                      controller:
+                                          controller.editUnitPriceController,
+                                      obcure: false,
+                                      type: TextInputType.number,
+                                      label: "unitprice".tr),
+                                ),
+                                SizedBox(
+                                  width: 3.h,
+                                ),
+                                Container(
+                                  height: 6.h,
+                                  width: 19.h,
+                                  decoration: BoxDecoration(
+                                      color: Colors
+                                          .white, //background color of dropdown button
+                                      border: Border.all(
+                                          color: myOrange,
+                                          width: 2), //border of dropdown button
+                                      borderRadius: BorderRadius.circular(
+                                          20), //border raiuds of dropdown button
+                                      boxShadow: <BoxShadow>[
+                                        //apply shadow on Dropdown button
+                                        BoxShadow(
+                                            color: myOrange,
+                                            blurRadius:
+                                                0.1), //shadow for button
+                                      ]),
+                                  child: Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 1.h,
+                                      bottom: 1.h,
+                                    ),
+                                    child: GetBuilder<ProductController>(
+                                      builder: (controller) => DropdownButton(
+                                        isExpanded: true,
+                                        autofocus: true,
+                                        dropdownColor: myWhite,
+                                        focusColor: myOrange,
+                                        // isExpanded: true,
+                                        underline: const SizedBox(),
+                                        elevation: 2,
+                                        hint: Center(
+                                          child: Text(
+                                            controller.unitSelecte,
+                                            style: TextStyle(fontSize: 13.sp),
+                                          ),
+                                        ),
+                                        alignment: AlignmentDirectional.center,
+                                        iconSize: 20.sp,
+                                        icon: Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: myOrange,
+                                          size: 25.sp,
+                                        ),
+                                        items: controller.unitList
+                                            .map<DropdownMenuItem<UnitsItem>>(
+                                                (cat) => DropdownMenuItem(
+                                                      value: cat,
+                                                      child: Center(
+                                                        child: Text(cat.name!),
+                                                      ),
+                                                    ))
+                                            .toList(),
+                                        onChanged: ((value) {
+                                          controller.changeSelectUnits(value);
+                                        }),
+                                      ),
+                                    ),
+                                  ),
+                                  //),
+                                ),
+                              ],
+                            ),
+                          ]),
+                        ),
+                      ]),
                 ),
+
                 Padding(
                   padding: EdgeInsets.all(1.h),
                   child: Container(
@@ -474,7 +532,10 @@ class EditProduct extends GetView<ProductController> {
                           id: controller.showProduct[0].id);
                     },
                     title: controller.isLoading == true
-                        ? SpinKitDualRing(color: myOrange,size: 20.sp,)
+                        ? SpinKitDualRing(
+                            color: myOrange,
+                            size: 20.sp,
+                          )
                         : Text("update".tr,
                             style: TextStyle(
                                 color: myWhite, fontWeight: FontWeight.bold)),

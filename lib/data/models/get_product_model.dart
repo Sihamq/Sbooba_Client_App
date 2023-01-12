@@ -73,6 +73,9 @@ class GetProductItem {
     this.image,
     this.discount,
     this.discountedPrice,
+    this.option,
+    this.store,
+    this.type,
   });
 
   int? id;
@@ -95,7 +98,7 @@ class GetProductItem {
   int? cashOnDelivery;
   int? featured;
   int? sellerFeatured;
-  String? unit;
+  int? unit;
   int? minQty;
   int? tax;
   int? taxType;
@@ -108,6 +111,9 @@ class GetProductItem {
   String? image;
   List<Discount>? discount;
   double? discountedPrice;
+  List<dynamic>? option;
+  int? type;
+  int? store;
 
   factory GetProductItem.fromJson(Map<String, dynamic> json) => GetProductItem(
         id: json["id"],
@@ -141,6 +147,8 @@ class GetProductItem {
         metaDescription: json["meta_description"],
         metaKeywords: json["meta_keywords"],
         image: json["image"],
+        type: json["type"],
+        store: json["store"],
         discount: List<Discount>.from(
             json["discount"].map((x) => Discount.fromJson(x))),
         discountedPrice: json["discounted_price"].toDouble(),
@@ -180,6 +188,8 @@ class GetProductItem {
         "image": image,
         "discount": List<dynamic>.from(discount!.map((x) => x.toJson())),
         "discounted_price": discountedPrice,
+        "type": type,
+        "store": store,
       };
 }
 
@@ -216,6 +226,58 @@ class Discount {
         "discount_type": discountType,
         "discount_start_date": discountStartDate!.toIso8601String(),
         "discount_end_date": discountEndDate!.toIso8601String(),
+      };
+}
+
+class Description {
+  Description({
+    this.ar,
+    this.en,
+  });
+
+  String? ar;
+  String? en;
+
+  factory Description.fromJson(Map<String, dynamic> json) => Description(
+        ar: json["ar"],
+        en: json["en"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ar": ar,
+        "en": en,
+      };
+}
+
+class Option {
+  Option({
+    this.id,
+    this.name,
+    this.productId,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  int? id;
+  Description? name;
+  int? productId;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+
+  factory Option.fromJson(Map<String, dynamic> json) => Option(
+        id: json["id"],
+        name: Description.fromJson(json["name"]),
+        productId: json["product_id"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name!.toJson(),
+        "product_id": productId,
+        "created_at": createdAt?.toIso8601String(),
+        "updated_at": updatedAt?.toIso8601String(),
       };
 }
 

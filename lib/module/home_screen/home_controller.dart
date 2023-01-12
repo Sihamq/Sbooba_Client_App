@@ -21,7 +21,7 @@ class HomeController extends GetxController {
     //ProfileView(),
     const ProfileScreen()
   ];
-  var label = ["order", "Products", "Notification", "Coupons", "Profile"].obs;
+  var label = ["order", "Products", "Notification", "c", "Profile"].obs;
   List<String> icon = [
     "assets/tracking.png",
     "assets/product.png",
